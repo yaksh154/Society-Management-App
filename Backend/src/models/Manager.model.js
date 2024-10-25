@@ -1,5 +1,5 @@
 const  mongoose = require("mongoose");
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { type } = require("os");
 
 const managerSchema = new mongoose.Schema(

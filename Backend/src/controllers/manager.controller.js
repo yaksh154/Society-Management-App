@@ -1,5 +1,5 @@
 const auth_service = require("../services/manager.service");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 // register
 const register = async (req, res) => {
