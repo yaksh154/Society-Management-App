@@ -1,0 +1,59 @@
+.bg-logotext-custom {
+  color: #FE512E;
+}
+
+.Logn_bg {
+  background-image: url(./../../public/images/Login_bg_img.png);
+}
+
+.Logn_bg .Login_col_bg {
+  height: 100vh;
+  background: #F6F8FB;
+}
+
+.Logn_bg .Login_col_bg_1 {
+  height: 100vh;
+}
+
+.Loginimg {
+  margin-top: -20px !important;
+  height: 27rem;
+}
+
+.Login_From {
+  width: 30rem;
+}
+
+.Login_button {
+  background: #F6F8FB;
+}
+
+.Login_button:hover {
+  background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
+  color: #fff;
+}
+.Login_button_society{
+  background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
+}
+
+/* media css */
+
+@media (max-width: 1440px) {}
+@media (max-width: 1025px) {
+  .Loginimg {
+    height: 15rem;
+  }
+}
+@media (max-width: 992px) {
+  .Login_col_bg{
+    display: none;
+  }
+}
+@media (max-width: 768px) {}
+@media (max-width: 426px) {}
+@media (max-width: 375px) {
+  .text_sm_media{
+    font-size: 15px
+  }
+}
+@media (max-width: 320px) {}
