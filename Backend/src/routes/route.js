@@ -1,9 +1,9 @@
 const express = require("express");
 const routes = express.Router();
-const authroute = require("./auth.route")
+const managerroute = require("./manager.route")
 const societyroute = require("./society.route")
 
-routes.use("/auth",authroute)
+routes.use("/manager",managerroute)
 routes.use("/society",societyroute)
 
 module.exports = routes;

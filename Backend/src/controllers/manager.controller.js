@@ -1,4 +1,4 @@
-const auth_service = require("../services/auth.service");
+const auth_service = require("../services/manager.service");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 // register
