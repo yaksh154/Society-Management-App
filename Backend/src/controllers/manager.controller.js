@@ -19,10 +19,9 @@ const register = async (req, res) => {
     const bcrpass = await bcrypt.hash(reqbody.Password, 10);
     // const otpsed = send_otp(reqbody.Email, otp);
     const body = {
-      Username: reqbody.Username,
-      Email: reqbody.Email,
-      Firstname: reqbody.Firstname,
       Lastname: reqbody.Lastname,
+      Firstname: reqbody.Firstname,
+      Email: reqbody.Email,
       Number: reqbody.Number,
       Country: reqbody.Country,
       State: reqbody.State,
