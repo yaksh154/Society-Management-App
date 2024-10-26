@@ -4,13 +4,13 @@ const createSociety = async (societyData) => {
   return await Society.create(societyData);
 };
 
-const getSocietyById = async (id) => {
-  return await Society.findById(id);
+const getSociety = async () => {
+  return await Society.find();
 };
 
 
 
 module.exports = {
   createSociety,
-  getSocietyById,
+  getSociety,
 };
