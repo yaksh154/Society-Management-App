@@ -2,8 +2,7 @@ const Importantnumber = require("../models/importantnumber.model")
 
 
 const create = async (data) => {
-  const importantNumber = new Importantnumber(data);
-  return await importantNumber.save();
+  return await Importantnumber.create(data);
 };
 
 
@@ -26,10 +25,15 @@ const remove = async (id) => {
   return await Importantnumber.findByIdAndDelete(id);
 };
 
+const findbynumber = async (num) => {
+  return await Importantnumber.findOne({ Phonenumber: num });
+}
+
 module.exports ={
   create,
   getAll,
   getById,
   update,
   remove,
+  findbynumber
 }

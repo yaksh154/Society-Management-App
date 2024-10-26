@@ -4,7 +4,6 @@ const importantnumber_controller = require("../controllers/importantnumber.contr
 
 router.post("/createImportantNumber", importantnumber_controller.createImportantNumber);
 router.get("/getAllImportantNumbers", importantnumber_controller.getAllImportantNumbers);
-router.get("/getImportantNumberById/:id", importantnumber_controller.getImportantNumberById);
 router.put("/updateImportantNumber/:id", importantnumber_controller.updateImportantNumber);
 router.delete("/deleteImportantNumber/:id", importantnumber_controller.deleteImportantNumber);
 

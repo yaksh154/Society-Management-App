@@ -2,6 +2,13 @@ const importantnumber_servise = require("../services/importantnumber.service")
 
 const createImportantNumber = async (req, res) => {
     try {
+        const num = req.body.Phonenumber
+        console.log("🚀 ~ createImportantNumber ~ num:", num)
+        const number = await importantnumber_servise.findbynumber(num)
+        console.log("🚀 ~ createImportantNumber ~ number:", number)
+        if (number) {
+            return res.status(400).json({ message: "Number already exists" });
+        }
         const importantNumber = await importantnumber_servise.create(req.body);
         res.status(201).json(importantNumber);
     } catch (error) {
@@ -19,21 +26,17 @@ const getAllImportantNumbers = async (req, res) => {
     }
 };
 
-// Get a single important number by ID
-const getImportantNumberById = async (req, res) => {
-    try {
-        const importantNumber = await importantnumber_servise.getById(req.params.id);
-        if (!importantNumber) return res.status(404).json({ message: "Not found" });
-        res.status(200).json(importantNumber);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
+
 
 // Update an important number
 const updateImportantNumber = async (req, res) => {
     try {
-        const updatedImportantNumber = await importantnumber_servise.update(req.params.id, req.body);
+        const { id } = req.params
+        const importantNumber = await importantnumber_servise.getById(id);
+        if (!importantNumber) {
+            return res.status(404).json({ message: "Not found" });
+        }
+        const updatedImportantNumber = await importantnumber_servise.update(id, req.body);
         if (!updatedImportantNumber) return res.status(404).json({ message: "Not found" });
         res.status(200).json(updatedImportantNumber);
     } catch (error) {
@@ -44,6 +47,11 @@ const updateImportantNumber = async (req, res) => {
 // Delete an important number
 const deleteImportantNumber = async (req, res) => {
     try {
+        const { id } = req.params
+        const importantNumber = await importantnumber_servise.getById(id);
+        if (!importantNumber) {
+            return res.status(404).json({ message: "already deleted" });
+        }
         const deletedImportantNumber = await importantnumber_servise.remove(req.params.id);
         if (!deletedImportantNumber) return res.status(404).json({ message: "Not found" });
         res.status(200).json({ message: "Deleted successfully" });
@@ -53,10 +61,9 @@ const deleteImportantNumber = async (req, res) => {
 };
 
 
-module.exports ={
+module.exports = {
     createImportantNumber,
     getAllImportantNumbers,
-    getImportantNumberById,
     updateImportantNumber,
     deleteImportantNumber,
 }
