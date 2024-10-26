@@ -3,6 +3,7 @@ import registration from '../../../public/images/registration.png';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import CreateSociety from '../Modals/CreateSociety'
+import { UserDataRegistration } from '../services/Api/api';
 
 const Registration = () => {
     const {
@@ -23,13 +24,16 @@ const Registration = () => {
         zip: ''
     });
     const [showModal, setShowModal] = useState(false);
+    const [RegistrationError, setRegistrationError] = useState('');
 
     const onSubmit = (data) => {
-        if (data.password !== data.confirmPassword) {
+        if (data.Password !== data.confirmPassword) {
             alert("Passwords do not match!");
             return;
         }
-        alert(JSON.stringify(data));
+        console.log(data);
+        
+        UserDataRegistration(data, setRegistrationError)
     };
 
     const CreatenewSociety = () => {
@@ -77,17 +81,17 @@ const Registration = () => {
                                 <label className="block text-gray-700 font-semibold mb-1 text-sm">Email Address<span className="text-red-600">*</span></label>
                                 <input
                                     type="email"
-                                    {...register("email", { required: true })}
+                                    {...register("Email", { required: true })}
                                     className="w-full p-1 text-sm border border-gray-300 rounded"
                                     placeholder="Enter Email Address"
                                 />
-                                {errors.email && <p className="text-red-600 text-xs">Email is required.</p>}
+                                {errors.Email && <p className="text-red-600 text-xs">Email is required.</p>}
                             </div>
                             <div className="w-full lg:w-1/2 px-2">
                                 <label className="block text-gray-700 font-semibold mb-1 text-sm">Phone Number<span className="text-red-600">*</span></label>
                                 <input
                                     type="tel"
-                                    {...register("phone", {
+                                    {...register("Number", {
                                         required: true,
                                         pattern: {
                                             value: /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|^\d{10,15}$)$/i,
@@ -96,7 +100,7 @@ const Registration = () => {
                                     className="w-full p-1 text-sm border border-gray-300 rounded"
                                     placeholder="Enter Phone Number"
                                 />
-                                {errors.phone && <p className="text-red-600 text-xs">Phone number is required.</p>}
+                                {errors.Number && <p className="text-red-600 text-xs">Phone number is required.</p>}
                             </div>
                         </div>
 
@@ -105,29 +109,29 @@ const Registration = () => {
                             <div className="w-full lg:w-1/3 px-2 mb-4 lg:mb-0">
                                 <label className="block text-gray-700 font-semibold mb-1 text-sm">Country<span className="text-red-600">*</span></label>
                                 <input
-                                    {...register("country", { required: true })}
+                                    {...register("Country", { required: true })}
                                     className="w-full p-1 text-sm border border-gray-300 rounded"
                                     placeholder="Enter Country"
                                 />
-                                {errors.country && <p className="text-red-600 text-xs">Country is required.</p>}
+                                {errors.Country && <p className="text-red-600 text-xs">Country is required.</p>}
                             </div>
                             <div className="w-full lg:w-1/3 px-2 mb-4 lg:mb-0">
                                 <label className="block text-gray-700 font-semibold mb-1 text-sm">State<span className="text-red-600">*</span></label>
                                 <input
-                                    {...register("state", { required: true })}
+                                    {...register("State", { required: true })}
                                     className="w-full p-1 text-sm border border-gray-300 rounded"
                                     placeholder="Enter State"
                                 />
-                                {errors.state && <p className="text-red-600 text-xs">State is required.</p>}
+                                {errors.State && <p className="text-red-600 text-xs">State is required.</p>}
                             </div>
                             <div className="w-full lg:w-1/3 px-2">
                                 <label className="block text-gray-700 font-semibold mb-1 text-sm">City<span className="text-red-600">*</span></label>
                                 <input
-                                    {...register("city", { required: true })}
+                                    {...register("City", { required: true })}
                                     className="w-full p-1 text-sm border border-gray-300 rounded"
                                     placeholder="Enter City"
                                 />
-                                {errors.city && <p className="text-red-600 text-xs">City is required.</p>}
+                                {errors.City && <p className="text-red-600 text-xs">City is required.</p>}
                             </div>
                         </div>
 
@@ -169,7 +173,7 @@ const Registration = () => {
                                 <div className="flex">
                                     <input
                                         type={passwordShown ? "text" : "password"}
-                                        {...register("password", { required: true })}
+                                        {...register("Password", { required: true })}
                                         className="w-full p-1 text-sm border border-gray-300 rounded"
                                         placeholder="Enter Password"
                                         autoComplete="new-password" // Added this line
@@ -182,7 +186,7 @@ const Registration = () => {
                                         {passwordShown ? "🙈" : "👁️"}
                                     </button>
                                 </div>
-                                {errors.password && <p className="text-red-600 text-xs">Password is required.</p>}
+                                {errors.Password && <p className="text-red-600 text-xs">Password is required.</p>}
                             </div>
                             <div className="w-full lg:w-1/2 px-2">
                                 <label className="block text-gray-700 font-semibold mb-1 text-sm">Confirm Password<span className="text-red-600">*</span></label>
@@ -205,14 +209,15 @@ const Registration = () => {
                                 {errors.confirmPassword && <p className="text-red-600 text-xs">Confirm password is required.</p>}
                             </div>
                         </div>
-
+                        {RegistrationError && <p className="text-red-500 text-sm mt-1">{RegistrationError}</p>}
+                        
                         {/* Submit Button */}
                         <div className="flex justify-center">
                             <button type="submit" className="bg-gray-100 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold w-full py-1 rounded text-sm">Register</button>
                         </div>
                     </form>
                     <p className="text-center text-sm text-gray-600 mt-4">
-                        Already have an account? <Link to="/" className="text-orange-600 font-semibold">Login</Link>
+                        Already have an account? <Link to="/login" className="text-orange-600 font-semibold">Login</Link>
                     </p>
                 </div>
             </div>

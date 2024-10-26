@@ -10,12 +10,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 module.exports = app;
+app.use(cors())
 app.use(routes);
 dotenv.config({
   path: ".env",
 });
 const PORT = process.env.PORT || 3000
-app.use(cors())
 connectDB();
 app.listen(PORT, () => {
   console.log(`server listening on http://localhost:${PORT}`);

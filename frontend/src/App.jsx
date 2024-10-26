@@ -4,6 +4,7 @@ import Registration from './component/pages/Registration'
 import Forgot_password from './component/pages/Forgot_password'
 import Forgot_password_opt from './component/pages/Forgot_password_opt'
 import Reset_password from './component/pages/Reset_password.jsx'
+import Home from './component/pages/DashStack_manager/Home.jsx'
 
 function App() {
 
@@ -11,11 +12,12 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/Registration' element={<Registration />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/registration' element={<Registration />} />
           <Route path='/forgot_password' element={<Forgot_password />} />
           <Route path='/forgot_password_opt' element={<Forgot_password_opt />} />
           <Route path='/reset_password' element={<Reset_password />} />
+          <Route path='/' element={<Home />} />
         </Routes>
       </BrowserRouter>
     </>

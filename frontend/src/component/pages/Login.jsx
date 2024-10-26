@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Loginimg from '../../../public/images/m_Loginimg.png';
-import { UserDataLogin } from '../services/Api/api';
+// import { UserDataLogin } from '../services/Api/api';
+import axios from 'axios';
 
 const Login = () => {
     const [passwordShown, setPasswordShown] = useState(false);
@@ -15,7 +16,9 @@ const Login = () => {
 
 
     // User Login 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
+        console.log(data);
+        
         UserDataLogin(data,setLoginError)
     };
 
@@ -60,7 +63,7 @@ const Login = () => {
                                 {...register("Password", {
                                     required: "Password is required",
                                     minLength: {
-                                        value: 6,
+                                        value: 4,
                                         message: "Password must be at least 6 characters long"
                                     },
                                     maxLength: {
@@ -98,7 +101,7 @@ const Login = () => {
                             Sign In
                         </button>
 
-                        <p className="text-center text-sm mt-4">Don’t have an account? <Link to="/Registration" className="text-orange-600 font-semibold">Registration</Link></p>
+                        <p className="text-center text-sm mt-4">Don’t have an account? <Link to="/registration" className="text-orange-600 font-semibold">Registration</Link></p>
                     </form>
                 </div>
             </div>
