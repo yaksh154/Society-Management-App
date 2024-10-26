@@ -14,10 +14,9 @@ const createSociety = async (req, res) => {
     }
 };
 
-const getSocietyById = async (req, res) => {
+const getSociety = async (req, res) => {
     try {
-        const { id } = req.params;
-        const society = await society_service.getSocietyById(id);
+        const society = await society_service.getSociety();
         if (!society) {
             return res.status(404).json({ message: 'Society not found' });
         }
@@ -30,5 +29,5 @@ const getSocietyById = async (req, res) => {
 
 module.exports = {
     createSociety,
-    getSocietyById,
+    getSociety,
 };
