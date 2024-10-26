@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import "../../style/Forgot_password.css"
-import forgot_password_img from '../../../public/images/forgot_password_img.png'
+import forgot_password_img from '../../../public/images/forgot_password_img.png';
 
 const Forgot_password = () => {
     const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -11,10 +10,24 @@ const Forgot_password = () => {
     const handleChange = (element, index) => {
         if (isNaN(element.value)) return;
 
-        setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
+        const newOtp = [...otp.map((d, idx) => (idx === index ? element.value : d))];
+        setOtp(newOtp);
 
-        if (element.nextSibling) {
+        // Move to the next input field if current input is filled
+        if (element.nextSibling && element.value) {
             element.nextSibling.focus();
+        }
+    };
+
+    // Handle backspace to erase the OTP
+    const handleKeyDown = (event, index) => {
+        if (event.key === "Backspace" && !otp[index]) {
+            if (index > 0) {
+                const prevInput = document.getElementById(`otp-input-${index - 1}`);
+                if (prevInput) {
+                    prevInput.focus();
+                }
+            }
         }
     };
 
@@ -43,70 +56,69 @@ const Forgot_password = () => {
         e.preventDefault();
         const enteredOTP = otp.join("");
         console.log("Entered OTP: ", enteredOTP);
-       
     };
+
     return (
-        <div className="m_Logn_bg">
-            <div className="container-fluid">
-                <div className="row">
-                    {/* Login Img side */}
-                    <div className="col-6 pt-5 ps-4 m_Login_col_bg">
-                        <h1 className='m_bg-logotext-custom'>Dash<span className='text-dark'>Stack</span></h1>
-                        <div className="text-center mt-5 pt-5">
-                            <img className='m_forgot_password_img mt-5' src={forgot_password_img} alt="Loginimg" />
+        <div className="bg-cover bg-center h-screen" style={{ backgroundImage: "url('/images/Login_bg_img.png')" }}>
+            <div className="flex w-full h-full">
+                {/* Login Image Side */}
+                <div className="hidden lg:flex w-1/2 bg-gray-100 flex-col justify-center">
+                    <h1 className="text-5xl font-bold text-orange-600 ms-16">Dash<span className="text-black">Stack</span></h1>
+                    <div className="flex items-center justify-center"><img className="mt-16 h-72" src={forgot_password_img} alt="Login" /></div>
+                </div>
+                {/* Login Form Side */}
+                <div className="flex flex-col w-full lg:w-1/2 items-center justify-center px-8 py-12 lg:py-0">
+                    <h1 className="text-5xl font-bold text-orange-600 lg:hidden">Dash<span className="text-black">Stack</span></h1>
+                    <div className="bg-white p-8 shadow-lg rounded-lg w-full max-w-md">
+                    <h3 className="text-2xl mb-4">Enter OTP</h3>
+                    <p className="text-gray-600 mb-6">Please enter the 6-digit code sent to your phone number.</p>
+
+                    {/* OTP Input */}
+                    <form onSubmit={handleSubmit}>
+                        <div className="flex justify-center mb-4">
+                            {otp.map((data, index) => (
+                                <input
+                                    key={index}
+                                    id={`otp-input-${index}`} // Add an ID for each input
+                                    type="text"
+                                    className="w-12 h-12 text-2xl text-center border border-gray-300 rounded-md mx-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    maxLength="1"
+                                    value={data}
+                                    onChange={(e) => handleChange(e.target, index)}
+                                    onKeyDown={(e) => handleKeyDown(e, index)} // Handle key down for backspace
+                                    onFocus={(e) => e.target.select()}
+                                />
+                            ))}
                         </div>
-                    </div>
-                    {/* Login Form side */}
-                    <div className="col-lg-6 m_Login_col_bg_1 mx-auto d-flex flex-column align-items-center justify-content-center">
-                        <h1 className='m_bg-logotext-custom m_Logo_text_media'>Dashp<span className='text-dark'>Stack</span></h1>
-                        <div className="bg-white p-5 shadow-sm rounded m_Login_From">
-                            <div className="row justify-content-center">
-                                <h3 className=" mb-4">Enter OTP</h3>
-                                <p className="m_text_sm">Please enter the 6-digit code sent to your phone number.</p>
 
-                                {/* OTP Input */}
-                                <form onSubmit={handleSubmit}>
-                                    <div className="otp-box m_otp_container mb-3">
-                                        {otp.map((data, index) => (
-                                            <input
-                                                key={index}
-                                                type="text"
-                                                className="m_otp_input m_form_control"
-                                                maxLength="1"
-                                                value={data}
-                                                onChange={(e) => handleChange(e.target, index)}
-                                                onFocus={(e) => e.target.select()}
-                                            />
-                                        ))}
-                                    </div>
-
-                                    {/* Timer and Resend OTP */}
-                                    <div className="d-flex justify-content-between align-items-center mb-4">
-                                        <div className="otp-timer">
-                                            <i className="bi bi-clock"></i> <span>{timeLeft > 0 ? `00:${timeLeft < 10 ? `0${timeLeft}` : timeLeft} sec` : "Time's up!"}</span>
-                                        </div>
-                                        <a
-                                            type="button"
-                                            className="bg-logotext-custom text_sm_media text-decoration-none "
-                                            onClick={resendOTP}
-                                            disabled={!resendAvailable}
-                                        >
-                                            Resend OTP
-                                        </a>
-                                    </div>
-
-                                    {/* Verify Button */}
-                                    <div className="text-center">
-                                        <button type="submit" className="m_Login_button btn w-100">Verify</button>
-                                    </div>
-                                </form>
+                        {/* Timer and Resend OTP */}
+                        <div className="flex justify-between items-center mb-4">
+                            <div className="text-gray-500">
+                                <i className="bi bi-clock"></i> 
+                                <span>{timeLeft > 0 ? `00:${timeLeft < 10 ? `0${timeLeft}` : timeLeft} sec` : "Time's up!"}</span>
                             </div>
+                            <button
+                                type="button"
+                                className={`text-sm text-blue-500 ${!resendAvailable ? 'cursor-not-allowed opacity-50' : ''}`}
+                                onClick={resendOTP}
+                                disabled={!resendAvailable}
+                            >
+                                Resend OTP
+                            </button>
                         </div>
-                    </div>
+
+                        {/* Verify Button */}
+                        <div className="text-center">
+                            <button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-orange-400 text-white font-bold py-2 rounded hover:bg-gradient-to-l transition duration-300">
+                                Verify
+                            </button>
+                        </div>
+                    </form>
+                </div>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Forgot_password
+export default Forgot_password;

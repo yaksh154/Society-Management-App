@@ -3,7 +3,7 @@ import Login from './component/pages/Login'
 import Registration from './component/pages/Registration'
 import Forgot_password from './component/pages/Forgot_password'
 import Forgot_password_opt from './component/pages/Forgot_password_opt'
-import Reset_password from './component/pages/Reset_password'
+import Reset_password from './component/pages/Reset_password.jsx'
 
 function App() {
 

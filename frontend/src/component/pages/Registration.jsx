@@ -2,30 +2,18 @@ import React, { useState } from 'react';
 import registration from '../../../public/images/registration.png';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import "../../style/Registration.css";
+import CreateSociety from '../Modals/CreateSociety'
 
 const Registration = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
-        watch
     } = useForm();
 
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
-
-    const [societies, setSocieties] = useState([
-        "Shantigram residency",
-        "Russett House Park",
-        "Saurya residency",
-        "Shamruddh Avenyu",
-        "Utsav society",
-        "Murlidhar",
-        "Shree Sharanam",
-        "vasantnagar township"
-    ]);
-
+    const [societies, setSocieties] = useState([]);
     const [newSociety, setNewSociety] = useState({
         name: '',
         address: '',
@@ -34,313 +22,198 @@ const Registration = () => {
         city: '',
         zip: ''
     });
+    const [showModal, setShowModal] = useState(false);
 
-    // Handle form submission
     const onSubmit = (data) => {
         if (data.password !== data.confirmPassword) {
             alert("Passwords do not match!");
             return;
         }
-        // Process registration logic
         alert(JSON.stringify(data));
     };
 
-    // Handle input change in the new society form
-    const handleNewSocietyChange = (e) => {
-        setNewSociety({ ...newSociety, [e.target.name]: e.target.value });
+    const CreatenewSociety = () => {
+        setShowModal(true);
     };
 
-    // Handle adding new society to dropdown
-    const handleAddSociety = () => {
-        if (newSociety.name.trim() !== "") {
-            setSocieties([...societies, newSociety.name]);
-            setNewSociety({ name: '', address: '', country: '', state: '', city: '', zip: '' });
-        }
-    };
 
     return (
-        <div className="Logn_bg">
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-6 pt-5 ps-4 Login_col_bg">
-                        <h1 className='bg-logotext-custom'>Dash<span className='text-dark'>Stack</span></h1>
-                        <div className="text-center mt-5 pt-5">
-                            <img className='Loginimg mt-5' src={registration} alt="Loginimg" />
-                        </div>
-                    </div>
-                    <div className="col-lg-6 d-flex align-items-center justify-content-center p-4">
-                        <div className="registration-form bg-white shadow-sm rounded p-4">
-                            <h2 className="text-center mb-4">Registration</h2>
-                            <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col lg:flex-row min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/images/Login_bg_img.png')" }}>
+            <div className="hidden lg:flex flex-col w-1/2 bg-gray-100 justify-center">
+                <h1 className="text-5xl font-bold text-orange-500 ms-16">Dash<span className="text-black">Stack</span></h1>
+                <div className="flex items-center justify-center"><img src={registration} alt="Registration" className="mt-10 w-96 h-96 object-contain" /></div>
+            </div>
+            <div className="flex flex-col w-full lg:w-1/2 items-center justify-center p-6">
 
-                                {/* Name Row */}
-                                <div className="row mb-3">
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label>First Name<span className="required">*</span></label>
-                                            <input
-                                                {...register("firstName", { required: true })}
-                                                className="form-control"
-                                                placeholder="Enter First Name"
-                                            />
-                                            {errors.firstName && <p className="text-danger">First name is required.</p>}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label>Last Name<span className="required">*</span></label>
-                                            <input
-                                                {...register("lastName", { required: true })}
-                                                className="form-control"
-                                                placeholder="Enter Last Name"
-                                            />
-                                            {errors.lastName && <p className="text-danger">Last name is required.</p>}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Contact Row */}
-                                <div className="row mb-3">
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label>Email Address<span className="required">*</span></label>
-                                            <input
-                                                type="email"
-                                                {...register("email", { required: true })}
-                                                className="form-control"
-                                                placeholder="Enter Email Address"
-                                            />
-                                            {errors.email && <p className="text-danger">Email is required.</p>}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label>Phone Number<span className="required">*</span></label>
-                                            <input
-                                                type="tel"
-                                                {...register("phone", {
-                                                    required: true,
-                                                    pattern: {
-                                                        value: /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|^\d{10,15}$)$/i,
-                                                    }
-                                                })}
-
-                                                className="form-control"
-                                                placeholder="91+"
-                                            />
-                                            {errors.phone && <p className="text-danger">Phone number is required.</p>}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Location Row */}
-                                <div className="row mb-3">
-                                    <div className="col-md-4">
-                                        <div className="form-group">
-                                            <label>Country<span className="required">*</span></label>
-                                            <input
-                                                {...register("country", { required: true })}
-                                                className="form-control"
-                                                placeholder="Enter Country"
-                                            />
-                                            {errors.country && <p className="text-danger">Country is required.</p>}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4">
-                                        <div className="form-group">
-                                            <label>State<span className="required">*</span></label>
-                                            <input
-                                                {...register("state", { required: true })}
-                                                className="form-control"
-                                                placeholder="Enter State"
-                                            />
-                                            {errors.state && <p className="text-danger">State is required.</p>}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-4">
-                                        <div className="form-group">
-                                            <label>City<span className="required">*</span></label>
-                                            <input
-                                                {...register("city", { required: true })}
-                                                className="form-control"
-                                                placeholder="Enter City"
-                                            />
-                                            {errors.city && <p className="text-danger">City is required.</p>}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Society Selection */}
-                                <div className="form-group mb-3">
-                                    <label htmlFor="societySelect" className="form-label">Select Society<span className="text-danger">*</span></label>
-                                    <select
-                                        {...register("society", { required: true })}
-                                        className="form-select"
-                                        id="societySelect"
-                                    >
-                                        <option value="">Select Society</option>
-                                        {societies.map((society, index) => (
-                                            <option key={index} value={society}>{society}</option>
-                                        ))}
-                                    </select>
-                                    {errors.society && <p className="text-danger">Society is required.</p>}
-                                    <button
-                                        type="button"
-                                        className="btn Login_button fw-medium mt-3 w-100"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal"
-                                    >
-                                        Create Society
-                                    </button>
-                                </div>
-
-                                {/* Modal for creating new society */}
-                                <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div className="modal-dialog">
-                                        <div className="modal-content">
-                                            <div className="modal-header">
-                                                <h1 className="modal-title fs-5" id="exampleModalLabel">Create New Society</h1>
-                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div className="modal-body">
-                                                {/* No form here, just inputs */}
-                                                <div className="mb-3">
-                                                    <label className="form-label">Society Name*</label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        name="name"
-                                                        value={newSociety.name}
-                                                        onChange={handleNewSocietyChange}
-                                                        placeholder="Enter Name"
-                                                    />
-                                                </div>
-                                                <div className="mb-3">
-                                                    <label className="form-label">Society Address*</label>
-                                                    <input
-                                                        type="text"
-                                                        className="form-control"
-                                                        name="address"
-                                                        value={newSociety.address}
-                                                        onChange={handleNewSocietyChange}
-                                                        placeholder="Enter Address"
-                                                    />
-                                                </div>
-                                                <div className="row">
-                                                    <div className="mb-3 col-6">
-                                                        <label className="form-label">Country*</label>
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            name="country"
-                                                            value={newSociety.country}
-                                                            onChange={handleNewSocietyChange}
-                                                            placeholder="Enter Country"
-                                                        />
-                                                    </div>
-                                                    <div className="mb-3 col-6">
-                                                        <label className="form-label">State*</label>
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            name="state"
-                                                            value={newSociety.state}
-                                                            onChange={handleNewSocietyChange}
-                                                            placeholder="Enter State"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="mb-3 col-6">
-                                                        <label className="form-label">City*</label>
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            name="city"
-                                                            value={newSociety.city}
-                                                            onChange={handleNewSocietyChange}
-                                                            placeholder="Enter City"
-                                                        />
-                                                    </div>
-                                                    <div className="mb-3 col-6">
-                                                        <label className="form-label">Zip Code*</label>
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            name="zip"
-                                                            value={newSociety.zip}
-                                                            onChange={handleNewSocietyChange}
-                                                            placeholder="Enter Zip Code"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="modal-footer">
-                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" className="btn Login_button" data-bs-dismiss="modal" onClick={handleAddSociety}>Add Society</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Password Row */}
-                                <div className="row mb-3">
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label>Password<span className="required">*</span></label>
-                                            <div className="input-group">
-                                                <input
-                                                    type={passwordShown ? "text" : "password"}
-                                                    {...register("password", { required: true })}
-                                                    className="form-control"
-                                                    placeholder="Enter Password"
-                                                    autoComplete="new-password"  // Fixed this
-                                                />
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-outline-secondary"
-                                                    onClick={() => setPasswordShown(!passwordShown)}
-                                                >
-                                                    {passwordShown ? "🙈" : "👁️"}
-                                                </button>
-                                            </div>
-                                            {errors.password && <p className="text-danger">Password is required.</p>}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="form-group">
-                                            <label>Confirm Password<span className="required">*</span></label>
-                                            <div className="input-group">
-                                                <input
-                                                    type={confirmPasswordShown ? "text" : "password"}
-                                                    {...register("confirmPassword", { required: true })}
-                                                    className="form-control"
-                                                    placeholder="Confirm Password"
-                                                    autoComplete="new-password"  // Fixed this
-                                                />
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-outline-secondary"
-                                                    onClick={() => setConfirmPasswordShown(!confirmPasswordShown)}
-                                                >
-                                                    {confirmPasswordShown ? "🙈" : "👁️"}
-                                                </button>
-                                            </div>
-                                            {errors.confirmPassword && <p className="text-danger">Please confirm your password.</p>}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Submit Button */}
-                                <div className="text-center">
-                                    <button type="submit" className="btn Login_button fw-medium mt-3 w-100">Register</button>
-                                </div>
-                            </form>
-                            <div className="text-center mt-3">
-                                <span>Already have an account? <Link className='text-decoration-none m_bg-logotext-custom' to="/">Sign In</Link></span>
+                <h1 className="text-5xl font-bold text-orange-600 lg:hidden mb-3">Dash<span className="text-black">Stack</span></h1>
+                <div className="w-full max-w-lg bg-white shadow-lg rounded-lg p-6">
+                    <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Registration</h2>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        {/* Name Fields */}
+                        <div className="flex flex-wrap mb-4">
+                            <div className="w-full lg:w-1/2 px-2 mb-4 lg:mb-0">
+                                <label className="block text-gray-700 font-semibold mb-1 text-sm">First Name<span className="text-red-600">*</span></label>
+                                <input
+                                    {...register("firstName", { required: true })}
+                                    className="w-full p-1 text-sm border border-gray-300 rounded"
+                                    placeholder="Enter First Name"
+                                />
+                                {errors.firstName && <p className="text-red-600 text-xs">First name is required.</p>}
+                            </div>
+                            <div className="w-full lg:w-1/2 px-2">
+                                <label className="block text-gray-700 font-semibold mb-1 text-sm">Last Name<span className="text-red-600">*</span></label>
+                                <input
+                                    {...register("lastName", { required: true })}
+                                    className="w-full p-1 text-sm border border-gray-300 rounded"
+                                    placeholder="Enter Last Name"
+                                />
+                                {errors.lastName && <p className="text-red-600 text-xs">Last name is required.</p>}
                             </div>
                         </div>
-                    </div>
+
+                        {/* Contact Fields */}
+                        <div className="flex flex-wrap mb-4">
+                            <div className="w-full lg:w-1/2 px-2 mb-4 lg:mb-0">
+                                <label className="block text-gray-700 font-semibold mb-1 text-sm">Email Address<span className="text-red-600">*</span></label>
+                                <input
+                                    type="email"
+                                    {...register("email", { required: true })}
+                                    className="w-full p-1 text-sm border border-gray-300 rounded"
+                                    placeholder="Enter Email Address"
+                                />
+                                {errors.email && <p className="text-red-600 text-xs">Email is required.</p>}
+                            </div>
+                            <div className="w-full lg:w-1/2 px-2">
+                                <label className="block text-gray-700 font-semibold mb-1 text-sm">Phone Number<span className="text-red-600">*</span></label>
+                                <input
+                                    type="tel"
+                                    {...register("phone", {
+                                        required: true,
+                                        pattern: {
+                                            value: /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|^\d{10,15}$)$/i,
+                                        }
+                                    })}
+                                    className="w-full p-1 text-sm border border-gray-300 rounded"
+                                    placeholder="Enter Phone Number"
+                                />
+                                {errors.phone && <p className="text-red-600 text-xs">Phone number is required.</p>}
+                            </div>
+                        </div>
+
+                        {/* Location Fields */}
+                        <div className="flex flex-wrap mb-4">
+                            <div className="w-full lg:w-1/3 px-2 mb-4 lg:mb-0">
+                                <label className="block text-gray-700 font-semibold mb-1 text-sm">Country<span className="text-red-600">*</span></label>
+                                <input
+                                    {...register("country", { required: true })}
+                                    className="w-full p-1 text-sm border border-gray-300 rounded"
+                                    placeholder="Enter Country"
+                                />
+                                {errors.country && <p className="text-red-600 text-xs">Country is required.</p>}
+                            </div>
+                            <div className="w-full lg:w-1/3 px-2 mb-4 lg:mb-0">
+                                <label className="block text-gray-700 font-semibold mb-1 text-sm">State<span className="text-red-600">*</span></label>
+                                <input
+                                    {...register("state", { required: true })}
+                                    className="w-full p-1 text-sm border border-gray-300 rounded"
+                                    placeholder="Enter State"
+                                />
+                                {errors.state && <p className="text-red-600 text-xs">State is required.</p>}
+                            </div>
+                            <div className="w-full lg:w-1/3 px-2">
+                                <label className="block text-gray-700 font-semibold mb-1 text-sm">City<span className="text-red-600">*</span></label>
+                                <input
+                                    {...register("city", { required: true })}
+                                    className="w-full p-1 text-sm border border-gray-300 rounded"
+                                    placeholder="Enter City"
+                                />
+                                {errors.city && <p className="text-red-600 text-xs">City is required.</p>}
+                            </div>
+                        </div>
+
+                        {/* Society Selection */}
+                        <div className="mb-4 px-2">
+                            <label className="block text-gray-700 font-semibold mb-1 text-sm">Select Society<span className="text-red-600">*</span></label>
+                            <select
+                                {...register("society", { required: true })}
+                                className="w-full p-1 text-sm border border-gray-300 rounded"
+                            >
+                                <option value="">Select Society</option>
+                                {societies.map((society, index) => (
+                                    <option key={index} value={society}>{society}</option>
+                                ))}
+                            </select>
+                            {errors.society && <p className="text-red-600 text-xs">Society is required.</p>}
+                            <button
+                                type="button"
+                                className="btn bg-gray-100 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold w-full py-1 rounded text-sm mt-3"
+                                onClick={CreatenewSociety}
+                            >
+                                Create Society
+                            </button>
+
+                            {showModal && (
+                                <CreateSociety
+                                    newSociety={newSociety}
+                                    setNewSociety={setNewSociety}
+                                    societies={societies}
+                                    setSocieties={setSocieties}
+                                    setShowModal={setShowModal}
+                                />
+                            )}
+                        </div>
+
+                        <div className="flex flex-wrap mb-4">
+                            <div className="w-full lg:w-1/2 px-2 mb-4 lg:mb-0">
+                                <label className="block text-gray-700 font-semibold mb-1 text-sm">Password<span className="text-red-600">*</span></label>
+                                <div className="flex">
+                                    <input
+                                        type={passwordShown ? "text" : "password"}
+                                        {...register("password", { required: true })}
+                                        className="w-full p-1 text-sm border border-gray-300 rounded"
+                                        placeholder="Enter Password"
+                                        autoComplete="new-password" // Added this line
+                                    />
+                                    <button
+                                        type="button"
+                                        className="text-sm text-gray-500"
+                                        onClick={() => setPasswordShown(!passwordShown)}
+                                    >
+                                        {passwordShown ? "🙈" : "👁️"}
+                                    </button>
+                                </div>
+                                {errors.password && <p className="text-red-600 text-xs">Password is required.</p>}
+                            </div>
+                            <div className="w-full lg:w-1/2 px-2">
+                                <label className="block text-gray-700 font-semibold mb-1 text-sm">Confirm Password<span className="text-red-600">*</span></label>
+                                <div className="flex">
+                                    <input
+                                        type={confirmPasswordShown ? "text" : "password"}
+                                        {...register("confirmPassword", { required: true })}
+                                        className="w-full p-1 text-sm border border-gray-300 rounded"
+                                        placeholder="Confirm Password"
+                                        autoComplete="new-password" // Added this line
+                                    />
+                                    <button
+                                        type="button"
+                                        className="text-sm text-gray-500"
+                                        onClick={() => setConfirmPasswordShown(!confirmPasswordShown)}
+                                    >
+                                        {confirmPasswordShown ? "🙈" : "👁️"}
+                                    </button>
+                                </div>
+                                {errors.confirmPassword && <p className="text-red-600 text-xs">Confirm password is required.</p>}
+                            </div>
+                        </div>
+
+                        {/* Submit Button */}
+                        <div className="flex justify-center">
+                            <button type="submit" className="bg-gray-100 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold w-full py-1 rounded text-sm">Register</button>
+                        </div>
+                    </form>
+                    <p className="text-center text-sm text-gray-600 mt-4">
+                        Already have an account? <Link to="/" className="text-orange-600 font-semibold">Login</Link>
+                    </p>
                 </div>
             </div>
         </div>
