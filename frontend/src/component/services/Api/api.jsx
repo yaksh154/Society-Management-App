@@ -1,9 +1,11 @@
-import axios from "../Axios/axois";
+import axios from "axios";
 
-export const UserDataLogin = (data,setLoginError) =>{
-    console.log(data,setLoginError);
-    
-    axios.post('/manager/login', {
+const url = 'https://society-management-app-server.onrender.com'
+
+export const UserDataLogin = (data, setLoginError) => {
+    console.log(data, setLoginError);
+
+    axios.post(`${url}/manager/login`, {
         Email: data.Email,
         Password: data.Password,
     })
@@ -20,20 +22,20 @@ export const UserDataLogin = (data,setLoginError) =>{
         });
 }
 
-export const UserDataRegistration = (data,setRegistrationError) =>{
+export const UserDataRegistration = (data, setRegistrationError) => {
     axios.post('/manager/createmanager', {
         Email: data.Email,
         Password: data.Password,
-        City:data.City,
-        Country:data.Country,
-        Email:data.Email,
-        Number:data.Number,
+        City: data.City,
+        Country: data.Country,
+        Email: data.Email,
+        Number: data.Number,
         // Password:data.Password,
-        State:data.State,
-        confirmPassword:data.confirmPassword,
-        firstName:data.firstName,
-        lastName:data.lastName,
-        society:data.society
+        State: data.State,
+        confirmPassword: data.confirmPassword,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        society: data.society
     })
         .then((res) => {
             if (res.data) {
@@ -45,5 +47,38 @@ export const UserDataRegistration = (data,setRegistrationError) =>{
         .catch((error) => {
             console.error('Registration error:', error);
             setRegistrationError('Registration failed. Please try again later.');
+        });
+}
+
+export const ImportantNumbersGet = (setContacts, setLoading) => {
+
+    setLoading(true);
+
+    axios.get(`${url}/importantnumber/getAllImportantNumbers`)
+        .then((res) => {
+
+            setContacts(res.data);
+            setLoading(false);
+        })
+        .catch((err) => {
+            console.error('Error fetching important numbers:', err);
+            setLoading(false);
+            setContacts([]);
+        });
+}
+export const ImportantNumbersPost = (setContacts, setLoading) => {
+
+    setLoading(true);
+
+    axios.get(`${url}/importantnumber/createImportantNumber`)
+        .then((res) => {
+
+            setContacts(res.data);
+            setLoading(false);
+        })
+        .catch((err) => {
+            console.error('Error fetching important numbers:', err);
+            setLoading(false);
+            setContacts([]);
         });
 }

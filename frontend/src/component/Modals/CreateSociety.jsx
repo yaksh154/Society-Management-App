@@ -132,6 +132,5 @@ const CreateSociety = ({ setShowModal, societies, setSocieties }) => {
         </div>
     )
 }
-
-// Make sure to export the CreateSociety component
 export default CreateSociety;
+
