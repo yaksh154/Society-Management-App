@@ -28,7 +28,7 @@ export const UserDataRegistration = (data,setRegistrationError) =>{
         Country:data.Country,
         Email:data.Email,
         Number:data.Number,
-        Password:data.Password,
+        // Password:data.Password,
         State:data.State,
         confirmPassword:data.confirmPassword,
         firstName:data.firstName,
