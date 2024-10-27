@@ -5,6 +5,7 @@ import Forgot_password from './component/pages/Forgot_password'
 import Forgot_password_opt from './component/pages/Forgot_password_opt'
 import Reset_password from './component/pages/Reset_password.jsx'
 import Home from './component/pages/DashStack_manager/Home.jsx'
+import Profile from './component/pages/DashStack_manager/Profile.jsx'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path='/forgot_password_opt' element={<Forgot_password_opt />} />
           <Route path='/reset_password' element={<Reset_password />} />
           <Route path='/' element={<Home />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </>

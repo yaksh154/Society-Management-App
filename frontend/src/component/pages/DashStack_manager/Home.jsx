@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Sidenav from '../../layout/Sidenav'
 
 const Home = () => {
     let [data,setdata] = useState(200);
