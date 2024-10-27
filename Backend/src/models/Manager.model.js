@@ -42,9 +42,11 @@ const managerSchema = new mongoose.Schema(
     },
     Rol:{
       type:String,
-      enum: ['Security', 'Resident', 'Manager'],
-      require:true,
-      default: 'Manager'
+      default: 'Manager',
+      require:true
+    },
+    Image:{
+      type: String
     }
   },
   {
