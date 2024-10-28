@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+import React, { useState } from 'react'
+=======
 import React, { useEffect, useState } from 'react'
 import Sidebar from '../../layout/Sidebar';
 import Header from '../../layout/Header';
@@ -20,6 +23,7 @@ import { TiThMenu } from "react-icons/ti";
 import CreateImportantNumbers from '../../Modals/CreateImportantNumbers';
 import EditImportantNumbers from '../../Modals/EditImportantNumbers';
 
+>>>>>>> 05e6b2e5690a7f98cb490c435eb93d8b3856a4f6
 
 const Home = () => {
   let [data, setdata] = useState(250);

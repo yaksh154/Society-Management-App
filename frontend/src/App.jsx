@@ -5,6 +5,9 @@ import Forgot_password from './component/pages/Forgot_password'
 import Forgot_password_opt from './component/pages/Forgot_password_opt'
 import Reset_password from './component/pages/Reset_password.jsx'
 import Home from './component/pages/DashStack_manager/Home.jsx'
+<<<<<<< HEAD
+import Profile from './component/pages/DashStack_manager/Profile.jsx'
+=======
 import Resident_Management from './component/pages/DashStack_manager/Resident_Management.jsx'
 import Financial_Management from './component/pages/DashStack_manager/Financial_Management.jsx'
 import Facility_Management from './component/pages/DashStack_manager/Facility_Management.jsx'
@@ -12,6 +15,7 @@ import Complaint_Tracking from './component/pages/DashStack_manager/Complaint_Tr
 import Security_Management from './component/pages/DashStack_manager/Security_Management.jsx'
 import Security_Guard from './component/pages/DashStack_manager/Security_Guard.jsx'
 import Announcement from './component/pages/DashStack_manager/Announcement.jsx'
+>>>>>>> 05e6b2e5690a7f98cb490c435eb93d8b3856a4f6
 
 function App() {
 
@@ -25,6 +29,9 @@ function App() {
           <Route path='/forgot_password_opt' element={<Forgot_password_opt />} />
           <Route path='/reset_password' element={<Reset_password />} />
           <Route path='/' element={<Home />} />
+<<<<<<< HEAD
+          <Route path='/profile' element={<Profile />} />
+=======
           <Route path='/resident_management' element={<Resident_Management />} />
           <Route path='/financial_management' element={<Financial_Management />} />
           <Route path='/facility_management' element={<Facility_Management/>} />
@@ -32,6 +39,7 @@ function App() {
           <Route path='/security_management' element={<Security_Management/>} />
           <Route path='/security_guard' element={<Security_Guard/>} />
           <Route path='/announcement' element={<Announcement/>} />
+>>>>>>> 05e6b2e5690a7f98cb490c435eb93d8b3856a4f6
         </Routes>
       </BrowserRouter>
     </>
