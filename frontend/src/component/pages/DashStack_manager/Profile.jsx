@@ -31,7 +31,7 @@ const Profile = () => {
     }
     console.log(formData);
     setError(''); // Clear error if validation passes
-    // Handle form submission logic here
+    // Handle form submission logic herea
   };
 
   return (

@@ -26,20 +26,19 @@ const Registration = () => {
     const [showModal, setShowModal] = useState(false);
     const [RegistrationError, setRegistrationError] = useState('');
 
+    const CreatenewSociety = () => {
+        setShowModal(true);
+    };
+    
     const onSubmit = (data) => {
         if (data.Password !== data.confirmPassword) {
             alert("Passwords do not match!");
             return;
         }
         console.log(data);
-        
+
         UserDataRegistration(data, setRegistrationError)
     };
-
-    const CreatenewSociety = () => {
-        setShowModal(true);
-    };
-
 
     return (
         <div className="flex flex-col lg:flex-row min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/images/Login_bg_img.png')" }}>
@@ -210,7 +209,7 @@ const Registration = () => {
                             </div>
                         </div>
                         {RegistrationError && <p className="text-red-500 text-sm mt-1">{RegistrationError}</p>}
-                        
+
                         {/* Submit Button */}
                         <div className="flex justify-center">
                             <button type="submit" className="bg-gray-100 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold w-full py-1 rounded text-sm">Register</button>
