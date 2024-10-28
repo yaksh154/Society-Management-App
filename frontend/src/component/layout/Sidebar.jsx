@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { MdDashboard } from "react-icons/md";
-import { TfiAnnouncement } from "react-icons/tfi";
+import { MdAttachEmail, MdDashboard, MdSecurity } from "react-icons/md";
+import { GrAnnounce } from "react-icons/gr";
 import { RiMoneyDollarBoxFill } from "react-icons/ri";
+import { IoIosContact } from "react-icons/io";
+import { FaCity } from "react-icons/fa";
+import { BsFillRecordBtnFill } from "react-icons/bs";
 
 export default function Sidenav({ closeNav, data }) {
   const { pathname } = useLocation();
@@ -47,7 +50,7 @@ export default function Sidenav({ closeNav, data }) {
             : "hover:bg-gray-100"
           }`}
       >
-        <RiMoneyDollarBoxFill className="inline mr-2" />
+        <BsFillRecordBtnFill className="inline mr-2" />
         Resident Management
       </Link>
 
@@ -58,6 +61,7 @@ export default function Sidenav({ closeNav, data }) {
             : "hover:bg-gray-100"
           }`}
       >
+        <RiMoneyDollarBoxFill className="inline mr-2" />
         Financial Management
       </Link>
 
@@ -66,6 +70,7 @@ export default function Sidenav({ closeNav, data }) {
         className={`p-4 text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/facility_management" ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold" : "hover:bg-gray-100"
           }`}
       >
+        <FaCity className="inline mr-2" />
         Facility Management
       </Link>
 
@@ -76,6 +81,7 @@ export default function Sidenav({ closeNav, data }) {
             : "hover:bg-gray-100"
           }`}
       >
+        <MdAttachEmail className="inline mr-2" />
         Complaint Tracking
       </Link>
 
@@ -86,6 +92,7 @@ export default function Sidenav({ closeNav, data }) {
             : "hover:bg-gray-100"
           }`}
       >
+        <MdSecurity className="inline mr-2" />
         Security Management
       </Link>
 
@@ -96,6 +103,7 @@ export default function Sidenav({ closeNav, data }) {
             : "hover:bg-gray-100"
           }`}
       >
+        <IoIosContact className="inline mr-2" />
         Security Guard
       </Link>
 
@@ -106,7 +114,7 @@ export default function Sidenav({ closeNav, data }) {
             : "hover:bg-gray-100"
           }`}
       >
-        <TfiAnnouncement className="inline mr-2" />
+        <GrAnnounce className="inline mr-2" />
         Announcement
       </Link>
 

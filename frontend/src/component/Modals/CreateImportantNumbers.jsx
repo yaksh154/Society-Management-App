@@ -2,19 +2,38 @@ import React, { useState } from 'react';
 import { ImportantNumbersPost } from '../services/Api/api';
 
 const CreateImportantNumbers = ({ setShowModal }) => { 
-    const [newNumber, setnewNumber] = useState({
+    const [newNumber, setNewNumber] = useState({
         Fullname: '',
         Phonenumber: '',
         Work: ''
     });
 
+    const [error, setError] = useState('');
+
     const handleNewNumberChange = (e) => {
-        setnewNumber({ ...newNumber, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setNewNumber({ ...newNumber, [name]: value });
+
+        // Validate phone number
+        if (name === 'Phonenumber') {
+            if (!/^\d{0,10}$/.test(value)) {
+                setError('Phone number must be 10 digits');
+            } else if (value.length === 10) {
+                setError('');
+            } else {
+                setError('');
+            }
+        }
     };
 
     const handleAddSociety = () => {
+        // Check for errors before submitting
+        if (newNumber.Phonenumber.length !== 10) {
+            setError('Phone number must be exactly 10 digits');
+            return;
+        }
         ImportantNumbersPost(newNumber); 
-        setShowModal(false)
+        setShowModal(false);
     };
 
     return (
@@ -48,12 +67,13 @@ const CreateImportantNumbers = ({ setShowModal }) => {
                         <label className="block text-sm font-medium pb-2">Phone Number<span className='text-red'>*</span></label>
                         <input
                             type="text"
-                            className="w-full p-1 text-sm border border-gray-300 rounded"
+                            className={`w-full p-1 text-sm border ${error ? 'border-red-500' : 'border-gray-300'} rounded`}
                             name="Phonenumber"
                             value={newNumber.Phonenumber}
                             onChange={handleNewNumberChange}
                             placeholder="Enter Number"
                         />
+                        {error && <p className="text-red-500 text-sm">{error}</p>}
                     </div>
                     {/* Work Input */}
                     <div className="mb-3">

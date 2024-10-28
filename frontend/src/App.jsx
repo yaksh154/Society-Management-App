@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './component/pages/Login'
 import Registration from './component/pages/Registration'
 import Forgot_password from './component/pages/Forgot_password'
@@ -13,30 +13,29 @@ import Complaint_Tracking from './component/pages/DashStack_manager/Complaint_Tr
 import Security_Management from './component/pages/DashStack_manager/Security_Management.jsx'
 import Security_Guard from './component/pages/DashStack_manager/Security_Guard.jsx'
 import Announcement from './component/pages/DashStack_manager/Announcement.jsx'
+import { useState } from 'react'
 
 function App() {
 
   return (
-    <>
       <BrowserRouter>
-        <Routes>
-          <Route path='/login' element={<Login />} />
-          <Route path='/registration' element={<Registration />} />
-          <Route path='/forgot_password' element={<Forgot_password />} />
-          <Route path='/forgot_password_opt' element={<Forgot_password_opt />} />
-          <Route path='/reset_password' element={<Reset_password />} />
-          <Route path='/' element={<Home />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/resident_management' element={<Resident_Management />} />
-          <Route path='/financial_management' element={<Financial_Management />} />
-          <Route path='/facility_management' element={<Facility_Management/>} />
-          <Route path='/complaint_tracking' element={<Complaint_Tracking/>} />
-          <Route path='/security_management' element={<Security_Management/>} />
-          <Route path='/security_guard' element={<Security_Guard/>} />
-          <Route path='/announcement' element={<Announcement/>} />
-        </Routes>
+          <Routes>
+              <Route path='/login' element={<Login />} />
+              <Route path='/registration' element={<Registration />} />
+              <Route path='/forgot_password' element={<Forgot_password />} />
+              <Route path='/forgot_password_opt' element={<Forgot_password_opt />} />
+              <Route path='/reset_password' element={<Reset_password />} />
+              <Route path='/' element={<Home />} />
+                  <Route path='/profile' element={<Profile />} />
+                  <Route path='/resident_management' element={<Resident_Management />} />
+                  <Route path='/financial_management' element={<Financial_Management />} />
+                  <Route path='/facility_management' element={<Facility_Management />} />
+                  <Route path='/complaint_tracking' element={<Complaint_Tracking />} />
+                  <Route path='/security_management' element={<Security_Management />} />
+                  <Route path='/security_guard' element={<Security_Guard />} />
+                  <Route path='/announcement' element={<Announcement />} />
+          </Routes>
       </BrowserRouter>
-    </>
   )
 }
 
