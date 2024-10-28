@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { MdDashboard } from "react-icons/md";
+import { MdDashboard, MdOutlineAttachMoney, MdOutlineHomeWork } from "react-icons/md";
 import { TfiAnnouncement } from "react-icons/tfi";
 import { RiMoneyDollarBoxFill } from "react-icons/ri";
+import { BsBuildings, BsBuildingsFill } from "react-icons/bs";
 
-export default function Sidenav({ closeNav, data }) {
+export default function Sidebar({ closeNav, data }) {
   const { pathname } = useLocation();
   const [popup, setPopup] = useState(false);
   const openpopup = () => {
@@ -47,7 +48,7 @@ export default function Sidenav({ closeNav, data }) {
             : "hover:bg-gray-100"
           }`}
       >
-        <RiMoneyDollarBoxFill className="inline mr-2" />
+        <MdOutlineHomeWork className="inline mr-2" />
         Resident Management
       </Link>
 
@@ -58,6 +59,7 @@ export default function Sidenav({ closeNav, data }) {
             : "hover:bg-gray-100"
           }`}
       >
+           <MdOutlineAttachMoney className="inline mr-2" />
         Financial Management
       </Link>
 
@@ -66,6 +68,7 @@ export default function Sidenav({ closeNav, data }) {
         className={`p-4 text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/facility_management" ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold" : "hover:bg-gray-100"
           }`}
       >
+       <BsBuildingsFill className="inline mr-2" />
         Facility Management
       </Link>
 
