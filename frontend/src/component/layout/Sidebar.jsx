@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import { TfiAnnouncement } from "react-icons/tfi";
+import { RiMoneyDollarBoxFill } from "react-icons/ri";
 
 export default function Sidenav({ closeNav, data }) {
   const { pathname } = useLocation();
@@ -19,7 +20,7 @@ export default function Sidenav({ closeNav, data }) {
         display: data === 0 ? 'none' : 'block', // Conditionally set display
         transition: 'width 0.3s', // Smooth transition effect
       }}
-      className="fixed top-0 left-0 h-full z-10 transition-all duration-500 bg-white text-white max-[425px]:fixed"
+      className="fixed overflow-y-auto top-0 left-0 h-full z-10 transition-all duration-500 bg-white text-white max-[425px]:fixed"
     >
       <div className="flex justify-center my-4">
         <h1 className="text-4xl font-bold text-orange-600 mt-10 mb-5">Dash<span className="text-black">Stack</span></h1>
@@ -46,6 +47,7 @@ export default function Sidenav({ closeNav, data }) {
             : "hover:bg-gray-100"
           }`}
       >
+        <RiMoneyDollarBoxFill className="inline mr-2" />
         Resident Management
       </Link>
 

@@ -2,6 +2,8 @@ import axios from "axios";
 
 const url = 'https://society-management-app-server.onrender.com'
 
+// login data
+
 export const UserDataLogin = (data, setLoginError) => {
     console.log(data, setLoginError);
 
@@ -21,6 +23,8 @@ export const UserDataLogin = (data, setLoginError) => {
             setLoginError('Login failed. Please try again later.');
         });
 }
+
+// regegistration data
 
 export const UserDataRegistration = (data, setRegistrationError) => {
     axios.post('/manager/createmanager', {
@@ -50,6 +54,10 @@ export const UserDataRegistration = (data, setRegistrationError) => {
         });
 }
 
+// ImportantNumbers page Home
+
+// ImportantNumbers get
+
 export const ImportantNumbersGet = (setContacts, setLoading) => {
 
     setLoading(true);
@@ -66,19 +74,40 @@ export const ImportantNumbersGet = (setContacts, setLoading) => {
             setContacts([]);
         });
 }
-export const ImportantNumbersPost = (setContacts, setLoading) => {
 
-    setLoading(true);
+// ImportantNumbers post
 
-    axios.get(`${url}/importantnumber/createImportantNumber`)
+export const ImportantNumbersPost = (newNumber) => {
+    axios.post(`${url}/importantnumber/createImportantNumber`, newNumber)
         .then((res) => {
-
-            setContacts(res.data);
-            setLoading(false);
+            console.log(res);
         })
         .catch((err) => {
             console.error('Error fetching important numbers:', err);
-            setLoading(false);
-            setContacts([]);
         });
 }
+
+// ImportantNumbers delete
+
+export const ImportantNumbersDelete = (_id, contacts, setContacts) => {
+    axios.delete(`${url}/importantnumber/deleteImportantNumber/${_id}`)
+        .then((res) => {
+            console.log(res);
+            const deletData = contacts.filter((e) => e._id !== _id)
+            setContacts(deletData)
+        })
+        .catch((err) => {
+            console.error('Error fetching important numbers:', err);
+        });
+}
+
+// ImportantNumbers edit
+
+export const updateImportantNumber = (_id,editNumber, seteditShowModal ,closeEditModal) => {
+    axios.put(`${url}/importantnumber/updateImportantNumber/${_id}`, editNumber)
+        .then(() => {
+            seteditShowModal(false);  
+            closeEditModal(); 
+        })
+        .catch((error) => console.error("Error saving data:", error));
+};
