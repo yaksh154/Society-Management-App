@@ -4,18 +4,20 @@ const url = 'https://society-management-app-server.onrender.com'
 
 // login data
 
-export const UserDataLogin = (data, setLoginError,setIsLoggdIn) => {
+export const UserDataLogin = (data, setLoginError) => {
     console.log(data, setLoginError);
 
     axios.post(`${url}/manager/login`, {
         Email: data.Email,
         Password: data.Password,
     })
-        .then((res) => {
+        .then((res,req) => {
             if (res.data) {
                 console.log(res.data);
                 localStorage.setItem('message', JSON.stringify(res.data.message));
                 localStorage.setItem('token', JSON.stringify(res.data.token));
+                console.log('Cookies:', document.cookie);
+                
                 // user login
             } else {
                 setLoginError('Incorrect email/phone or password');

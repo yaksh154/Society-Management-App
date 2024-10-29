@@ -74,7 +74,7 @@ const Home = () => {
         <main className="flex-1 space-y-6 ">
           <div className="p-6 space-y-4 bg-[#f0f5fb]">
             {/* Dashboard Cards */}
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-1 gap-4">
               {/* Card 1 */}
               <Home_totle_card
                 total_title="Total Balance"
@@ -113,12 +113,12 @@ const Home = () => {
               />
             </div>
             {/* Graph and Important Numbers */}
-            <div className="grid grid-cols-4 gap-4">
-              <div className="bg-white rounded-lg shadow-lg col-span-2">
+            <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-1 gap-4">
+              <div className="bg-white rounded-lg shadow-lg xl:col-span-2 col-span-1">
                 <TotalBalanceChart />
-              </div>
+              </div> 
               <div className="bg-white p-4 rounded-lg shadow-lg col-span-1">
-                <div className=" bg-white rounded-lg max-w-md">
+                <div className=" bg-white rounded-lg">
                   <div className="flex justify-between items-center mb-5">
                     <h2 className="text-lg font-semibold text-gray-800">Important Numbers</h2>
                     <button
@@ -184,11 +184,11 @@ const Home = () => {
                 </div>
               </div>
               <div className="bg-white p-4 rounded-lg shadow-lg col-span-1">
-                <div class="flex justify-between items-center mb-4">
-                  <h2 class="text-lg font-semibold">Pending Maintenances</h2>
-                  <a href="#" class="text-blue-500 text-sm">View all</a>
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-lg font-semibold">Pending Maintenances</h2>
+                  <a href="#" className="text-blue-500 text-sm">View all</a>
                 </div>
-                <div class="space-y-4 overflow-y-auto max-h-80">
+                <div className="space-y-4 overflow-y-auto max-h-80">
                   <div>
                     {/* Maintenance Item */}
                     <div className="flex justify-between items-center">
@@ -289,67 +289,81 @@ const Home = () => {
               </div>
             </div>
             {/* Complaint List and Upcoming Activity */}
-            <div className="grid grid-cols-4 gap-4">
-              <div className="bg-white col-span-3 rounded-lg shadow">
-                <div class="bg-white rounded-lg p-4">
-                  <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-lg font-semibold">Complaint List</h2>
-                    <button class="border border-gray-300 bg-gray-100 text-gray-600 rounded-lg px-4 py-1">
-                      Month
-                      <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-                    </button>
+            <div className="grid xl:grid-cols-4 grid-cols-1 gap-4">
+              <div className="bg-white xl:col-span-3 rounded-lg shadow">
+                <div className="bg-white rounded-lg p-4">
+                  <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-lg font-semibold">Complaint List</h2>
+                    <button className="text-red-500 bg-red-100 p-1 rounded">
+  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+    <path fillRule="evenodd" d="M5.5 5l.21-1.42a1 1 0 01.98-.8h6.62a1 1 0 01.98.8L14.5 5H17a1 1 0 010 2H3a1 1 0 010-2h2.5zM6 8v6a2 2 0 002 2h4a2 2 0 002-2V8H6z" clipRule="evenodd" />
+  </svg>
+</button>
+
+
                   </div>
-                  <table class="w-full text-left">
-                    <thead>
-                      <tr class="bg-gray-100 text-gray-700">
-                        <th class="px-4 py-2">Complainer Name</th>
-                        <th class="px-4 py-2">Complaint Name</th>
-                        <th class="px-4 py-2">Date</th>
-                        <th class="px-4 py-2">Priority</th>
-                        <th class="px-4 py-2">Complain Status</th>
-                        <th class="px-4 py-2">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="border-b">
-                        <td class="px-4 py-2 flex items-center space-x-2">
-                          <img class="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
-                          <span>Evelyn Harper</span>
-                        </td>
-                        <td class="px-4 py-2">Unethical Behavior</td>
-                        <td class="px-4 py-2">01/02/2024</td>
-                        <td class="px-4 py-2">
-                          <span class="text-white bg-blue-500 px-3 py-1 rounded-full text-sm">Medium</span>
-                        </td>
-                        <td class="px-4 py-2">
-                          <span class="text-white bg-blue-400 px-3 py-1 rounded-full text-sm">Open</span>
-                        </td>
-                        <td class="px-4 py-2 flex space-x-2">
-                          <button class="text-green-500 bg-green-100 p-1 rounded">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path d="M5 10l3 3L15 6" /></svg>
-                          </button>
-                          <button class="text-blue-500 bg-blue-100 p-1 rounded">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path d="M6 2h8l2 2H4l2-2zM3 5h14v12H3V5zm4 3h6v6H7V8z" /></svg>
-                          </button>
-                          <button class="text-red-500 bg-red-100 p-1 rounded">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.5 5l.21-1.42a1 1 0 01.98-.8h6.62a1 1 0 01.98.8L14.5 5H17a1 1 0 010 2H3a1 1 0 010-2h2.5zM6 8v6a2 2 0 002 2h4a2 2 0 002-2V8H6z" clip-rule="evenodd" /></svg>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+
+                  <div className="overflow-x-auto max-h-60">
+                    <table className="min-w-full text-left">
+                      <thead>
+                        <tr className="bg-gray-100 text-gray-700">
+                          <th className="px-4 py-2">Complainer Name</th>
+                          <th className="px-4 py-2">Complaint Name</th>
+                          <th className="px-4 py-2">Date</th>
+                          <th className="px-4 py-2">Priority</th>
+                          <th className="px-4 py-2">Complain Status</th>
+                          <th className="px-4 py-2">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-b">
+                          <td className="px-4 py-2 flex items-center space-x-2">
+                            <img className="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
+                            <span>Evelyn Harper</span>
+                          </td>
+                          <td className="px-4 py-2">Unethical Behavior</td>
+                          <td className="px-4 py-2">01/02/2024</td>
+                          <td className="px-4 py-2">
+                            <span className="text-white bg-blue-500 px-3 py-1 rounded-full text-sm">Medium</span>
+                          </td>
+                          <td className="px-4 py-2">
+                            <span className="text-white bg-blue-400 px-3 py-1 rounded-full text-sm">Open</span>
+                          </td>
+                          <td className="px-4 py-2 flex space-x-2">
+                            <button className="text-green-500 bg-green-100 p-1 rounded">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5 10l3 3L15 6" />
+                              </svg>
+                            </button>
+                            <button className="text-blue-500 bg-blue-100 p-1 rounded">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M6 2h8l2 2H4l2-2zM3 5h14v12H3V5zm4 3h6v6H7V8z" />
+                              </svg>
+                            </button>
+                            <button className="text-red-500 bg-red-100 p-1 rounded">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M5.5 5l.21-1.42a1 1 0 01.98-.8h6.62a1 1 0 01.98.8L14.5 5H17a1 1 0 010 2H3a1 1 0 010-2h2.5zM6 8v6a2 2 0 002 2h4a2 2 0 002-2V8H6z" clipRule="evenodd" />
+                              </svg>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
+
+
               </div>
               <div className="bg-white p-4 rounded-lg shadow">
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-semibold">Upcoming Activity</h2>
-                    <select className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                      <option>Month</option>
-                      <option>Week</option>
-                      <option>Day</option>
-                    </select>
-                  </div>
-                <div className="bg-white rounded-lg w-full max-w-sm h-32 overflow-auto">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-xl font-semibold">Upcoming Activity</h2>
+                  <select className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option>Month</option>
+                    <option>Week</option>
+                    <option>Day</option>
+                  </select>
+                </div>
+                <div className="bg-white rounded-lg w-full h-32 overflow-auto">
                   <div className="space-y-4">
                     {/* Activity Item */}
                     <div className="flex items-center justify-between">

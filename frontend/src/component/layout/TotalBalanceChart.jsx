@@ -52,7 +52,7 @@ function TotalBalanceChart() {
           </select>
         </div>
       </div>
-      <div className="h-64">
+      <div className="">
         <Line data={data} options={options} />
       </div>
     </div>
