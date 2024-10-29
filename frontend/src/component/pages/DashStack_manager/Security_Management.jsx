@@ -6,6 +6,7 @@ const Security_Management = () => {
   let [data, setdata] = useState(250);
   let [getdata, setget] = useState(250);
 
+
   function openNav() {
     setdata(250);
     setget(250);
