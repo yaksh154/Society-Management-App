@@ -1,6 +1,4 @@
 const  mongoose = require("mongoose");
-const bcrypt = require('bcryptjs');
-const { type } = require("os");
 
 const managerSchema = new mongoose.Schema(
   {
@@ -47,6 +45,10 @@ const managerSchema = new mongoose.Schema(
     },
     Image:{
       type: String
+    },
+    OTP:{
+      type: Number,
+      default: null
     }
   },
   {
@@ -54,20 +56,6 @@ const managerSchema = new mongoose.Schema(
   }
 );
 
-
-managerSchema.pre('save', async function (next) {
-  const manager = this;
-  if (!manager.isModified('Password')) return next();
-
-  try {
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(manager.Password, salt);
-    manager.Password = hashedPassword;
-    next();
-  } catch (error) {
-    return next(error);
-  }
-});
 
 
 const Manager = mongoose.model("Manager", managerSchema);
