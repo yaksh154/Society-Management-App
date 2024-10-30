@@ -151,6 +151,7 @@ const otpverify = async (req, res) => {
     console.error(error.message);
     res.status(500).json({ message: error.message })
   }
+  
 }
 
 const forgotpassword = async (req, res) => {
