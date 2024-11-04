@@ -1,6 +1,7 @@
 import React from 'react'
 import { IoIosNotifications } from 'react-icons/io'
 import { GiHamburgerMenu } from "react-icons/gi";
+import { Link } from 'react-router-dom';
 
 const Header = (props) => {
   return (
@@ -16,11 +17,11 @@ const Header = (props) => {
           {/* <span className="font-medium">Moni Roy</span> */}
           <button className='border-2 border-[#d3d3d3] p-1 rounded-lg text-2xl hover:bg-[#d3d3d3]'><IoIosNotifications /></button>
           <div className="">
-            <img src="profile-image-url.jpg" alt="Profile" className="w-8 h-8 rounded-full" />
-            <div className="">
-              <span>Moni Roy</span>
-              <span>Admin</span>
-            </div>
+          <Link className="flex items-center space-x-4" to="/profile">
+          <div className="Profie-img"><img src="../../../public/images/Admin.png" alt="Profile" className="w-8 h-8 rounded-full" /> </div>
+         <div className="profile-text">  <p className="font-medium">Moni Roy</p>
+          <p className='text-gray-400'>Admin</p></div>
+        </Link>
           </div>
         </div>
       </header>
