@@ -56,11 +56,12 @@ export default function Sidenav({ closeNav, data }) {
 
       <Link
         to="/financial_management"
-        className={`p-4 text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/financial_management"
+        className={`p-4 text-lg block transition-colors duration-300 flex text-black items-center ${pathname.startsWith("/financial_management")
             ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
             : "hover:bg-gray-100"
           }`}
       >
+
         <RiMoneyDollarBoxFill className="inline mr-2" />
         Financial Management
       </Link>
