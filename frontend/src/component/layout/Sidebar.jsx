@@ -45,7 +45,7 @@ export default function Sidenav({ closeNav, data }) {
 
       <Link
         to="/resident_management"
-        className={`p-3 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/resident_management"
+        className={`p-3 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname.startsWith("/resident_management")
             ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
             : "hover:bg-gray-100"
           }`}

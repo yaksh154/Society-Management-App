@@ -14,6 +14,7 @@ import Security_Management from './component/pages/DashStack_manager/Security_Ma
 import Security_Guard from './component/pages/DashStack_manager/Security_Guard.jsx'
 import Announcement from './component/pages/DashStack_manager/Announcement.jsx'
 import { useState } from 'react'
+import Resident_Owner from './component/pages/DashStack_manager/Resident_Owner.jsx'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
               <Route path='/' element={<Home />} />
                   <Route path='/profile' element={<Profile />} />
                   <Route path='/resident_management' element={<Resident_Management />} />
+                  <Route path='/resident_management/resident_owner' element={<Resident_Owner />} />
                   <Route path='/financial_management' element={<Financial_Management />} />
                   <Route path='/facility_management' element={<Facility_Management />} />
                   <Route path='/complaint_tracking' element={<Complaint_Tracking />} />
