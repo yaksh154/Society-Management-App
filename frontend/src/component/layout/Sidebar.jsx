@@ -61,6 +61,7 @@ export default function Sidenav({ closeNav, data }) {
             : "hover:bg-gray-100"
           }`}
       >
+
         <RiMoneyDollarBoxFill className="inline mr-2" />
         Financial Management
       </Link>

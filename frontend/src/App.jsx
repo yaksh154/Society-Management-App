@@ -13,8 +13,12 @@ import Complaint_Tracking from './component/pages/DashStack_manager/Complaint_Tr
 import Security_Management from './component/pages/DashStack_manager/Security_Management.jsx'
 import Security_Guard from './component/pages/DashStack_manager/Security_Guard.jsx'
 import Announcement from './component/pages/DashStack_manager/Announcement.jsx'
+<<<<<<< HEAD
 import { useState } from 'react'
 import Resident_Owner from './component/pages/DashStack_manager/Resident_Owner.jsx'
+=======
+import Otherincome from './component/pages/DashStack_manager/Income/Otherincome.jsx'
+>>>>>>> 73788aca1989fae3d01102b5083aff2b70fee9c7
 
 function App() {
 
@@ -27,6 +31,7 @@ function App() {
               <Route path='/forgot_password_opt' element={<Forgot_password_opt />} />
               <Route path='/reset_password' element={<Reset_password />} />
               <Route path='/' element={<Home />} />
+
                   <Route path='/profile' element={<Profile />} />
                   <Route path='/resident_management' element={<Resident_Management />} />
                   <Route path='/resident_management/resident_owner' element={<Resident_Owner />} />
@@ -36,6 +41,8 @@ function App() {
                   <Route path='/security_management' element={<Security_Management />} />
                   <Route path='/security_guard' element={<Security_Guard />} />
                   <Route path='/announcement' element={<Announcement />} />
+                  <Route path='/financial_management/otherincome' element={<Otherincome />} />
+
           </Routes>
       </BrowserRouter>
   )
