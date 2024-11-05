@@ -36,7 +36,7 @@ const EditImportantNumbers = ({ _id, closeEditModal, seteditShowModal }) => {
                     <h1 className="text-lg font-semibold">Edit Contact</h1>
                     <button
                         type="button"
-                        className="text-gray-600 hover:text-gray-800"
+                        className="text-gray-600 hover:text-gray-800 text-2xl"
                         onClick={closeEditModal}
                     >
                         &times;
@@ -95,7 +95,7 @@ const EditImportantNumbers = ({ _id, closeEditModal, seteditShowModal }) => {
 
                 </div>
             </div>
-        </div>
+        </div>  
     );
 };
 

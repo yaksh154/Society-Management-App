@@ -53,7 +53,12 @@ function TotalBalanceChart() {
         </div>
       </div>
       <div className="">
-        <Line data={data} options={options} />
+        <Line style={{
+          boxSizing: 'border-box',
+          display: 'block',
+          height: '100%',
+          width: '100%'
+        }} data={data} options={options} />
       </div>
     </div>
   );

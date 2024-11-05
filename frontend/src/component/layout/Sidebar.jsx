@@ -36,7 +36,7 @@ export default function Sidenav({ closeNav, data }) {
 
       <Link
         to="/"
-        className={`p-4 my-2 text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/" ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold" : "hover:bg-gray-100"
+        className={`p-3 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/" ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold" : "hover:bg-gray-100"
           }`}
       >
         <MdDashboard className="inline mr-2" />
@@ -45,7 +45,7 @@ export default function Sidenav({ closeNav, data }) {
 
       <Link
         to="/resident_management"
-        className={`p-4 text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/resident_management"
+        className={`p-3 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/resident_management"
             ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
             : "hover:bg-gray-100"
           }`}
@@ -56,7 +56,7 @@ export default function Sidenav({ closeNav, data }) {
 
       <Link
         to="/financial_management"
-        className={`p-4 text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/financial_management"
+        className={`p-3 ml-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/financial_management"
             ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
             : "hover:bg-gray-100"
           }`}
@@ -67,7 +67,7 @@ export default function Sidenav({ closeNav, data }) {
 
       <Link
         to="/facility_management"
-        className={`p-4 text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/facility_management" ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold" : "hover:bg-gray-100"
+        className={`p-3 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/facility_management" ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold" : "hover:bg-gray-100"
           }`}
       >
         <FaCity className="inline mr-2" />
@@ -76,7 +76,7 @@ export default function Sidenav({ closeNav, data }) {
 
       <Link
         to="/complaint_tracking"
-        className={`p-4 text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/complaint_tracking"
+        className={`p-3 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/complaint_tracking"
             ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
             : "hover:bg-gray-100"
           }`}
@@ -87,7 +87,7 @@ export default function Sidenav({ closeNav, data }) {
 
       <Link
         to="/security_management"
-        className={`p-4 text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/security_management"
+        className={`p-3 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/security_management"
             ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
             : "hover:bg-gray-100"
           }`}
@@ -98,7 +98,7 @@ export default function Sidenav({ closeNav, data }) {
 
       <Link
         to="/security_guard"
-        className={`p-4 text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/security_guard"
+        className={`p-3 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/security_guard"
             ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
             : "hover:bg-gray-100"
           }`}
@@ -109,7 +109,7 @@ export default function Sidenav({ closeNav, data }) {
 
       <Link
         to="/announcement"
-        className={`p-4 text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/announcement"
+        className={`p-3 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/announcement"
             ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
             : "hover:bg-gray-100"
           }`}

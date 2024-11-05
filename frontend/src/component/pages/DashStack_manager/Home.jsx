@@ -19,15 +19,19 @@ import { ImportantNumbersDelete, ImportantNumbersGet } from '../../services/Api/
 import { TiThMenu } from "react-icons/ti";
 import CreateImportantNumbers from '../../Modals/CreateImportantNumbers';
 import EditImportantNumbers from '../../Modals/EditImportantNumbers';
+import OpenEditComplintModel from '../../Modals/OpenEditComplintModel';
+import { GrFormView } from 'react-icons/gr';
+import ViewComplintModel from '../../Modals/ViewComplintModel';
+import axios from 'axios';
 
 
 const Home = () => {
-  let [data, setdata] = useState(250);
-  let [getdata, setget] = useState(250);
+  let [data, setdata] = useState(255);
+  let [getdata, setget] = useState(255);
 
   function openNav() {
-    setdata(250);
-    setget(250);
+    setdata(255);
+    setget(255);
   }
   function closeNav() {
     setdata(0);
@@ -47,6 +51,8 @@ const Home = () => {
     ImportantNumbersGet(setContacts, setLoading)
   }
 
+  // add numbers pop_up
+
   const openModal = () => {
     setShowModal(true);
   };
@@ -54,6 +60,8 @@ const Home = () => {
   const closeModal = () => {
     setShowModal(false);
   };
+
+  // edit numbers pop_up
 
   const closeeditModal = () => {
     seteditModal(false);
@@ -63,6 +71,34 @@ const Home = () => {
     console.log(_id);
     ImportantNumbersDelete(_id, contacts, setContacts)
   };
+
+  // get complaint List
+
+  useEffect(() => {
+    getComplaintdata()
+  }, [])
+
+  let [getComplaint, setgetComplaint] = useState([]);
+  const getComplaintdata = () => {
+    axios.get('http://localhost:3030/user').then((res) => {
+      setgetComplaint(res.data);
+    })
+  }
+  
+  // edit complaint List pop_up
+
+  const [EditComplint, setEditComplint] = useState(false);
+  const [ViewComplint, setViewComplint] = useState(false);
+
+  const closeEditComplint = () => {
+    setEditComplint(false);
+  }
+  const closeViewComplint = () => {
+    setViewComplint(false);
+  }
+  const OpneViewComplint = (_id) => {
+    setViewComplint(true)
+  }
 
   return (
     <div>
@@ -74,7 +110,7 @@ const Home = () => {
         <main className="flex-1 space-y-6 ">
           <div className="p-6 space-y-4 bg-[#f0f5fb]">
             {/* Dashboard Cards */}
-            <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-1 gap-4">
+            <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-2 max-[425px]:grid-cols-2 gap-4">
               {/* Card 1 */}
               <Home_totle_card
                 total_title="Total Balance"
@@ -114,9 +150,9 @@ const Home = () => {
             </div>
             {/* Graph and Important Numbers */}
             <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-1 gap-4">
-              <div className="bg-white rounded-lg shadow-lg xl:col-span-2 col-span-1">
+              <div className="bg-white rounded-lg max-[425px]:overflow-x-auto shadow-lg xl:col-span-2 col-span-1">
                 <TotalBalanceChart />
-              </div> 
+              </div>
               <div className="bg-white p-4 rounded-lg shadow-lg col-span-1">
                 <div className=" bg-white rounded-lg">
                   <div className="flex justify-between items-center mb-5">
@@ -157,6 +193,12 @@ const Home = () => {
                             </div>
                             <div className="flex space-x-2">
                               <button
+                                onClick={() => deleteContact(contact._id)}
+                                className="text-red-500 hover:text-red-600"
+                              >
+                                <FaTrashAlt />
+                              </button>
+                              <button
                                 onClick={() => seteditModal(true)}
                                 className="text-green-500 hover:text-green-600"
                               >
@@ -164,17 +206,11 @@ const Home = () => {
                               </button>
                               {editModal && (
                                 <EditImportantNumbers
-                                  _id={contact._id} // <-- Pass _id here
+                                  _id={contact._id}
                                   closeEditModal={closeeditModal}
                                   seteditShowModal={seteditModal}
                                 />
                               )}
-                              <button
-                                onClick={() => deleteContact(contact._id)}
-                                className="text-red-500 hover:text-red-600"
-                              >
-                                <FaTrashAlt />
-                              </button>
                             </div>
                           </div>
                         ))}
@@ -294,16 +330,13 @@ const Home = () => {
                 <div className="bg-white rounded-lg p-4">
                   <div className="flex justify-between items-center mb-4">
                     <h2 className="text-lg font-semibold">Complaint List</h2>
-                    <button className="text-red-500 bg-red-100 p-1 rounded">
-  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-    <path fillRule="evenodd" d="M5.5 5l.21-1.42a1 1 0 01.98-.8h6.62a1 1 0 01.98.8L14.5 5H17a1 1 0 010 2H3a1 1 0 010-2h2.5zM6 8v6a2 2 0 002 2h4a2 2 0 002-2V8H6z" clipRule="evenodd" />
-  </svg>
-</button>
-
-
+                    <select className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                      <option>Month</option>
+                      <option>Week</option>
+                      <option>Day</option>
+                    </select>
                   </div>
-
-                  <div className="overflow-x-auto max-h-60">
+                  <div className="overflow-x-auto h-32">
                     <table className="min-w-full text-left">
                       <thead>
                         <tr className="bg-gray-100 text-gray-700">
@@ -316,43 +349,47 @@ const Home = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr className="border-b">
-                          <td className="px-4 py-2 flex items-center space-x-2">
-                            <img className="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
-                            <span>Evelyn Harper</span>
-                          </td>
-                          <td className="px-4 py-2">Unethical Behavior</td>
-                          <td className="px-4 py-2">01/02/2024</td>
-                          <td className="px-4 py-2">
-                            <span className="text-white bg-blue-500 px-3 py-1 rounded-full text-sm">Medium</span>
-                          </td>
-                          <td className="px-4 py-2">
-                            <span className="text-white bg-blue-400 px-3 py-1 rounded-full text-sm">Open</span>
-                          </td>
-                          <td className="px-4 py-2 flex space-x-2">
-                            <button className="text-green-500 bg-green-100 p-1 rounded">
-                              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M5 10l3 3L15 6" />
-                              </svg>
-                            </button>
-                            <button className="text-blue-500 bg-blue-100 p-1 rounded">
-                              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M6 2h8l2 2H4l2-2zM3 5h14v12H3V5zm4 3h6v6H7V8z" />
-                              </svg>
-                            </button>
-                            <button className="text-red-500 bg-red-100 p-1 rounded">
-                              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fillRule="evenodd" d="M5.5 5l.21-1.42a1 1 0 01.98-.8h6.62a1 1 0 01.98.8L14.5 5H17a1 1 0 010 2H3a1 1 0 010-2h2.5zM6 8v6a2 2 0 002 2h4a2 2 0 002-2V8H6z" clipRule="evenodd" />
-                              </svg>
-                            </button>
-                          </td>
-                        </tr>
+                        {getComplaint.map((e, index) => {
+                          return(
+                            <tr key={index} className="border-b">
+                            <td className="px-4 py-2 flex items-center space-x-2">
+                              <img className="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
+                              <span>{e.Complainer_Name}</span>
+                            </td>
+                            <td className="px-4 py-2">{e.Complaint_Name}</td>
+                            <td className="px-4 py-2">{e.Date}</td>
+                            <td className="px-4 py-2">
+                              <span className="text-white bg-blue-500 px-3 py-1 rounded-full text-sm">{e.Priority}</span>
+                            </td>
+                            <td className="px-4 py-2">
+                              <span className="text-white bg-blue-400 px-3 py-1 rounded-full text-sm">{e.Complain_Status}</span>
+                            </td>
+                            <td className="px-4 py-2 flex space-x-2">
+                              <button className="text-green-500 p-1" onClick={() => setEditComplint(true)}>
+                                <FaEdit />
+                              </button>
+                              {EditComplint && (
+                                <OpenEditComplintModel
+                                  _id={e._id}
+                                  closeEditComplint={closeEditComplint}
+                                />
+                              )}
+                              <button className="text-blue-500 text-2xl rounded" onClick={() =>OpneViewComplint(e._id)}>
+                                <GrFormView />
+                              </button>
+                              {ViewComplint && <ViewComplintModel _id={e._id} closeViewComplint={closeViewComplint} />}
+
+                              <button className="text-red-500 p-1">
+                                <FaTrashAlt />
+                              </button>
+                            </td>
+                          </tr>
+                          )
+                        })}
                       </tbody>
                     </table>
                   </div>
                 </div>
-
-
               </div>
               <div className="bg-white p-4 rounded-lg shadow">
                 <div className="flex items-center justify-between mb-4">

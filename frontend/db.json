@@ -1,0 +1,32 @@
+{
+    "user": [
+        {
+            "_id": "1",
+            "Complainer_Name": "Evelyn Harper",
+            "Complaint_Name": "Unethical Behavior",
+            "Date": "01/02/2024",
+            "Priority": "Medium",
+            "Complain_Status": "Open",
+            "Description": "Complaint regarding unethical behavior observed in the workplace."
+        },
+        {
+            "_id": "2",
+            "Complainer_Name": "Evelyn Harper",
+            "Complaint_Name": "Unethical Behavior",
+            "Date": "01/02/2024",
+            "Priority": "Low",
+            "Complain_Status": "Pending",
+            "Description": "Complaint regarding unethical behavior observed in the workplace."
+        },
+        {
+            "_id": "3",
+            "Complainer_Name": "Evelyn Harper",
+            "Complaint_Name": "Unethical Behavior",
+            "Date": "01/02/2024",
+            "Priority": "High",
+            "Complain_Status": "Solve",
+            "Description": "Complaint regarding unethical behavior observed in the workplace."
+        }
+    ]
+    
+}

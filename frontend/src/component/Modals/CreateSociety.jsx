@@ -29,7 +29,7 @@ const CreateSociety = ({ setShowModal, societies, setSocieties }) => {
                     <h1 className="text-lg font-semibold">Create New Society</h1>
                     <button
                         type="button"
-                        className="text-gray-600 hover:text-gray-800"
+                        className="text-gray-600 hover:text-gray-800 text-2xl"
                         onClick={() => setShowModal(false)}
                     >
                         &times;
