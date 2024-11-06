@@ -1,23 +1,12 @@
 
 import React, { useState } from 'react';
-import Sidebar from '../../../layout/Sidebar';
-import Header from '../../../layout/Header';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { FaRupeeSign } from 'react-icons/fa';
 
 const Otherincome = () => {
-  let [data, setdata] = useState(250);
-  let [getdata, setget] = useState(250);
   const [dropdownOpenIndex, setDropdownOpenIndex] = useState(null); // State to track dropdown
 
-  function openNav() {
-    setdata(250);
-    setget(250);
-  }
-  function closeNav() {
-    setdata(0);
-    setget(0);
-  }
+ 
 
   const toggleDropdown = (index) => {
     setDropdownOpenIndex(dropdownOpenIndex === index ? null : index);
@@ -60,11 +49,6 @@ const Otherincome = () => {
 
   return (
     <div>
-      <Sidebar closeNav={closeNav} data={data} />
-      <div id="main" className="max-[425px]:ml-0" style={{ marginLeft: getdata }}>
-        <div className="open_he">
-          <Header openNav={openNav} />
-        </div>
 
         <div className="p-6 bg-gray-100 min-h-screen">
           <div className="flex justify-between items-center mb-6">
@@ -130,7 +114,6 @@ const Otherincome = () => {
             ))}
           </div>
         </div>
-      </div>
     </div>
   );
 };
