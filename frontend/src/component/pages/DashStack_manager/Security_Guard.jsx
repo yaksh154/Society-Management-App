@@ -23,7 +23,6 @@ const Security_Guard = () => {
         </div>
         {/* Main Content */}
         <h1>Security_Guard</h1>
-
       </div>
     </div>
   )

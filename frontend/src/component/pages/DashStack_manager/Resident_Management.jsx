@@ -153,12 +153,12 @@ const Resident_Management = () => {
             <div className="p-8">
               <div className="bg-white shadow-md rounded-lg p-6">
                 <div className="flex justify-between items-center mb-4">
-                  <h1 className="text-xl font-semibold">
+                  <h1 className="font-semibold md:text-2xl text-md">
                     Resident Tenant and Owner Details
                   </h1>
                   <button
                     onClick={OpenResidenceStatus}
-                    className="bg-orange-500 text-white px-4 py-2 rounded-lg"
+                    className="bg-orange-500 text-white px-4 py-2 rounded-lg md:text-md text-sm"
                   >
                     Add New Resident details
                   </button>
@@ -168,6 +168,7 @@ const Resident_Management = () => {
                     />
                   )}
                 </div>
+                <div className="overflow-x-auto">
                 <table className="min-w-full bg-white border border-gray-200">
                   <thead>
                     <tr>
@@ -241,6 +242,7 @@ const Resident_Management = () => {
                     ))}
                   </tbody>
                 </table>
+                </div>
               </div>
             </div>
           </div>
