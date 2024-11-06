@@ -16,7 +16,6 @@ import Announcement from './component/pages/DashStack_manager/Announcement.jsx'
 import Otherincome from './component/pages/DashStack_manager/Income/Otherincome.jsx'
 import Resident_Owner from './component/pages/DashStack_manager/Resident_Owner.jsx'
 
-
 function App() {
 
   return (
@@ -32,12 +31,12 @@ function App() {
                   <Route path='/resident_management' element={<Resident_Management />} />
                   <Route path='/resident_management/resident_owner' element={<Resident_Owner />} />
                   <Route path='/financial_management' element={<Financial_Management />} />
+                  <Route path='/financial_management/otherincome' element={<Otherincome />} />
                   <Route path='/facility_management' element={<Facility_Management />} />
                   <Route path='/complaint_tracking' element={<Complaint_Tracking />} />
                   <Route path='/security_management' element={<Security_Management />} />
                   <Route path='/security_guard' element={<Security_Guard />} />
                   <Route path='/announcement' element={<Announcement />} />
-                  <Route path='/financial_management/otherincome' element={<Otherincome />} />
 
           </Routes>
       </BrowserRouter>
