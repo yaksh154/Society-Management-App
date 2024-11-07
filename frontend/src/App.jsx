@@ -14,7 +14,11 @@ import Security_Management from './component/pages/DashStack_manager/Security_Ma
 import Security_Guard from './component/pages/DashStack_manager/Security_Guard.jsx'
 import Announcement from './component/pages/DashStack_manager/Announcement.jsx'
 import Otherincome from './component/pages/DashStack_manager/Income/Otherincome.jsx'
+<<<<<<< Updated upstream
 import Resident_Owner from './component/pages/DashStack_manager/Resident_Owner.jsx'
+=======
+import SetMaintenancePwd from './component/Modals/SetMaintenancePwd.jsx'
+>>>>>>> Stashed changes
 
 function App() {
 
@@ -37,6 +41,8 @@ function App() {
                   <Route path='/security_management' element={<Security_Management />} />
                   <Route path='/security_guard' element={<Security_Guard />} />
                   <Route path='/announcement' element={<Announcement />} />
+                  <Route path='/SetMaintenancePwd' element={<SetMaintenancePwd />} />
+
 
           </Routes>
       </BrowserRouter>
