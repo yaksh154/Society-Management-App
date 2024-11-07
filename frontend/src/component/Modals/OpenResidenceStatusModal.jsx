@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const OpenResidenceStatusModal = ({setShowResidenceStatus}) => {
+
+    const navigate = useNavigate();
 
     const [editComplaint, setEditComplaint] = useState({
         Complainer_Name: '',
@@ -32,8 +35,10 @@ const OpenResidenceStatusModal = ({setShowResidenceStatus}) => {
 
     const handleSave = async () => {
         try {
-            await axios.put(`http://localhost:3030/user`, editComplaint);
-            setShowResidenceStatus();
+
+            if (editComplaint.Status === "Occupied") {
+                navigate('/resident_management/resident_owner');
+            }
         } catch (error) {
             console.error('Error saving complaint:', error);
         }
@@ -91,7 +96,7 @@ const OpenResidenceStatusModal = ({setShowResidenceStatus}) => {
                     </button>
                     <button
                         type="button"
-                        className="bg-gradient-to-r from-orange-500 to-orange-600 w-full py-2 text-white font-semibold rounded"
+                        className="py-2 w-full bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200"
                         onClick={handleSave}
                     >
                         Save

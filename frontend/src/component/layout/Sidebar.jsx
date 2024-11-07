@@ -83,7 +83,7 @@ export default function Sidenav({ closeNav, data }) {
       {/* Dropdown Menu */}
       {isDropdownOpen && (
         <div
-          className={`mt-2 w-full bg-white shadow-lg rounded-lg overflow-hidden transition-all duration-500 ${
+          className={`mt-2 w-full bg-white rounded-lg overflow-hidden transition-all duration-500 ${
             isDropdownOpen ? "max-h-screen" : "max-h-0"
           }`}
         >

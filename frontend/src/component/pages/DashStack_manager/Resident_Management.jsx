@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "../../layout/Sidebar";
 import Header from "../../layout/Header";
 import OpenResidenceStatusModal from "../../Modals/OpenResidenceStatusModal";
+import { FaEdit } from "react-icons/fa";
 
 const Resident_Management = () => {
   let [data, setdata] = useState(260);
@@ -232,7 +233,7 @@ const Resident_Management = () => {
                         <td className="px-6 py-4 border-b">{row.vehicles}</td>
                         <td className="px-6 py-4 border-b flex justify-center">
                           <button className="bg-green-500 text-white px-3 py-1 rounded-full mr-2">
-                            ✓
+                            <FaEdit/>
                           </button>
                           <button className="bg-blue-500 text-white px-3 py-1 rounded-full">
                             🔍
