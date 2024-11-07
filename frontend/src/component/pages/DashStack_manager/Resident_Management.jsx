@@ -3,14 +3,15 @@ import Sidebar from "../../layout/Sidebar";
 import Header from "../../layout/Header";
 import OpenResidenceStatusModal from "../../Modals/OpenResidenceStatusModal";
 import { FaEdit } from "react-icons/fa";
+import { GrFormView } from "react-icons/gr";
 
 const Resident_Management = () => {
-  let [data, setdata] = useState(260);
-  let [getdata, setget] = useState(260);
+  let [data, setdata] = useState(280);
+  let [getdata, setget] = useState(280);
 
   function openNav() {
-    setdata(260);
-    setget(260);
+    setdata(280);
+    setget(280);
   }
   function closeNav() {
     setdata(0);
@@ -232,11 +233,11 @@ const Resident_Management = () => {
                         <td className="px-6 py-4 border-b">{row.members}</td>
                         <td className="px-6 py-4 border-b">{row.vehicles}</td>
                         <td className="px-6 py-4 border-b flex justify-center">
-                          <button className="bg-green-500 text-white px-3 py-1 rounded-full mr-2">
+                          <button className="bg-[#f6f8fb] text-[#39973d] text-lg px-3 py-1 rounded-lg mr-2">
                             <FaEdit/>
                           </button>
-                          <button className="bg-blue-500 text-white px-3 py-1 rounded-full">
-                            🔍
+                          <button className="bg-[#f6f8fb] text-[#5678e9] text-3xl px-1 py-1 rounded-lg">
+                            <GrFormView/>
                           </button>
                         </td>
                       </tr>

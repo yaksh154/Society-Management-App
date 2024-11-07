@@ -26,12 +26,12 @@ import axios from 'axios';
 
 
 const Home = () => {
-  let [data, setdata] = useState(260);
-  let [getdata, setget] = useState(260);
+  let [data, setdata] = useState(280);
+  let [getdata, setget] = useState(280);
 
   function openNav() {
-    setdata(260);
-    setget(260);
+    setdata(280);
+    setget(280);
   }
   function closeNav() {
     setdata(0);
@@ -84,7 +84,7 @@ const Home = () => {
       setgetComplaint(res.data);
     })
   }
-  
+
   // edit complaint List pop_up
 
   const [EditComplint, setEditComplint] = useState(false);
@@ -350,40 +350,46 @@ const Home = () => {
                       </thead>
                       <tbody>
                         {getComplaint.map((e, index) => {
-                          return(
+                          return (
                             <tr key={index} className="border-b">
-                            <td className="px-4 py-2 flex items-center space-x-2">
-                              <img className="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
-                              <span>{e.Complainer_Name}</span>
-                            </td>
-                            <td className="px-4 py-2">{e.Complaint_Name}</td>
-                            <td className="px-4 py-2">{e.Date}</td>
-                            <td className="px-4 py-2">
-                              <span className="text-white bg-blue-500 px-3 py-1 rounded-full text-sm">{e.Priority}</span>
-                            </td>
-                            <td className="px-4 py-2">
-                              <span className="text-white bg-blue-400 px-3 py-1 rounded-full text-sm">{e.Complain_Status}</span>
-                            </td>
-                            <td className="px-4 py-2 flex space-x-2">
-                              <button className="text-green-500 p-1" onClick={() => setEditComplint(true)}>
-                                <FaEdit />
-                              </button>
-                              {EditComplint && (
-                                <OpenEditComplintModel
-                                  _id={e._id}
-                                  closeEditComplint={closeEditComplint}
-                                />
-                              )}
-                              <button className="text-blue-500 text-2xl rounded" onClick={() =>OpneViewComplint(e._id)}>
-                                <GrFormView />
-                              </button>
-                              {ViewComplint && <ViewComplintModel _id={e._id} closeViewComplint={closeViewComplint} />}
+                              <td className="px-4 py-2 flex items-center space-x-2">
+                                <img className="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
+                                <span>{e.Complainer_Name}</span>
+                              </td>
+                              <td className="px-4 py-2">{e.Complaint_Name}</td>
+                              <td className="px-4 py-2">{e.Date}</td>
+                              <td className="px-4 py-2 text-center">
+                                <span className={`px-3 py-1 rounded-full text-md font-medium ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
+                                  e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
+                                    e.Priority === "Low" ? "bg-[#39973d] text-white" : null
+                                  }`}>{e.Priority}</span>
+                              </td>
+                              <td className="px-4 py-2 text-center">
+                                <span className={`px-3 py-1 rounded-full text-md font-medium ${e.Complain_Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
+                                  e.Complain_Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
+                                    e.Complain_Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
+                                  }`}>{e.Complain_Status}</span>
+                              </td>
+                              <td className="px-4 py-2 flex space-x-2">
+                                <button className="text-green-500 p-1" onClick={() => setEditComplint(true)}>
+                                  <FaEdit />
+                                </button>
+                                {EditComplint && (
+                                  <OpenEditComplintModel
+                                    _id={e._id}
+                                    closeEditComplint={closeEditComplint}
+                                  />
+                                )}
+                                <button className="text-blue-500 text-2xl rounded" onClick={() => OpneViewComplint(e._id)}>
+                                  <GrFormView />
+                                </button>
+                                {ViewComplint && <ViewComplintModel _id={e._id} closeViewComplint={closeViewComplint} />}
 
-                              <button className="text-red-500 p-1">
-                                <FaTrashAlt />
-                              </button>
-                            </td>
-                          </tr>
+                                <button className="text-red-500 p-1">
+                                  <FaTrashAlt />
+                                </button>
+                              </td>
+                            </tr>
                           )
                         })}
                       </tbody>

@@ -63,10 +63,10 @@ export default function Sidenav({ closeNav, data }) {
         Resident Management
       </Link>
 
-      <button
+      <Link
         onClick={toggleDropdown}
         aria-current={pathname.startsWith("/financial_management") ? "page" : undefined}
-        className={`relative p-3 ml-4 m-2 rounded-lg text-lg transition-colors duration-300 flex items-center ${
+        className={`relative p-3 ms-4 m-2 rounded-lg text-lg transition-colors duration-300 flex items-center ${
            pathname.startsWith("/financial_management")
             ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
             : "hover:bg-gray-100 text-black"
@@ -78,7 +78,7 @@ export default function Sidenav({ closeNav, data }) {
         )}
         <RiMoneyDollarBoxFill className="inline mr-2" />
         Financial Management
-      </button>
+      </Link>
 
       {/* Dropdown Menu */}
       {isDropdownOpen && (

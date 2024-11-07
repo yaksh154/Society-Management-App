@@ -5,12 +5,12 @@ import Header from '../../layout/Header';
 
 const Profile = () => {
 
-  let [data, setdata] = useState(260);
-  let [getdata, setget] = useState(260);
+  let [data, setdata] = useState(280);
+  let [getdata, setget] = useState(280);
 
   function openNav() {
-    setdata(260);
-    setget(260);
+    setdata(280);
+    setget(280);
   }
   function closeNav() {
     setdata(0);
