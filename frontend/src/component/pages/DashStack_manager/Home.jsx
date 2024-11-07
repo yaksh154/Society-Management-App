@@ -26,12 +26,12 @@ import axios from 'axios';
 
 
 const Home = () => {
-  let [data, setdata] = useState(255);
-  let [getdata, setget] = useState(255);
+  let [data, setdata] = useState(260);
+  let [getdata, setget] = useState(260);
 
   function openNav() {
-    setdata(255);
-    setget(255);
+    setdata(260);
+    setget(260);
   }
   function closeNav() {
     setdata(0);

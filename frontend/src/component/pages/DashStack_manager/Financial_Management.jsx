@@ -10,12 +10,12 @@ import { Link } from 'react-router-dom';
 import Otherincome from './Income/Otherincome';
 
 const Financial_Management = () => {
-  const [data, setData] = useState(250);
-  const [getdata, setGetdata] = useState(250);
+  const [data, setData] = useState(260);
+  const [getdata, setGetdata] = useState(260);
 
   function openNav() {
-    setData(250);
-    setGetdata(250);
+    setData(260);
+    setGetdata(260);
   }
 
   function closeNav() {

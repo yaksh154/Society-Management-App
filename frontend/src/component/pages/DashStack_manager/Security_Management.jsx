@@ -3,12 +3,12 @@ import Sidebar from '../../layout/Sidebar'
 import Header from '../../layout/Header'
 
 const Security_Management = () => {
-  let [data, setdata] = useState(250);
-  let [getdata, setget] = useState(250);
+  let [data, setdata] = useState(260);
+  let [getdata, setget] = useState(260);
 
   function openNav() {
-    setdata(250);
-    setget(250);
+    setdata(260);
+    setget(260);
   }
   function closeNav() {
     setdata(0);

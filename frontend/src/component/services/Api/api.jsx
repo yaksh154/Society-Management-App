@@ -11,13 +11,13 @@ export const UserDataLogin = (data, setLoginError) => {
         Email: data.Email,
         Password: data.Password,
     })
-        .then((res,req) => {
+        .then((res, req) => {
             if (res.data) {
                 console.log(res.data);
                 localStorage.setItem('message', JSON.stringify(res.data.message));
                 localStorage.setItem('token', JSON.stringify(res.data.token));
                 console.log('Cookies:', document.cookie);
-                
+
                 // user login
             } else {
                 setLoginError('Incorrect email/phone or password');
@@ -108,11 +108,11 @@ export const ImportantNumbersDelete = (_id, contacts, setContacts) => {
 
 // ImportantNumbers edit
 
-export const updateImportantNumber = (_id,editNumber, seteditShowModal ,closeEditModal) => {
+export const updateImportantNumber = (_id, editNumber, seteditShowModal, closeEditModal) => {
     axios.put(`${url}/importantnumber/updateImportantNumber/${_id}`, editNumber)
         .then(() => {
-            seteditShowModal(false);  
-            closeEditModal(); 
+            seteditShowModal(false);
+            closeEditModal();
         })
         .catch((error) => console.error("Error saving data:", error));
 };

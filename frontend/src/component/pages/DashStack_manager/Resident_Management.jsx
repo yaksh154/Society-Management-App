@@ -4,12 +4,12 @@ import Header from "../../layout/Header";
 import OpenResidenceStatusModal from "../../Modals/OpenResidenceStatusModal";
 
 const Resident_Management = () => {
-  let [data, setdata] = useState(250);
-  let [getdata, setget] = useState(250);
+  let [data, setdata] = useState(260);
+  let [getdata, setget] = useState(260);
 
   function openNav() {
-    setdata(250);
-    setget(250);
+    setdata(260);
+    setget(260);
   }
   function closeNav() {
     setdata(0);
@@ -158,7 +158,7 @@ const Resident_Management = () => {
                   </h1>
                   <button
                     onClick={OpenResidenceStatus}
-                    className="bg-orange-500 text-white px-4 py-2 rounded-lg md:text-md text-sm"
+                    className="px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200"
                   >
                     Add New Resident details
                   </button>

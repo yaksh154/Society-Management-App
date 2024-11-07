@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import Header from "../../layout/Header";
 import Sidebar from "../../layout/Sidebar";
+import { LuImagePlus } from "react-icons/lu";
+import { Link } from "react-router-dom";
 
 const Resident_Owner = () => {
-  let [data, setdata] = useState(250);
-  let [getdata, setget] = useState(250);
+  let [data, setdata] = useState(260);
+  let [getdata, setget] = useState(260);
 
   function openNav() {
-    setdata(250);
-    setget(250);
+    setdata(260);
+    setget(260);
   }
   function closeNav() {
     setdata(0);
@@ -20,15 +22,15 @@ const Resident_Owner = () => {
 
 
   const [formValuesfortenant, setFormValuesfortenant] = useState({
-    owner_full_name:"",
-    owner_number:"",
-    owner_address:""
+    owner_full_name: "",
+    owner_number: "",
+    owner_address: ""
   })
 
   const handleInputChangefortenant = (e) => {
     const { name, value } = e.target;
     setFormValuesfortenant({
-      ...formValues,
+      ...formValuesfortenant,
       [name]: value,
     });
   };
@@ -121,9 +123,79 @@ const Resident_Owner = () => {
       formValues,
       members,
       vehicles,
+      files,
+      image, // Include the image here
     };
     console.log("Form Submission Data:", data);
   };
+  
+
+  const [files, setFiles] = useState({
+    frontAadhar: null,
+    backAadhar: null,
+    addressProof: null,
+    rentAgreement: null,
+  });
+
+  const handleFileChange = (e, fileType) => {
+    setFiles({
+      ...files,
+      [fileType]: e.target.files[0],
+    });
+  };
+
+  const handleRemoveFile = (fileType) => {
+    setFiles({
+      ...files,
+      [fileType]: null,
+    });
+  };
+
+  const uploadCard = (label, fileType) => (
+    <div>
+      <p className="text-gray-700 font-medium mb-2 text-sm">{label}</p>
+      <div className="border-2 border-dashed border-gray-300 rounded-md p-4 text-center">
+        <label className="cursor-pointer">
+          <div className="text-5xl flex justify-center">
+            <LuImagePlus className="text-[#a7a7a7]" />
+          </div>
+          <div className="flex flex-col items-center">
+            {!files[fileType] ? (
+              <>
+                <p>
+                  <span className="text-blue-500 underline">Upload a file</span> or drag and drop
+                </p>
+                <input
+                  type="file"
+                  accept=".png, .jpg, .jpeg, .gif"
+                  className="hidden"
+                  onChange={(e) => handleFileChange(e, fileType)}
+                />
+                <p className="text-gray-500 text-xs mt-2">PNG, JPG, GIF up to 10MB</p>
+              </>
+            ) : null}
+          </div>
+        </label>
+      </div>
+      {files[fileType] ? (
+        <div className="flex flex-col items-center mt-4">
+          <img
+            src={URL.createObjectURL(files[fileType])}
+            alt="Uploaded file preview"
+            className="w-12 h-12 mb-2"
+          />
+          <span className="text-gray-600 text-sm mb-2">{files[fileType].name}</span>
+          <button
+            onClick={() => handleRemoveFile(fileType)}
+            className="text-red-500 text-sm"
+          >
+            Delete
+          </button>
+        </div>
+      ) : null}
+    </div>
+  );
+  
 
   return (
     <div>
@@ -205,7 +277,7 @@ const Resident_Owner = () => {
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mt-4">
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-4 my-4">
                       <input
                         type="number"
                         name="age"
@@ -254,6 +326,15 @@ const Resident_Owner = () => {
                         className="p-3 border border-gray-300 rounded-md w-full"
                         required
                       />
+                    </div>
+
+                    <div className="">
+                      <div className="grid grid-cols-2 md:grid-cols-4 flex space-x-4">
+                        {uploadCard("Upload Aadhar Card (Front Side)", "frontAadhar")}
+                        {uploadCard("Upload Aadhar Card (Back Side)", "backAadhar")}
+                        {uploadCard("Address Proof (Vera Bill OR Light Bill)", "addressProof")}
+                        {uploadCard("Rent Agreement", "rentAgreement")}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -608,8 +689,8 @@ const Resident_Owner = () => {
 
 
             <div className="mt-4 flex justify-end">
-              <button className="px-4 py-2 rounded-lg border-2 bg-white mr-3">cancel</button>
-              <button onClick={handleCreate} className="px-4 py-2 rounded-lg border-2 bg-white ">create</button>
+              <Link to={"/resident_management"} className="px-4 py-2 rounded-lg border-2 bg-white mr-3">cancel</Link>
+              <button onClick={handleCreate} className="px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200 ">create</button>
             </div>
 
           </div>
