@@ -8,10 +8,14 @@ import { IoMdWallet } from 'react-icons/io';
 import { BsPersonBoundingBox } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import Otherincome from './Income/Otherincome';
+import SetMaintenancePwd from '../../Modals/SetMaintenancePwd';
 
 const Financial_Management = () => {
   const [data, setData] = useState(280);
   const [getdata, setGetdata] = useState(280);
+
+
+
 
   function openNav() {
     setData(280);
@@ -34,6 +38,16 @@ const Financial_Management = () => {
     { img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ48JWGkSOWJegd_jiLj6C5cz-Ityd6OMLR-w&s", name: 'Jenny Wilson', unit: 'F 303', date: '12/02/2024', status: 'Tenant', phone: '92589 34522', amount: 1000, penalty: null, paymentStatus: 'Pending', paymentMethod: 'Cash' },
     // Add more entries as needed...
   ];
+
+  const [ShowMaintenance, setShowMaintenance] = useState(false);
+
+  const OpenMaintenance = () => {
+    setShowMaintenance(true);
+  };
+  const CloseMaintenance = () => {
+    setShowMaintenance(false);
+  };
+
   return (
     <div >
       <Sidebar closeNav={closeNav} data={data} />
@@ -61,9 +75,14 @@ const Financial_Management = () => {
               </div>
 
               {/* Set Maintenance Button */}
-              <button className="px-4 py-2 w-full lg:w-auto bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200">
+              <button    onClick={OpenMaintenance} className="px-4 py-2 w-full lg:w-auto bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200">
                 Set Maintenance
               </button>
+              {ShowMaintenance && (
+                    <SetMaintenancePwd
+                    setShowMaintenance={CloseMaintenance}
+                    />
+                  )}
             </div>
           )}
 
@@ -131,7 +150,7 @@ const Financial_Management = () => {
                       </td>
                       <td className="px-4 py-3">{item.phone}</td>
                       <td className="px-4 py-3 text-green-600 font-bold">{item.amount}</td>
-                      <td className="p-4">{item.penalty ? <span className="text-red-600 font-semibold">{item.penalty}</span> : '--'}</td>
+                      <td className="p-4">{item.penalty ? <span className="text-red-600  font-semibold">{item.penalty}</span> : '--'}</td>
                       <td className="p-4">
                         {item.paymentStatus === 'Pending' ? (
                           <span className="px-2 py-1 flex items-center gap-1 rounded-full text-yellow-700 bg-yellow-100">
