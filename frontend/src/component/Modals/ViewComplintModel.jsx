@@ -2,25 +2,21 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const ViewComplintModel = ({ _id, closeViewComplint }) => {
+
     const [editNumber, setEditNumber] = useState([]);
 
     useEffect(() => {
-        const editdata = async () => {
-            try {
-                const res = await axios.get(`http://localhost:3030/user`);
-                setEditNumber(res.data); 
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
         editdata();
     }, []);
 
-    // Filter data to get the specific complaint by _id
-    const editNumberFdata = editNumber.filter((item) => item._id === _id);
-    console.log(editNumberFdata);
+    const editdata = async () => {
+        axios.get("http://localhost:3030/user").then((res) => {
+            setEditNumber(res.data);
+        })
+    };
     
+    const editNumberFdata = editNumber.filter((e) => e._id === _id);
+    console.log(editNumberFdata);
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
@@ -35,7 +31,7 @@ const ViewComplintModel = ({ _id, closeViewComplint }) => {
                         &times;
                     </button>
                 </div>
-                
+
                 {editNumberFdata.length > 0 ? (
                     editNumberFdata.map((e, index) => (
                         <div key={index} className="p-4">
@@ -52,11 +48,19 @@ const ViewComplintModel = ({ _id, closeViewComplint }) => {
                             </div>
                             <div className="mb-3">
                                 <p className="font-semibold">Description</p>
-                                <p>{e.Description}</p> 
+                                <p>{e.Description}</p>
                             </div>
-                            <div className="mb-3">
-                                <label className="block text-sm font-medium pb-2">Work<span className="text-red">*</span></label>
-                              
+                            <div className="mb-3 grid grid-cols-4 gap-2">
+                                <div className="text-center"><label className="block text-sm font-medium pb-2 text-[#a7a7a7]">Work</label><span></span></div>
+                                <div className="text-center"><label className="block text-sm font-medium pb-2 text-[#a7a7a7]">unit</label><span>{e.Unit_Number}</span></div>
+                                <div className="text-center"><label className="block text-sm font-medium pb-2 text-[#a7a7a7]">Work</label><span className={`px-3 py-1 rounded-full text-md font-medium ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
+                                    e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
+                                        e.Priority === "Low" ? "bg-[#39973d] text-white" : null
+                                    }`}>{e.Priority}</span></div>
+                                <div className="text-center"><label className="block text-sm font-medium pb-2 text-[#a7a7a7]">Work</label><span className={`px-3 py-1 rounded-full text-md font-medium ${e.Complain_Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
+                                    e.Complain_Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
+                                        e.Complain_Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
+                                    }`}>{e.Complain_Status}</span></div>
                             </div>
                         </div>
                     ))

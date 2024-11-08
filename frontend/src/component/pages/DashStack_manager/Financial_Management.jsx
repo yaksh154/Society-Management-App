@@ -66,7 +66,7 @@ const Financial_Management = () => {
         <Header openNav={openNav} />
 
         {/* Main Content */}
-        <main className='flex-1  bg-[#f0f5fb]  p-5'>
+        <main className='flex-1  bg-[#f0f5fb] p-6'>
           {activeTab === "Maintenance" && (
             <div className="flex flex-col lg:flex-row items-center justify-between p-4 mb-4 bg-white rounded-lg space-y-4   lg:space-y-0">
 

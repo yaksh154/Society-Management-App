@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import Sidebar from '../../layout/Sidebar'
-import Header from '../../layout/Header'
+import React, { useState } from 'react';
+import Sidebar from '../../../layout/Sidebar';
+import Header from '../../../layout/Header';
 
-const Security_Management = () => {
+const Request_Tracking = () => {
   let [data, setdata] = useState(280);
   let [getdata, setget] = useState(280);
 
@@ -22,11 +22,11 @@ const Security_Management = () => {
           <Header openNav={openNav} />
         </div>
         {/* Main Content */}
-        <h1>Security_Management</h1>
+        <h1>Request Tracking</h1>
 
       </div>
     </div>
   )
 }
 
-export default Security_Management
+export default Request_Tracking

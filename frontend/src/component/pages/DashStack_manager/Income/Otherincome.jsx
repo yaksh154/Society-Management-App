@@ -60,82 +60,71 @@ const Otherincome = () => {
 
   return (
     <div>
-      <div className="p-6 bg-white rounded-lg">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-semibold">Other Income</h1>
-          <button className="bg-gradient-to-r from-orange-600 to-yellow-500 text-white px-4 py-2 rounded-md hover:bg-orange-600">
-            Create Other Income
-          </button>
-        </div>
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-4">
-          {incomeData.map((item, index) => (
-            <div key={index} className="bg-white shadow-md rounded-md relative">
-              <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-blue-600">
-                <h2 className="text-lg font-semibold text-white">{item.title}</h2>
-                <div className="relative">
-                  <button
-                    onClick={() => toggleDropdown(index)}
-                    className="text-blue-500 bg-white rounded-md pb-1 focus:outline-none"
-                  >
-                    <BsThreeDotsVertical className="h-5 w-5 mt-1" />
-                  </button>
-                  {dropdownOpenIndex === index && (
-                    <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-10">
-                      <ul className="py-1 text-gray-700">
-                        <li
-                          className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                          onClick={() => alert(`Editing ${item.title}`)}
-                        >
-                          Edit
-                        </li>
-                        <Link
-                          to="ViewParticipation"
-                          className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                        >
-                          View
-                        </Link>
-                        <li
-                          
-                          onClick={OpenBox}
-                          className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                        >
-                          Delete {DeleteBox && (
-                    <DeleteModal
-                    setDeleteBox={CloseBox}
-                    />
-                  )}
-                        </li>
-                       
-                      </ul>
-                    </div>
-                  )}
+
+        <div className="p-6 bg-gray-100 bg-white rounded-lg">
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-semibold">Other Income</h1>
+            <button className="bg-gradient-to-r from-orange-600 to-yellow-500 text-white px-4 py-2 rounded-md hover:bg-orange-600">
+              Create Other Income
+            </button>
+          </div>
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-4">
+            {incomeData.map((item, index) => (
+              <div key={index} className="bg-white shadow-md rounded-md relative">
+                <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-blue-600">
+                  <h2 className="text-lg font-semibold text-white">{item.title}</h2>
+                  <div className="relative">
+                    <button
+                      onClick={() => toggleDropdown(index)}
+                      className="text-blue-500  bg-white   rounded-md  pb-1 focus:outline-none"
+                    >
+                      <BsThreeDotsVertical className="h-5 w-5 mt-1" />
+                    </button>
+                    {dropdownOpenIndex === index && (
+                      <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-10">
+                        <ul className="py-1 text-gray-700">
+                          <li
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => alert(`Editing ${item.title}`)}
+                          >
+                            Edit
+                          </li>
+                          <li
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => alert(`Deleting ${item.title}`)}
+                          >
+                            Delete
+                          </li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="flex flex-col gap-2 mb-4 p-2">
+                  <div className="text-sm text-gray-500 flex items-center">
+                    Amount Per Member:
+                    <span className="ml-2 flex items-center text-lg font-semibold text-blue-500 bg-blue-100 px-2 py-1 rounded-md">
+                      <FaRupeeSign className="mr-1" />{item.amountPerMember}
+                    </span>
+                  </div>
+                  <div className="text-sm text-gray-500">
+                    Total Member:
+                    <span className="ml-2 text-base font-semibold text-gray-700">{item.totalMember}</span>
+                  </div>
+                  <div className="text-sm text-gray-500">
+                    Date:
+                    <span className="ml-2 text-base font-semibold text-gray-700">{item.date}</span>
+                  </div>
+                  <div className="text-sm text-gray-500">
+                    Due Date:
+                    <span className="ml-2 text-base font-semibold text-gray-700">{item.dueDate}</span>
+                  </div>
+                  <p className="text-gray-500 text-sm font-bold">{item.description}</p>
                 </div>
               </div>
-              <div className="flex flex-col gap-2 mb-4 p-2">
-                <div className="text-sm text-gray-500 flex items-center">
-                  Amount Per Member:
-                  <span className="ml-2 flex items-center text-lg font-semibold text-blue-500 bg-blue-100 px-2 py-1 rounded-md">
-                    <FaRupeeSign className="mr-1" />{item.amountPerMember}
-                  </span>
-                </div>
-                <div className="text-sm text-gray-500">
-                  Total Member:
-                  <span className="ml-2 text-base font-semibold text-gray-700">{item.totalMember}</span>
-                </div>
-                <div className="text-sm text-gray-500">
-                  Date:
-                  <span className="ml-2 text-base font-semibold text-gray-700">{item.date}</span>
-                </div>
-                <div className="text-sm text-gray-500">
-                  Due Date:
-                  <span className="ml-2 text-base font-semibold text-gray-700">{item.dueDate}</span>
-                </div>
-                <p className="text-gray-500 text-sm font-bold">{item.description}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
     </div>
   );
 };
