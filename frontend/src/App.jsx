@@ -7,15 +7,22 @@ import Reset_password from './component/pages/Reset_password.jsx'
 import Home from './component/pages/DashStack_manager/Home.jsx'
 import Profile from './component/pages/DashStack_manager/Profile.jsx'
 import Resident_Management from './component/pages/DashStack_manager/Resident_Management.jsx'
-import Financial_Management from './component/pages/DashStack_manager/Financial_Management.jsx'
-import Facility_Management from './component/pages/DashStack_manager/Facility_Management.jsx'
-import Complaint_Tracking from './component/pages/DashStack_manager/Complaint_Tracking.jsx'
-import Security_Guard from './component/pages/DashStack_manager/Security_Guard.jsx'
-import Announcement from './component/pages/DashStack_manager/Announcement.jsx'
-import Otherincome from './component/pages/DashStack_manager/Income/Otherincome.jsx'
 import Resident_Owner from './component/pages/DashStack_manager/Resident_Owner.jsx'
+import Financial_Management from './component/pages/DashStack_manager/Financial_Management.jsx'
+import Otherincome from './component/pages/DashStack_manager/Income/Otherincome.jsx'
+import ParticipantTable from './component/pages/DashStack_manager/ParticipantTable.jsx'
+import ViewMaintenance from './component/Modals/Viewmaintenance .jsx'
 import Expanse from './component/pages/DashStack_manager/Income/Expanse.jsx'
 import Note from './component/pages/DashStack_manager/Income/Note.jsx'
+import Facility_Management from './component/pages/DashStack_manager/Facility_Management.jsx'
+import Complaint_Tracking from './component/pages/DashStack_manager/Complaint_Tracking.jsx'
+import Create_Complaint from './component/pages/DashStack_manager/Complaint_Complaint/Create_Complaint.jsx'
+import Request_Tracking from './component/pages/DashStack_manager/Complaint_Complaint/Request_Tracking.jsx'
+import Visitor_Logs from './component/pages/DashStack_manager/Security_Visitor/Visitor_Logs.jsx'
+import Security_Protocols from './component/pages/DashStack_manager/Security_Visitor/Security_Protocols.jsx'
+import Security_Guard from './component/pages/DashStack_manager/Security_Guard.jsx'
+import Announcement from './component/pages/DashStack_manager/Announcement.jsx'
+
 
 function App() {
 
@@ -35,7 +42,7 @@ function App() {
                   <Route path='/financial_management/income' element={<Financial_Management />} />
                   <Route path='/financial_management/otherincome' element={<Otherincome />} />
                   <Route path='/financial_management/ViewParticipation' element={<ParticipantTable />} />
-                  <Route path='/financial_management/Viewmaintenance' element={<Viewmaintenance />} />
+                  <Route path='/financial_management/Viewmaintenance' element={<ViewMaintenance />} />
 
                   <Route path='/financial_management/Expanse' element={<Expanse />} />
                   <Route path='/financial_management/Note' element={<Note />} />
