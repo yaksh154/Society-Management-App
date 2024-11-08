@@ -17,6 +17,10 @@ import Otherincome from './component/pages/DashStack_manager/Income/Otherincome.
 import Resident_Owner from './component/pages/DashStack_manager/Resident_Owner.jsx'
 import Expanse from './component/pages/DashStack_manager/Income/Expanse.jsx'
 import Note from './component/pages/DashStack_manager/Income/Note.jsx'
+import AddMaintenanceDetail from './component/Modals/AddMaintenanceDetail.jsx'
+import ParticipantTable from './component/pages/DashStack_manager/ParticipantTable.jsx'
+import DeleteModal from './component/Modals/DeleteModal.jsx'
+import Viewmaintenance from './component/Modals/Viewmaintenance .jsx'
 
 function App() {
 
@@ -34,6 +38,9 @@ function App() {
                   <Route path='/resident_management/resident_owner' element={<Resident_Owner />} />
                   <Route path='/financial_management' element={<Financial_Management />} />
                   <Route path='/financial_management/otherincome' element={<Otherincome />} />
+                  <Route path='/financial_management/ViewParticipation' element={<ParticipantTable />} />
+                  <Route path='/financial_management/Viewmaintenance' element={<Viewmaintenance />} />
+
                   <Route path='/financial_management/Expanse' element={<Expanse />} />
                   <Route path='/financial_management/Note' element={<Note />} />
                   <Route path='/facility_management' element={<Facility_Management />} />
@@ -41,6 +48,7 @@ function App() {
                   <Route path='/security_management' element={<Security_Management />} />
                   <Route path='/security_guard' element={<Security_Guard />} />
                   <Route path='/announcement' element={<Announcement />} />
+
            
 
 

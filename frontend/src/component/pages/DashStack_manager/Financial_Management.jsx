@@ -9,6 +9,7 @@ import { BsPersonBoundingBox } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import Otherincome from './Income/Otherincome';
 import SetMaintenancePwd from '../../Modals/SetMaintenancePwd';
+import Viewmaintenance from '../../Modals/Viewmaintenance ';
 
 const Financial_Management = () => {
   const [data, setData] = useState(280);
@@ -47,6 +48,16 @@ const Financial_Management = () => {
   const CloseMaintenance = () => {
     setShowMaintenance(false);
   };
+
+  const [ShowViewUser, setShowViewUser] = useState(false);
+
+  const OpenView = () => {
+    setShowViewUser(true);
+  };
+  const CloseView = () => {
+    setShowViewUser(false);
+  };
+
 
   return (
     <div >
@@ -174,9 +185,14 @@ const Financial_Management = () => {
                         )}
                       </td>
                       <td className="px-4 py-3">
-                        <button className="p-2 bg-gray-200 rounded-full hover:bg-gray-300">
-                          <FaEye className="text-customBlue" />
+                        <button className="p-2 bg-gray-200 rounded-full hover:bg-gray-300" onClick={OpenView} >
+                          <FaEye className="text-customBlue"  />
                         </button>
+                        {ShowViewUser && (
+                    <Viewmaintenance
+                    setShowViewUser={CloseView}
+                    />
+                  )}
                       </td>
                     </tr>
                   ))}
