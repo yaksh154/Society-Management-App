@@ -91,7 +91,7 @@ export default function Sidenav({ closeNav, data }) {
             <li className="ml-6">
               <Link
                 to="/financial_management"
-                className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/financial_management") ? "border-black":""}`}
+                className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/financial_management") ? "border-black font-semibold":""}`}
               >
                 Income
               </Link>

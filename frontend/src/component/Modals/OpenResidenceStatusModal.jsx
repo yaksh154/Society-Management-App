@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import OpneResidence_Vacate from './OpneResidence_Vacate';
 
-const OpenResidenceStatusModal = ({setShowResidenceStatus}) => {
+const OpenResidenceStatusModal = ({ setShowResidenceStatus }) => {
 
     const navigate = useNavigate();
 
     const [editComplaint, setEditComplaint] = useState({
-        Complainer_Name: '',
-        Complaint_Name: '',
-        Description: '',
-        Wing: '',
-        Unit: '',
-        Priority: '',
         Status: ''
     });
 
@@ -33,22 +28,43 @@ const OpenResidenceStatusModal = ({setShowResidenceStatus}) => {
         setEditComplaint({ ...editComplaint, [e.target.name]: e.target.value });
     };
 
-    const handleSave = async () => {
-        try {
+    const [showResidenceVacate, setshowResidenceVacate] = useState(false);
 
-            if (editComplaint.Status === "Occupied") {
-                navigate('/resident_management/resident_owner');
-            }
-        } catch (error) {
-            console.error('Error saving complaint:', error);
+const handleSave = async () => {
+    try {
+        if (editComplaint.Status === "Occupied") {
+            navigate('/resident_management/resident_owner');
+            setShowResidenceStatus(false);
+        }else if (editComplaint.Status === "Vacate") {
+            setshowResidenceVacate(true); // Trigger state change
         }
-    };
+    } catch (error) {
+        console.error('Error saving complaint:', error);
+    }
+};
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
+// Effect to track changes to showResidenceVacate
+useEffect(() => {
+    if (showResidenceVacate) {
+        opnenew();
+    }
+}, [showResidenceVacate]);
+
+const opnenew = () => {
+    // Additional logic for opening ResidenceVacate
+    console.log("Opening ResidenceVacate...");
+};
+
+const CloseResidenceVacate = () => {
+    setshowResidenceVacate(false);
+};
+
+
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
             <div className="bg-white rounded-lg shadow-lg w-11/12 lg:w-1/4 md:w-1/2 p-6">
                 <h2 className="text-xl font-semibold mb-4">Residence Status</h2>
-                
+
                 {/* Radio Buttons for Occupied/Vacate */}
                 <div className="flex gap-4 mb-4">
                     <label className={`flex items-center px-4 py-2 rounded-lg cursor-pointer ${editComplaint.Status === "Occupied" ? 'border-2 border-orange-500' : 'border border-gray-300'}`}>
@@ -75,6 +91,13 @@ const OpenResidenceStatusModal = ({setShowResidenceStatus}) => {
                     </label>
                 </div>
 
+                {showResidenceVacate && (
+                    <OpneResidence_Vacate
+                        setShowResidence_Vacate={CloseResidenceVacate}
+                        setShowResidenceStatusOne={setShowResidenceStatus}
+                    />
+                )}
+
                 {/* Checkbox */}
                 <div className="flex items-center mb-4">
                     <input
@@ -90,7 +113,7 @@ const OpenResidenceStatusModal = ({setShowResidenceStatus}) => {
                     <button
                         type="button"
                         className="bg-gray-100 w-full py-2 mr-2 text-gray-700 font-semibold rounded"
-                        onClick={setShowResidenceStatus }
+                        onClick={setShowResidenceStatus}
                     >
                         Cancel
                     </button>
@@ -104,7 +127,7 @@ const OpenResidenceStatusModal = ({setShowResidenceStatus}) => {
                 </div>
             </div>
         </div>
-  )
+    )
 }
 
 export default OpenResidenceStatusModal
