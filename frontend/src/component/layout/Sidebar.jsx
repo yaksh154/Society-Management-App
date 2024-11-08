@@ -99,7 +99,7 @@ export default function Sidenav({ closeNav, data }) {
             <li className="ml-6">
               <Link
                 to="/financial_management/Expanse"
-                className="block px-4 py-2 hover:bg-gray-100 text-black border-l-4"
+                className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/financial_management/Expanse") ? "border-black":""}`}
               >
                 Expanse
               </Link>
@@ -107,7 +107,7 @@ export default function Sidenav({ closeNav, data }) {
             <li className="ml-6">
               <Link
                 to="/financial_management/note"
-                className="block px-4 py-2 hover:bg-gray-100 text-black border-l-4"
+                className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/financial_management/note") ? "border-black":""}`}
               >
                 Note
               </Link>

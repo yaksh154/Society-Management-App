@@ -15,7 +15,8 @@ import Security_Guard from './component/pages/DashStack_manager/Security_Guard.j
 import Announcement from './component/pages/DashStack_manager/Announcement.jsx'
 import Otherincome from './component/pages/DashStack_manager/Income/Otherincome.jsx'
 import Resident_Owner from './component/pages/DashStack_manager/Resident_Owner.jsx'
-import SetMaintenancePwd from './component/Modals/SetMaintenancePwd.jsx'
+import Expanse from './component/pages/DashStack_manager/Income/Expanse.jsx'
+import Note from './component/pages/DashStack_manager/Income/Note.jsx'
 
 function App() {
 
@@ -33,12 +34,15 @@ function App() {
                   <Route path='/resident_management/resident_owner' element={<Resident_Owner />} />
                   <Route path='/financial_management' element={<Financial_Management />} />
                   <Route path='/financial_management/otherincome' element={<Otherincome />} />
+                  <Route path='/financial_management/Expanse' element={<Expanse />} />
+                  <Route path='/financial_management/Note' element={<Note />} />
                   <Route path='/facility_management' element={<Facility_Management />} />
                   <Route path='/complaint_tracking' element={<Complaint_Tracking />} />
                   <Route path='/security_management' element={<Security_Management />} />
                   <Route path='/security_guard' element={<Security_Guard />} />
                   <Route path='/announcement' element={<Announcement />} />
-                  <Route path='/SetMaintenancePwd' element={<SetMaintenancePwd />} />
+           
+
 
 
           </Routes>
