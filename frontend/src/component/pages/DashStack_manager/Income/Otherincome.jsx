@@ -60,7 +60,7 @@ const Otherincome = () => {
           <div className="grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-4">
             {incomeData.map((item, index) => (
               <div key={index} className="bg-white shadow-md rounded-md relative">
-                <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-blue-600">
+                <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-[#5678e9]">
                   <h2 className="text-lg font-semibold text-white">{item.title}</h2>
                   <div className="relative">
                     <button

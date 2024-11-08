@@ -152,7 +152,7 @@ const Resident_Management = () => {
           </div>
           {/* Main Content */}
           <div className="flex-1 bg-[#f0f5fb]">
-            <div className="p-8">
+            <div className="p-6">
               <div className="bg-white shadow-md rounded-lg p-6">
                 <div className="flex justify-between items-center mb-4">
                   <h1 className="font-semibold md:text-2xl text-md">
@@ -170,80 +170,78 @@ const Resident_Management = () => {
                     />
                   )}
                 </div>
-                <div className="overflow-x-auto">
-                <table className="min-w-full bg-white border border-gray-200">
-                  <thead>
-                    <tr>
-                      <th className="px-6 py-3 border-b font-medium text-gray-500">
-                        Full Name
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium text-gray-500">
-                        Unit Number
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium text-gray-500">
-                        Unit Status
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium text-gray-500">
-                        Resident Status
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium text-gray-500">
-                        Phone Number
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium text-gray-500">
-                        Member
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium text-gray-500">
-                        Vehicle
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium text-gray-500">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Sumdata.map((row, index) => (
-                      <tr key={index} className="text-center">
-                        <td className="px-6 py-4 border-b">{row.name}</td>
-                        <td className="px-6 py-4 border-b">{row.unit}</td>
-                        <td className="px-6 py-4 border-b">
-                          <span
-                            className={`px-2 py-1 rounded-lg text-sm ${
-                              row.status === "Occupied"
-                                ? "bg-green-100 text-green-600"
-                                : "bg-purple-100 text-purple-600"
-                            }`}
-                          >
-                            {row.status}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 border-b">
-                          <span
-                            className={`px-2 py-1 rounded-lg text-sm ${
-                              row.resident === "Tenant"
-                                ? "bg-pink-100 text-pink-600"
-                                : row.resident === "Owner"
-                                ? "bg-blue-100 text-blue-600"
-                                : ""
-                            }`}
-                          >
-                            {row.resident}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 border-b">{row.phone}</td>
-                        <td className="px-6 py-4 border-b">{row.members}</td>
-                        <td className="px-6 py-4 border-b">{row.vehicles}</td>
-                        <td className="px-6 py-4 border-b flex justify-center">
-                          <button className="bg-[#f6f8fb] text-[#39973d] text-lg px-3 py-1 rounded-lg mr-2">
-                            <FaEdit/>
-                          </button>
-                          <button className="bg-[#f6f8fb] text-[#5678e9] text-3xl px-1 py-1 rounded-lg">
-                            <GrFormView/>
-                          </button>
-                        </td>
+                <div className="overflow-auto h-svh">
+                  <table className="min-w-full bg-white border border-gray-200">
+                    <thead>
+                      <tr>
+                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                          Full Name
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                          Unit Number
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                          Unit Status
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                          Resident Status
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                          Phone Number
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                          Member
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                          Vehicle
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                          Action
+                        </th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {Sumdata.map((row, index) => (
+                        <tr key={index} className="text-center">
+                          <td className="px-6 py-4 border-b">{row.name}</td>
+                          <td className="px-6 py-4 border-b">{row.unit}</td>
+                          <td className="px-6 py-4 border-b">
+                            <span
+                              className={`px-2 py-1 rounded-lg text-sm ${row.status === "Occupied"
+                                  ? "bg-green-100 text-green-600"
+                                  : "bg-purple-100 text-purple-600"
+                                }`}
+                            >
+                              {row.status}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 border-b">
+                            <span
+                              className={`px-2 py-1 rounded-lg text-sm ${row.resident === "Tenant"
+                                  ? "bg-pink-100 text-pink-600"
+                                  : row.resident === "Owner"
+                                    ? "bg-blue-100 text-blue-600"
+                                    : ""
+                                }`}
+                            >
+                              {row.resident}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 border-b">{row.phone}</td>
+                          <td className="px-6 py-4 border-b">{row.members}</td>
+                          <td className="px-6 py-4 border-b">{row.vehicles}</td>
+                          <td className="px-6 py-4 border-b flex justify-center">
+                            <button className="bg-[#f6f8fb] text-[#39973d] text-lg px-3 py-1 rounded-lg mr-2">
+                              <FaEdit />
+                            </button>
+                            <button className="bg-[#f6f8fb] text-[#5678e9] text-3xl px-1 py-1 rounded-lg">
+                              <GrFormView />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

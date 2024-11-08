@@ -16,16 +16,16 @@ const Expanse = () => {
   }
   return (
     <div>
-    <Sidebar closeNav={closeNav} data={data} />
-    <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
-      <div className="open_he">
-        <Header openNav={openNav} />
-      </div>
-      {/* Main Content */}
-      <h1>Financial_Management _ Expanse</h1>
+      <Sidebar closeNav={closeNav} data={data} />
+      <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
+        <div className="open_he">
+          <Header openNav={openNav} />
+        </div>
+        {/* Main Content */}
+        <h1>Financial_Management _ Expanse</h1>
 
+      </div>
     </div>
-  </div>
   )
 }
 

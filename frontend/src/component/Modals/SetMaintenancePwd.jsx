@@ -81,10 +81,6 @@ const SetMaintenancePwd = ({ setShowMaintenance }) => {
           </button>
         </div>
       </div>
-
-      {/* {showAddDetail && ( // Corrected condition for showing the modal
-        <AddMaintenanceDetail setShowAddDetail={closeAddDetail} />
-      )} */}
     </div>
   );
 };
