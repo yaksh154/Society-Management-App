@@ -3,8 +3,8 @@ import Header from "../../layout/Header";
 import Sidebar from "../../layout/Sidebar";
 import { LuImagePlus } from "react-icons/lu";
 import { Link } from "react-router-dom";
-import Resident_Owner from "./Resident_Owner/Resident_Owner";
-import Resident_Tenant from "./Resident_Owner/Resident_Tenant";
+import Resident_Owner from "./Resident_Owner/Resident_Owner_component/Resident_Owner";
+import Resident_Tenant from "./Resident_Owner/Resident_Owner_component/Resident_Tenant";
 
 const Resident_Owner_Form = () => {
   let [data, setdata] = useState(280);

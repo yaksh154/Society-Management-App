@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Sidebar from "../../layout/Sidebar";
-import Header from "../../layout/Header";
-import OpenResidenceStatusModal from "../../Modals/OpenResidenceStatusModal";
+import Sidebar from "../../../layout/Sidebar";
+import Header from "../../../layout/Header";
+import OpenResidenceStatusModal from "../../../Modals/OpenResidenceStatusModal";
 import { FaEdit } from "react-icons/fa";
 import { GrFormView } from "react-icons/gr";
 

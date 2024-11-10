@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Sidebar from '../../../layout/Sidebar';
-import Header from '../../../layout/Header';
+import Sidebar from '../../../../layout/Sidebar';
+import Header from '../../../../layout/Header';
 import {  FaEye, FaFileImage, FaFilePdf, FaPen, FaTrashAlt } from 'react-icons/fa';
 import { FaSquarePlus } from 'react-icons/fa6';
-import AddExpenseForm from '../../../Modals/AddExpenseForm';
+import AddExpenseForm from '../../../../Modals/AddExpenseForm';
 
 const expenses = [
   {

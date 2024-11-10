@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Sidebar from '../../layout/Sidebar';
-import Header from '../../layout/Header';
+import Sidebar from '../../../layout/Sidebar';
+import Header from '../../../layout/Header';
 import { MdOutlinePendingActions } from 'react-icons/md';
 import { FaCheckCircle, FaEye, FaUser } from 'react-icons/fa';
 import { HiOutlineCash } from 'react-icons/hi';
@@ -8,8 +8,8 @@ import { IoMdWallet } from 'react-icons/io';
 import { BsPersonBoundingBox } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import Otherincome from './Income/Otherincome';
-import SetMaintenancePwd from '../../Modals/SetMaintenancePwd';
-import Viewmaintenance from '../../Modals/Viewmaintenance ';
+import SetMaintenancePwd from '../../../Modals/SetMaintenancePwd';
+import Viewmaintenance from '../../../Modals/Viewmaintenance ';
 
 const Financial_Management = () => {
   const [data, setData] = useState(280);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaPencilAlt } from 'react-icons/fa';
-import Sidebar from '../../layout/Sidebar';
-import Header from '../../layout/Header';
+import Sidebar from '../../../layout/Sidebar';
+import Header from '../../../layout/Header';
 
 const Profile = () => {
 

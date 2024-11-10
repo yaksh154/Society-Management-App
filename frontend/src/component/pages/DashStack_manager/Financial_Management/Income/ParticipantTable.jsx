@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Sidebar from '../../layout/Sidebar';
-import Header from '../../layout/Header';
+import Sidebar from '../../../../layout/Sidebar';
+import Header from '../../../../layout/Header';
 import { BsPersonBoundingBox } from 'react-icons/bs';
 import { FaUser } from 'react-icons/fa';
 import { HiOutlineCash } from 'react-icons/hi';

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import Sidebar from '../../layout/Sidebar'
-import Header from '../../layout/Header'
+import Sidebar from '../../../layout/Sidebar'
+import Header from '../../../layout/Header'
 import { BsThreeDotsVertical } from 'react-icons/bs';
-import Create_facility_model from '../../Modals/Create_facility_model';
-import Editcreate_facility_Modal from '../../Modals/Editcreate_facility_Modal';
+import Create_facility_model from '../../../Modals/Create_facility_model';
+import Editcreate_facility_Modal from '../../../Modals/Editcreate_facility_Modal';
 
 const Facility_Management = () => {
   let [data, setdata] = useState(280);
@@ -86,7 +86,7 @@ const Facility_Management = () => {
                   />
                 )}
               </div>
-              <div className="grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-4">
+              <div className="grid gap-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4">
                 {incomeData.map((item, index) => (
                   <div key={index} className="bg-white shadow-md rounded-md relative">
                     <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-[#5678e9]">

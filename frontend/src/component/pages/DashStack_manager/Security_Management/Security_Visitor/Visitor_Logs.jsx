@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Sidebar from '../../../layout/Sidebar';
-import Header from '../../../layout/Header';
+import Sidebar from '../../../../layout/Sidebar';
+import Header from '../../../../layout/Header';
 
 const Visitor_Logs = () => {
     let [data, setdata] = useState(280);

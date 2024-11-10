@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { FaRupeeSign } from 'react-icons/fa';
 
-import DeleteModal from '../../../Modals/DeleteModal';
+import DeleteModal from '../../../../Modals/DeleteModal';
 import { Link } from 'react-router-dom';
 
 const Otherincome = () => {

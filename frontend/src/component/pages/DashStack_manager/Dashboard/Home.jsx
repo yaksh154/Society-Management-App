@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import Sidebar from '../../layout/Sidebar';
-import Header from '../../layout/Header';
-import '../../../style/home.css'
-import Home_totle_card from '../../layout/Home_totle_card';
+import Sidebar from '../../../layout/Sidebar';
+import Header from '../../../layout/Header';
+import '../../../../style/home.css'
+import Home_totle_card from '../../../layout/Home_totle_card';
 import { MdOutlineAttachMoney } from "react-icons/md";
-import TotalBalanceChart from '../../layout/TotalBalanceChart';
+import TotalBalanceChart from '../../../layout/TotalBalanceChart';
 import {
   Chart as ChartJS,
   LineElement,
@@ -15,15 +15,15 @@ import {
 } from 'chart.js';
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip);
 import { FaTrashAlt, FaEdit, FaPlus } from 'react-icons/fa';
-import { GetComplainy, ImportantNumbersDelete, ImportantNumbersGet } from '../../services/Api/api';
+import { GetComplainy, ImportantNumbersDelete, ImportantNumbersGet } from '../../../services/Api/api';
 import { TiThMenu } from "react-icons/ti";
-import CreateImportantNumbers from '../../Modals/CreateImportantNumbers';
-import EditImportantNumbers from '../../Modals/EditImportantNumbers';
-import OpenEditComplintModel from '../../Modals/OpenEditComplintModel';
+import CreateImportantNumbers from '../../../Modals/CreateImportantNumbers';
+import EditImportantNumbers from '../../../Modals/EditImportantNumbers';
+import OpenEditComplintModel from '../../../Modals/OpenEditComplintModel';
 import { GrFormView } from 'react-icons/gr';
-import ViewComplintModel from '../../Modals/ViewComplintModel';
+import ViewComplintModel from '../../../Modals/ViewComplintModel';
 import axios from 'axios';
-import DeleteComplintModal from '../../Modals/DeleteComplintModal';
+import DeleteComplintModal from '../../../Modals/DeleteComplintModal';
 
 
 const Home = () => {

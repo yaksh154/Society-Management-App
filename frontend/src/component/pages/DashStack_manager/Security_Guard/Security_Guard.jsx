@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import Sidebar from '../../layout/Sidebar'
-import Header from '../../layout/Header'
+import Sidebar from '../../../layout/Sidebar'
+import Header from '../../../layout/Header'
 
-const Complaint_Tracking = () => {
+const Security_Guard = () => {
   let [data, setdata] = useState(280);
   let [getdata, setget] = useState(280);
 
@@ -22,11 +22,10 @@ const Complaint_Tracking = () => {
           <Header openNav={openNav} />
         </div>
         {/* Main Content */}
-        <h1>Complaint_Tracking</h1>
-
+        <h1>Security_Guard</h1>
       </div>
     </div>
   )
 }
 
-export default Complaint_Tracking
+export default Security_Guard
