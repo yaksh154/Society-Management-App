@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import AddMaintenanceDetail from './AddMaintenanceDetail';
 
 
 const SetMaintenancePwd = ({ setShowMaintenance }) => {
@@ -7,7 +8,7 @@ const SetMaintenancePwd = ({ setShowMaintenance }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isIncorrect, setIsIncorrect] = useState(false);
 
-  // const [showAddDetail, setShowAddDetail] = useState(false); // Corrected state name
+  const [showAddDetail, setShowAddDetail] = useState(false); // Corrected state name
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -22,20 +23,22 @@ const SetMaintenancePwd = ({ setShowMaintenance }) => {
     setShowMaintenance(false); // Close the modal if applicable
   };
 
+
+
   const handleContinue = () => {
     // Check if the password is '111'
-    if (password !== '111') {
-      setIsIncorrect(true);
-      // setShowAddDetail(true); // Show the AddMaintenanceDetail modal
+    if (password === '1111') {
+      setIsIncorrect(false); // Password is correct, so no warning is needed
+      setShowAddDetail(true); // Show the AddMaintenanceDetail modal
     } else {
-      setIsIncorrect(false);
-      setShowMaintenance(false); // Close the modal after successful password entry
+      setIsIncorrect(true); // Password is incorrect, show the warning
+      setShowAddDetail(false); // Do not show the modal if password is wrong
     }
   };
 
-  // const closeAddDetail = () => {
-  //   setShowAddDetail(false); // Close the AddMaintenanceDetail modal
-  // };
+  const closeAddDetail = () => {
+    setShowAddDetail(false); // Close the AddMaintenanceDetail modal
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
@@ -81,6 +84,10 @@ const SetMaintenancePwd = ({ setShowMaintenance }) => {
           </button>
         </div>
       </div>
+
+      {/* {showAddDetail && ( // Corrected condition for showing the modal
+        <AddMaintenanceDetail setShowAddDetail={closeAddDetail} />
+      )} */}
     </div>
   );
 };
