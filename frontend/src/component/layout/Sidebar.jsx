@@ -34,7 +34,7 @@ export default function Sidenav({ closeNav, data }) {
       id="mySidenav"
       style={{
         width: data,
-        display: data === 0 ? 'none' : 'block',
+        display: data === 0,
         transition: 'width 0.3s',
       }}
       className="fixed overflow-y-auto top-0 left-0 h-full z-10 transition-all duration-500 bg-white text-white max-[425px]:fixed"
@@ -50,7 +50,7 @@ export default function Sidenav({ closeNav, data }) {
 
       <Link
         to="/"
-        className={`relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/" ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold" : "hover:bg-gray-100"
+        className={`text-nowrap relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/" ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold" : "hover:bg-gray-100"
           }`}
       >
         {pathname === "/" && (
@@ -62,7 +62,7 @@ export default function Sidenav({ closeNav, data }) {
 
       <Link
         to="/resident_management"
-        className={`relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 text-black flex items-center ${pathname.startsWith("/resident_management")
+        className={`text-nowrap relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 text-black flex items-center ${pathname.startsWith("/resident_management")
             ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
             : "hover:bg-gray-200"
           }`}
@@ -77,7 +77,7 @@ export default function Sidenav({ closeNav, data }) {
       <Link
         onClick={toggleDropdown}
         aria-current={pathname.startsWith("/financial_management") ? "page" : undefined}
-        className={`relative p-3 ms-4 m-2 rounded-lg text-lg transition-colors duration-300 flex items-center ${pathname.startsWith("/financial_management")
+        className={`text-nowrap relative p-3 ms-4 m-2 rounded-lg text-lg transition-colors duration-300 flex items-center ${pathname.startsWith("/financial_management")
             ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
             : "hover:bg-gray-100 text-black"
           }`}
@@ -127,7 +127,7 @@ export default function Sidenav({ closeNav, data }) {
 
       <Link
         to="/facility_management"
-        className={`relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/facility_management" ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold" : "hover:bg-gray-100"
+        className={`text-nowrap relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/facility_management" ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold" : "hover:bg-gray-100"
           }`}
       >
         {pathname.startsWith("/facility_management") && (
@@ -140,7 +140,7 @@ export default function Sidenav({ closeNav, data }) {
       <Link
         onClick={toggleComplaintTrackingDropdown}
         aria-current={pathname.startsWith("/complaint_tracking") ? "page" : undefined}
-        className={`relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname.startsWith("/complaint_tracking")
+        className={`text-nowrap relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname.startsWith("/complaint_tracking")
           ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
           : "hover:bg-gray-100"
           }`}
@@ -182,7 +182,7 @@ export default function Sidenav({ closeNav, data }) {
       <Link
         onClick={toggleSecurity_managementDropdown}
         aria-current={pathname.startsWith("/security_management") ? "page" : undefined}
-        className={`relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname.startsWith("/security_management")
+        className={`text-nowrap relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname.startsWith("/security_management")
           ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
           : "hover:bg-gray-100"
           }`}
@@ -222,7 +222,7 @@ export default function Sidenav({ closeNav, data }) {
 
       <Link
         to="/security_guard"
-        className={`relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/security_guard"
+        className={`text-nowrap relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/security_guard"
           ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
           : "hover:bg-gray-100"
           }`}
@@ -236,7 +236,7 @@ export default function Sidenav({ closeNav, data }) {
 
       <Link
         to="/announcement"
-        className={`relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/announcement"
+        className={`text-nowrap relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black items-center ${pathname === "/announcement"
           ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
           : "hover:bg-gray-100"
           }`}

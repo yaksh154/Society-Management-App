@@ -82,10 +82,11 @@ export const ImportantNumbersGet = (setContacts, setLoading) => {
 
 // ImportantNumbers post
 
-export const ImportantNumbersPost = (newNumber) => {
+export const ImportantNumbersPost = (newNumber, Fdata) => {
     axios.post(`${url}/importantnumber/createImportantNumber`, newNumber)
         .then((res) => {
             console.log(res);
+            Fdata()
         })
         .catch((err) => {
             console.error('Error fetching important numbers:', err);
@@ -116,3 +117,35 @@ export const updateImportantNumber = (_id, editNumber, seteditShowModal, closeEd
         })
         .catch((error) => console.error("Error saving data:", error));
 };
+
+// Complaint Tracking page
+
+// === Create Complaint get
+
+export const GetComplainy = (setgetComplaint) => {
+    axios.get('http://localhost:3030/user').then((res) => {
+        setgetComplaint(res.data);
+    })
+}
+
+// === Create Complaint create
+
+export const CreateComplaint = async (data, setClosecreateComplint, getComplaintdata) => {
+    try {
+        const response = await axios.post("http://localhost:3030/user", data);
+        console.log(response.data);
+        getComplaintdata()
+        setClosecreateComplint(false);
+    } catch (error) {
+        console.error("Error submitting complaint:", error);
+    }
+}
+
+// === Create Complaint delete
+
+export const DeleteComplaint = async (_id, getComplaint) => {
+    axios.delete(`http://localhost:3030/user/${_id}`).then((res) => {
+        console.log(res);
+        getComplaint()
+    })
+}

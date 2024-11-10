@@ -6,6 +6,9 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { GrFormView } from 'react-icons/gr';
 import OpenEditComplintModel from '../../../Modals/OpenEditComplintModel';
 import ViewComplintModel from '../../../Modals/ViewComplintModel';
+import Create_Complint_model from '../../../Modals/Create_Complint_model';
+import DeleteComplintModal from '../../../Modals/DeleteComplintModal';
+import { GetComplainy } from '../../../services/Api/api';
 
 const Create_Complaint = () => {
   let [data, setdata] = useState(280);
@@ -26,23 +29,43 @@ const Create_Complaint = () => {
 
   const [getComplaint, setgetComplaint] = useState([]);
   const getComplaintdata = () => {
-    axios.get('http://localhost:3030/user').then((res) => {
-      setgetComplaint(res.data);
-    })
+    GetComplainy(setgetComplaint)
   }
 
+  const [createComplint, setcreateComplint] = useState(false);
   const [EditComplint, setEditComplint] = useState(false);
+  const [DeleteComplint, setDeleteComplint] = useState(false);
   const [ViewComplint, setViewComplint] = useState(false);
+  const [a_id, seta_id] = useState([]);
+  const [b_id, setb_id] = useState([]);
+  const [c_id, setc_id] = useState([]);
 
+  const closecreateComplint = () => {
+    setcreateComplint(false);
+  }
+
+  const OpneEditComplint = (_id) => {
+    setEditComplint(true);
+    seta_id(_id)
+  }
   const closeEditComplint = () => {
     setEditComplint(false);
   }
 
+  const OpneViewComplint = (_id) => {
+    setViewComplint(true)
+    setb_id(_id)
+  }
   const closeViewComplint = () => {
     setViewComplint(false);
   }
-  const OpneViewComplint = () => {
-    setViewComplint(true)
+
+  const OpneDeleteComplint = (_id) => {
+    setDeleteComplint(true)
+    setc_id(_id)
+  }
+  const CloseDeleteComplint = () => {
+    setDeleteComplint(false);
   }
 
   return (
@@ -57,14 +80,15 @@ const Create_Complaint = () => {
             <div className="bg-white shadow-md rounded-lg p-6">
               <div className="flex justify-between items-center mb-6">
                 <h1 className='font-semibold md:text-2xl text-md'>Create Complaint</h1>
-                <button className="font-semibold bg-gradient-to-r from-orange-600 to-yellow-500 text-white px-4 py-2 rounded-md hover:bg-orange-600">
+                <button onClick={() => setcreateComplint(true)} className="px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200">
                   Create Complaint
                 </button>
-                {/* {create_facility && (
-                <Create_facility_model
-                  setClosecreate_facility={Closecreate_facility}
-                />
-              )} */}
+                {createComplint && (
+                  <Create_Complint_model
+                    setClosecreateComplint={closecreateComplint}
+                    getComplaintdata={getComplaintdata}
+                  />
+                )}
               </div>
               <div className="overflow-auto h-svh">
                 <table className="min-w-full bg-[#eef1fd] rounded-lg">
@@ -103,7 +127,10 @@ const Create_Complaint = () => {
                           </td>
                           <td className="px-4 py-2">{e.Complaint_Name}</td>
                           <td className="px-4 py-2">{e.Description}</td>
-                          <td className="px-4 py-2 text-center">{e.Unit_Number}</td>
+                          <td className="px-4 py-2 text-center">
+                            <samp className=' px-2 py-1 text-[#5678e9] bg-[#f6f8fb] mr-2 rounded-full'>{e.Wing}</samp>
+                            {e.Unit_Number}
+                          </td>
                           <td className="px-4 py-2 text-center">
                             <span className={`px-3 py-1 rounded-full text-md font-medium ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
                               e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
@@ -117,22 +144,15 @@ const Create_Complaint = () => {
                               }`}>{e.Complain_Status}</span>
                           </td>
                           <td className="px-4 py-2 flex space-x-2">
-                            <button className="text-green-500 p-1" onClick={() => setEditComplint(true)}>
+                            <button className="text-green-500 p-1" onClick={() => OpneEditComplint(e._id)}>
                               <FaEdit />
                             </button>
-                            {EditComplint && (
-                              <OpenEditComplintModel
-                                _id={e._id}
-                                closeEditComplint={closeEditComplint}
-                              />
-                            )}
 
-                            <button className="text-blue-500 text-2xl rounded" onClick={() => OpneViewComplint()}>
+                            <button className="text-blue-500 text-2xl rounded" onClick={() => OpneViewComplint(e._id)}>
                               <GrFormView />
                             </button>
-                            {ViewComplint && <ViewComplintModel _id={e._id} closeViewComplint={closeViewComplint} />}
 
-                            <button className="text-red-500 p-1">
+                            <button onClick={() => OpneDeleteComplint(e._id)} className="text-red-500 p-1">
                               <FaTrashAlt />
                             </button>
                           </td>
@@ -141,6 +161,9 @@ const Create_Complaint = () => {
                     })}
                   </tbody>
                 </table>
+                {EditComplint && <OpenEditComplintModel _id={a_id} closeEditComplint={closeEditComplint} />}
+                {ViewComplint && <ViewComplintModel _id={b_id} closeViewComplint={closeViewComplint} />}
+                {DeleteComplint && <DeleteComplintModal CloseDeleteComplint={CloseDeleteComplint} _id={c_id} getComplaint={getComplaint} />}
               </div>
             </div>
           </div>

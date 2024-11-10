@@ -2,24 +2,36 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const OpenEditComplintModel = ({ _id, closeEditComplint }) => {
+
     const [editComplaint, seteditComplaint] = useState({
         Complainer_Name: '',
         Complaint_Name: '',
         Description: '',
         Wing: '',
-        Unit: '',
+        Unit_Number: '',
         Priority: '',
-        Status: ''
+        Complain_Status: ''
     });
 
     useEffect(() => {
-        editdata();
+        editdata(_id);
     }, []);
 
-    const editdata = async () => {
+    const editdata = async (_id) => {
         try {
-            const response = await axios.get(`http://localhost:3030/user/${_id}`);
-            seteditComplaint(response.data);
+            const res = await axios.get(`http://localhost:3030/user/${_id}`);
+            if (res.data) {
+                seteditComplaint({
+                    Complainer_Name: res.data.Complainer_Name || '',
+                    Complaint_Name: res.data.Complaint_Name || '',
+                    Description: res.data.Description || '',
+                    Wing: res.data.Wing || '',
+                    Unit_Number: res.data.Unit_Number || '',
+                    Priority: res.data.Priority || '',
+                    Complain_Status: res.data.Complain_Status || ''
+                });
+            }
+            console.log('Fetched data:', res.data);
         } catch (error) {
             console.error('Error fetching complaint data:', error);
         }
@@ -57,7 +69,7 @@ const OpenEditComplintModel = ({ _id, closeEditComplint }) => {
                         <input
                             type="text"
                             className="w-full p-1 text-sm border border-gray-300 rounded"
-                            name="ComplainerName"
+                            name="Complainer_Name"
                             value={editComplaint.Complainer_Name}
                             onChange={handleInputChange}
                             placeholder="Enter Complainer Name"
@@ -68,7 +80,7 @@ const OpenEditComplintModel = ({ _id, closeEditComplint }) => {
                         <input
                             type="text"
                             className="w-full p-1 text-sm border border-gray-300 rounded"
-                            name="ComplaintName"
+                            name="Complaint_Name"
                             value={editComplaint.Complaint_Name}
                             onChange={handleInputChange}
                             placeholder="Enter Complaint Name"
@@ -101,8 +113,8 @@ const OpenEditComplintModel = ({ _id, closeEditComplint }) => {
                             <input
                                 type="text"
                                 className="w-full p-1 text-sm border border-gray-300 rounded"
-                                name="Unit"
-                                value={editComplaint.Unit}
+                                name="Unit_Number"
+                                value={editComplaint.Unit_Number}
                                 onChange={handleInputChange}
                                 placeholder="Enter Unit"
                             />
@@ -144,46 +156,44 @@ const OpenEditComplintModel = ({ _id, closeEditComplint }) => {
                                 />
                                 Low
                             </label>
-
                         </div>
                     </div>
                     <div className="mb-3">
                         <label className="block text-sm font-medium pb-2">Status<span className='text-red'>*</span></label>
                         <div className="flex gap-2">
-                            <label className={`flex items-center px-3 py-1 border rounded-lg ${editComplaint.Status === "Open" ? 'border-yellow-500' : ''}`}>
+                            <label className={`flex items-center px-3 py-1 border rounded-lg ${editComplaint.Complain_Status === "Open" ? 'border-yellow-500' : ''}`}>
                                 <input
                                     className="mr-2"
                                     type="radio"
-                                    name="Status"
+                                    name="Complain_Status"
                                     value="Open"
-                                    checked={editComplaint.Status === "Open"}
+                                    checked={editComplaint.Complain_Status === "Open"}
                                     onChange={handleInputChange}
                                 />
                                 Open
                             </label>
-                            <label className={`flex items-center px-3 py-1 border rounded-lg ${editComplaint.Status === "Pending" ? 'border-yellow-500' : ''}`}>
+                            <label className={`flex items-center px-3 py-1 border rounded-lg ${editComplaint.Complain_Status === "Pending" ? 'border-yellow-500' : ''}`}>
                                 <input
                                     className="mr-2"
                                     type="radio"
-                                    name="Status"
+                                    name="Complain_Status"
                                     value="Pending"
-                                    checked={editComplaint.Status === "Pending"}
+                                    checked={editComplaint.Complain_Status === "Pending"}
                                     onChange={handleInputChange}
                                 />
                                 Pending
                             </label>
-                            <label className={`flex items-center px-3 py-1 border rounded-lg ${editComplaint.Status === "Solved" ? 'border-yellow-500' : ''}`}>
+                            <label className={`flex items-center px-3 py-1 border rounded-lg ${editComplaint.Complain_Status === "Solved" ? 'border-yellow-500' : ''}`}>
                                 <input
                                     className="mr-2"
                                     type="radio"
-                                    name="Status"
+                                    name="Complain_Status"
                                     value="Solved"
-                                    checked={editComplaint.Status === "Solved"}
+                                    checked={editComplaint.Complain_Status === "Solved"}
                                     onChange={handleInputChange}
                                 />
                                 Solved
                             </label>
-
                         </div>
                     </div>
                     <div className="flex justify-end mt-4">

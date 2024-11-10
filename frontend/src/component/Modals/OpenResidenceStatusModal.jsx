@@ -33,7 +33,7 @@ const OpenResidenceStatusModal = ({ setShowResidenceStatus }) => {
 const handleSave = async () => {
     try {
         if (editComplaint.Status === "Occupied") {
-            navigate('/resident_management/resident_owner');
+            navigate('/resident_management/resident_owner_Form');
             setShowResidenceStatus(false);
         }else if (editComplaint.Status === "Vacate") {
             setshowResidenceVacate(true); // Trigger state change

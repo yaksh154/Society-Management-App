@@ -13,7 +13,7 @@ import Complaint_Tracking from './component/pages/DashStack_manager/Complaint_Tr
 import Security_Guard from './component/pages/DashStack_manager/Security_Guard.jsx'
 import Announcement from './component/pages/DashStack_manager/Announcement.jsx'
 import Otherincome from './component/pages/DashStack_manager/Income/Otherincome.jsx'
-import Resident_Owner from './component/pages/DashStack_manager/Resident_Owner.jsx'
+import Resident_Owner_Form from './component/pages/DashStack_manager/Resident_Owner_Form.jsx'
 import Expanse from './component/pages/DashStack_manager/Income/Expanse.jsx'
 import Note from './component/pages/DashStack_manager/Income/Note.jsx'
 import Create_Complaint from './component/pages/DashStack_manager/Complaint_Complaint/Create_Complaint.jsx'
@@ -34,7 +34,7 @@ function App() {
               <Route path='/' element={<Home />} />
                   <Route path='/profile' element={<Profile />} />
                   <Route path='/resident_management' element={<Resident_Management />} />
-                  <Route path='/resident_management/resident_owner' element={<Resident_Owner />} />
+                  <Route path='/resident_management/resident_owner_Form' element={<Resident_Owner_Form/>} />
 
                   <Route path='/financial_management/income' element={<Financial_Management />} />
                   <Route path='/financial_management/otherincome' element={<Otherincome />} />

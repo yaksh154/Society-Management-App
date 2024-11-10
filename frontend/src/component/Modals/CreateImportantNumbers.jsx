@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ImportantNumbersPost } from '../services/Api/api';
 
-const CreateImportantNumbers = ({ setShowModal }) => { 
+const CreateImportantNumbers = ({ setShowModal,Fdata }) => { 
     const [newNumber, setNewNumber] = useState({
         Fullname: '',
         Phonenumber: '',
@@ -32,7 +32,7 @@ const CreateImportantNumbers = ({ setShowModal }) => {
             setError('Phone number must be exactly 10 digits');
             return;
         }
-        ImportantNumbersPost(newNumber); 
+        ImportantNumbersPost(newNumber ,Fdata); 
         setShowModal(false);
     };
 

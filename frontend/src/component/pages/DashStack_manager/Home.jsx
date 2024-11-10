@@ -15,7 +15,7 @@ import {
 } from 'chart.js';
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip);
 import { FaTrashAlt, FaEdit, FaPlus } from 'react-icons/fa';
-import { ImportantNumbersDelete, ImportantNumbersGet } from '../../services/Api/api';
+import { GetComplainy, ImportantNumbersDelete, ImportantNumbersGet } from '../../services/Api/api';
 import { TiThMenu } from "react-icons/ti";
 import CreateImportantNumbers from '../../Modals/CreateImportantNumbers';
 import EditImportantNumbers from '../../Modals/EditImportantNumbers';
@@ -23,6 +23,7 @@ import OpenEditComplintModel from '../../Modals/OpenEditComplintModel';
 import { GrFormView } from 'react-icons/gr';
 import ViewComplintModel from '../../Modals/ViewComplintModel';
 import axios from 'axios';
+import DeleteComplintModal from '../../Modals/DeleteComplintModal';
 
 
 const Home = () => {
@@ -42,6 +43,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editModal, seteditModal] = useState(false);
+  const [Important_id, setImportant_id] = useState([])
 
   useEffect(() => {
     Fdata()
@@ -63,6 +65,13 @@ const Home = () => {
 
   // edit numbers pop_up
 
+  const OpneeditModal = (_id) => {
+    console.log(_id);
+    
+    seteditModal(true)
+    setImportant_id(_id)
+  }
+
   const closeeditModal = () => {
     seteditModal(false);
   };
@@ -80,24 +89,40 @@ const Home = () => {
 
   let [getComplaint, setgetComplaint] = useState([]);
   const getComplaintdata = () => {
-    axios.get('http://localhost:3030/user').then((res) => {
-      setgetComplaint(res.data);
-    })
+    GetComplainy(setgetComplaint)
   }
 
   // edit complaint List pop_up
 
   const [EditComplint, setEditComplint] = useState(false);
   const [ViewComplint, setViewComplint] = useState(false);
+  const [DeleteComplint, setDeleteComplint] = useState(false);
+  const [a_id, seta_id] = useState([]);
+  const [b_id, setb_id] = useState([]);
+  const [c_id, setc_id] = useState([]);
 
+  const OpneEditComplint = (_id) => {
+    setEditComplint(true);
+    seta_id(_id)
+  }
   const closeEditComplint = () => {
     setEditComplint(false);
+  }
+
+  const OpneViewComplint = (_id) => {
+    setViewComplint(true)
+    setb_id(_id)
   }
   const closeViewComplint = () => {
     setViewComplint(false);
   }
-  const OpneViewComplint = (_id) => {
-    setViewComplint(true)
+
+  const OpneDeleteComplint = (_id) => {
+    setDeleteComplint(true)
+    setc_id(_id)
+  }
+  const CloseDeleteComplint = () => {
+    setDeleteComplint(false);
   }
 
   return (
@@ -164,11 +189,7 @@ const Home = () => {
                       <FaPlus className="mr-2" />
                       Add
                     </button>
-                    {showModal && (
-                      <CreateImportantNumbers
-                        setShowModal={closeModal}
-                      />
-                    )}
+                    {showModal && (<CreateImportantNumbers Fdata={Fdata} setShowModal={closeModal} />)}
                   </div>
                   <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
                     {loading ? (
@@ -199,23 +220,17 @@ const Home = () => {
                                 <FaTrashAlt />
                               </button>
                               <button
-                                onClick={() => seteditModal(true)}
+                                onClick={()=>OpneeditModal(contact._id)}
                                 className="text-green-500 hover:text-green-600"
                               >
                                 <FaEdit />
                               </button>
-                              {editModal && (
-                                <EditImportantNumbers
-                                  _id={contact._id}
-                                  closeEditModal={closeeditModal}
-                                  seteditShowModal={seteditModal}
-                                />
-                              )}
                             </div>
                           </div>
                         ))}
                       </div>
                     )}
+                    {editModal && (<EditImportantNumbers _id={Important_id} closeEditModal={closeeditModal} seteditShowModal={seteditModal} />)}
                   </div>
                 </div>
               </div>
@@ -371,21 +386,13 @@ const Home = () => {
                                   }`}>{e.Complain_Status}</span>
                               </td>
                               <td className="px-4 py-2 flex space-x-2">
-                                <button className="text-green-500 p-1" onClick={() => setEditComplint(true)}>
+                                <button className="text-green-500 p-1" onClick={() => OpneEditComplint(e._id)}>
                                   <FaEdit />
                                 </button>
-                                {EditComplint && (
-                                  <OpenEditComplintModel
-                                    _id={e._id}
-                                    closeEditComplint={closeEditComplint}
-                                  />
-                                )}
                                 <button className="text-blue-500 text-2xl rounded" onClick={() => OpneViewComplint(e._id)}>
                                   <GrFormView />
                                 </button>
-                                {ViewComplint && <ViewComplintModel _id={e._id} closeViewComplint={closeViewComplint} />}
-
-                                <button className="text-red-500 p-1">
+                                <button onClick={() => OpneDeleteComplint(e._id)} className="text-red-500 p-1">
                                   <FaTrashAlt />
                                 </button>
                               </td>
@@ -394,6 +401,9 @@ const Home = () => {
                         })}
                       </tbody>
                     </table>
+                    {EditComplint && <OpenEditComplintModel _id={a_id} closeEditComplint={closeEditComplint} />}
+                    {ViewComplint && <ViewComplintModel _id={b_id} closeViewComplint={closeViewComplint} />}
+                    {DeleteComplint && <DeleteComplintModal CloseDeleteComplint={CloseDeleteComplint} _id={c_id} getComplaint={getComplaint} />}
                   </div>
                 </div>
               </div>

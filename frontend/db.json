@@ -1,35 +1,51 @@
 {
-    "user": [
-        {
-            "_id": "1",
-            "Complainer_Name": "Evelyn Harper",
-            "Complaint_Name": "Unethical Behavior",
-            "Date": "01/02/2024",
-            "Priority": "Medium",
-            "Complain_Status": "Open",
-            "Unit_Number":"1001",
-            "Description": "Complaint regarding unethical behavior observed in the workplace."
-        },
-        {
-            "_id": "2",
-            "Complainer_Name": "Evelyn Harper",
-            "Complaint_Name": "Unethical Behavior",
-            "Date": "01/02/2024",
-            "Priority": "Low",
-            "Complain_Status": "Pending",
-            "Unit_Number":"1002",
-            "Description": "Complaint regarding unethical behavior observed in the workplace."
-        },
-        {
-            "_id": "3",
-            "Complainer_Name": "Evelyn Harper",
-            "Complaint_Name": "Unethical Behavior",
-            "Date": "01/02/2024",
-            "Priority": "High",
-            "Complain_Status": "Solve",
-            "Unit_Number":"1003",
-            "Description": "Complaint regarding unethical behavior observed in the workplace."
-        }
-    ]
-    
+  "user": [
+    {
+      "_id": "1",
+      "Complainer_Name": "Evelyn Harper",
+      "Complaint_Name": "Unethical Behavior",
+      "Date": "01/02/2024",
+      "Priority": "Medium",
+      "Complain_Status": "Open",
+      "Unit_Number": "1001",
+      "Wing": "A",
+      "Description": "Complaint regarding unethical behavior observed in the workplace.",
+      "id": "68c2"
+    },
+    {
+      "_id": "2",
+      "Complainer_Name": "Evelyn Harper",
+      "Complaint_Name": "Unethical Behavior",
+      "Date": "01/02/2024",
+      "Priority": "Low",
+      "Complain_Status": "Pending",
+      "Unit_Number": "1002",
+      "Wing": "B",
+      "Description": "Complaint regarding unethical behavior observed in the workplace.",
+      "id": "977a"
+    },
+    {
+      "_id": "3",
+      "Complainer_Name": "Evelyn Harper",
+      "Complaint_Name": "Unethical Behavior",
+      "Date": "01/02/2024",
+      "Priority": "High",
+      "Wing": "A",
+      "Complain_Status": "Solve",
+      "Unit_Number": "1003",
+      "Description": "Complaint regarding unethical behavior observed in the workplace.",
+      "id": "02d5"
+    },
+    {
+      "_id": "095c",
+      "Complainer_Name": "111",
+      "Complaint_Name": "111",
+      "Description": "111",
+      "Wing": "A",
+      "Unit_Number": "111",
+      "Priority": "Medium",
+      "Complain_Status": "Pending",
+      "Date": "09/11/2024"
+    }
+  ]
 }

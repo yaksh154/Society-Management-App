@@ -21,9 +21,18 @@ const Request_Tracking = () => {
         <div className="open_he">
           <Header openNav={openNav} />
         </div>
-        {/* Main Content */}
-        <h1>Request Tracking</h1>
-
+        <div className="flex-1 bg-[#f0f5fb]">
+          <div className="p-6">
+            <div className="bg-white shadow-md rounded-lg p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h1 className='font-semibold md:text-2xl text-md'>Create Complaint</h1>
+                <button className="px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200">
+                  Create Complaint
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
