@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import registration from '../../../public/images/registration.png';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import CreateSociety from '../Modals/CreateSociety'
-import { UserDataRegistration } from '../services/Api/api';
+import { GetCreateSocirty, UserDataRegistration } from '../services/Api/api';
 
 const Registration = () => {
     const {
@@ -15,31 +15,35 @@ const Registration = () => {
     const [passwordShown, setPasswordShown] = useState(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
     const [societies, setSocieties] = useState([]);
-    const [newSociety, setNewSociety] = useState({
-        name: '',
-        address: '',
-        country: '',
-        state: '',
-        city: '',
-        zip: ''
-    });
+
     const [showModal, setShowModal] = useState(false);
     const [RegistrationError, setRegistrationError] = useState('');
 
-    const CreatenewSociety = () => {
+    const OpneCreatenewSociety = () => {
         setShowModal(true);
     };
-    
+    const CloseCreatenewSociety = () => {
+        setShowModal(false);
+    };
+
+    useEffect(() => {
+        Fdata()
+    }, [])
+
+    const Fdata = () => {
+        GetCreateSocirty(setSocieties)
+    }
+
     const onSubmit = (data) => {
         if (data.Password !== data.confirmPassword) {
             alert("Passwords do not match!");
             return;
         }
-        console.log(data);
+        
+        const { confirmPassword, ...registrationData } = data;
+        UserDataRegistration(registrationData, setRegistrationError)
 
-        UserDataRegistration(data, setRegistrationError)
     };
-
     return (
         <div className="flex flex-col lg:flex-row min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/images/Login_bg_img.png')" }}>
             <div className="hidden lg:flex flex-col w-1/2 bg-gray-100 justify-center">
@@ -57,20 +61,20 @@ const Registration = () => {
                             <div className="w-full lg:w-1/2 px-2 mb-4 lg:mb-0">
                                 <label className="block text-gray-700 font-semibold mb-1 text-sm">First Name<span className="text-red-600">*</span></label>
                                 <input
-                                    {...register("firstName", { required: true })}
+                                    {...register("Firstname", { required: true })}
                                     className="w-full p-1 text-sm border border-gray-300 rounded"
                                     placeholder="Enter First Name"
                                 />
-                                {errors.firstName && <p className="text-red-600 text-xs">First name is required.</p>}
+                                {errors.Firstname && <p className="text-red-600 text-xs">First name is required.</p>}
                             </div>
                             <div className="w-full lg:w-1/2 px-2">
                                 <label className="block text-gray-700 font-semibold mb-1 text-sm">Last Name<span className="text-red-600">*</span></label>
                                 <input
-                                    {...register("lastName", { required: true })}
+                                    {...register("Lastname", { required: true })}
                                     className="w-full p-1 text-sm border border-gray-300 rounded"
                                     placeholder="Enter Last Name"
                                 />
-                                {errors.lastName && <p className="text-red-600 text-xs">Last name is required.</p>}
+                                {errors.Lastname && <p className="text-red-600 text-xs">Last name is required.</p>}
                             </div>
                         </div>
 
@@ -138,31 +142,25 @@ const Registration = () => {
                         <div className="mb-4 px-2">
                             <label className="block text-gray-700 font-semibold mb-1 text-sm">Select Society<span className="text-red-600">*</span></label>
                             <select
-                                {...register("society", { required: true })}
+                                {...register("societyid", { required: true })}
                                 className="w-full p-1 text-sm border border-gray-300 rounded"
                             >
                                 <option value="">Select Society</option>
-                                {societies.map((society, index) => (
-                                    <option key={index} value={society}>{society}</option>
+                                {societies.map((e, index) => (
+                                    <option key={index} value={e._id}>{e.societyname}</option>
                                 ))}
                             </select>
                             {errors.society && <p className="text-red-600 text-xs">Society is required.</p>}
                             <button
                                 type="button"
                                 className="btn bg-gray-100 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold w-full py-1 rounded text-sm mt-3"
-                                onClick={CreatenewSociety}
+                                onClick={OpneCreatenewSociety}
                             >
                                 Create Society
                             </button>
 
                             {showModal && (
-                                <CreateSociety
-                                    newSociety={newSociety}
-                                    setNewSociety={setNewSociety}
-                                    societies={societies}
-                                    setSocieties={setSocieties}
-                                    setShowModal={setShowModal}
-                                />
+                                <CreateSociety CloseCreatenewSociety={CloseCreatenewSociety} />
                             )}
                         </div>
 

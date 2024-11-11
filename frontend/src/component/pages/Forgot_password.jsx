@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import forgot_password_img from '../../../public/images/forgot_password_img.png';
+import { UserForgot_password } from '../services/Api/api';
 
 const Forgot_password = () => {
     const [loginError, setLoginError] = useState('');
@@ -15,21 +16,22 @@ const Forgot_password = () => {
     const onSubmit = (data) => {
         console.log('Submitted data:', data);
 
-        axios
-            .post('https://task-4-ten-khaki.vercel.app/user/login', {
-                Email: data.Email,
-            })
-            .then((res) => {
-                if (res.data) {
-                    console.log('user Login');
-                } else {
-                    setLoginError('Incorrect email/phone');
-                }
-            })
-            .catch((error) => {
-                console.error('Login error:', error);
-                setLoginError('Login failed. Please try again later.');
-            });
+        UserForgot_password(data,setLoginError)
+
+        // axios.post('https://task-4-ten-khaki.vercel.app/user/login', {
+        //         Email: data.Email,
+        //     })
+        //     .then((res) => {
+        //         if (res.data) {
+        //             console.log('user Login');
+        //         } else {
+        //             setLoginError('Incorrect email/phone');
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.error('Login error:', error);
+        //         setLoginError('Login failed. Please try again later.');
+        //     });
     };
 
     return (

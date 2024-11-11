@@ -29,33 +29,75 @@ export const UserDataLogin = (data, setLoginError) => {
         });
 }
 
-// regegistration data
+// Forgot_password page
 
-export const UserDataRegistration = (data, setRegistrationError) => {
-    axios.post('/manager/createmanager', {
+export const UserForgot_password = (data, setLoginError) => {
+    axios.post(`${url}/manager/forgotpassword`, {
         Email: data.Email,
-        Password: data.Password,
-        City: data.City,
-        Country: data.Country,
-        Email: data.Email,
-        Number: data.Number,
-        // Password:data.Password,
-        State: data.State,
-        confirmPassword: data.confirmPassword,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        society: data.society
+    })
+        .then((res) => {
+            if (res.data) {
+                console.log('user Login');
+            } else {
+                setLoginError('Incorrect email/phone');
+            }
+        })
+        .catch((error) => {
+            console.error('Login error:', error);
+            setLoginError('Login failed. Please try again later.');
+        });
+}
+
+// regegistration page
+
+// create regegistration
+
+export const UserDataRegistration = (registrationData, setRegistrationError) => {
+    console.log(registrationData);
+
+    axios.post(`${url}/manager/createmanager`, registrationData).then((res) => {
+        if (res.data) {
+            console.log(res.data);
+        } else {
+            setRegistrationError('Incorrect email/phone or password');
+        }
+    })
+        .catch((error) => {
+            console.error('Registration error:', error);
+            setRegistrationError('Registration failed. Please try again later.');
+        });
+}
+
+// Get Socirty
+
+export const GetCreateSocirty = (setSocieties) => {
+    axios.get(`${url}/society/societies`).then((res) => {
+        setSocieties(res.data.data)
+    })
+}
+
+// Post Socirty
+
+export const UserCreateSociety = (newSociety, CloseCreatenewSociety) => {
+    axios.post(`${url}/society/createsocieties`, {
+        societyname: newSociety.societyname,
+        societyaddress: newSociety.societyaddress,
+        Country: newSociety.Country,
+        State: newSociety.State,
+        City: newSociety.City,
+        Zipcode: newSociety.Zipcode
     })
         .then((res) => {
             if (res.data) {
                 console.log(res.data);
+                CloseCreatenewSociety()
             } else {
-                setRegistrationError('Incorrect email/phone or password');
+                console.log("Incorrect create society");
+
             }
         })
         .catch((error) => {
             console.error('Registration error:', error);
-            setRegistrationError('Registration failed. Please try again later.');
         });
 }
 
@@ -95,12 +137,13 @@ export const ImportantNumbersPost = (newNumber, Fdata) => {
 
 // ImportantNumbers delete
 
-export const ImportantNumbersDelete = (_id, contacts, setContacts) => {
+export const ImportantNumbersDelete = (_id, contacts, setContacts, ClosedeleteContact) => {
     axios.delete(`${url}/importantnumber/deleteImportantNumber/${_id}`)
         .then((res) => {
             console.log(res);
             const deletData = contacts.filter((e) => e._id !== _id)
             setContacts(deletData)
+            ClosedeleteContact()
         })
         .catch((err) => {
             console.error('Error fetching important numbers:', err);
@@ -147,5 +190,34 @@ export const DeleteComplaint = async (_id, getComplaint) => {
     axios.delete(`http://localhost:3030/user/${_id}`).then((res) => {
         console.log(res);
         getComplaint()
+    })
+}
+
+// Announcement page
+
+// Get Announcement
+
+export const GetAnnouncement = (setgetAnnouncement) => {
+    axios.get('http://localhost:3030/incomeData').then((res) => {
+        setgetAnnouncement(res.data)
+    })
+}
+
+// Post Announcement
+
+export const PostAnnouncement = (data, Fdata, ClaseAddAnnouncement) => {
+    axios.post(`http://localhost:3030/incomeData`, data).then((res) => {
+        ClaseAddAnnouncement(false)
+        Fdata()
+    })
+}
+
+// Delete Announcement
+
+export const DeleteAnnouncement = (_id, Fdata, ClaseDeleteAnnouncement) => {
+    console.log(_id);
+    axios.delete(`http://localhost:3030/incomeData/${_id}`).then((res) => {
+        Fdata()
+        ClaseDeleteAnnouncement(false)
     })
 }

@@ -15,15 +15,15 @@ import {
 } from 'chart.js';
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip);
 import { FaTrashAlt, FaEdit, FaPlus } from 'react-icons/fa';
-import { GetComplainy, ImportantNumbersDelete, ImportantNumbersGet } from '../../../services/Api/api';
+import { GetComplainy, ImportantNumbersGet } from '../../../services/Api/api';
 import { TiThMenu } from "react-icons/ti";
 import CreateImportantNumbers from '../../../Modals/CreateImportantNumbers';
 import EditImportantNumbers from '../../../Modals/EditImportantNumbers';
 import OpenEditComplintModel from '../../../Modals/OpenEditComplintModel';
 import { GrFormView } from 'react-icons/gr';
 import ViewComplintModel from '../../../Modals/ViewComplintModel';
-import axios from 'axios';
 import DeleteComplintModal from '../../../Modals/DeleteComplintModal';
+import DeleteImportantNumbersModal from '../../../Modals/DeleteImportantNumbersModal';
 
 
 const Home = () => {
@@ -76,9 +76,19 @@ const Home = () => {
     seteditModal(false);
   };
 
-  const deleteContact = (_id) => {
-    console.log(_id);
-    ImportantNumbersDelete(_id, contacts, setContacts)
+  // edit numbers pop_up
+
+  const [ImportantNumbersDelete,setImportantNumbersDelete]=useState(false)
+  const [ImportantNumbersDeleteId,setImportantNumbersDeleteId]=useState(null)
+
+  const OpnedeleteContact = (_id) => {
+    setImportantNumbersDelete(true)
+    setImportantNumbersDeleteId(_id);
+    // ImportantNumbersDelete(_id, contacts, setContacts)
+  };
+
+  const ClosedeleteContact = () => {
+    setImportantNumbersDelete(false)
   };
 
   // get complaint List
@@ -214,7 +224,7 @@ const Home = () => {
                             </div>
                             <div className="flex space-x-2">
                               <button
-                                onClick={() => deleteContact(contact._id)}
+                                onClick={() => OpnedeleteContact(contact._id)}
                                 className="text-red-500 hover:text-red-600"
                               >
                                 <FaTrashAlt />
@@ -231,6 +241,7 @@ const Home = () => {
                       </div>
                     )}
                     {editModal && (<EditImportantNumbers _id={Important_id} closeEditModal={closeeditModal} seteditShowModal={seteditModal} />)}
+                    {ImportantNumbersDelete && (<DeleteImportantNumbersModal contacts={contacts} setContacts={setContacts} ClosedeleteContact={ClosedeleteContact} _id={ImportantNumbersDeleteId} />)}
                   </div>
                 </div>
               </div>

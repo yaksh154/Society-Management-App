@@ -47,5 +47,35 @@
       "Complain_Status": "Pending",
       "Date": "09/11/2024"
     }
+  ],
+  "incomeData": [
+    {
+      "Announcement_Title": "Ganesh Chaturthi",
+      "_id": "1",
+      "AnnouncementDate": "2024-01-07",
+      "Announcement_Time": "10:15",
+      "description": "The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesha in."
+    },
+    {
+      "Announcement_Title": "Navratri",
+      "_id": "2",
+      "AnnouncementDate": "2024-01-07",
+      "Announcement_Time": "10:15",
+      "description": "The celebration of Navratri involves the installation of clay idols of Durga in Resident."
+    },
+    {
+      "Announcement_Title": "Diwali",
+      "_id": "3",
+      "AnnouncementDate": "2024-01-07",
+      "Announcement_Time": "10:15",
+      "description": "The celebration of Diwali involves the installation of clay idols of Ganesha in."
+    },
+    {
+      "Announcement_Title": "Holi",
+      "_id": "4",
+      "announcementDate": "2024-01-07",
+      "Announcement_Time": "10:15",
+      "description": "The celebration of Holi involves the installation of clay idols of Ganesha in."
+    }
   ]
 }

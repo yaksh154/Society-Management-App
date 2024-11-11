@@ -9,7 +9,6 @@ const DeleteModal = ({ setDeleteBox }) => {
 
   // Handle delete action
   const handleDelete = () => {
-    alert("Deleted");
     setDeleteBox(false); // Optionally, close the modal after delete
   };
 

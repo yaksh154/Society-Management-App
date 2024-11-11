@@ -35,7 +35,7 @@ const AddExpenseForm = ({ Close }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
       <div className="p-6 bg-white rounded-lg shadow-md max-w-md w-full mx-auto relative z-60">
         <h2 className="text-xl font-semibold mb-4">Add Expenses Details</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
