@@ -3,7 +3,10 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import { FaRupeeSign } from 'react-icons/fa';
 
 import DeleteModal from '../../../../Modals/DeleteModal';
+import CreateOincome from '../../../../Modals/CreateOincome';
+import EditOIncome from '../../../../Modals/EditOIncome';
 import { Link } from 'react-router-dom';
+
 
 const Otherincome = () => {
   const [dropdownOpenIndex, setDropdownOpenIndex] = useState(null);
@@ -11,11 +14,27 @@ const Otherincome = () => {
     setDropdownOpenIndex(dropdownOpenIndex === index ? null : index);
   };
 
-  const [ShowMaintenance, setShowMaintenance] = useState(false);
   const [DeleteBox, setDeleteBox] = useState(false);
+  const [CreateIncome, setCreateIncome]= useState(false);
+  const [EditIncome, setEditIncome]= useState(false);
 
 
-  const OpenBox = () => {
+const Create =()=>{
+  setCreateIncome(true);
+}
+  const Off =()=>{
+    setCreateIncome(false);
+  };
+
+const EditForm =()=>{
+  setEditIncome(true);
+}                                            
+
+const OffEditForm=()=>{
+  setEditIncome(false);
+};
+//Delete Box 
+const handleDelete = () => {
     setDeleteBox(true);
   };
   const CloseBox = () => {
@@ -64,9 +83,14 @@ const Otherincome = () => {
         <div className="p-6  bg-white rounded-lg">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-semibold">Other Income</h1>
-            <button className="bg-gradient-to-r from-orange-600 to-yellow-500 text-white px-4 py-2 rounded-md hover:bg-orange-600">
-              Create Other Income
+            <button className="bg-gradient-to-r from-orange-600 to-yellow-500 text-white px-4 py-2 rounded-md hover:bg-orange-600" onClick={Create}>
+              Create Other Income 
             </button>
+            {CreateIncome && (
+                    <CreateOincome
+                    setCreateIncome={Off}
+                    />
+                  )}
           </div>
           <div className="grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-4">
             {incomeData.map((item, index) => (
@@ -85,16 +109,32 @@ const Otherincome = () => {
                         <ul className="py-1 text-gray-700">
                           <li
                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={() => alert(`Editing ${item.title}`)}
+                            onClick={EditForm}
                           >
                             Edit
                           </li>
+                          {EditIncome && (
+                    <EditOIncome
+                    setEditIncome={OffEditForm}
+                    />
+                  )}
+                          <Link
+                            className="px-4 py-2 hover:bg-gray-100     cursor-pointer"
+                            to="/financial_management/ViewParticipation"
+                          >
+                            View
+                          </Link>
+
                           <li
                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={() => alert(`Deleting ${item.title}`)}
+                            onClick={handleDelete}
                           >
                             Delete
-                          </li>
+                          </li> {DeleteBox && (
+                    <DeleteModal
+                    setDeleteBox={CloseBox}
+                    />
+                  )}
                         </ul>
                       </div>
                     )}
