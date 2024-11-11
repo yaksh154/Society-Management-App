@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from '../../../../layout/Sidebar';
 import Header from '../../../../layout/Header';
-import {  FaEye, FaFileImage, FaFilePdf, FaPen, FaTrashAlt } from 'react-icons/fa';
+import { FaEye, FaFileImage, FaFilePdf, FaPen, FaTrashAlt } from 'react-icons/fa';
 import { FaSquarePlus } from 'react-icons/fa6';
 import AddExpenseForm from '../../../../Modals/AddExpenseForm';
 import EditExpensesForm from '../../../../Modals/EditExpensesForm';
@@ -90,7 +90,7 @@ const expenses = [
     amount: '1000',
     format: 'JPG',
   }
- 
+
   // Add more entries as needed
 ];
 
@@ -107,7 +107,7 @@ const Expanse = () => {
 
 
   const [AddExpense, setAddExpense] = useState(false);
- 
+
   const Open = () => {
     setAddExpense(true);
   };
@@ -135,11 +135,9 @@ const Expanse = () => {
               <h1 className="text-lg md:text-2xl font-semibold">Add Expenses Details</h1>
               <button className="bg-orange-500 text-white px-2 md:px-4 py-1 md:py-2 rounded-lg hover:bg-orange-600 text-sm md:text-base flex items-center" onClick={Open}>
                 <FaSquarePlus className="mr-2" /> Add New Expenses Details
-              </button> {AddExpense && (
-                    <AddExpenseForm
-                    setAddExpense={Close}
-                    />
-                  )}
+              </button>
+              {AddExpense && (<AddExpenseForm setAddExpense={Close}/>
+              )}
             </div>
             <div className="p-4 bg-white rounded-lg shadow-lg  ">
               <table className="min-w-full bg-white rounded-lg ">
@@ -177,6 +175,7 @@ const Expanse = () => {
 
                         <button className="text-green-500 hover:text-green-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm" aria-label="Edit"  onClick={OpenForm}>
                           <FaPen />
+
                         </button>{EditData && (
                     <EditExpensesForm
                     setEditData={CloseForm}
@@ -184,8 +183,15 @@ const Expanse = () => {
                   )}
                         <button className="text-blue-500 hover:text-blue-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm" aria-label="View">
                           <FaEye /> 
+
                         </button>
-                        
+                        <button className="text-blue-500 hover:text-blue-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm" aria-label="View" onClick={Open}>
+                          <FaEye />  {AddExpense && (
+                            <AddExpenseForm
+                              setAddExpense={Close}
+                            />
+                          )}
+                        </button>
 
                         <button className="text-red-500 bg-slate-200 px-1 md:px-2 py-1 rounded-sm hover:text-red-600" aria-label="Delete">
                           <FaTrashAlt />

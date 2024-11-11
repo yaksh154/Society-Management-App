@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import { UserCreateSociety } from '../services/Api/api';
 
-const CreateSociety = ({ setShowModal, societies, setSocieties }) => {
+const CreateSociety = ({ CloseCreatenewSociety }) => {
     const [newSociety, setNewSociety] = useState({
-        name: '',
-        address: '',
-        country: '',
-        state: '',
-        city: '',
-        zip: ''
+        societyname: '',
+        societyaddress: '',
+        Country: '',
+        State: '',
+        City: '',
+        Zipcode: ''
     });
 
     const handleNewSocietyChange = (e) => {
@@ -15,25 +16,14 @@ const CreateSociety = ({ setShowModal, societies, setSocieties }) => {
     };
 
     const handleAddSociety = () => {
-        if (newSociety.name.trim() !== "") {
-            setSocieties([...societies, newSociety.name]);
-            setNewSociety({ name: '', address: '', country: '', state: '', city: '', zip: '' });
-            setShowModal(false);
-        }
+        UserCreateSociety(newSociety,CloseCreatenewSociety)
     };
-    
+
     return (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
             <div className="bg-white rounded-lg shadow-lg w-11/12 lg:w-1/4 md:w-1/2">
                 <div className="flex justify-between items-center p-4 border-b">
                     <h1 className="text-lg font-semibold">Create New Society</h1>
-                    <button
-                        type="button"
-                        className="text-gray-600 hover:text-gray-800 text-2xl"
-                        onClick={() => setShowModal(false)}
-                    >
-                        &times;
-                    </button>
                 </div>
                 <div className="p-4">
                     {/* Society Name */}
@@ -42,8 +32,8 @@ const CreateSociety = ({ setShowModal, societies, setSocieties }) => {
                         <input
                             type="text"
                             className="w-full p-1 text-sm border border-gray-300 rounded"
-                            name="name"
-                            value={newSociety.name}
+                            name="societyname"
+                            value={newSociety.societyname}
                             onChange={handleNewSocietyChange}
                             placeholder="Enter Name"
                         />
@@ -54,8 +44,8 @@ const CreateSociety = ({ setShowModal, societies, setSocieties }) => {
                         <input
                             type="text"
                             className="w-full p-1 text-sm border border-gray-300 rounded"
-                            name="address"
-                            value={newSociety.address}
+                            name="societyaddress"
+                            value={newSociety.societyaddress}
                             onChange={handleNewSocietyChange}
                             placeholder="Enter Address"
                         />
@@ -67,8 +57,8 @@ const CreateSociety = ({ setShowModal, societies, setSocieties }) => {
                             <input
                                 type="text"
                                 className="w-full p-1 text-sm border border-gray-300 rounded"
-                                name="country"
-                                value={newSociety.country}
+                                name="Country"
+                                value={newSociety.Country}
                                 onChange={handleNewSocietyChange}
                                 placeholder="Enter Country"
                             />
@@ -78,8 +68,8 @@ const CreateSociety = ({ setShowModal, societies, setSocieties }) => {
                             <input
                                 type="text"
                                 className="w-full p-1 text-sm border border-gray-300 rounded"
-                                name="state"
-                                value={newSociety.state}
+                                name="State"
+                                value={newSociety.State}
                                 onChange={handleNewSocietyChange}
                                 placeholder="Enter State"
                             />
@@ -92,8 +82,8 @@ const CreateSociety = ({ setShowModal, societies, setSocieties }) => {
                             <input
                                 type="text"
                                 className="w-full p-1 text-sm border border-gray-300 rounded"
-                                name="city"
-                                value={newSociety.city}
+                                name="City"
+                                value={newSociety.City}
                                 onChange={handleNewSocietyChange}
                                 placeholder="Enter City"
                             />
@@ -103,8 +93,8 @@ const CreateSociety = ({ setShowModal, societies, setSocieties }) => {
                             <input
                                 type="text"
                                 className="w-full p-1 text-sm border border-gray-300 rounded"
-                                name="zip"
-                                value={newSociety.zip}
+                                name="Zipcode"
+                                value={newSociety.Zipcode}
                                 onChange={handleNewSocietyChange}
                                 placeholder="Enter Zip Code"
                             />
@@ -115,7 +105,7 @@ const CreateSociety = ({ setShowModal, societies, setSocieties }) => {
                         <button
                             type="button"
                             className="bg-gray-100 w-1/2 font-semibold text-gray-700 mr-2"
-                            onClick={() => setShowModal(false)}
+                            onClick={CloseCreatenewSociety}
                         >
                             Cancel
                         </button>
