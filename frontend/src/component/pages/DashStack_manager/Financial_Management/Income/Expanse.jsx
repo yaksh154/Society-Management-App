@@ -4,6 +4,7 @@ import Header from '../../../../layout/Header';
 import { FaEye, FaFileImage, FaFilePdf, FaPen, FaTrashAlt } from 'react-icons/fa';
 import { FaSquarePlus } from 'react-icons/fa6';
 import AddExpenseForm from '../../../../Modals/AddExpenseForm';
+import EditExpensesForm from '../../../../Modals/EditExpensesForm';
 
 const expenses = [
   {
@@ -114,6 +115,15 @@ const Expanse = () => {
   const Close = () => {
     setAddExpense(false);
   };
+  const [EditData,setEditData]=useState(false);
+
+  const OpenForm = () => {
+    setEditData(true);
+  };
+
+  const CloseForm = () => {
+    setEditData(false);
+  };
   return (
     <div className="flex">
       <Sidebar closeNav={closeNav} data={sidebarWidth} />
@@ -162,16 +172,19 @@ const Expanse = () => {
                         )}
                       </td>
                       <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-1 md:space-x-2">
-                        <button className="text-green-500 hover:text-green-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm" aria-label="Edit">
+
+                        <button className="text-green-500 hover:text-green-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm" aria-label="Edit"  onClick={OpenForm}>
                           <FaPen />
                         </button>
                         <button className="text-blue-500 hover:text-blue-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm" aria-label="View" onClick={Open}>
                           <FaEye />  {AddExpense && (
-                            <AddExpenseForm
-                              setAddExpense={Close}
-                            />
-                          )}
+                    <AddExpenseForm
+                    setAddExpense={Close}
+                    />
+                  )}
                         </button>
+                        
+
                         <button className="text-red-500 bg-slate-200 px-1 md:px-2 py-1 rounded-sm hover:text-red-600" aria-label="Delete">
                           <FaTrashAlt />
                         </button>

@@ -9,6 +9,9 @@ import { IoMdWallet } from 'react-icons/io';
 const participants = [
   { unit: 'A 1001', date: '10/07/2024', status: 'Owner', phone: '92524 12365', amount: '₹ 1000', payment: 'Cash' },
   { unit: 'B 1002', date: '11/07/2024', status: 'Tenant', phone: '92458 12865', amount: '₹ 1000', payment: 'Online' },
+  { unit: 'C 1003', date: '12/07/2024', status: 'Owner', phone: '92524 12365', amount: '₹ 1000', payment: 'Cash' },
+  { unit: 'D 1004', date: '14/07/2024', status: 'Tenant', phone: '92458 12865', amount: '₹ 1000', payment: 'Online' },
+  { unit: 'E 1005', date: '17/07/2024', status: 'Tenant', phone: '92458 12865', amount: '₹ 1000', payment: 'Online' },
   // Additional data...
 ];
 

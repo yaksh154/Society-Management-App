@@ -11,7 +11,6 @@ import Resident_Owner_Form from './component/pages/DashStack_manager/Resident_Ow
 import Financial_Management from './component/pages/DashStack_manager/Financial_Management/Financial_Management.jsx'
 import Otherincome from './component/pages/DashStack_manager/Financial_Management/Income/Otherincome.jsx'
 import ParticipantTable from './component/pages/DashStack_manager/Financial_Management/Income/ParticipantTable.jsx'
-import ViewMaintenance from './component/Modals/Viewmaintenance .jsx'
 import Expanse from './component/pages/DashStack_manager/Financial_Management/Income/Expanse.jsx'
 import Note from './component/pages/DashStack_manager/Financial_Management/Income/Note.jsx'
 import Facility_Management from './component/pages/DashStack_manager/Facility_Management/Facility_Management.jsx'
@@ -21,7 +20,11 @@ import Visitor_Logs from './component/pages/DashStack_manager/Security_Managemen
 import Security_Protocols from './component/pages/DashStack_manager/Security_Management/Security_Visitor/Security_Protocols.jsx'
 import Security_Guard from './component/pages/DashStack_manager/Security_Guard/Security_Guard.jsx'
 import Announcement from './component/pages/DashStack_manager/Announcement/Announcement.jsx'
+import ViewMaintenance from './component/Modals/Viewmaintenance .jsx'
 import ViewExpenseDetails from './component/Modals/ViewExpense.jsx'
+import AddMaintenanceDetail from './component/Modals/AddMaintenanceDetail.jsx'
+import CreateOincome from './component/Modals/CreateOincome.jsx'
+import EditExpensesForm from './component/Modals/EditExpensesForm.jsx'
 
 
 function App() {
@@ -47,14 +50,14 @@ function App() {
         {/* financial_management */}
         <Route path='/financial_management/income' element={<Financial_Management />} />
 
-        {/* ...Income */}
+        {/* ...Income & OtherIncome....*/}
         <Route path='/financial_management/otherincome' element={<Otherincome />} />
         <Route path='/financial_management/ViewParticipation' element={<ParticipantTable />} />
-        <Route path='/financial_management/Viewmaintenance' element={<ViewMaintenance />} />
 
         {/* Expenses */}
         <Route path='/financial_management/Expanse' element={<Expanse />} />
         <Route path='/financial_management/Expanse/ViewExpenseDetails' element={<ViewExpenseDetails />} />
+        <Route path='/financial_management/Expanse/EditExpensesForm' element={<EditExpensesForm />} />
 
         {/* Note */}
         <Route path='/financial_management/Note' element={<Note />} />
