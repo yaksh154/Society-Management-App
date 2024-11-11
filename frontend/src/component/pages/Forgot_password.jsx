@@ -17,21 +17,6 @@ const Forgot_password = () => {
         console.log('Submitted data:', data);
 
         UserForgot_password(data,setLoginError)
-
-        // axios.post('https://task-4-ten-khaki.vercel.app/user/login', {
-        //         Email: data.Email,
-        //     })
-        //     .then((res) => {
-        //         if (res.data) {
-        //             console.log('user Login');
-        //         } else {
-        //             setLoginError('Incorrect email/phone');
-        //         }
-        //     })
-        //     .catch((error) => {
-        //         console.error('Login error:', error);
-        //         setLoginError('Login failed. Please try again later.');
-        //     });
     };
 
     return (
