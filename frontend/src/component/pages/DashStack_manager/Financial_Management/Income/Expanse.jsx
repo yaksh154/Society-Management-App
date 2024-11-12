@@ -175,15 +175,7 @@ const Expanse = () => {
 
                         <button className="text-green-500 hover:text-green-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm" aria-label="Edit"  onClick={OpenForm}>
                           <FaPen />
-
-                        </button>{EditData && (
-                    <EditExpensesForm
-                    setEditData={CloseForm}
-                    />
-                  )}
-                        <button className="text-blue-500 hover:text-blue-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm" aria-label="View">
-                          <FaEye /> 
-
+<<<<<<<<< Temporary merge branch 1
                         </button>
                         <button className="text-blue-500 hover:text-blue-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm" aria-label="View" onClick={Open}>
                           <FaEye />  {AddExpense && (
@@ -191,6 +183,15 @@ const Expanse = () => {
                               setAddExpense={Close}
                             />
                           )}
+=========
+                        </button>{EditData && (
+                    <EditExpensesForm
+                    setEditData={CloseForm}
+                    />
+                  )}
+                        <button className="text-blue-500 hover:text-blue-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm" aria-label="View">
+                          <FaEye /> 
+>>>>>>>>> Temporary merge branch 2
                         </button>
 
                         <button className="text-red-500 bg-slate-200 px-1 md:px-2 py-1 rounded-sm hover:text-red-600" aria-label="Delete">
