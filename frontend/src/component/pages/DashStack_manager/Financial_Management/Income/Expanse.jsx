@@ -1,89 +1,94 @@
 import React, { useState } from 'react';
 import Sidebar from '../../../../layout/Sidebar';
 import Header from '../../../../layout/Header';
-import { FaEye, FaFileImage, FaFilePdf, FaPen, FaTrashAlt } from 'react-icons/fa';
+import { FaEye, FaFileImage, FaFilePdf, FaPen, FaRemoveFormat, FaTrashAlt } from 'react-icons/fa';
 import { FaSquarePlus } from 'react-icons/fa6';
 import AddExpenseForm from '../../../../Modals/AddExpenseForm';
 import EditExpensesForm from '../../../../Modals/EditExpensesForm';
+import ViewExpenseDetails from '../../../../Modals/ViewExpense';
+import ViewExpense from '../../../../Modals/ViewExpense';
+import DeleteModal from '../../../../Modals/DeleteExpence';
+import DeleteExpence from '../../../../Modals/DeleteExpence';
 
 const expenses = [
   {
+    id:'1',
     title: 'Rent or Mortgage',
     description: 'A visual representation of your spending categories...',
     date: '10/02/2024',
     amount: '1000',
     format: 'JPG',
   },
-  {
+  {  id:'2',
     title: 'Housing Costs',
     description: 'Track the fluctuations in your spending over time...',
     date: '11/02/2024',
     amount: '1000',
     format: 'PDF',
   },
-  {
+  { id:'3',
     title: 'Rent or Mortgage',
     description: 'A visual representation of your spending categories...',
     date: '10/02/2024',
     amount: '1000',
     format: 'JPG',
   },
-  {
+  { id:'4',
     title: 'Housing Costs',
     description: 'Track the fluctuations in your spending over time...',
     date: '11/02/2024',
     amount: '1000',
     format: 'PDF',
   },
-  {
+  { id:'5',
     title: 'Water Costs',
     description: 'Track the changes in your spending over time...',
     date: '14/02/2024',
     amount: '1000',
     format: 'JPG',
   },
-  {
+  { id:'6',
     title: 'Water Costs',
     description: 'Track the changes in your spending over time...',
     date: '14/02/2024',
     amount: '1000',
     format: 'JPG',
-  }, {
+  }, {id:'7',
     title: 'Rent or Mortgage',
     description: 'A visual representation of your spending categories...',
     date: '10/02/2024',
     amount: '1000',
     format: 'JPG',
   },
-  {
+  {id:'8',
     title: 'Housing Costs',
     description: 'Track the fluctuations in your spending over time...',
     date: '11/02/2024',
     amount: '1000',
     format: 'PDF',
   },
-  {
+  {id:'9',
     title: 'Rent or Mortgage',
     description: 'A visual representation of your spending categories...',
     date: '10/02/2024',
     amount: '1000',
     format: 'JPG',
   },
-  {
+  {id:'10',
     title: 'Housing Costs',
     description: 'Track the fluctuations in your spending over time...',
     date: '11/02/2024',
     amount: '1000',
     format: 'PDF',
   },
-  {
+  {id:'10',
     title: 'Water Costs',
     description: 'Track the changes in your spending over time...',
     date: '14/02/2024',
     amount: '1000',
     format: 'JPG',
   },
-  {
+  {id:'11',
     title: 'Water Costs',
     description: 'Track the changes in your spending over time...',
     date: '14/02/2024',
@@ -105,7 +110,7 @@ const Expanse = () => {
     setSidebarWidth(0);
   };
 
-
+//Add
   const [AddExpense, setAddExpense] = useState(false);
 
   const Open = () => {
@@ -115,15 +120,41 @@ const Expanse = () => {
   const Close = () => {
     setAddExpense(false);
   };
+
+  //Edit ...
   const [EditData,setEditData]=useState(false);
 
-  const OpenForm = () => {
+  const EditOpen = () => {
     setEditData(true);
   };
 
   const CloseForm = () => {
     setEditData(false);
   };
+
+  //View...
+  const [View,setView]=useState(false);
+
+  const ViewOpen = () => {
+    setView(true);
+  };
+
+  const CloseView = () => {
+    setView(false);
+  };
+
+  //Delete
+  const [Remove,setRemove]=useState(false);
+
+  const RemoveOpen = () => {
+    setRemove(true);
+  };
+
+  const RemoveView = () => {
+    setRemove(false);
+  };
+
+
   return (
     <div className="flex">
       <Sidebar closeNav={closeNav} data={sidebarWidth} />
@@ -173,35 +204,26 @@ const Expanse = () => {
                       </td>
                       <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-1 md:space-x-2">
 
-                        <button className="text-green-500 hover:text-green-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm" aria-label="Edit"  onClick={OpenForm}>
+                        <button className="text-green-500 hover:text-green-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm"  onClick={EditOpen} aria-label="Edit">
                           <FaPen />
-<<<<<<<<< Temporary merge branch 1
-                        </button>
-                        <button className="text-blue-500 hover:text-blue-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm" aria-label="View" onClick={Open}>
-                          <FaEye />  {AddExpense && (
-                            <AddExpenseForm
-                              setAddExpense={Close}
-                            />
-                          )}
-=========
-                        </button>{EditData && (
-                    <EditExpensesForm
-                    setEditData={CloseForm}
-                    />
-                  )}
-                        <button className="text-blue-500 hover:text-blue-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm" aria-label="View">
-                          <FaEye /> 
->>>>>>>>> Temporary merge branch 2
-                        </button>
+                        </button>{EditData && (<EditExpensesForm setEditData={CloseForm}/>
+              )}
+                       
+                        <button className="text-blue-500 hover:text-blue-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm" aria-label="View" onClick={ViewOpen}>
+                          <FaEye />
+                        </button>{View && (<ViewExpense setView={CloseView}/>
+              )}
+                       
 
-                        <button className="text-red-500 bg-slate-200 px-1 md:px-2 py-1 rounded-sm hover:text-red-600" aria-label="Delete">
+                        <button className="text-red-500 bg-slate-200 px-1 md:px-2 py-1 rounded-sm hover:text-red-600" aria-label="Delete" onClick={RemoveOpen}>
                           <FaTrashAlt />
-                        </button>
+                        </button>{Remove && (<DeleteExpence setRemove={RemoveView}/>
+              )}
                       </td>
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </table> 
             </div>
           </div>
         </div>

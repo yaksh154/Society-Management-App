@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { BiImageAdd } from 'react-icons/bi';
 
-const AddExpenseForm = ({ Close }) => {
+const AddExpenseForm = ({ setAddExpense }) => {
   const {
     register,
     handleSubmit,
@@ -31,7 +31,7 @@ const AddExpenseForm = ({ Close }) => {
   };
 
   const handleCancel = () => {
-    Close(false); // Close the modal
+    setAddExpense(false); // Close the modal
   };
 
   return (
