@@ -193,6 +193,16 @@ export const DeleteComplaint = async (_id, getComplaint) => {
     })
 }
 
+// Security Guard page
+
+// Get Security Guard Details
+
+export const GetGuard_Details = (setGuard_Details) =>{
+    axios.get('http://localhost:3030/Guard_Details').then((res)=>{
+        setGuard_Details(res.data)
+    })
+}
+
 // Announcement page
 
 // Get Announcement
