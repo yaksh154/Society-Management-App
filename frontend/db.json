@@ -77,5 +77,97 @@
       "Announcement_Time": "10:15",
       "description": "The celebration of Holi involves the installation of clay idols of Ganesha in."
     }
-  ]
+  ],
+  "Guard_Details": [
+    {
+      "_id": 1,
+      "Security_Guard_Name": "Brooklyn Simmons",
+      "Phone_Number": "94564 96321",
+      "Select_Shift": "Day",
+      "Shift_Date": "10/02/2024",
+      "Shift_Time": "2:45 PM",
+      "Gender": "Male"
+    },
+    {
+      "_id": 2,
+      "Security_Guard_Name": "Brooklyn Simmons",
+      "Phone_Number": "94564 96321",
+      "Select_Shift": "Day",
+      "Shift_Date": "10/02/2024",
+      "Shift_Time": "2:45 PM",
+      "Gender": "Female"
+    },
+    {
+      "_id": 3,
+      "Security_Guard_Name": "Brooklyn Simmons",
+      "Phone_Number": "94564 96321",
+      "Select_Shift": "Night",
+      "Shift_Date": "10/02/2024",
+      "Shift_Time": "2:45 PM",
+      "Gender": "Male"
+    },
+    {
+      "_id": 4,
+      "Security_Guard_Name": "Brooklyn Simmons",
+      "Phone_Number": "94564 96321",
+      "Select_Shift": "Day",
+      "Shift_Date": "10/02/2024",
+      "Shift_Time": "2:45 PM",
+      "Gender": "Female"
+    },
+    {
+      "_id": 5,
+      "Security_Guard_Name": "Brooklyn Simmons",
+      "Phone_Number": "94564 96321",
+      "Select_Shift": "Night",
+      "Shift_Date": "10/02/2024",
+      "Shift_Time": "2:45 PM",
+      "Gender": "Male"
+    },
+    {
+      "_id": 6,
+      "Security_Guard_Name": "Brooklyn Simmons",
+      "Phone_Number": "94564 96321",
+      "Select_Shift": "Day",
+      "Shift_Date": "10/02/2024",
+      "Shift_Time": "2:45 PM",
+      "Gender": "Female"
+    },
+    {
+      "_id": 7,
+      "Security_Guard_Name": "Brooklyn Simmons",
+      "Phone_Number": "94564 96321",
+      "Select_Shift": "Day",
+      "Shift_Date": "10/02/2024",
+      "Shift_Time": "2:45 PM",
+      "Gender": "Male"
+    },
+    {
+      "_id": 8,
+      "Security_Guard_Name": "Brooklyn Simmons",
+      "Phone_Number": "94564 96321",
+      "Select_Shift": "Day",
+      "Shift_Date": "10/02/2024",
+      "Shift_Time": "2:45 PM",
+      "Gender": "Male"
+    },
+    {
+      "_id": 9,
+      "Security_Guard_Name": "Brooklyn Simmons",
+      "Phone_Number": "94564 96321",
+      "Select_Shift": "Day",
+      "Shift_Date": "10/02/2024",
+      "Shift_Time": "2:45 PM",
+      "Gender": "Male"
+    },
+    {
+      "_id": 10,
+      "Security_Guard_Name": "Brooklyn Simmons",
+      "Phone_Number": "94564 96321",
+      "Select_Shift": "Day",
+      "Shift_Date": "10/02/2024",
+      "Shift_Time": "2:45 PM",
+      "Gender": "Male"
+    }
+  ]  
 }
