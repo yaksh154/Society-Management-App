@@ -42,8 +42,9 @@ const EditExpensesForm = ({ setEditData }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
-      <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
+      <div className="fixed inset-0  backdrop-filter backdrop-opacity-sm  flex items-center justify-center bg-opacity-40">
+
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg z-60">
         <div className="form-group mb-4">
           <label htmlFor="title" className="block text-gray-700 mb-1">Title<span className='text-red-800'> *</span></label>
           <input
@@ -138,7 +139,11 @@ const EditExpensesForm = ({ setEditData }) => {
           </button>
         </div>
       </form>
-    </div>
+
+          </div>
+     
+      
+   
   );
 };
 

@@ -1,19 +1,19 @@
 import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
-const DeleteModal = ({ setDeleteBox  }) => {
+const DeleteExpence = ({ setRemove }) => {
 
   const handleCancel = () => {
-    setDeleteBox(false); 
+    setRemove(false); 
   };
 
   // Handle delete action
   const handleDelete = () => {
-    setDeleteBox(false); 
+    setRemove(false); 
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+    <div className="fixed inset-0 bg-transparent bg-opacity-50 flex items-center justify-center">
       <div className="bg-white rounded-lg p-6 shadow-lg w-full max-w-sm">
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold">Delete</h2>
@@ -41,4 +41,4 @@ const DeleteModal = ({ setDeleteBox  }) => {
   );
 };
 
-export default DeleteModal;
+export default DeleteExpence;

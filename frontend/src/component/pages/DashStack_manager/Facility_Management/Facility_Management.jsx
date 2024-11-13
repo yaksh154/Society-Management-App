@@ -109,7 +109,7 @@ const Facility_Management = () => {
                               </li>
                               {editcreate_facility&&(
                                 <Editcreate_facility_Modal
-                                  seteditClosecreate_facility={editClosecreate_facility}
+                                seteditcreate_facility={editClosecreate_facility}
                                 />
                               )}
                               <li

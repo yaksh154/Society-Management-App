@@ -56,8 +56,6 @@ function App() {
 
         {/* Expenses */}
         <Route path='/financial_management/Expanse' element={<Expanse />} />
-        <Route path='/financial_management/Expanse/ViewExpenseDetails' element={<ViewExpenseDetails />} />
-        <Route path='/financial_management/Expanse/EditExpensesForm' element={<EditExpensesForm />} />
 
         {/* Note */}
         <Route path='/financial_management/Note' element={<Note />} />

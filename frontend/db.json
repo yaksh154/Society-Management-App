@@ -45,7 +45,8 @@
       "Unit_Number": "111",
       "Priority": "Medium",
       "Complain_Status": "Pending",
-      "Date": "09/11/2024"
+      "Date": "09/11/2024",
+      "id": "d716"
     }
   ],
   "incomeData": [
@@ -54,28 +55,39 @@
       "_id": "1",
       "AnnouncementDate": "2024-01-07",
       "Announcement_Time": "10:15",
-      "description": "The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesha in."
+      "description": "The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesha in.",
+      "id": "0dc2"
     },
     {
       "Announcement_Title": "Navratri",
       "_id": "2",
       "AnnouncementDate": "2024-01-07",
       "Announcement_Time": "10:15",
-      "description": "The celebration of Navratri involves the installation of clay idols of Durga in Resident."
+      "description": "The celebration of Navratri involves the installation of clay idols of Durga in Resident.",
+      "id": "0612"
     },
     {
       "Announcement_Title": "Diwali",
       "_id": "3",
       "AnnouncementDate": "2024-01-07",
       "Announcement_Time": "10:15",
-      "description": "The celebration of Diwali involves the installation of clay idols of Ganesha in."
+      "description": "The celebration of Diwali involves the installation of clay idols of Ganesha in.",
+      "id": "1b18"
     },
     {
       "Announcement_Title": "Holi",
       "_id": "4",
       "announcementDate": "2024-01-07",
       "Announcement_Time": "10:15",
-      "description": "The celebration of Holi involves the installation of clay idols of Ganesha in."
+      "description": "The celebration of Holi involves the installation of clay idols of Ganesha in.",
+      "id": "4895"
+    },
+    {
+      "id": "f561",
+      "Announcement_Title": "ass",
+      "description": "asasa",
+      "AnnouncementDate": "2024-11-13",
+      "Announcement_Time": "01:43"
     }
   ],
   "Guard_Details": [
@@ -86,7 +98,8 @@
       "Select_Shift": "Day",
       "Shift_Date": "10/02/2024",
       "Shift_Time": "2:45 PM",
-      "Gender": "Male"
+      "Gender": "Male",
+      "id": "8d3a"
     },
     {
       "_id": 2,
@@ -95,7 +108,8 @@
       "Select_Shift": "Day",
       "Shift_Date": "10/02/2024",
       "Shift_Time": "2:45 PM",
-      "Gender": "Female"
+      "Gender": "Female",
+      "id": "5a24"
     },
     {
       "_id": 3,
@@ -104,7 +118,8 @@
       "Select_Shift": "Night",
       "Shift_Date": "10/02/2024",
       "Shift_Time": "2:45 PM",
-      "Gender": "Male"
+      "Gender": "Male",
+      "id": "69df"
     },
     {
       "_id": 4,
@@ -113,7 +128,8 @@
       "Select_Shift": "Day",
       "Shift_Date": "10/02/2024",
       "Shift_Time": "2:45 PM",
-      "Gender": "Female"
+      "Gender": "Female",
+      "id": "36cb"
     },
     {
       "_id": 5,
@@ -122,7 +138,8 @@
       "Select_Shift": "Night",
       "Shift_Date": "10/02/2024",
       "Shift_Time": "2:45 PM",
-      "Gender": "Male"
+      "Gender": "Male",
+      "id": "98bf"
     },
     {
       "_id": 6,
@@ -131,7 +148,8 @@
       "Select_Shift": "Day",
       "Shift_Date": "10/02/2024",
       "Shift_Time": "2:45 PM",
-      "Gender": "Female"
+      "Gender": "Female",
+      "id": "e382"
     },
     {
       "_id": 7,
@@ -140,7 +158,8 @@
       "Select_Shift": "Day",
       "Shift_Date": "10/02/2024",
       "Shift_Time": "2:45 PM",
-      "Gender": "Male"
+      "Gender": "Male",
+      "id": "ddc2"
     },
     {
       "_id": 8,
@@ -149,7 +168,8 @@
       "Select_Shift": "Day",
       "Shift_Date": "10/02/2024",
       "Shift_Time": "2:45 PM",
-      "Gender": "Male"
+      "Gender": "Male",
+      "id": "8ae3"
     },
     {
       "_id": 9,
@@ -158,7 +178,8 @@
       "Select_Shift": "Day",
       "Shift_Date": "10/02/2024",
       "Shift_Time": "2:45 PM",
-      "Gender": "Male"
+      "Gender": "Male",
+      "id": "89a1"
     },
     {
       "_id": 10,
@@ -167,198 +188,8 @@
       "Select_Shift": "Day",
       "Shift_Date": "10/02/2024",
       "Shift_Time": "2:45 PM",
-      "Gender": "Male"
+      "Gender": "Male",
+      "id": "df34"
     }
-  ],
-  "Sumdata": [
-    {
-      "_id": 1,
-      "name": "Evelyn Harper",
-      "unit": "1001",
-      "wing": "A",
-      "status": "Occupied",
-      "resident": "Tenant",
-      "phone": "97587 85828",
-      "members": 1,
-      "vehicles": 2
-    },
-    {
-      "_id": 2,
-      "name": "-",
-      "unit": "1002",
-      "wing": "B",
-      "status": "Vacate",
-      "resident": "--",
-      "phone": "--",
-      "members": "-",
-      "vehicles": "-"
-    },
-    {
-      "_id": 3,
-      "name": "Evelyn Harper",
-      "unit": "1003",
-      "wing": "C",
-      "status": "Occupied",
-      "resident": "Owner",
-      "phone": "97587 85828",
-      "members": 1,
-      "vehicles": 4
-    },
-    {
-      "_id": 4,
-      "name": "Robert Fox",
-      "unit": "2002",
-      "wing": "F",
-      "status": "Occupied",
-      "resident": "Tenant",
-      "phone": "97587 85828",
-      "members": 3,
-      "vehicles": 2
-    },
-    {
-      "_id": 5,
-      "name": "Mia Wong",
-      "unit": "1004",
-      "wing": "A",
-      "status": "Occupied",
-      "resident": "Owner",
-      "phone": "98547 21485",
-      "members": 2,
-      "vehicles": 1
-    },
-    {
-      "_id": 6,
-      "name": "Liam Smith",
-      "unit": "1005",
-      "wing": "B",
-      "status": "Occupied",
-      "resident": "Tenant",
-      "phone": "95874 15248",
-      "members": 4,
-      "vehicles": 2
-    },
-    {
-      "_id": 7,
-      "name": "Noah Brown",
-      "unit": "1006",
-      "wing": "C",
-      "status": "Occupied",
-      "resident": "Owner",
-      "phone": "98745 21546",
-      "members": 5,
-      "vehicles": 3
-    },
-    {
-      "_id": 8,
-      "name": "-",
-      "unit": "1007",
-      "wing": "D",
-      "status": "Vacate",
-      "resident": "--",
-      "phone": "--",
-      "members": "-",
-      "vehicles": "-"
-    },
-    {
-      "_id": 9,
-      "name": "Olivia Johnson",
-      "unit": "1008",
-      "wing": "E",
-      "status": "Occupied",
-      "resident": "Tenant",
-      "phone": "94568 12457",
-      "members": 3,
-      "vehicles": 1
-    },
-    {
-      "_id": 10,
-      "name": "Isabella Davis",
-      "unit": "2009",
-      "wing": "F",
-      "status": "Occupied",
-      "resident": "Owner",
-      "phone": "97548 22547",
-      "members": 4,
-      "vehicles": 2
-    }
-  ],
-  "Security_Protocols": [
-    {
-      "_id": "1",
-      "Title": "Physical Security",
-      "Description": "Implementing surveillance cameras in public spaces.",
-      "Date": "11/01/2024",
-      "Time": "3:45 PM"
-    },
-    {
-      "_id": "2",
-      "Title": "Cybersecurity",
-      "Description": "Securing critical infrastructure, government systems.",
-      "Date": "12/01/2024",
-      "Time": "6:40 AM"
-    },
-    {
-      "_id": "3",
-      "Title": "Legal Measures",
-      "Description": "Enforcing and updating laws and regulations.",
-      "Date": "13/01/2024",
-      "Time": "1:00 PM"
-    },
-    {
-      "_id": "4",
-      "Title": "Social Engagement",
-      "Description": "Fostering collaboration between law enforcement.",
-      "Date": "14/01/2024",
-      "Time": "6:20 PM"
-    },
-    {
-      "_id": "5",
-      "Title": "Education and Training",
-      "Description": "Implementing surveillance cameras in public spaces.",
-      "Date": "15/01/2024",
-      "Time": "3:45 PM"
-    },
-    {
-      "_id": "6",
-      "Title": "Physical Security",
-      "Description": "Developing comprehensive plans for responding.",
-      "Date": "16/01/2024",
-      "Time": "1:00 PM"
-    },
-    {
-      "_id": "7",
-      "Title": "Ethical Considerations",
-      "Description": "Implementing surveillance cameras in public spaces.",
-      "Date": "17/01/2024",
-      "Time": "6:40 AM"
-    },
-    {
-      "_id": "8",
-      "Title": "Physical Security",
-      "Description": "Securing critical infrastructure, government systems.",
-      "Date": "18/01/2024",
-      "Time": "3:45 PM"
-    },
-    {
-      "_id": "9",
-      "Title": "Privacy Protection",
-      "Description": "Enforcing and updating laws and regulations.",
-      "Date": "19/01/2024",
-      "Time": "4:45 AM"
-    },
-    {
-      "_id": "10",
-      "Title": "Legal Measures",
-      "Description": "Implementing surveillance cameras in public spaces.",
-      "Date": "20/01/2024",
-      "Time": "3:45 PM"
-    },
-    {
-      "_id": "11",
-      "Title": "Social Engagement",
-      "Description": "Implementing surveillance cameras in public spaces.",
-      "Date": "22/01/2024",
-      "Time": "6:20 PM"
-    }
-  ]
+  ]  
 }
