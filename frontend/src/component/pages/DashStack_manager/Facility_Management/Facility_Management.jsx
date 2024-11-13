@@ -4,6 +4,7 @@ import Header from '../../../layout/Header'
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import Create_facility_model from '../../../Modals/Create_facility_model';
 import Editcreate_facility_Modal from '../../../Modals/Editcreate_facility_Modal';
+import DeleteModal from '../../../Modals/DeleteModal';
 
 const Facility_Management = () => {
   let [data, setdata] = useState(280);
@@ -47,6 +48,8 @@ const Facility_Management = () => {
     },
   ];
 
+
+  //Create
   const [create_facility, setcreate_facility] = useState(false);
 
   const sowcreate_facility = () => {
@@ -56,6 +59,8 @@ const Facility_Management = () => {
     setcreate_facility(false);
   };
 
+  //Edit
+
   const [editcreate_facility, seteditcreate_facility] = useState(false);
 
   const editsowcreate_facility = () => {
@@ -64,6 +69,17 @@ const Facility_Management = () => {
   const editClosecreate_facility = () => {
     seteditcreate_facility(false);
   };
+
+  //Deltel
+  const [DeleteBox, setDeleteBox] = useState(false);
+
+
+  const DeleteOpen = () =>  {
+      setDeleteBox(true);
+    };
+    const DeleteClose = () => {
+      setDeleteBox(false);
+    };
 
   return (
     <div>
@@ -113,11 +129,16 @@ const Facility_Management = () => {
                                 />
                               )}
                               <li
-                                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                                onClick={() => alert(`Deleting ${item.title}`)}
+                                className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={DeleteOpen}
+                               
                               >
                                 Delete
                               </li>
+                              {DeleteBox &&(
+                                < DeleteModal 
+                                setDeleteBox={DeleteClose}
+                                />
+                              )}
                             </ul>
                           </div>
                         )}

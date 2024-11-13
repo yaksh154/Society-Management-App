@@ -147,5 +147,4 @@ const Security_Protocols = () => {
         </div>
     )
 }
-
 export default Security_Protocols
