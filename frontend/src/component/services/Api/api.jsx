@@ -203,6 +203,15 @@ export const Get_Security_Protocols = (setSecurity) =>{
     })
 }
 
+// Post Security Protocols
+
+export const Post_Security_Protocols = (data,Fdata,CloseAddProtocols) =>{
+    axios.post("http://localhost:3030/Security_Protocols",data).then((res)=>{
+        CloseAddProtocols()
+        Fdata()
+    })
+}
+
 // Delete Security Protocols
 
 export const Delete_Security_Protocols = (_id,Fdata) =>{

@@ -7,6 +7,8 @@ import axios from 'axios';
 import ViewProtocolsModal from '../../../../Modals/ViewProtocolsModal';
 import { Get_Security_Protocols } from '../../../../services/Api/api';
 import DeleteProtocolsModal from '../../../../Modals/DeleteProtocolsModal';
+import AddProtocolsModal from '../../../../Modals/AddProtocolsModal';
+import EditProtocolsModal from '../../../../Modals/EditProtocolsModal';
 
 const Security_Protocols = () => {
     let [data, setdata] = useState(280);
@@ -31,10 +33,20 @@ const Security_Protocols = () => {
         Get_Security_Protocols(setSecurity)
     }
 
+    const [AddProtocols,setAddProtocols]=useState(false)
     const [ViewProtocols,setViewProtocols]=useState(false)
     const [ViewId,setViewId]=useState(null)
+    const [EditProtocols,setEditProtocols]=useState(false)
+    const [EditId,setEditId]=useState(null)
     const [DeleteProtocols,setDeleteProtocols]=useState(false)
     const [DeleteId,setDeleteId]=useState(null)
+
+    const OpneAddProtocols = ()=>{
+        setAddProtocols(true)
+    }
+    const CloseAddProtocols = ()=>{
+        setAddProtocols(false)
+    }
 
     const OpneViewProtocols = (_id)=>{
         setViewProtocols(true)
@@ -42,6 +54,14 @@ const Security_Protocols = () => {
     }
     const CloseViewProtocols = ()=>{
         setViewProtocols(false)
+    }
+
+    const OpneEditProtocols = (_id)=>{
+        setEditProtocols(true)
+        setEditId(_id)
+    }
+    const CloseEditProtocols = ()=>{
+        setEditProtocols(false)
     }
     const OpneDeleteProtocols = (_id)=>{
         setDeleteProtocols(true)
@@ -63,9 +83,10 @@ const Security_Protocols = () => {
                         <div className="bg-white shadow-md rounded-lg p-6">
                             <div className="flex justify-between items-center mb-6">
                                 <h1 className='font-semibold md:text-2xl text-md'>Security Protocols</h1>
-                                <button className="px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200">
+                                <button onClick={OpneAddProtocols} className="px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200">
                                     Create Protocol
                                 </button>
+                                {AddProtocols && (<AddProtocolsModal CloseAddProtocols={CloseAddProtocols} Fdata={Fdata}/>)}
                             </div>
                             <div className="overflow-auto h-svh">
                                 <table className="min-w-full bg-[#eef1fd] rounded-lg">
@@ -98,7 +119,7 @@ const Security_Protocols = () => {
                                                     <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 text-center truncate">{e.Date}</td>
                                                     <td className="px-1 md:px-2 py-1 md:py-3 text-xs md:text-sm text-gray-700 text-center truncate"><samp className='rounded-full px-2 py-1 bg-[#f6f8fb]'>{e.Time}</samp></td>
                                                     <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex justify-center space-x-2 md:space-x-2">
-                                                        <button className="text-green-500 p-1">
+                                                        <button onClick={()=>OpneEditProtocols(e._id)} className="text-green-500 p-1">
                                                             <FaEdit />
                                                         </button>
 
@@ -115,6 +136,7 @@ const Security_Protocols = () => {
                                         })}
                                     </tbody>
                                 </table>
+                                {EditProtocols && (<EditProtocolsModal _id={EditId} CloseEditProtocols={CloseEditProtocols}/>)}
                                 {ViewProtocols && (<ViewProtocolsModal _id={ViewId} CloseViewProtocols={CloseViewProtocols}/>)}
                                 {DeleteProtocols && (<DeleteProtocolsModal Fdata={Fdata} _id={DeleteId} CloseDeleteProtocols={CloseDeleteProtocols}/>)}
                             </div>
