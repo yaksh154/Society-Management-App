@@ -20,11 +20,7 @@ import Visitor_Logs from './component/pages/DashStack_manager/Security_Managemen
 import Security_Protocols from './component/pages/DashStack_manager/Security_Management/Security_Visitor/Security_Protocols.jsx'
 import Security_Guard from './component/pages/DashStack_manager/Security_Guard/Security_Guard.jsx'
 import Announcement from './component/pages/DashStack_manager/Announcement/Announcement.jsx'
-import ViewMaintenance from './component/Modals/Viewmaintenance .jsx'
-import ViewExpenseDetails from './component/Modals/ViewExpense.jsx'
-import AddMaintenanceDetail from './component/Modals/AddMaintenanceDetail.jsx'
-import CreateOincome from './component/Modals/CreateOincome.jsx'
-import EditExpensesForm from './component/Modals/EditExpensesForm.jsx'
+
 
 
 function App() {
@@ -38,6 +34,7 @@ function App() {
         <Route path='/forgot_password' element={<Forgot_password />} />
         <Route path='/forgot_password_opt' element={<Forgot_password_opt />} />
         <Route path='/reset_password' element={<Reset_password />} />
+
 
         {/* Dashboard */}
         <Route path='/' element={<Home />} />
