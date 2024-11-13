@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Editcreate_facility_Modal = ({ seteditClosecreate_facility }) => {
+const Editcreate_facility_Modal = ({ seteditcreate_facility }) => {
     const [data,setdata] = useState([]);
 
     const chang = (e) => {
@@ -9,7 +9,7 @@ const Editcreate_facility_Modal = ({ seteditClosecreate_facility }) => {
 
     const handleSave = () => {
         console.log(data);
-        seteditClosecreate_facility(false)
+        seteditcreate_facility(false)
     };
     return (
         <div>
@@ -38,7 +38,7 @@ const Editcreate_facility_Modal = ({ seteditClosecreate_facility }) => {
                         </select>
                     </div>
                     <div className="flex justify-between mt-4">
-                        <button type="button" onClick={() => seteditClosecreate_facility(false)} className="bg-white border w-full py-2 mr-2 text-gray-700 font-semibold rounded">
+                        <button type="button" onClick={() => seteditcreate_facility(false)} className="bg-white border w-full py-2 mr-2 text-gray-700 font-semibold rounded">
                             Cancel
                         </button>
                         <button type="button" onClick={handleSave} className="py-2 w-full bg-[#f6f8fb] hover:bg-gradient-to-r from-orange-500 to-yellow-500 hover:text-white rounded-lg font-semibold hover:from-orange-600 hover:to-yellow-600 transition duration-200">
