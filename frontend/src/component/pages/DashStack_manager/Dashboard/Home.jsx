@@ -385,13 +385,13 @@ const Home = () => {
                               <td className="px-4 py-2">{e.Complaint_Name}</td>
                               <td className="px-4 py-2">{e.Date}</td>
                               <td className="px-4 py-2 text-center">
-                                <span className={`px-3 py-1 rounded-full text-md font-medium ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
+                                <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
                                   e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
                                     e.Priority === "Low" ? "bg-[#39973d] text-white" : null
                                   }`}>{e.Priority}</span>
                               </td>
                               <td className="px-4 py-2 text-center">
-                                <span className={`px-3 py-1 rounded-full text-md font-medium ${e.Complain_Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
+                                <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Complain_Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
                                   e.Complain_Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
                                     e.Complain_Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
                                   }`}>{e.Complain_Status}</span>

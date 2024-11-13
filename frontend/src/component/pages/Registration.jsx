@@ -95,11 +95,13 @@ const Registration = () => {
                                 <input
                                     type="tel"
                                     {...register("Number", {
-                                        required: true,
+                                        required: "This field is required",
                                         pattern: {
-                                            value: /^(?:[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|^\d{10,15}$)$/i,
+                                            value: /^\d{10,15}$/, // Adjusted regex to only accept digits (10 to 15)
+                                            message: "Please enter a valid phone number with 10 to 15 digits"
                                         }
                                     })}
+                                    
                                     className="w-full p-1 text-sm border border-gray-300 rounded"
                                     placeholder="Enter Phone Number"
                                 />

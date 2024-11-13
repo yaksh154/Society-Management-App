@@ -131,14 +131,14 @@ const Create_Complaint = () => {
                             <samp className=' px-2 py-1 text-[#5678e9] bg-[#f6f8fb] mr-2 rounded-full'>{e.Wing}</samp>
                             {e.Unit_Number}
                           </td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
-                            <span className={`px-3 py-1 rounded-full text-md font-medium ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
+                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 ">
+                            <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
                               e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
                                 e.Priority === "Low" ? "bg-[#39973d] text-white" : null
                               }`}>{e.Priority}</span>
                           </td>
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
-                            <span className={`px-3 py-1 rounded-full text-md font-medium ${e.Complain_Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
+                            <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Complain_Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
                               e.Complain_Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
                                 e.Complain_Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
                               }`}>{e.Complain_Status}</span>
