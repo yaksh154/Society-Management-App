@@ -9,6 +9,7 @@ import { IoSunnySharp } from "react-icons/io5";
 import AddSecurityModal from '../../../Modals/AddSecurityModal';
 import DeleteSecurityModal from '../../../Modals/DeleteSecurityModal';
 import ViewSecurityModal from '../../../Modals/ViewSecurityModal';
+import EditSecurityModal from '../../../Modals/EditSecurityModal';
 
 const Security_Guard = () => {
   let [data, setdata] = useState(280);
@@ -36,6 +37,8 @@ const Security_Guard = () => {
   const [AddSecurity,setAddSecurity]=useState(false)
   const [ViewSecurity,setViewSecurity]=useState(false)
   const [ViewId,setViewId]=useState(null)
+  const [EditSecurity,setEditSecurity]=useState(false)
+  const [EditId,setEditId]=useState(null)
   const [DeleteSecurity,setDeleteSecurity]=useState(false)
   const [DeleteId,setDeleteId]=useState(null)
 
@@ -46,11 +49,19 @@ const Security_Guard = () => {
     setAddSecurity(false)
   }
 
+  const OpneEditSecurity = (_id) =>{
+    setEditSecurity(true)
+    setEditId(_id)
+  }
+  const CloseEditSecurity = () =>{
+    setEditSecurity(false)
+  }
+
   const OpneViewSecurity = (_id) =>{
     setViewSecurity(true)
     setViewId(_id)
   }
-  const CloseViewSecurity = (_id) =>{
+  const CloseViewSecurity = () =>{
     setViewSecurity(false)
   }
 
@@ -140,7 +151,7 @@ const Security_Guard = () => {
 
 
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-2 md:space-x-2">
-                            <button className="text-green-500 p-1">
+                            <button onClick={()=>OpneEditSecurity(e._id)} className="text-green-500 p-1">
                               <FaEdit />
                             </button>
 
@@ -157,6 +168,7 @@ const Security_Guard = () => {
                     })}
                   </tbody>
                 </table>
+                {EditSecurity && (<EditSecurityModal _id={EditId} CloseEdit={CloseEditSecurity}/>)}
                 {ViewSecurity && (<ViewSecurityModal _id={ViewId} CloseView={CloseViewSecurity}/>)}
                 {DeleteSecurity && (<DeleteSecurityModal _id={DeleteId} CloseDelete={CloseDeleteSecurity} />)}
               </div>

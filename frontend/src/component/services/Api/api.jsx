@@ -4,7 +4,7 @@ const url = 'https://society-management-app-server.onrender.com'
 
 // login data
 
-export const UserDataLogin = (data, setLoginError) => {
+export const UserDataLogin = (data, setLoginError,navigate) => {
     console.log(data, setLoginError);
 
     axios.post(`${url}/manager/login`, {
@@ -17,8 +17,8 @@ export const UserDataLogin = (data, setLoginError) => {
                 localStorage.setItem('message', JSON.stringify(res.data.message));
                 localStorage.setItem('token', JSON.stringify(res.data.token));
                 console.log('Cookies:', document.cookie);
-
-                // user login
+                navigate('/');
+                
             } else {
                 setLoginError('Incorrect email/phone or password');
             }
@@ -190,6 +190,24 @@ export const DeleteComplaint = async (_id, getComplaint) => {
     axios.delete(`http://localhost:3030/user/${_id}`).then((res) => {
         console.log(res);
         getComplaint()
+    })
+}
+
+// Security Management page
+
+// Get Security Protocols
+
+export const Get_Security_Protocols = (setSecurity) =>{
+    axios.get("http://localhost:3030/Security_Protocols").then((res)=>{
+        setSecurity(res.data)
+    })
+}
+
+// Delete Security Protocols
+
+export const Delete_Security_Protocols = (_id,Fdata) =>{
+    axios.delete(`http://localhost:3030/Security_Protocols/${_id}`).then((res)=>{
+        Fdata()
     })
 }
 

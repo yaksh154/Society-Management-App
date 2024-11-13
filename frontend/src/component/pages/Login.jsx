@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Loginimg from '../../../public/images/m_Loginimg.png';
 import { UserDataLogin } from '../services/Api/api';
@@ -12,13 +12,14 @@ const Login = () => {
         handleSubmit,
         formState: { errors }
     } = useForm();
+    const navigate = useNavigate();
 
 
     // User Login 
     const onSubmit = async (data) => {
         console.log(data);
         
-        UserDataLogin(data,setLoginError)
+        UserDataLogin(data,setLoginError,navigate)
     };
 
     return (

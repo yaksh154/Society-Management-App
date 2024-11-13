@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../../../layout/Sidebar";
 import Header from "../../../layout/Header";
 import OpenResidenceStatusModal from "../../../Modals/OpenResidenceStatusModal";
 import { FaEdit } from "react-icons/fa";
 import { GrFormView } from "react-icons/gr";
+import axios from "axios";
+import View_Owner_Details_Modal from "../../../Modals/View_Owner_Details_Modal";
 
 const Resident_Management = () => {
   let [data, setdata] = useState(280);
@@ -18,116 +20,17 @@ const Resident_Management = () => {
     setget(0);
   }
 
-  const Sumdata = [
-    {
-      name: "Evelyn Harper",
-      unit: "A 1001",
-      status: "Occupied",
-      resident: "Tenant",
-      phone: "97587 85828",
-      members: 1,
-      vehicles: 2,
-    },
-    {
-      name: "Evelyn Harper",
-      unit: "A 1001",
-      status: "Occupied",
-      resident: "Tenant",
-      phone: "97587 85828",
-      members: 1,
-      vehicles: 2,
-    },
-    {
-      name: "Evelyn Harper",
-      unit: "A 1001",
-      status: "Occupied",
-      resident: "Tenant",
-      phone: "97587 85828",
-      members: 1,
-      vehicles: 2,
-    },
-    {
-      name: "-",
-      unit: "B 1002",
-      status: "Vacate",
-      resident: "--",
-      phone: "--",
-      members: "-",
-      vehicles: "-",
-    },
-    {
-      name: "-",
-      unit: "B 1002",
-      status: "Vacate",
-      resident: "--",
-      phone: "--",
-      members: "-",
-      vehicles: "-",
-    },
-    {
-      name: "-",
-      unit: "B 1002",
-      status: "Vacate",
-      resident: "--",
-      phone: "--",
-      members: "-",
-      vehicles: "-",
-    },
-    {
-      name: "Evelyn Harper",
-      unit: "C 1003",
-      status: "Occupied",
-      resident: "Owner",
-      phone: "97587 85828",
-      members: 1,
-      vehicles: 4,
-    },
-    {
-      name: "Evelyn Harper",
-      unit: "C 1003",
-      status: "Occupied",
-      resident: "Owner",
-      phone: "97587 85828",
-      members: 1,
-      vehicles: 4,
-    },
-    {
-      name: "Evelyn Harper",
-      unit: "C 1003",
-      status: "Occupied",
-      resident: "Owner",
-      phone: "97587 85828",
-      members: 1,
-      vehicles: 4,
-    },
-    {
-      name: "Robert Fox",
-      unit: "F 2002",
-      status: "Occupied",
-      resident: "Tenant",
-      phone: "97587 85828",
-      members: 3,
-      vehicles: 2,
-    },
-    {
-      name: "Robert Fox",
-      unit: "F 2002",
-      status: "Occupied",
-      resident: "Tenant",
-      phone: "97587 85828",
-      members: 3,
-      vehicles: 2,
-    },
-    {
-      name: "Robert Fox",
-      unit: "F 2002",
-      status: "Occupied",
-      resident: "Tenant",
-      phone: "97587 85828",
-      members: 3,
-      vehicles: 2,
-    },
-  ];
+  const [Sumdata,setSumdata]=useState([])
+
+  useEffect(()=>{
+    Fdata()
+  },[])
+
+  const Fdata = () =>{
+    axios.get("http://localhost:3030/Sumdata").then((res)=>{
+      setSumdata(res.data)
+    })
+  }
 
   const [showResidenceStatus, setShowResidenceStatus] = useState(false);
 
@@ -136,6 +39,17 @@ const Resident_Management = () => {
   };
   const CloseResidenceStatus = () => {
     setShowResidenceStatus(false);
+  };
+
+  const [View_Owner_Details,setView_Owner_Details] = useState(false)
+  const [Owner_DetailsId,setOwner_DetailsId] = useState(false)
+
+  const OpneView_Owner_Details = (_id) =>{
+    setView_Owner_Details(true);
+    setOwner_DetailsId(_id);
+  }
+  const closeModal = () => {
+    setView_Owner_Details(false);
   };
 
   return (
@@ -171,42 +85,45 @@ const Resident_Management = () => {
                   )}
                 </div>
                 <div className="overflow-auto h-svh">
-                  <table className="min-w-full bg-white border border-gray-200">
+                  <table className="min-w-full bg-[#eef1fd] rounded-lg">
                     <thead>
                       <tr>
-                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                        <th className="px-6 py-3 border-b font-medium text-black">
                           Full Name
                         </th>
-                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                        <th className="px-6 py-3 border-b font-medium text-black">
                           Unit Number
                         </th>
-                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                        <th className="px-6 py-3 border-b font-medium text-black">
                           Unit Status
                         </th>
-                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                        <th className="px-6 py-3 border-b font-medium text-black">
                           Resident Status
                         </th>
-                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                        <th className="px-6 py-3 border-b font-medium text-black">
                           Phone Number
                         </th>
-                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                        <th className="px-6 py-3 border-b font-medium text-black">
                           Member
                         </th>
-                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                        <th className="px-6 py-3 border-b font-medium text-black">
                           Vehicle
                         </th>
-                        <th className="px-6 py-3 border-b font-medium text-gray-500">
+                        <th className="px-6 py-3 border-b font-medium text-black">
                           Action
                         </th>
                       </tr>
                     </thead>
                     <tbody>
                       {Sumdata.map((e, index) => (
-                        <tr key={index} className="border-b hover:bg-gray-50 font-medium text-center md:font-semibold overflow-x-scroll">
+                        <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium text-center md:font-semibold overflow-x-scroll">
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{e.name}</td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.unit}</td>
+                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">
+                          <samp className=' px-2 py-1 text-[#5678e9] bg-[#f6f8fb] mr-2 rounded-full'>{e.wing}</samp>
+                            {e.unit}
+                          </td>
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700"><span
-                            className={`px-2 py-1 rounded-lg text-sm ${e.status === "Occupied"
+                            className={`px-2 py-1 rounded-lg text-sm flex justify-center ${e.status === "Occupied"
                               ? "bg-green-100 text-green-600"
                               : "bg-purple-100 text-purple-600"
                               }`}
@@ -214,7 +131,7 @@ const Resident_Management = () => {
                             {e.status}
                           </span></td>
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700"><span
-                            className={`px-2 py-1 rounded-lg text-sm ${e.resident === "Tenant"
+                            className={`px-2 py-1 rounded-lg text-sm flex justify-center ${e.resident === "Tenant"
                               ? "bg-pink-100 text-pink-600"
                               : e.resident === "Owner"
                                 ? "bg-blue-100 text-blue-600"
@@ -226,11 +143,11 @@ const Resident_Management = () => {
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{e.phone}</td>
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{e.members}</td>
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{e.vehicles}</td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-1 md:space-x-2">
-                            <button className="bg-[#f6f8fb] text-[#39973d] text-lg px-3 py-1 rounded-lg mr-2">
+                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-1 md:space-x-2 justify-evenly">
+                            <button onClick={()=>OpneEdit_Owner_Details(e._id)} className="bg-[#f6f8fb] text-[#39973d] px-3 py-1 rounded-lg mr-2">
                               <FaEdit />
                             </button>
-                            <button className="bg-[#f6f8fb] text-[#5678e9] text-3xl px-1 py-1 rounded-lg">
+                            <button onClick={()=>OpneView_Owner_Details(e._id)} className="bg-[#f6f8fb] text-[#5678e9] text-2xl px-1 py-1 rounded-lg">
                               <GrFormView />
                             </button>
                           </td>
@@ -238,6 +155,7 @@ const Resident_Management = () => {
                       ))}
                     </tbody>
                   </table>
+                  <View_Owner_Details_Modal _id={Owner_DetailsId} View_Owner_Details={View_Owner_Details} closeModal={closeModal}/>
                 </div>
               </div>
             </div>
