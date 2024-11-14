@@ -50,7 +50,7 @@ export const UserForgot_password = (data, setLoginError) => {
 
 // regegistration page
 
-// create regegistration
+// Create User Registration
 
 export const UserDataRegistration = (registrationData, setRegistrationError) => {
     console.log(registrationData);
@@ -225,6 +225,7 @@ export const GetGuard_Details = (setGuard_Details) =>{
 
 // Get Announcement
 
+
 export const GetAnnouncement = (setgetAnnouncement) => {
     axios.get('http://localhost:3030/incomeData').then((res) => {
         setgetAnnouncement(res.data)
@@ -247,5 +248,26 @@ export const DeleteAnnouncement = (_id, Fdata, ClaseDeleteAnnouncement) => {
     axios.delete(`http://localhost:3030/incomeData/${_id}`).then((res) => {
         Fdata()
         ClaseDeleteAnnouncement(false)
+    })
+}
+
+
+// Financial -Maintenance page
+
+// Get Maintenance
+
+export const GetMaintenance = (setudata) => {
+    axios.get('http://localhost:3030/Maintenance').then((res) => {
+        // console.log(res.data);
+        setudata(res.data)
+    })
+}
+
+// Post Maintenance
+
+export const PostMaintenance = (data, Fdata, ClaseAddMaintenance) => {
+    axios.post(`http://localhost:3030/Maintenance`, data).then((res) => {
+        ClaseAddMaintenance(false)
+        Fdata()
     })
 }

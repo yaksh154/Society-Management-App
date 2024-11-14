@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from '../../../layout/Sidebar';
 import Header from '../../../layout/Header';
 import { MdOutlinePendingActions } from 'react-icons/md';
@@ -6,10 +6,10 @@ import { FaCheckCircle, FaEye, FaUser } from 'react-icons/fa';
 import { HiOutlineCash } from 'react-icons/hi';
 import { IoMdWallet } from 'react-icons/io';
 import { BsPersonBoundingBox } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
 import Otherincome from './Income/Otherincome';
 import SetMaintenancePwd from '../../../Modals/SetMaintenancePwd';
 import Viewmaintenance from '../../../Modals/Viewmaintenance ';
+import { GetMaintenance } from '../../../services/Api/api';
 
 const Financial_Management = () => {
   const [data, setData] = useState(280);
@@ -30,25 +30,16 @@ const Financial_Management = () => {
 
   const [activeTab, setActiveTab] = useState("Maintenance");
 
-  const udata = [
-    { img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4CRKPij6o2waFROp-89BCE8lEf96jLsndRQ&s", name: 'Cody Fisher', unit: 'A 101', date: '10/02/2024', status: 'Tenant', phone: '92524 34522', amount: 1000, penalty: null, paymentStatus: 'Pending', paymentMethod: 'Online' },
-    { img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSnyw54qdhqa0ISfF-_xM8H06WxfkM8hXhxudqC1j5Ood5T7yEIgM3c6n5qCcOQD9lc_c&usqp=CAU", name: 'Esther Howard', unit: 'B 202', date: '11/02/2024', status: 'Owner', phone: '92524 12365', amount: 1000, penalty: 250, paymentStatus: 'Done', paymentMethod: 'Cash' },
-    { img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ48JWGkSOWJegd_jiLj6C5cz-Ityd6OMLR-w&s", name: 'Jenny Wilson', unit: 'C 303', date: '12/02/2024', status: 'Tenant', phone: '92589 34522', amount: 1000, penalty: null, paymentStatus: 'Pending', paymentMethod: 'Cash' },
-    { img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4CRKPij6o2waFROp-89BCE8lEf96jLsndRQ&s", name: 'Cody Fisher', unit: 'D 101', date: '10/02/2024', status: 'Owner', phone: '92524 34522', amount: 1000, penalty: null, paymentStatus: 'Pending', paymentMethod: 'Online' },
-    { img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSnyw54qdhqa0ISfF-_xM8H06WxfkM8hXhxudqC1j5Ood5T7yEIgM3c6n5qCcOQD9lc_c&usqp=CAU", name: 'Esther Howard', unit: 'E 202', date: '11/02/2024', status: 'Owner', phone: '92524 12365', amount: 1000, penalty: 250, paymentStatus: 'Done', paymentMethod: 'Cash' },
-    { img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ48JWGkSOWJegd_jiLj6C5cz-Ityd6OMLR-w&s", name: 'Jenny Wilson', unit: 'F 303', date: '12/02/2024', status: 'Tenant', phone: '92589 34522', amount: 1000, penalty: null, paymentStatus: 'Pending', paymentMethod: 'Cash' },
-    // Add more entries as needed...
-  ];
-
+  
   const [ShowMaintenance, setShowMaintenance] = useState(false);
-
+  
   const OpenMaintenance = () => {
     setShowMaintenance(true);
   };
   const CloseMaintenance = () => {
     setShowMaintenance(false);
   };
-
+  
   const [ShowViewUser, setShowViewUser] = useState(false);
 
   const OpenView = () => {
@@ -57,8 +48,18 @@ const Financial_Management = () => {
   const CloseView = () => {
     setShowViewUser(false);
   };
+  
+  const [udata,setudata]=useState([])
 
-
+  // console.log(udata);
+  
+  useEffect(()=>{
+  Fdata()
+  },[])
+  const Fdata = () =>{
+    GetMaintenance(setudata)
+  }
+  
   return (
     <div >
       <Sidebar closeNav={closeNav} data={data} />

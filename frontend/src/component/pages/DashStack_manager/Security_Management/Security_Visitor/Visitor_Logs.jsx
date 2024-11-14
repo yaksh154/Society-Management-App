@@ -29,6 +29,8 @@ const Visitor_Logs = () => {
         { name: 'Kathryn Murphy', phone: '97577 66663', date: '19/01/2024', unit: 'C 3002', time: '6:00 AM' },
         { name: 'Eleanor Pena', phone: '97259 69963', date: '20/01/2024', unit: 'C 3003', time: '7:00 PM' },
       ];
+      console.log(visitorLogs);
+      
     return (
         <div>
             <Sidebar closeNav={closeNav} data={data} />
