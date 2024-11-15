@@ -6,8 +6,8 @@
 
 
 ::-webkit-scrollbar {
-    width:5px;
-    background-color: #ebf0f6;
+    width:3px;
+    background-color: transparent;
     height: 8px;
 
 }
