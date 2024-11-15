@@ -73,6 +73,8 @@ function App() {
 
         {/* announcement */}
         <Route path='/announcement' element={<Announcement />} />
+
+
       </Routes>
     </BrowserRouter>
   )

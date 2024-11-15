@@ -15,8 +15,8 @@ const AddProtocolsModal = ({ CloseAddProtocols, Fdata }) => {
     useEffect(() => {
         const updateDateTime = () => {
             const now = new Date();
-            const currentDate = now.toLocaleDateString(); 
-            const currentTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); 
+            const currentDate = now.toISOString().split('T')[0]; 
+            const currentTime = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
             setValue('Date', currentDate); 
             setValue('Time', currentTime); 
         };

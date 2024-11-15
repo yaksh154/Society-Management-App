@@ -6,54 +6,34 @@ const EditProtocolsModal = ({ _id, CloseEditProtocols }) => {
     const [Security, setSecurity] = useState([]);
     const [Edata, setEdata] = useState({ Title: '', Description: '', Date: '', Time: '' });
 
-    // Initialize react-hook-form
-    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm();
 
     useEffect(() => {
         Fdata();
     }, []);
+
+    useEffect(() => {
+        Editdata();
+    }, [Security]);
 
     const Fdata = () => {
         Get_Security_Protocols(setSecurity);
     };
 
     const Editdata = () => {
-        const edit = Security[_id];
-        setEdata({
-            Title: edit.Title,
-            Description: edit.Description,
-            Date: edit.Date,
-            Time: edit.Time
-        });
+        if (Security[_id]) {
+            setEdata(Security[_id]);
+            // Set default values for react-hook-form fields
+            setValue("Title", Security[_id].Title);
+            setValue("Description", Security[_id].Description);
+            setValue("Date", Security[_id].Date);
+            setValue("Time", Security[_id].Time);
+        }
     };
 
-    useEffect(() => {
-        if (Security.length > 0 && _id !== undefined) {
-            Editdata();
-        }
-    }, [Security, _id]);
-
-    useEffect(() => {
-        // Convert Date format to DD/MM/YYYY (if it's not empty)
-        const formattedDate = Edata.Date
-            ? Edata.Date.split('-').reverse().join('/') // Converts yyyy-MM-dd to DD/MM/yyyy
-            : '';
-
-        // Validate and convert Time to 12-hour format with AM/PM
-        const time12HrFormat = Edata.Time && !isNaN(Date.parse(`1970-01-01T${Edata.Time}`))
-            ? new Date(`1970-01-01T${Edata.Time}`).toLocaleTimeString('en-US') // Converts HH:mm to h:mm AM/PM
-            : '12:00 AM'; // Default to '12:00 AM' if time is invalid
-
-        // Sync data with react-hook-form fields when Edata changes
-        setValue('Title', Edata.Title);
-        setValue('Description', Edata.Description);
-        setValue('Date', formattedDate); // Set formatted date
-        setValue('Time', time12HrFormat); // Set formatted time
-    }, [Edata, setValue]);
-
     const onSubmit = (data) => {
-        // Handle the logic to submit the form data here
-        console.log("Data submitted: ", data);
+        console.log("Submitted data:", data);
+        // Handle form submission here
     };
 
     return (
@@ -68,8 +48,8 @@ const EditProtocolsModal = ({ _id, CloseEditProtocols }) => {
                         <input
                             type="text"
                             placeholder="Enter Title"
-                            {...register('Title', { required: 'Title is required' })}
-                            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 ${errors.Title ? 'border-red-500' : ''}`}
+                            {...register('Title', { required: 'Title is required', minLength: { message: 'Title is required' } })}
+                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                         />
                         {errors.Title && <p className="text-red-500 text-sm">{errors.Title.message}</p>}
                     </div>
@@ -79,8 +59,8 @@ const EditProtocolsModal = ({ _id, CloseEditProtocols }) => {
                         </label>
                         <textarea
                             placeholder="Enter Description"
-                            {...register('Description', { required: 'Description is required' })}
-                            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 ${errors.Description ? 'border-red-500' : ''}`}
+                            {...register('Description', { required: 'Description is required', minLength: { message: 'Description is required' } })}
+                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                         />
                         {errors.Description && <p className="text-red-500 text-sm">{errors.Description.message}</p>}
                     </div>
@@ -89,10 +69,9 @@ const EditProtocolsModal = ({ _id, CloseEditProtocols }) => {
                             Date<span className="text-red-500">*</span>
                         </label>
                         <input
-                            type="text"
+                            type="date"
                             {...register('Date', { required: 'Date is required' })}
-                            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 ${errors.Date ? 'border-red-500' : ''}`}
-                             // Keeping it disabled as the date will be pre-populated in DD/MM/YYYY format
+                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                         />
                         {errors.Date && <p className="text-red-500 text-sm">{errors.Date.message}</p>}
                     </div>
@@ -101,10 +80,9 @@ const EditProtocolsModal = ({ _id, CloseEditProtocols }) => {
                             Time<span className="text-red-500">*</span>
                         </label>
                         <input
-                            type="text"
+                            type="time"
                             {...register('Time', { required: 'Time is required' })}
-                            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 ${errors.Time ? 'border-red-500' : ''}`}
-                             // Keeping it disabled as the time will be pre-populated in h:mm AM/PM format
+                            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
                         />
                         {errors.Time && <p className="text-red-500 text-sm">{errors.Time.message}</p>}
                     </div>

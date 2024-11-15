@@ -88,6 +88,13 @@
       "description": "asasa",
       "AnnouncementDate": "2024-11-13",
       "Announcement_Time": "01:43"
+    },
+    {
+      "id": "07a6",
+      "Announcement_Title": "meet",
+      "description": "12121",
+      "AnnouncementDate": "2024-11-15",
+      "Announcement_Time": "05:30"
     }
   ],
   "Guard_Details": [
@@ -100,6 +107,26 @@
       "Shift_Time": "2:45 PM",
       "Gender": "Male",
       "id": "8d3a"
+    },
+    {
+      "_id": 2,
+      "Security_Guard_Name": "Brooklyn Simmons",
+      "Phone_Number": "94564 96321",
+      "Select_Shift": "Day",
+      "Shift_Date": "10/02/2024",
+      "Shift_Time": "2:45 PM",
+      "Gender": "Female",
+      "id": "5a24"
+    },
+    {
+      "_id": 3,
+      "Security_Guard_Name": "Brooklyn Simmons",
+      "Phone_Number": "94564 96321",
+      "Select_Shift": "Night",
+      "Shift_Date": "10/02/2024",
+      "Shift_Time": "2:45 PM",
+      "Gender": "Male",
+      "id": "69df"
     },
     {
       "_id": 2,
@@ -202,7 +229,12 @@
       "resident": "Tenant",
       "phone": "97587 85828",
       "members": 1,
-      "vehicles": 2
+      "vehicles": 2,
+      "id": "f269",
+      "email": "evelyn.harper1001@example.com",
+      "gender": "Female",
+      "img": "https://loremflickr.com/1680/1050/dog",
+      "pdf": "https://www.w3.org/WAI/WCAG21/quickref/2018/06/14/wcag2.0.pdf"
     },
     {
       "_id": 2,
@@ -213,7 +245,12 @@
       "resident": "--",
       "phone": "--",
       "members": "-",
-      "vehicles": "-"
+      "vehicles": "-",
+      "id": "f0c9",
+      "email": "--",
+      "gender": "--",
+      "img": "--",
+      "pdf": "--"
     },
     {
       "_id": 3,
@@ -224,7 +261,12 @@
       "resident": "Owner",
       "phone": "97587 85828",
       "members": 1,
-      "vehicles": 4
+      "vehicles": 4,
+      "id": "d444",
+      "email": "evelyn.harper1003@example.com",
+      "gender": "Female",
+      "img": "https://example.com/images/evelyn_harper.jpg",
+      "pdf": "https://example.com/docs/evelyn_harper_1003.pdf"
     },
     {
       "_id": 4,
@@ -235,7 +277,12 @@
       "resident": "Tenant",
       "phone": "97587 85828",
       "members": 3,
-      "vehicles": 2
+      "vehicles": 2,
+      "id": "72f2",
+      "email": "robert.fox2002@example.com",
+      "gender": "Male",
+      "img": "https://example.com/images/robert_fox.jpg",
+      "pdf": "https://example.com/docs/robert_fox_2002.pdf"
     },
     {
       "_id": 5,
@@ -246,7 +293,12 @@
       "resident": "Owner",
       "phone": "98547 21485",
       "members": 2,
-      "vehicles": 1
+      "vehicles": 1,
+      "id": "5152",
+      "email": "mia.wong1004@example.com",
+      "gender": "Female",
+      "img": "https://example.com/images/mia_wong.jpg",
+      "pdf": "https://example.com/docs/mia_wong_1004.pdf"
     },
     {
       "_id": 6,
@@ -257,7 +309,12 @@
       "resident": "Tenant",
       "phone": "95874 15248",
       "members": 4,
-      "vehicles": 2
+      "vehicles": 2,
+      "id": "316d",
+      "email": "liam.smith1005@example.com",
+      "gender": "Male",
+      "img": "https://example.com/images/liam_smith.jpg",
+      "pdf": "https://example.com/docs/liam_smith_1005.pdf"
     },
     {
       "_id": 7,
@@ -268,7 +325,12 @@
       "resident": "Owner",
       "phone": "98745 21546",
       "members": 5,
-      "vehicles": 3
+      "vehicles": 3,
+      "id": "e712",
+      "email": "noah.brown1006@example.com",
+      "gender": "Male",
+      "img": "https://example.com/images/noah_brown.jpg",
+      "pdf": "https://example.com/docs/noah_brown_1006.pdf"
     },
     {
       "_id": 8,
@@ -279,7 +341,12 @@
       "resident": "--",
       "phone": "--",
       "members": "-",
-      "vehicles": "-"
+      "vehicles": "-",
+      "id": "213e",
+      "email": "--",
+      "gender": "--",
+      "img": "--",
+      "pdf": "--"
     },
     {
       "_id": 9,
@@ -290,7 +357,12 @@
       "resident": "Tenant",
       "phone": "94568 12457",
       "members": 3,
-      "vehicles": 1
+      "vehicles": 1,
+      "id": "f2bd",
+      "email": "olivia.johnson1008@example.com",
+      "gender": "Female",
+      "img": "https://example.com/images/olivia_johnson.jpg",
+      "pdf": "https://example.com/docs/olivia_johnson_1008.pdf"
     },
     {
       "_id": 10,
@@ -301,7 +373,12 @@
       "resident": "Owner",
       "phone": "97548 22547",
       "members": 4,
-      "vehicles": 2
+      "vehicles": 2,
+      "id": "1fb7",
+      "email": "isabella.davis2009@example.com",
+      "gender": "Female",
+      "img": "https://example.com/images/isabella_davis.jpg",
+      "pdf": "https://example.com/docs/isabella_davis_2009.pdf"
     }
   ],
   "Security_Protocols": [
@@ -309,78 +386,89 @@
       "_id": "1",
       "Title": "Physical Security",
       "Description": "Implementing surveillance cameras in public spaces.",
-      "Date": "11/01/2024",
-      "Time": "3:45 PM"
+      "Date": "2024-11-01",
+      "Time": "03:45",
+      "id": "9bff"
     },
     {
       "_id": "2",
       "Title": "Cybersecurity",
       "Description": "Securing critical infrastructure, government systems.",
-      "Date": "12/01/2024",
-      "Time": "6:40 AM"
+      "Date": "2024-12-01",
+      "Time": "06:40",
+      "id": "5591"
     },
     {
       "_id": "3",
       "Title": "Legal Measures",
       "Description": "Enforcing and updating laws and regulations.",
-      "Date": "13/01/2024",
-      "Time": "1:00 PM"
+      "Date": "2024-12-01",
+      "Time": "01:00",
+      "id": "38a2"
     },
     {
       "_id": "4",
       "Title": "Social Engagement",
       "Description": "Fostering collaboration between law enforcement.",
-      "Date": "14/01/2024",
-      "Time": "6:20 PM"
+      "Date": "2024-12-01",
+      "Time": "06:20",
+      "id": "ce2c"
     },
     {
       "_id": "5",
       "Title": "Education and Training",
       "Description": "Implementing surveillance cameras in public spaces.",
-      "Date": "15/01/2024",
-      "Time": "3:45 PM"
+      "Date": "2024-12-01",
+      "Time": "03:45",
+      "id": "14c1"
     },
     {
       "_id": "6",
       "Title": "Physical Security",
       "Description": "Developing comprehensive plans for responding.",
-      "Date": "16/01/2024",
-      "Time": "1:00 PM"
+      "Date": "2024-12-01",
+      "Time": "01:00",
+      "id": "67a3"
     },
     {
       "_id": "7",
       "Title": "Ethical Considerations",
       "Description": "Implementing surveillance cameras in public spaces.",
-      "Date": "17/01/2024",
-      "Time": "6:40 AM"
+      "Date": "2024-12-01",
+      "Time": "06:40",
+      "id": "2556"
     },
     {
       "_id": "8",
       "Title": "Physical Security",
       "Description": "Securing critical infrastructure, government systems.",
-      "Date": "18/01/2024",
-      "Time": "3:45 PM"
+      "Date": "2024-12-01",
+      "Time": "03:45",
+      "id": "0ae6"
     },
     {
       "_id": "9",
       "Title": "Privacy Protection",
       "Description": "Enforcing and updating laws and regulations.",
-      "Date": "19/01/2024",
-      "Time": "4:45 AM"
+      "Date": "2024-12-01",
+      "Time": "04:45",
+      "id": "7c8e"
     },
     {
       "_id": "10",
       "Title": "Legal Measures",
       "Description": "Implementing surveillance cameras in public spaces.",
-      "Date": "20/01/2024",
-      "Time": "3:45 PM"
+      "Date": "2024-12-01",
+      "Time": "18:45",
+      "id": "fce4"
     },
     {
       "_id": "11",
       "Title": "Social Engagement",
       "Description": "Implementing surveillance cameras in public spaces.",
-      "Date": "22/01/2024",
-      "Time": "6:20 PM"
+      "Date": "2024-12-01",
+      "Time": "12:23",
+      "id": "2adc"
     }
   ]
 }

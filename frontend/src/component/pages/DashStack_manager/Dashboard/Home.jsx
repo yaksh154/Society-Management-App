@@ -67,7 +67,7 @@ const Home = () => {
 
   const OpneeditModal = (_id) => {
     console.log(_id);
-    
+
     seteditModal(true)
     setImportant_id(_id)
   }
@@ -78,8 +78,8 @@ const Home = () => {
 
   // edit numbers pop_up
 
-  const [ImportantNumbersDelete,setImportantNumbersDelete]=useState(false)
-  const [ImportantNumbersDeleteId,setImportantNumbersDeleteId]=useState(null)
+  const [ImportantNumbersDelete, setImportantNumbersDelete] = useState(false)
+  const [ImportantNumbersDeleteId, setImportantNumbersDeleteId] = useState(null)
 
   const OpnedeleteContact = (_id) => {
     setImportantNumbersDelete(true)
@@ -146,40 +146,40 @@ const Home = () => {
           <div className="p-6 space-y-4 bg-[#f0f5fb]">
             {/* Dashboard Cards */}
             <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-2 max-[425px]:grid-cols-2 gap-4">
-              {/* Card 1 */}
               <Home_totle_card
                 total_title="Total Balance"
                 total_price="2,22,520"
                 totle_color="text-white"
                 totle_icon_bg_back="bg-[#fff0e5]"
                 totle_icon_bg="bg-[#ff6a00]"
+                totle_Noch="bg-[#ffb480]"
                 totle_simbol={<TiThMenu />}
               />
-              {/* Card 2 */}
               <Home_totle_card
                 total_title="Total Income"
                 total_price="55,000"
                 totle_color="text-white"
                 totle_icon_bg_back="bg-[#ebf5ec]"
                 totle_icon_bg="bg-[#39973d]"
+                totle_Noch="bg-[#9ccb9e]"
                 totle_simbol={<MdOutlineAttachMoney />}
               />
-              {/* Card 3 */}
               <Home_totle_card
                 total_title="Total Expense"
                 total_price="20,550"
                 totle_color="text-white"
                 totle_icon_bg_back="bg-[#f3f5fe]"
                 totle_icon_bg="bg-[#869ff3]"
+                totle_Noch="bg-[#c3cff9]"
                 totle_simbol={<MdOutlineAttachMoney />}
               />
-              {/* Card 4 */}
               <Home_totle_card
                 total_title="Total Unit"
                 total_price="20,550"
                 totle_color="text-white"
                 totle_icon_bg_back="bg-[#fdebf9]"
                 totle_icon_bg="bg-[#eb37c3]"
+                totle_Noch="bg-[#f59be1]"
                 totle_simbol={<MdOutlineAttachMoney />}
               />
             </div>
@@ -230,7 +230,7 @@ const Home = () => {
                                 <FaTrashAlt />
                               </button>
                               <button
-                                onClick={()=>OpneeditModal(contact._id)}
+                                onClick={() => OpneeditModal(contact._id)}
                                 className="text-green-500 hover:text-green-600"
                               >
                                 <FaEdit />

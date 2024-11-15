@@ -170,7 +170,7 @@ export default function Sidenav({ closeNav, data }) {
             <li className="ml-6">
               <Link
                 to="/complaint_tracking/Request_Tracking"
-                className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/complaint_tracking/Request_Tracking") ? "border-black" : ""}`}
+                className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/complaint_tracking/Request_Tracking") ? "border-black font-semibold" : ""}`}
               >
                 Request Tracking
               </Link>
@@ -211,7 +211,7 @@ export default function Sidenav({ closeNav, data }) {
             <li className="ml-6">
               <Link
                 to="/security_management/security_protocols"
-                className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/security_management/security_protocols") ? "border-black" : ""}`}
+                className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/security_management/security_protocols") ? "border-black font-semibold" : ""}`}
               >
                 Security Protocols
               </Link>

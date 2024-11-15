@@ -23,51 +23,51 @@ const Security_Protocols = () => {
         setget(0);
     }
 
-    const [Security,setSecurity]=useState([])
-    
-    useEffect(()=>{
-        Fdata()
-    },[])
+    const [Security, setSecurity] = useState([])
 
-    const Fdata = () =>{
+    useEffect(() => {
+        Fdata()
+    }, [])
+
+    const Fdata = () => {
         Get_Security_Protocols(setSecurity)
     }
 
-    const [AddProtocols,setAddProtocols]=useState(false)
-    const [ViewProtocols,setViewProtocols]=useState(false)
-    const [ViewId,setViewId]=useState(null)
-    const [EditProtocols,setEditProtocols]=useState(false)
-    const [EditId,setEditId]=useState(null)
-    const [DeleteProtocols,setDeleteProtocols]=useState(false)
-    const [DeleteId,setDeleteId]=useState(null)
+    const [AddProtocols, setAddProtocols] = useState(false)
+    const [ViewProtocols, setViewProtocols] = useState(false)
+    const [ViewId, setViewId] = useState(null)
+    const [EditProtocols, setEditProtocols] = useState(false)
+    const [EditId, setEditId] = useState(null)
+    const [DeleteProtocols, setDeleteProtocols] = useState(false)
+    const [DeleteId, setDeleteId] = useState(null)
 
-    const OpneAddProtocols = ()=>{
+    const OpneAddProtocols = () => {
         setAddProtocols(true)
     }
-    const CloseAddProtocols = ()=>{
+    const CloseAddProtocols = () => {
         setAddProtocols(false)
     }
 
-    const OpneViewProtocols = (_id)=>{
+    const OpneViewProtocols = (_id) => {
         setViewProtocols(true)
         setViewId(_id)
     }
-    const CloseViewProtocols = ()=>{
+    const CloseViewProtocols = () => {
         setViewProtocols(false)
     }
 
-    const OpneEditProtocols = (_id)=>{
+    const OpneEditProtocols = (_id) => {
         setEditProtocols(true)
         setEditId(_id)
     }
-    const CloseEditProtocols = ()=>{
+    const CloseEditProtocols = () => {
         setEditProtocols(false)
     }
-    const OpneDeleteProtocols = (_id)=>{
+    const OpneDeleteProtocols = (_id) => {
         setDeleteProtocols(true)
         setDeleteId(_id)
     }
-    const CloseDeleteProtocols = ()=>{
+    const CloseDeleteProtocols = () => {
         setDeleteProtocols(false)
     }
 
@@ -86,7 +86,7 @@ const Security_Protocols = () => {
                                 <button onClick={OpneAddProtocols} className="px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200">
                                     Create Protocol
                                 </button>
-                                {AddProtocols && (<AddProtocolsModal CloseAddProtocols={CloseAddProtocols} Fdata={Fdata}/>)}
+                                {AddProtocols && (<AddProtocolsModal CloseAddProtocols={CloseAddProtocols} Fdata={Fdata} />)}
                             </div>
                             <div className="overflow-auto h-svh">
                                 <table className="min-w-full bg-[#eef1fd] rounded-lg">
@@ -113,21 +113,29 @@ const Security_Protocols = () => {
                                         {Security.map((e, index) => {
                                             return (
                                                 <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium md:font-semibold overflow-x-scroll">
-                                                    
+
                                                     <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Title}</td>
                                                     <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Description}</td>
-                                                    <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 text-center truncate">{e.Date}</td>
-                                                    <td className="px-1 md:px-2 py-1 md:py-3 text-xs md:text-sm text-gray-700 text-center truncate"><samp className='rounded-full px-2 py-1 bg-[#f6f8fb]'>{e.Time}</samp></td>
+                                                    <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 text-center truncate">{e.Date.split('-').reverse().join('/')}</td>
+                                                    <td className="px-1 md:px-2 py-1 md:py-3 text-xs md:text-sm text-gray-700 text-center truncate">
+                                                        <samp className='rounded-full px-2 py-1 bg-[#f6f8fb]'>
+                                                            {new Date(`1970-01-01T${e.Time}`).toLocaleTimeString('en-US', {
+                                                                hour: '2-digit',
+                                                                minute: '2-digit',
+                                                                hour12: true
+                                                            })}
+                                                        </samp>
+                                                    </td>
                                                     <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex justify-center space-x-2 md:space-x-2">
-                                                        <button onClick={()=>OpneEditProtocols(e._id)} className="text-green-500 p-1">
+                                                        <button onClick={() => OpneEditProtocols(e._id)} className="text-green-500 p-1">
                                                             <FaEdit />
                                                         </button>
 
-                                                        <button onClick={()=>OpneViewProtocols(e._id)} className="text-blue-500 text-2xl rounded">
+                                                        <button onClick={() => OpneViewProtocols(e._id)} className="text-blue-500 text-2xl rounded">
                                                             <GrFormView />
                                                         </button>
 
-                                                        <button onClick={()=>OpneDeleteProtocols(e._id)} className="text-red-500 p-1">
+                                                        <button onClick={() => OpneDeleteProtocols(e._id)} className="text-red-500 p-1">
                                                             <FaTrashAlt />
                                                         </button>
                                                     </td>
@@ -136,9 +144,9 @@ const Security_Protocols = () => {
                                         })}
                                     </tbody>
                                 </table>
-                                {EditProtocols && (<EditProtocolsModal _id={EditId} CloseEditProtocols={CloseEditProtocols}/>)}
-                                {ViewProtocols && (<ViewProtocolsModal _id={ViewId} CloseViewProtocols={CloseViewProtocols}/>)}
-                                {DeleteProtocols && (<DeleteProtocolsModal Fdata={Fdata} _id={DeleteId} CloseDeleteProtocols={CloseDeleteProtocols}/>)}
+                                {EditProtocols && (<EditProtocolsModal _id={EditId} CloseEditProtocols={CloseEditProtocols} />)}
+                                {ViewProtocols && (<ViewProtocolsModal _id={ViewId} CloseViewProtocols={CloseViewProtocols} />)}
+                                {DeleteProtocols && (<DeleteProtocolsModal Fdata={Fdata} _id={DeleteId} CloseDeleteProtocols={CloseDeleteProtocols} />)}
                             </div>
                         </div>
                     </div>
