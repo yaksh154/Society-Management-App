@@ -5,3 +5,18 @@
 }
 
 
+::-webkit-scrollbar {
+    width:5px;
+    background-color: #000;
+    height: 8px;
+
+}
+
+::-webkit-scrollbar-thumb {
+    /* background: orangered; */
+    border-radius: 30px;
+    background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
+
+}
+
+
