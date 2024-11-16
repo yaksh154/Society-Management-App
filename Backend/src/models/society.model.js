@@ -1,4 +1,4 @@
-const  mongoose  = require("mongoose");
+const mongoose = require("mongoose");
 
 const societySchema = new mongoose.Schema(
   {
@@ -26,6 +26,16 @@ const societySchema = new mongoose.Schema(
       type: Number,
       require: true
     },
+    residents: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Resident'
+      }
+    ],
+    units: {
+      type: Number,
+      default: 0
+    },
   },
   {
     timestamps: true,
@@ -36,3 +46,4 @@ const societySchema = new mongoose.Schema(
 const Society = mongoose.model("Society", societySchema);
 
 module.exports = Society;
+

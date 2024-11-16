@@ -18,7 +18,7 @@ const register = async (req, res) => {
     }
     const managerExists = await manager_service.findemail(reqbody.Email);
     if (managerExists) {
-      return res.status(400).json({ message: "email already exists" });
+      return res.status(403).json({ message: "email already exists" });
     }
     const bcrpass = await bcrypt.hash(reqbody.Password, 10);
     const body = {
@@ -151,7 +151,6 @@ const otpverify = async (req, res) => {
     console.error(error.message);
     res.status(500).json({ message: error.message })
   }
-  
 }
 
 const forgotpassword = async (req, res) => {
@@ -171,11 +170,28 @@ const forgotpassword = async (req, res) => {
   }
 }
 
+
+const getProfile = async (req, res) => {
+  try {
+    const id = req.user._id;
+    console.log("��� ~ getProfile ~ id:", id)
+    const manager = await manager_service.findById(id);
+    if (!manager) {
+      return res.status(404).json({ message: "Not found" });
+    }
+    res.status(200).json(manager);
+  } catch (error) {
+    console.error("��� ~ getProfile ~ error:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+}
+
 module.exports = {
   register,
   update,
   login,
   sed_otp,
   otpverify,
-  forgotpassword
+  forgotpassword,
+  getProfile
 };

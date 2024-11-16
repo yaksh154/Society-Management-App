@@ -7,6 +7,7 @@ const {upload} = require("../middleware/upload")
 
 router.post("/createmanager", manager_controller.register);
 router.put("/updatemanger",authUser, upload.fields([{ name: "Image" }]), manager_controller.update)
+router.get("/profile",authUser, manager_controller.getProfile)
 router.post("/login", manager_controller.login);
 router.get("/sedotp", manager_controller.sed_otp);
 router.get("/verifyotp",authUser, manager_controller.otpverify);
