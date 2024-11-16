@@ -116,13 +116,14 @@ const sed_otp = async (req, res) => {
     const { Email } = req.body;
     console.log("🚀 ~ sed_otp ~ Email:", Email)
     const manager = await manager_service.findemail(Email)
+    console.log("🚀 ~ constsed_otp= ~ manager:", manager)
     if (!manager) {
       return res.status(403).json({ message: "manager Not Found" })
     }
     const otp = Math.floor(1000 + Math.random() * 9000);
     console.log("🚀 ~ sed_otp ~ otp:", otp)
     const addotp = await manager_service.addotp(manager._id, otp)
-    const ot = await send_otp(Email, otp);
+    const ot = await send_otp(Email,manager.Firstname, manager.Lastname, otp);
     const payload = {
       _id: manager._id,
       email: manager.Email
