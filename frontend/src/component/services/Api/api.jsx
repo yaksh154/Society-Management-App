@@ -2,9 +2,10 @@ import axios from "axios";
 
 const url = 'https://society-management-app-server.onrender.com'
 
+
 // login data
 
-export const UserDataLogin = (data, setLoginError,navigate) => {
+export const UserDataLogin = (data, setLoginError,navigate,storetokenInLs) => {
     console.log(data, setLoginError);
 
     axios.post(`${url}/manager/login`, {
@@ -14,9 +15,10 @@ export const UserDataLogin = (data, setLoginError,navigate) => {
         .then((res, req) => {
             if (res.data) {
                 console.log(res.data);
-                localStorage.setItem('message', JSON.stringify(res.data.message));
-                localStorage.setItem('token', JSON.stringify(res.data.token));
+                // localStorage.setItem('message', JSON.stringify(res.data.message));
+                // localStorage.setItem('token', JSON.stringify(res.data.token));
                 console.log('Cookies:', document.cookie);
+                storetokenInLs(res.data.token)
                 navigate('/');
                 
             } else {

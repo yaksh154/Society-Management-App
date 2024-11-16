@@ -3,8 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Loginimg from '../../../public/images/m_Loginimg.png';
 import { UserDataLogin } from '../services/Api/api';
+import { useAuth } from '../services/Auth/auth';
+
 
 const Login = () => {
+    const {storetokenInLs} = useAuth();
     const [passwordShown, setPasswordShown] = useState(false);
     const [loginError, setLoginError] = useState('');
     const {
@@ -19,7 +22,7 @@ const Login = () => {
     const onSubmit = async (data) => {
         console.log(data);
         
-        UserDataLogin(data,setLoginError,navigate)
+        UserDataLogin(data,setLoginError,navigate,storetokenInLs)
     };
 
     return (
