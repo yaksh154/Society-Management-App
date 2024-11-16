@@ -88,7 +88,7 @@ const login = async (req, res) => {
     console.log("🚀 ~ login ~ Password:", Password)
     const manager = await manager_service.findemail(Email)
     if (!manager) {
-      return res.status(404).json({ message: "manager Not Found" })
+      return res.status(403).json({ message: "manager Not Found" })
     }
     const bcryptpass = await bcrypt.compare(Password, manager.Password)
     console.log("🚀 ~ login ~ bcryptpass:", bcryptpass)
@@ -117,7 +117,7 @@ const sed_otp = async (req, res) => {
     console.log("🚀 ~ sed_otp ~ Email:", Email)
     const manager = await manager_service.findemail(Email)
     if (!manager) {
-      return res.status(404).json({ message: "manager Not Found" })
+      return res.status(403).json({ message: "manager Not Found" })
     }
     const otp = Math.floor(1000 + Math.random() * 9000);
     console.log("🚀 ~ sed_otp ~ otp:", otp)
@@ -140,7 +140,7 @@ const otpverify = async (req, res) => {
     const { Email, otp } = req.body;
     const manager = await manager_service.findemail(Email)
     if (!manager) {
-      return res.status(404).json({ message: "manager Not Found" })
+      return res.status(403).json({ message: "manager Not Found" })
     }
     if (otp != manager.OTP) {
       res.status(404).json({ message: "Incorrect OTP" });
@@ -159,7 +159,7 @@ const forgotpassword = async (req, res) => {
     console.log("🚀 ~ forgotpassword ~ Email:", Email)
     const manager = await manager_service.findemail(Email)
     if (!manager) {
-      return res.status(404).json({ message: "manager Not Found" })
+      return res.status(403).json({ message: "manager Not Found" })
     }
     const bcrpass = await bcrypt.hash(newpass, 10);
     const updatedmanager = await manager_service.updatepassword(manager._id, bcrpass)
@@ -177,7 +177,7 @@ const getProfile = async (req, res) => {
     console.log("��� ~ getProfile ~ id:", id)
     const manager = await manager_service.findById(id);
     if (!manager) {
-      return res.status(404).json({ message: "Not found" });
+      return res.status(403).json({ message: "Not found" });
     }
     res.status(200).json(manager);
   } catch (error) {
