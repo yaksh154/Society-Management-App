@@ -124,13 +124,7 @@ const sed_otp = async (req, res) => {
     console.log("🚀 ~ sed_otp ~ otp:", otp)
     const addotp = await manager_service.addotp(manager._id, otp)
     const ot = await send_otp(Email,manager.Firstname, manager.Lastname, otp);
-    const payload = {
-      _id: manager._id,
-      email: manager.Email
-    };
-    const token = jwt.sign(payload, process.env.SECRET_key);
-    res.cookie("token", token);
-    res.status(200).json({ message: "OTP sent successfully", token: token });
+    res.status(200).json({ message: "OTP sent successfully", data: Email });
   } catch (error) {
     console.error("🚀 ~ sed_otp ~ error:", error.message);
     res.status(500).json({ message: error.message })
