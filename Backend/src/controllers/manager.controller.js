@@ -129,6 +129,7 @@ const sed_otp = async (req, res) => {
       email: manager.Email
     };
     const token = jwt.sign(payload, process.env.SECRET_key);
+    res.cookie("token", token);
     res.status(200).json({ message: "OTP sent successfully", token: token });
   } catch (error) {
     console.error("🚀 ~ sed_otp ~ error:", error.message);
