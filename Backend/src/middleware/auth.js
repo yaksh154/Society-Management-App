@@ -18,6 +18,7 @@ const authUser = async (req, res, next) => {
     req.user = userData;
     next();
   } catch (err) {
+    console.log("🚀 ~ authUser ~ err:", err)
     return res.status(400).json({ msg: "Token is not valid" });
   }
 };
