@@ -176,14 +176,14 @@ const forgotpassword = async (req, res) => {
 const getProfile = async (req, res) => {
   try {
     const id = req.user._id;
-    console.log("��� ~ getProfile ~ id:", id)
+    console.log("🚀 ~ getProfile ~ id:", id)
     const manager = await manager_service.findById(id);
     if (!manager) {
       return res.status(403).json({ message: "Not found" });
     }
     res.status(200).json(manager);
   } catch (error) {
-    console.error("��� ~ getProfile ~ error:", error.message);
+    console.error("🚀 ~ getProfile ~ error:", error.message);
     res.status(500).json({ message: error.message });
   }
 }
