@@ -134,7 +134,9 @@ const sed_otp = async (req, res) => {
 const otpverify = async (req, res) => {
   try {
     const { Email, otp } = req.body;
+    console.log("🚀 ~ otpverify ~ req.body:", req.body)
     const manager = await manager_service.findemail(Email)
+    console.log("🚀 ~ otpverify ~ manager:", manager)
     if (!manager) {
       return res.status(403).json({ message: "manager Not Found" })
     }
@@ -142,6 +144,7 @@ const otpverify = async (req, res) => {
       res.status(404).json({ message: "Incorrect OTP" });
     }
     const updatedmanager = await manager_service.removeotp(manager._id)
+    console.log("🚀 ~ otpverify ~ updatedmanager:", updatedmanager)
     res.status(200).json({ message: "OTP verified successfully" });
   } catch (error) {
     console.error(error.message);
