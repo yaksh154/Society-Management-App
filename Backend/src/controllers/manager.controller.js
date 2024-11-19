@@ -157,11 +157,14 @@ const forgotpassword = async (req, res) => {
     const { Email, newpass } = req.body;
     console.log("🚀 ~ forgotpassword ~ Email:", Email)
     const manager = await manager_service.findemail(Email)
+    console.log("🚀 ~ forgotpassword ~ manager:", manager)
     if (!manager) {
       return res.status(403).json({ message: "manager Not Found" })
     }
     const bcrpass = await bcrypt.hash(newpass, 10);
+    console.log("🚀 ~ forgotpassword ~ bcrpass:", bcrpass)
     const updatedmanager = await manager_service.updatepassword(manager._id, bcrpass)
+    console.log("🚀 ~ forgotpassword ~ updatedmanager:", updatedmanager)
     res.status(200).json({ message: "Password updated successfully" });
   } catch (error) {
     console.error("🚀 ~ forgotpassword ~ error:", error.message);

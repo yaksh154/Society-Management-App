@@ -34,6 +34,6 @@ const facilitySchema = new mongoose.Schema(
 
 
 
-const Facility = mongoose.model("Facility", facilitySchema);
+const Facility = mongoose.model("Facility ", facilitySchema);
 
 module.exports = Facility;
