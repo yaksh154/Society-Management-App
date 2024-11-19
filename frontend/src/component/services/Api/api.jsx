@@ -263,9 +263,9 @@ export const DeleteAnnouncement = (_id, Fdata, ClaseDeleteAnnouncement) => {
 }
 
 
-// Financial -Maintenance page
+// Financial Maintenance page
 
-// Get Maintenance
+//  Maintenance
 
 export const GetMaintenance = (setudata) => {
     axios.get('http://localhost:3030/Maintenance').then((res) => {
@@ -274,11 +274,79 @@ export const GetMaintenance = (setudata) => {
     })
 }
 
-// Post Maintenance
-
-export const PostMaintenance = (data, Fdata, ClaseAddMaintenance) => {
-    axios.post(`http://localhost:3030/Maintenance`, data).then((res) => {
-        ClaseAddMaintenance(false)
+//   Income page 
+export const PostIncome = (data, Fdata, setShowAddDetail) => {
+    axios.post(`http://localhost:3030/Income`, data).then((res) => {
         Fdata()
+        setShowAddDetail(false)
+    })
+}
+
+
+//Other Income
+export const GetOtherIncome = (setIncomeData) => {
+    axios.get('http://localhost:3030/OtherIncome').then((res) => {
+        // console.log(res.data);
+        setIncomeData(res.data)
+    })
+}
+
+export const PostOtherIncome= (data, Fdata, setCreateIncome) => {
+    axios.post(`http://localhost:3030/OtherIncome`, data).then((res) => {
+        Fdata()
+        setCreateIncome(false)
+    })
+}
+
+export const PutOtherIncome = (setIncomeData) => {
+    axios.get('http://localhost:3030/OtherIncome/:id').then((res) => {
+        setIncomeData(res.data)
+    })
+}
+
+export const DeleteOtherIncome= (data, Fdata, setCreateIncome) => {
+    axios.post(`http://localhost:3030/OtherIncome/:id`, data).then((res) => {
+        Fdata()
+        setCreateIncome(false)
+    })
+}
+
+
+///Expanse 
+
+export const GetExpanse = (setAddExpense) => {
+    axios.get('http://localhost:3030/Expenses').then((res) => {
+        // console.log(res.data);
+        setAddExpense(res.data)
+    })
+}
+
+
+export const PostExpanse= (data, Fdata, setAddExpense) => {
+    axios.post(`http://localhost:3030/Expenses`, data).then((res) => {
+        Fdata()
+        setAddExpense(false)
+    })
+}
+
+export const PutExpense = (setIncomeData) => {
+    axios.get('http://localhost:3030/Expenses/:id').then((res) => {
+        setIncomeData(res.data)
+    })
+}
+
+export const DeleteExpense= (data, Fdata, setCreateIncome) => {
+    axios.post(`http://localhost:3030/Expenses/:id`, data).then((res) => {
+        Fdata()
+        setCreateIncome(false)
+    })
+}
+
+///Visiter Data
+
+export const GetVisiter = (setAddExpense) => {
+    axios.get('http://localhost:3030/Visitors').then((res) => {
+        // console.log(res.data);
+        setAddExpense(res.data)
     })
 }
