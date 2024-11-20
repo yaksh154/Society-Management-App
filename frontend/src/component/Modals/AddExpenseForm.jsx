@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { BiImageAdd } from 'react-icons/bi';
+import { PostExpanse } from '../services/Api/api';
 
-const AddExpenseForm = ({ setAddExpense }) => {
+const AddExpenseForm = ({ setAddExpense ,Fdata }) => {
   const {
     register,
     handleSubmit,
@@ -13,11 +14,15 @@ const AddExpenseForm = ({ setAddExpense }) => {
   } = useForm();
   
   const fileInputRef = useRef(null);
+  const [previewImage, setPreviewImage] = useState(null); // For image preview
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setValue('bill', file);
+      // Create a preview URL for the image
+      const fileURL = URL.createObjectURL(file);
+      setPreviewImage(fileURL);
     }
   };
 
@@ -26,12 +31,15 @@ const AddExpenseForm = ({ setAddExpense }) => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
-    reset(); // Reset the form after submission
+console.log(data);
+
+    const { bill, ...formData } = data;
+    PostExpanse (data,Fdata,setAddExpense)
   };
 
   const handleCancel = () => {
     setAddExpense(false); // Close the modal
+    setPreviewImage(null); // Reset preview
   };
 
   return (
@@ -39,7 +47,7 @@ const AddExpenseForm = ({ setAddExpense }) => {
       <div className="p-6 bg-white rounded-lg shadow-md max-w-md w-full mx-auto relative z-60">
         <h2 className="text-xl font-semibold mb-4">Add Expenses Details</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
+        <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Title <span className="text-red-500">*</span>
             </label>
@@ -102,6 +110,7 @@ const AddExpenseForm = ({ setAddExpense }) => {
             </div>
           </div>
 
+          
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Upload Bill <span className="text-red-500">*</span>
@@ -111,26 +120,39 @@ const AddExpenseForm = ({ setAddExpense }) => {
               onClick={handleFileClick}
             >
               <input
-                type="file"
-                {...register('bill', {
-                  required: 'Bill is required',
-                  validate: {
-                    isImage: (fileList) =>
-                      fileList && ['image/png', 'image/jpeg', 'image/gif'].includes(fileList[0]?.type) ||
-                      'Only PNG, JPG, and GIF files are allowed',
-                    maxSize: (fileList) =>
-                      fileList && fileList[0]?.size <= 10 * 1024 * 1024 ||
-                      'File size should be up to 10MB',
-                  },
-                })}
-                onChange={handleFileChange}
-                ref={fileInputRef}
-                className="hidden"
-              />
+  type="file"
+  {...register('bill', {
+    validate: {
+      isImage: (fileList) => {
+        if (fileList && fileList.length > 0) {
+          const fileType = fileList[0].type;
+          const allowedTypes = ['image/png', 'image/jpeg', 'image/gif'];
+          return allowedTypes.includes(fileType) || 'Only PNG, JPG, and GIF files are allowed';
+        }
+        return true; // No file selected; allow form submission
+      },
+      maxSize: (fileList) => {
+        if (fileList && fileList.length > 0) {
+          const fileSize = fileList[0].size;
+          return fileSize <= 10 * 1024 * 1024 || 'File size should be up to 10MB';
+        }
+        return true; // No file selected; allow form submission
+      },
+    },
+  })}
+  onChange={handleFileChange}
+  ref={fileInputRef}
+  className="hidden"
+/>
+
               <div>
-                <div className="flex justify-center mb-2">
-                  <BiImageAdd className="text-gray-400 text-4xl" />
-                </div>
+                {previewImage ? (
+                  <img src={previewImage} alt="Preview" className="mx-auto h-32 w-32 object-cover rounded-md mb-2" />
+                ) : (
+                  <div className="flex justify-center mb-2">
+                    <BiImageAdd className="text-gray-400 text-4xl" />
+                  </div>
+                )}
                 <p className="text-blue-500 font-semibold">Upload a file</p>
                 <p className="text-gray-500">or drag and drop</p>
                 <p className="text-gray-400 text-xs">PNG, JPG, GIF up to 10MB</p>

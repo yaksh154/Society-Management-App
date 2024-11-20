@@ -1,13 +1,13 @@
 import React from 'react'
 import { ImportantNumbersDelete } from '../services/Api/api'
 
-const DeleteImportantNumbersModal = ({_id,ClosedeleteContact,contacts,setContacts}) => {
-    
+const DeleteImportantNumbersModal = ({ _id, ClosedeleteContact, contacts, setContacts }) => {
+
     const deletedata = () => {
-        ImportantNumbersDelete(_id, contacts, setContacts,ClosedeleteContact)
+        ImportantNumbersDelete(_id, contacts, setContacts, ClosedeleteContact)
     }
-  return (
-    <div
+    return (
+        <div
             className='fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50'
             onClick={(e) => { if (e.target === e.currentTarget) ClosedeleteContact(); }}>
             <div className="bg-white rounded-lg shadow-lg w-11/12 lg:w-1/4 md:w-1/2">
@@ -34,7 +34,7 @@ const DeleteImportantNumbersModal = ({_id,ClosedeleteContact,contacts,setContact
                 </div>
             </div>
         </div>
-  )
+    )
 }
 
 export default DeleteImportantNumbersModal

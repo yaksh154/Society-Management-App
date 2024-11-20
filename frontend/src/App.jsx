@@ -32,9 +32,8 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/registration' element={<Registration />} />
         <Route path='/forgot_password' element={<Forgot_password />} />
-        <Route path='/forgot_password_opt' element={<Forgot_password_opt />} />
+        <Route path='/forgot_password/opt' element={<Forgot_password_opt />} />
         <Route path='/reset_password' element={<Reset_password />} />
-
 
         {/* Dashboard */}
         <Route path='/' element={<Home />} />
