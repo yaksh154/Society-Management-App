@@ -91,7 +91,7 @@ const Financial_Management = () => {
                 Set Maintenance
               </button>
               {ShowMaintenance && (
-                    <SetMaintenancePwd
+                    <SetMaintenancePwd  Fdata={Fdata}
                     setShowMaintenance={CloseMaintenance}
                     />
                   )}

@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { FaCalendarAlt } from 'react-icons/fa';
+import { PostOtherIncome } from '../services/Api/api';
 
-const CreateOincome = ({ setCreateIncome }) => { // Correctly destructure `setCreateIncome`
-  const [formData, setFormData] = useState({
-    title: '',
-    date: '',
-    dueDate: '',
-    description: '',
-    amount: ''
-  });
+const CreateOincome = ({ setCreateIncome ,Fdata }) => { // Correctly destructure `setCreateIncome`
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,17 +19,19 @@ const CreateOincome = ({ setCreateIncome }) => { // Correctly destructure `setCr
       setCreateIncome(false); // Close the modal if `setCreateIncome` is available
     }
   };
+  function DataAdd(data){
+console.log(data);
+PostOtherIncome(data,Fdata,setCreateIncome)
+reset();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form Data Submitted:', formData);
-  };
+  }
+
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
       <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
         <h2 className="text-xl font-semibold mb-4">Create Other Income</h2>
-        <form onSubmit={handleSubmit} method="post">
+        <form onSubmit={handleSubmit(DataAdd)} method="post">
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1" htmlFor="title">
               Title <span className="text-red-500">*</span>
@@ -42,8 +40,7 @@ const CreateOincome = ({ setCreateIncome }) => { // Correctly destructure `setCr
               type="text"
               id="title"
               name="title"
-              value={formData.title}
-              onChange={handleChange}
+              {...register("title", { required: true })}
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
               placeholder="Enter Title"
               required
@@ -60,8 +57,7 @@ const CreateOincome = ({ setCreateIncome }) => { // Correctly destructure `setCr
                   type="date"
                   id="date"
                   name="date"
-                  value={formData.date}
-                  onChange={handleChange}
+                  {...register("date", { required: true })}
                   className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                   required
                 />
@@ -78,8 +74,7 @@ const CreateOincome = ({ setCreateIncome }) => { // Correctly destructure `setCr
                   type="date"
                   id="dueDate"
                   name="dueDate"
-                  value={formData.dueDate}
-                  onChange={handleChange}
+                  {...register("dueDate", { required: true })}
                   className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                   required
                 />
@@ -95,8 +90,7 @@ const CreateOincome = ({ setCreateIncome }) => { // Correctly destructure `setCr
             <textarea
               id="description"
               name="description"
-              value={formData.description}
-              onChange={handleChange}
+              {...register("description", { required: true })}
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
               placeholder="Enter Description"
               required
@@ -113,8 +107,7 @@ const CreateOincome = ({ setCreateIncome }) => { // Correctly destructure `setCr
                 type="number"
                 id="amount"
                 name="amount"
-                value={formData.amount}
-                onChange={handleChange}
+                {...register("amount", { required: true })}
                 className="w-full pl-8 pr-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                 placeholder="0000"
                 required

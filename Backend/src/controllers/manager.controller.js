@@ -124,12 +124,7 @@ const sed_otp = async (req, res) => {
     console.log("🚀 ~ sed_otp ~ otp:", otp)
     const addotp = await manager_service.addotp(manager._id, otp)
     const ot = await send_otp(Email,manager.Firstname, manager.Lastname, otp);
-    const payload = {
-      _id: manager._id,
-      email: manager.Email
-    };
-    const token = jwt.sign(payload, process.env.SECRET_key);
-    res.status(200).json({ message: "OTP sent successfully", token: token });
+    res.status(200).json({ message: "OTP sent successfully", data: Email });
   } catch (error) {
     console.error("🚀 ~ sed_otp ~ error:", error.message);
     res.status(500).json({ message: error.message })
@@ -139,7 +134,9 @@ const sed_otp = async (req, res) => {
 const otpverify = async (req, res) => {
   try {
     const { Email, otp } = req.body;
+    console.log("🚀 ~ otpverify ~ req.body:", req.body)
     const manager = await manager_service.findemail(Email)
+    console.log("🚀 ~ otpverify ~ manager:", manager)
     if (!manager) {
       return res.status(403).json({ message: "manager Not Found" })
     }
@@ -147,6 +144,7 @@ const otpverify = async (req, res) => {
       res.status(404).json({ message: "Incorrect OTP" });
     }
     const updatedmanager = await manager_service.removeotp(manager._id)
+    console.log("🚀 ~ otpverify ~ updatedmanager:", updatedmanager)
     res.status(200).json({ message: "OTP verified successfully" });
   } catch (error) {
     console.error(error.message);
@@ -159,11 +157,14 @@ const forgotpassword = async (req, res) => {
     const { Email, newpass } = req.body;
     console.log("🚀 ~ forgotpassword ~ Email:", Email)
     const manager = await manager_service.findemail(Email)
+    console.log("🚀 ~ forgotpassword ~ manager:", manager)
     if (!manager) {
       return res.status(403).json({ message: "manager Not Found" })
     }
     const bcrpass = await bcrypt.hash(newpass, 10);
+    console.log("🚀 ~ forgotpassword ~ bcrpass:", bcrpass)
     const updatedmanager = await manager_service.updatepassword(manager._id, bcrpass)
+    console.log("🚀 ~ forgotpassword ~ updatedmanager:", updatedmanager)
     res.status(200).json({ message: "Password updated successfully" });
   } catch (error) {
     console.error("🚀 ~ forgotpassword ~ error:", error.message);
@@ -175,14 +176,14 @@ const forgotpassword = async (req, res) => {
 const getProfile = async (req, res) => {
   try {
     const id = req.user._id;
-    console.log("��� ~ getProfile ~ id:", id)
+    console.log("🚀 ~ getProfile ~ id:", id)
     const manager = await manager_service.findById(id);
     if (!manager) {
       return res.status(403).json({ message: "Not found" });
     }
     res.status(200).json(manager);
   } catch (error) {
-    console.error("��� ~ getProfile ~ error:", error.message);
+    console.error("🚀 ~ getProfile ~ error:", error.message);
     res.status(500).json({ message: error.message });
   }
 }
