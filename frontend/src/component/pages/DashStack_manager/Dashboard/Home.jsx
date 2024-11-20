@@ -250,7 +250,7 @@ const Home = () => {
                   <h2 className="text-lg font-semibold">Pending Maintenances</h2>
                   <a href="#" className="text-blue-500 text-sm">View all</a>
                 </div>
-                <div className="space-y-4 overflow-y-auto max-h-80">
+                <div className="space-y-4 overflow-y-auto max-h-80 px-2">
                   <div>
                     {/* Maintenance Item */}
                     <div className="flex justify-between items-center">
@@ -362,7 +362,7 @@ const Home = () => {
                       <option>Day</option>
                     </select>
                   </div>
-                  <div className="overflow-x-auto h-32">
+                  <div className="overflow-x-auto h-32 px-2">
                     <table className="min-w-full text-left">
                       <thead>
                         <tr className="bg-gray-100 text-gray-700">
@@ -427,7 +427,7 @@ const Home = () => {
                     <option>Day</option>
                   </select>
                 </div>
-                <div className="bg-white rounded-lg w-full h-32 overflow-auto">
+                <div className="bg-white rounded-lg w-full h-32 overflow-auto px-2">
                   <div className="space-y-4">
                     {/* Activity Item */}
                     <div className="flex items-center justify-between">

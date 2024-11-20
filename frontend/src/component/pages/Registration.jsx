@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import registration from '../../../public/images/registration.png';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CreateSociety from '../Modals/CreateSociety'
 import { GetCreateSocirty, UserDataRegistration } from '../services/Api/api';
 
@@ -9,6 +9,7 @@ const Registration = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm();
 
@@ -26,6 +27,8 @@ const Registration = () => {
         setShowModal(false);
     };
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         Fdata()
     }, [])
@@ -41,7 +44,7 @@ const Registration = () => {
         }
         
         const { confirmPassword, ...registrationData } = data;
-        UserDataRegistration(registrationData, setRegistrationError)
+        UserDataRegistration(registrationData, setRegistrationError,reset,navigate)
 
     };
     return (

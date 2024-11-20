@@ -2,27 +2,28 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Loginimg from '../../../public/images/m_Loginimg.png';
-import { UserDataLogin } from '../services/Api/api';
+import { ManagerLogin } from '../services/Api/api';
 import { useAuth } from '../services/Auth/auth';
 
 
 const Login = () => {
-    const {storetokenInLs} = useAuth();
+    const { storetokenInLs } = useAuth();
     const [passwordShown, setPasswordShown] = useState(false);
     const [loginError, setLoginError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        formState: { errors },
+        reset
     } = useForm();
-    const navigate = useNavigate();
 
 
     // User Login 
     const onSubmit = async (data) => {
-        console.log(data);
-        
-        UserDataLogin(data,setLoginError,navigate,storetokenInLs)
+        setLoading(true);
+        ManagerLogin(data, setLoginError, navigate, storetokenInLs, setLoading, reset)
     };
 
     return (
@@ -100,8 +101,8 @@ const Login = () => {
                             <Link to="/forgot_password" className="text-orange-600 text-sm">Forgot Password?</Link>
                         </div>
 
-                        <button type="submit" className="bg-gray-100 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold w-full py-2 rounded">
-                            Sign In
+                        <button type="submit" className={`bg-gray-100 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold w-full py-2 rounded ${loading && 'opacity-50 cursor-not-allowed'}`} disabled={loading}>
+                            {loading ? 'Log In...' : 'Log In'}
                         </button>
 
                         <p className="text-center text-sm mt-4">Don’t have an account? <Link to="/registration" className="text-orange-600 font-semibold">Registration</Link></p>

@@ -3,50 +3,105 @@ import axios from "axios";
 const url = 'https://society-management-app-server.onrender.com'
 
 
-// login data
+// login Manger
 
-export const UserDataLogin = (data, setLoginError,navigate,storetokenInLs) => {
-    console.log(data, setLoginError);
-
+export const ManagerLogin = (data, setLoginError, navigate, storetokenInLs, setLoading, reset) => {
     axios.post(`${url}/manager/login`, {
         Email: data.Email,
         Password: data.Password,
     })
-        .then((res, req) => {
+        .then((res) => {
             if (res.data) {
-                console.log(res.data);
-                // localStorage.setItem('message', JSON.stringify(res.data.message));
-                // localStorage.setItem('token', JSON.stringify(res.data.token));
-                console.log('Cookies:', document.cookie);
+                setLoading(false);
                 storetokenInLs(res.data.token)
                 navigate('/');
-                
+                reset()
             } else {
+                setLoading(false);
                 setLoginError('Incorrect email/phone or password');
             }
         })
         .catch((error) => {
+            setLoading(false);
             console.error('Login error:', error);
             setLoginError('Login failed. Please try again later.');
-        });
+        })
 }
 
-// Forgot_password page
+// Forgot password Manger
 
-export const UserForgot_password = (data, setLoginError) => {
-    axios.post(`${url}/manager/forgotpassword`, {
-        Email: data.Email,
+export const ManagerForgot_password = (data, setLoginError, navigate, setLoading) => {
+    axios.post(`${url}/manager/sedotp`, { Email: data.Email, }).then((res) => {
+        if (res.data) {
+            console.log(res.data);
+            setLoading(false);
+            localStorage.setItem('Email', JSON.stringify(res.data.data));
+            navigate('/forgot_password/opt');
+        } else {
+            setLoading(false);
+            setLoginError('Incorrect email/phone');
+        }
+    }).catch((error) => {
+        setLoading(false);
+        console.error('Login error:', error);
+        setLoginError('Login failed. Please try again later.');
     })
+};
+
+// resend otp
+
+export const ResendOtp = (datas) => {
+    axios.post(`${url}/manager/sedotp`, { Email: datas.Email, }).then((res) => {
+        console.log(res.data);
+    }).catch((error) => {
+        console.error('Login error:', error);
+    })
+}
+
+
+// Verifyotp Manger
+
+export const Managerverifyotp = (datas, setLoginError, setLoading, navigate, reset) => {
+    axios.post(`${url}/manager/verifyotp`, { otp: datas.otp, Email: datas.Email })
         .then((res) => {
             if (res.data) {
-                console.log('user Login');
+                setLoading(false);
+                // localStorage.removeItem('Email');
+                navigate('/reset_password')
             } else {
-                setLoginError('Incorrect email/phone');
+                setLoading(false);
+                setLoginError('Incorrect OTP');
             }
         })
         .catch((error) => {
+            setLoading(false);
             console.error('Login error:', error);
-            setLoginError('Login failed. Please try again later.');
+            setLoginError('Verify failed. Please try again later.');
+            reset({ otp: new Array(4).fill("") });
+        })
+}
+
+// Reset password Manger
+
+export const ManagerResetPassword = (data, setLoginError, setLoading, reset, navigate) => {
+    axios.post(`${url}/manager/forgotpassword`, { newpass: data.Password, Email: data.Email })
+        .then((res) => {
+            if (res.data) {
+                setLoading(false);
+                reset()
+                console.log("Password Reset Successful");
+                localStorage.removeItem('Email');
+                navigate('/login')
+            } else {
+                setLoading(false);
+                reset()
+                setLoginError('Reset password failed. Please try again.');
+            }
+        })
+        .catch(() => {
+            setLoading(false);
+            reset()
+            setLoginError('Reset password failed. Please try again later.');
         });
 }
 
@@ -54,12 +109,12 @@ export const UserForgot_password = (data, setLoginError) => {
 
 // Create User Registration
 
-export const UserDataRegistration = (registrationData, setRegistrationError) => {
-    console.log(registrationData);
+export const UserDataRegistration = (registrationData, setRegistrationError, reset) => {
 
     axios.post(`${url}/manager/createmanager`, registrationData).then((res) => {
         if (res.data) {
             console.log(res.data);
+            reset()
         } else {
             setRegistrationError('Incorrect email/phone or password');
         }
@@ -199,16 +254,16 @@ export const DeleteComplaint = async (_id, getComplaint) => {
 
 // Get Security Protocols
 
-export const Get_Security_Protocols = (setSecurity) =>{
-    axios.get("http://localhost:3030/Security_Protocols").then((res)=>{
+export const Get_Security_Protocols = (setSecurity) => {
+    axios.get("http://localhost:3030/Security_Protocols").then((res) => {
         setSecurity(res.data)
     })
 }
 
 // Post Security Protocols
 
-export const Post_Security_Protocols = (data,Fdata,CloseAddProtocols) =>{
-    axios.post("http://localhost:3030/Security_Protocols",data).then((res)=>{
+export const Post_Security_Protocols = (data, Fdata, CloseAddProtocols) => {
+    axios.post("http://localhost:3030/Security_Protocols", data).then((res) => {
         CloseAddProtocols()
         Fdata()
     })
@@ -216,8 +271,8 @@ export const Post_Security_Protocols = (data,Fdata,CloseAddProtocols) =>{
 
 // Delete Security Protocols
 
-export const Delete_Security_Protocols = (_id,Fdata) =>{
-    axios.delete(`http://localhost:3030/Security_Protocols/${_id}`).then((res)=>{
+export const Delete_Security_Protocols = (_id, Fdata) => {
+    axios.delete(`http://localhost:3030/Security_Protocols/${_id}`).then((res) => {
         Fdata()
     })
 }
@@ -226,8 +281,8 @@ export const Delete_Security_Protocols = (_id,Fdata) =>{
 
 // Get Security Guard Details
 
-export const GetGuard_Details = (setGuard_Details) =>{
-    axios.get('http://localhost:3030/Guard_Details').then((res)=>{
+export const GetGuard_Details = (setGuard_Details) => {
+    axios.get('http://localhost:3030/Guard_Details').then((res) => {
         setGuard_Details(res.data)
     })
 }

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 import forgot_password_img from '../../../public/images/forgot_password_img.png';
-import { UserForgot_password } from '../services/Api/api';
+import { ManagerForgot_password } from '../services/Api/api';
+import { useNavigate } from 'react-router-dom';
 
 const Forgot_password = () => {
     const [loginError, setLoginError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -14,9 +15,8 @@ const Forgot_password = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        console.log('Submitted data:', data);
-
-        UserForgot_password(data,setLoginError)
+        setLoading(true); 
+        ManagerForgot_password(data, setLoginError, navigate, setLoading);
     };
 
     return (
@@ -53,8 +53,11 @@ const Forgot_password = () => {
 
                         {loginError && <p className="text-red-500 text-sm mt-1">{loginError}</p>}
 
-                        <button type="submit" className="bg-gray-100 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold w-full py-2 rounded">
-                            Sign In
+                        <button
+                            type="submit"
+                            className={`bg-gray-100 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold w-full py-2 rounded ${loading && 'opacity-50 cursor-not-allowed'}`}
+                            disabled={loading}>
+                            {loading ? 'Sending...' : 'Sign In'}
                         </button>
                     </form>
                 </div>
