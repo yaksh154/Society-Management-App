@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { updateImportantNumber } from '../services/Api/api';
 import axios from 'axios';
 
-const EditImportantNumbers = ({ _id, closeEditModal, seteditShowModal }) => {
+const EditImportantNumbers = ({ _id,Fdata, closeEditModal }) => {
 
     const [editNumber, setEditNumber] = useState({
         Fullname: '',
@@ -26,7 +26,7 @@ const EditImportantNumbers = ({ _id, closeEditModal, seteditShowModal }) => {
     };
 
     const handleSave = () => {
-        updateImportantNumber(_id,editNumber, seteditShowModal ,closeEditModal)
+        updateImportantNumber(_id,editNumber ,closeEditModal,Fdata)
     };
 
     return (
