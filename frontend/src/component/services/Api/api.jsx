@@ -66,7 +66,6 @@ export const Managerverifyotp = (datas, setLoginError, setLoading, navigate, res
         .then((res) => {
             if (res.data) {
                 setLoading(false);
-                // localStorage.removeItem('Email');
                 navigate('/reset_password')
             } else {
                 setLoading(false);
@@ -209,11 +208,11 @@ export const ImportantNumbersDelete = (_id, contacts, setContacts, ClosedeleteCo
 
 // ImportantNumbers edit
 
-export const updateImportantNumber = (_id, editNumber, seteditShowModal, closeEditModal) => {
+export const updateImportantNumber = (_id, editNumber,Fdata, closeEditModal) => {
     axios.put(`${url}/importantnumber/updateImportantNumber/${_id}`, editNumber)
         .then(() => {
-            seteditShowModal(false);
             closeEditModal();
+            Fdata()
         })
         .catch((error) => console.error("Error saving data:", error));
 };
@@ -310,7 +309,6 @@ export const PostAnnouncement = (data, Fdata, ClaseAddAnnouncement) => {
 // Delete Announcement
 
 export const DeleteAnnouncement = (_id, Fdata, ClaseDeleteAnnouncement) => {
-    console.log(_id);
     axios.delete(`http://localhost:3030/incomeData/${_id}`).then((res) => {
         Fdata()
         ClaseDeleteAnnouncement(false)

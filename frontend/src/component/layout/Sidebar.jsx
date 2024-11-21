@@ -30,6 +30,10 @@ export default function Sidenav({ closeNav, data }) {
     setIsSecurity_managementDropdown(!isSecurity_managementDropdown);
   };
 
+  const AdminLogout =()=>{
+    localStorage.removeItem('token');
+  }
+
   return (
     <div
       id="mySidenav"
@@ -253,6 +257,7 @@ export default function Sidenav({ closeNav, data }) {
         <div className="border-t">
           <Link
             to="/login"
+            onClick={AdminLogout}
             className={`text-nowrap relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black text-red-600 items-center ${pathname === "/login"
               ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
               : "hover:bg-gray-100"

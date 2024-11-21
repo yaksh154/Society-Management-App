@@ -97,12 +97,13 @@ const login = async (req, res) => {
     }
     const payload = {
       _id: manager._id,
-      email: manager.Email
+      email: manager.Email,
+      societyid: manager.society
     };
 
     const token = jwt.sign(payload, process.env.SECRET_key, { expiresIn: "1d" });
     res.cookie("token", token);
-    // res.WriteHeader('managerorization', `Bearer ${token}`);
+    res.WriteHeader('Authorization', `Bearer ${token}`);
     console.log("🚀 ~ login ~ token generated:", token);
     res.status(200).json({ message: "manager Login Successful", token: token });
   } catch (error) {

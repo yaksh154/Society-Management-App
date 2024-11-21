@@ -84,7 +84,6 @@ const Home = () => {
   const OpnedeleteContact = (_id) => {
     setImportantNumbersDelete(true)
     setImportantNumbersDeleteId(_id);
-    // ImportantNumbersDelete(_id, contacts, setContacts)
   };
 
   const ClosedeleteContact = () => {
@@ -240,7 +239,7 @@ const Home = () => {
                         ))}
                       </div>
                     )}
-                    {editModal && (<EditImportantNumbers _id={Important_id} closeEditModal={closeeditModal} seteditShowModal={seteditModal} />)}
+                    {editModal && (<EditImportantNumbers Fdata={Fdata} _id={Important_id} closeEditModal={closeeditModal} />)}
                     {ImportantNumbersDelete && (<DeleteImportantNumbersModal contacts={contacts} setContacts={setContacts} ClosedeleteContact={ClosedeleteContact} _id={ImportantNumbersDeleteId} />)}
                   </div>
                 </div>
