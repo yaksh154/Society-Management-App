@@ -90,7 +90,7 @@ const ComplaintModal = ({ close }) => {
                         <div className="flex gap-2">
                             <label className={`flex items-center px-3 py-1 border rounded-lg ${errors.Priority ? 'border-red-500' : ''}`}>
                                 <input
-                                    className="mr-2"
+                                    className="mr-2 "
                                     type="radio"
                                     value="High"
                                     {...register("Priority", { required: "Priority is required" })}

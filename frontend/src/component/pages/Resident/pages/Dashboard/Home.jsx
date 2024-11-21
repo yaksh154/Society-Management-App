@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Sidebar from '../../layout/Sidebar'
 import Header from '../../layout/Header'
+import Button from '../../layout/Button_gradient'
 import Home_totle_card from '../../../../layout/Home_totle_card';
 import { TiThMenu } from 'react-icons/ti';
 import { MdOutlineAttachMoney } from 'react-icons/md';
@@ -77,8 +78,9 @@ const Home = () => {
           <div className="p-6">
             <div className="bg-white shadow-md rounded-lg p-6">
               <div className="flex justify-between items-center mb-6">
-                <h1 className='font-semibold md:text-2xl text-md'>Detail of the Per Person</h1>
-                <button onClick={() => setGetPass(true)} className='px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200'>Get Pass</button>
+                <h1 className='font-semibold md:text-xl text-md'>Detail of the Per Person</h1>
+                <Button onClick={() => setGetPass(true)} Btn_Name="Get Pass" />
+
                 {GetPass && (<GetPassModal close={closeGetPass} />)}
               </div>
             </div>

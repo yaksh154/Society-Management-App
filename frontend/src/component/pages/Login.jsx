@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Loginimg from '../../../public/images/m_Loginimg.png';
+import m_Loginimg from '../../../public/images/Login.png';
 import { ManagerLogin } from '../services/Api/api';
 import { useAuth } from '../services/Auth/auth';
 
@@ -36,8 +37,9 @@ const Login = () => {
                 </div>
                 {/* Login Form 0 */}
                 <div className="flex flex-col w-full lg:w-1/2 items-center justify-center px-8 py-12 lg:py-0">
-                    <h1 className="text-5xl font-bold text-orange-600 lg:hidden">Dash<span className="text-black">Stack</span></h1>
+                    <h1 className="text-5xl max-[425px]:text-4xl font-bold text-orange-600 lg:hidden">Dash<span className="text-black">Stack</span></h1>
                     <form className="bg-white w-full max-w-md shadow-lg rounded-lg p-8 mt-8" onSubmit={handleSubmit(onSubmit)}>
+                        <div className="hidden max-[1023px]:flex items-center justify-center"><img className="h-44 max-[375px]:h-36 max-[320px]:h-28" src={m_Loginimg} alt="Login" /></div>
                         <h2 className="text-2xl font-semibold mb-6 text-center">Login</h2>
 
                         <div className="mb-4">
@@ -101,7 +103,7 @@ const Login = () => {
                             <Link to="/forgot_password" className="text-orange-600 text-sm">Forgot Password?</Link>
                         </div>
 
-                        <button type="submit" className={`bg-gray-100 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold w-full py-2 rounded ${loading && 'opacity-50 cursor-not-allowed'}`} disabled={loading}>
+                        <button type="submit" className={`bg-gray-100 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold w-full py-2 rounded ${loading && 'opacity-50 cursor-not-allowed cursor-progress'}`} disabled={loading}>
                             {loading ? 'Log In...' : 'Log In'}
                         </button>
 

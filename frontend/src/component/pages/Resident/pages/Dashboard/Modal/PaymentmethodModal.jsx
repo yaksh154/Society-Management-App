@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PaymentCardNumber from './PaymentCardNumber';
+import Button from '../../../layout/Button_gradient'
 
 const PaymentmethodModal = ({close1,close2}) => {
     const [selectedMethod, setSelectedMethod] = useState("");
@@ -74,12 +75,7 @@ const PaymentmethodModal = ({close1,close2}) => {
                     >
                         Cancel
                     </button>
-                    <button
-                        onClick={handlePayment}
-                        className="bg-gray-100 w-1/2 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold py-1 rounded text-sm"
-                    >
-                        Pay Now
-                    </button>
+                    <Button onClick={handlePayment} Btn_Name="Pay Now" Addclass='w-1/2'/>
                 </div>
                 {CardNum && (<PaymentCardNumber close1={close1} close2={close2} close3={CloseCardNum}/>)}
             </div>

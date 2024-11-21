@@ -1,7 +1,8 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
+import Button from '../../../layout/Button_gradient'
 
-const PaymentCardNumber = ({close1,close2,close3}) => {
+const PaymentCardNumber = ({ close1, close2, close3 }) => {
 
   const {
     register,
@@ -32,9 +33,8 @@ const PaymentCardNumber = ({close1,close2,close3}) => {
               {...register("cardName", {
                 required: "Card name is required",
               })}
-              className={`w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 ${
-                errors.cardName ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
-              }`}
+              className={`w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 ${errors.cardName ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
+                }`}
             />
             {errors.cardName && (
               <p className="text-red-500 text-sm mt-1">{errors.cardName.message}</p>
@@ -57,9 +57,8 @@ const PaymentCardNumber = ({close1,close2,close3}) => {
                 },
               })}
               placeholder="1234 5678 8745 5212"
-              className={`w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 ${
-                errors.cardNumber ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
-              }`}
+              className={`w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 ${errors.cardNumber ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
+                }`}
             />
             {errors.cardNumber && (
               <p className="text-red-500 text-sm mt-1">{errors.cardNumber.message}</p>
@@ -84,9 +83,8 @@ const PaymentCardNumber = ({close1,close2,close3}) => {
                   },
                 })}
                 placeholder="MM/YY"
-                className={`w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 ${
-                  errors.expiryDate ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
-                }`}
+                className={`w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 ${errors.expiryDate ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
+                  }`}
               />
               {errors.expiryDate && (
                 <p className="text-red-500 text-sm mt-1">{errors.expiryDate.message}</p>
@@ -109,9 +107,8 @@ const PaymentCardNumber = ({close1,close2,close3}) => {
                   },
                 })}
                 placeholder="123"
-                className={`w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 ${
-                  errors.cvv ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
-                }`}
+                className={`w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 ${errors.cvv ? "border-red-500 focus:ring-red-500" : "border-gray-300 focus:ring-orange-500"
+                  }`}
               />
               {errors.cvv && (
                 <p className="text-red-500 text-sm mt-1">{errors.cvv.message}</p>
@@ -128,12 +125,7 @@ const PaymentCardNumber = ({close1,close2,close3}) => {
             >
               Cancel
             </button>
-            <button
-              type="submit"
-              className="bg-gray-100 w-1/2 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold py-1 rounded text-sm"
-            >
-              Pay Now
-            </button>
+            <Button type="submit" Btn_Name="Pay Now" Addclass='w-1/2' />
           </div>
         </form>
       </div>

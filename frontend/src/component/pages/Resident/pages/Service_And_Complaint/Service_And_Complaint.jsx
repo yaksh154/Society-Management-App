@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Sidebar from '../../layout/Sidebar'
 import Header from '../../layout/Header'
+import Button from '../../layout/Button_gradient'
 import ComplaintModal from './Modal/ComplaintModal';
 import DeleteModal from '../../layout/DeleteModal';
 
@@ -51,7 +52,7 @@ const Service_And_Complaint = () => {
                         <div className="bg-white shadow-md rounded-lg p-6">
                             <div className="flex justify-between items-center mb-6">
                                 <h1 className='font-semibold md:text-2xl text-md'>Create Complaint</h1>
-                                <button onClick={() => setComplaint(true)} className='px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200'>Get Pass</button>
+                                <Button onClick={() => setComplaint(true)} Btn_Name="Get Pass" />
                                 {Complaint && (<ComplaintModal close={closeComplaint} />)}
                             </div>
                         </div>
@@ -62,7 +63,7 @@ const Service_And_Complaint = () => {
                         <div className="bg-white shadow-md rounded-lg p-6">
                             <div className="flex justify-between items-center mb-6">
                                 <h1 className='font-semibold md:text-2xl text-md'>Delete</h1>
-                                <button onClick={() => OpneDelete()} className='px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200'>Get Pass</button>
+                                <Button onClick={() => OpneDelete()} Btn_Name="Delete" />
                                 {Delete && (<DeleteModal close={closeDelete} DeleteClick={DeleteClick} />)}
                             </div>
                         </div>
