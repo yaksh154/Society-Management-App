@@ -10,11 +10,10 @@ import { GetOtherIncome } from '../../../../services/Api/api';
 
 const Otherincome = () => {
   const [incomeData, setIncomeData] = useState([]);
-
-  const [error, setError] = useState(null);
-
+  const [selectedIncome, setSelectedIncome] = useState(null); // For editing
   const [dropdownOpenIndex, setDropdownOpenIndex] = useState(null);
   const [DeleteBox, setDeleteBox] = useState(false);
+  const [DeleteId, setDeleteId] = useState(null);
   const [CreateIncome, setCreateIncome] = useState(false);
   const [EditIncome, setEditIncome] = useState(false);
 
@@ -22,20 +21,18 @@ const Otherincome = () => {
     setDropdownOpenIndex(dropdownOpenIndex === index ? null : index);
   };
 
-  const Fdata = () => {
-    setError(null);
+  const fetchData = () => {
     GetOtherIncome((data) => {
       if (data && Array.isArray(data)) {
         setIncomeData(data);
       } else {
-        setError('Failed to load data or data is invalid.');
+        console.error('Failed to load data or data is invalid.');
       }
-  ;
     });
   };
 
   useEffect(() => {
-    Fdata();
+    fetchData();
   }, []);
 
   const handleCreate = () => {
@@ -46,23 +43,25 @@ const Otherincome = () => {
     setCreateIncome(false);
   };
 
-  const handleEditForm = () => {
-    setEditIncome(true);
+  const handleEditForm = (income) => {
+    setSelectedIncome(income); // Set the selected income for editing
+    setEditIncome(true); // Open the edit modal
   };
 
   const closeEditForm = () => {
     setEditIncome(false);
+    setSelectedIncome(null); // Clear the selected income
   };
 
-  const handleDelete = () => {
+  const handleDelete = (id) => {
+    setDeleteId(id);
     setDeleteBox(true);
   };
 
   const closeDeleteBox = () => {
     setDeleteBox(false);
+    setDeleteId(null);
   };
-
-
 
   return (
     <div>
@@ -76,7 +75,7 @@ const Otherincome = () => {
             Create Other Income
           </button>
           {CreateIncome && (
-            <CreateOincome Fdata={Fdata} setCreateIncome={closeCreateForm} />
+            <CreateOincome Fdata={fetchData} setCreateIncome={closeCreateForm} />
           )}
         </div>
         <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
@@ -95,17 +94,24 @@ const Otherincome = () => {
                     {dropdownOpenIndex === index && (
                       <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-10">
                         <ul className="py-1 text-gray-700">
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={handleEditForm}>
-                            Edit 
+                          <li
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => handleEditForm(item)} // Pass item for editing
+                          >
+                            Edit
                           </li>
-                          {EditIncome && <EditOIncome setEditIncome={closeEditForm} />}
-                          <Link className="px-4 py-2 hover:bg-gray-100 cursor-pointer" to="/financial_management/ViewParticipation">
+                          <Link
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            to="/financial_management/ViewParticipation"
+                          >
                             View
                           </Link>
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={handleDelete}>
+                          <li
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => handleDelete(item._id)}
+                          >
                             Delete
                           </li>
-                          {DeleteBox && <DeleteModal setDeleteBox={closeDeleteBox} />}
                         </ul>
                       </div>
                     )}
@@ -140,6 +146,14 @@ const Otherincome = () => {
           )}
         </div>
       </div>
+      {EditIncome && (
+        <EditOIncome
+          setEditIncome={closeEditForm}
+          initialData={selectedIncome} // Pass the selected income for editing
+          onUpdate={fetchData} // Refresh data after update
+        />
+      )}
+      {DeleteBox && <DeleteModal setDeleteBox={closeDeleteBox} />}
     </div>
   );
 };
