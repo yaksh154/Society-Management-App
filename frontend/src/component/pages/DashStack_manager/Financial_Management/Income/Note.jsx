@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../../../../layout/Sidebar';
 import Header from '../../../../layout/Header';
 import { FaEllipsisV } from 'react-icons/fa';
@@ -7,6 +7,7 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import CreateNote from '../../../../Modals/CreateNote';
 import EditNote from '../../../../Modals/EditNote';
 import DeleteModal from '../../../../Modals/DeleteModal';
+import { GetNotes } from '../../../../services/Api/api';
 
 const Note = () => {
     let [data, setdata] = useState(280);
@@ -56,40 +57,16 @@ const DeleteOpen = () =>  {
   const toggleDropdown = (index) => {
     setDropdownOpenIndex(dropdownOpenIndex === index ? null : index);
   };
-  const notes = [
-    {
-      title: 'Rent or Mortgage',
-      description: 'A visual representation of your spending categories visual representation.',
-    },
-    {
-      title: 'Rent or Transportation',
-      description: 'A visual representation of your spending categories visual representation.',
-    },
-    {
-      title: 'Housing Costs',
-      description: 'A visual representation of your spending categories visual representation.',
-    },
-    {
-      title: 'Breakdown',
-      description: 'A visual representation of your spending categories visual representation.',
-    },
-    {
-      title: 'Property Taxes',
-      description: 'A visual representation of your spending categories visual representation.',
-    },
-    {
-      title: 'Expense Tracker',
-      description: 'A visual representation of your spending categories visual representation.',
-    },
-    {
-      title: 'Maintenance Fees',
-      description: 'A visual representation of your spending categories visual representation.',
-    },
-    {
-      title: 'Breakdown',
-      description: 'A visual representation of your spending categories visual representation.',
-    },
-  ];
+  const [Notes, setNotes] = useState([])
+
+  useEffect(() => {
+    Fdata()
+  }, [0])
+
+  const Fdata = () => {
+    GetNotes(setNotes)
+  }
+
   return (
     <div>
     <Sidebar closeNav={closeNav} data={data} />
@@ -112,7 +89,7 @@ const DeleteOpen = () =>  {
                 )}
               </div>
               <div className="grid gap-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4">
-                {notes.map((item, index) => (
+                {Notes.map((item, index) => (
                   <div key={index} className="bg-white shadow-md rounded-md relative">
                     <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-[#5678e9]">
                       <h2 className="text-lg font-semibold text-white">{item.title}</h2>

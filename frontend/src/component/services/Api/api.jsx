@@ -404,3 +404,20 @@ export const GetVisiter = (setAddExpense) => {
         setAddExpense(res.data)
     })
 }
+
+
+//Notes
+
+export const GetNotes = (setNotes) => {
+    axios.get('http://localhost:3030/Notes').then((res) => {
+        // console.log(res.data);
+        setNotes(res.data)
+    })
+}
+
+export const PostNotes = (data, setcreate,Fdata) => {
+        axios.post('http://localhost:3030/Notes', data).then((res) =>{
+            Fdata()
+        setcreate(res.data)
+    })
+}
