@@ -20,6 +20,16 @@ import Visitor_Logs from './component/pages/DashStack_manager/Security_Managemen
 import Security_Protocols from './component/pages/DashStack_manager/Security_Management/Security_Visitor/Security_Protocols.jsx'
 import Security_Guard from './component/pages/DashStack_manager/Security_Guard/Security_Guard.jsx'
 import Announcement from './component/pages/DashStack_manager/Announcement/Announcement.jsx'
+import Resident_home from './component/pages/Resident/pages/Dashboard/Home.jsx'
+import Resident_Personal_Detail from './component/pages/Resident/pages/Personal_Detail/Personal_Detail.jsx'
+import Resident_Service_And_Complaint from './component/pages/Resident/pages/Service_And_Complaint/Service_And_Complaint.jsx'
+import Resident_Events_Participation from './component/pages/Resident/pages/Events_Participation/Events_Participation.jsx'
+import Resident_Access_Forums from './component/pages/Resident/pages/Community/pages/Access_Forums.jsx'
+import Resident_Polls from './component/pages/Resident/pages/Community/pages/Polls.jsx'
+import Resident_Communities_Discussion from './component/pages/Resident/pages/Community/pages/Communities_Discussion.jsx'
+import Resident_Maintenance_Invoices from './component/pages/Resident/pages/Payment_Portal/pages/Maintenance_Invoices.jsx'
+import Resident_Other_Income_Invoice from './component/pages/Resident/pages/Payment_Portal/pages/Other_Income_Invoice.jsx'
+import Resident_Security_Protocols from './component/pages/Resident/pages/Security_Protocols/Security_Protocols.jsx'
 
 
 
@@ -73,6 +83,23 @@ function App() {
         {/* announcement */}
         <Route path='/announcement' element={<Announcement />} />
 
+        {/* Resident Dashboard */}
+        <Route path='/resident/home' element={<Resident_home />} />
+        {/* Resident Personal Detail */}
+        <Route path='/resident/personal_detail' element={<Resident_Personal_Detail />} />
+        {/* Resident Service And Complaint */}
+        <Route path='/resident/service_and_complaint' element={<Resident_Service_And_Complaint />} />
+        {/* Resident Events Participation */}
+        <Route path='/resident/events_participation' element={<Resident_Events_Participation />} />
+        {/* Resident Community */}
+        <Route path='/resident/community/access_forums' element={<Resident_Access_Forums />} />
+        <Route path='/resident/community/polls' element={<Resident_Polls />} />
+        <Route path='/resident/community/communities_discussion' element={<Resident_Communities_Discussion />} />
+        {/* Resident Payment Portal */}
+        <Route path='/resident/payment_portal/maintenance_invoices' element={<Resident_Maintenance_Invoices />} />
+        <Route path='/resident/payment_portal/other_income_invoice' element={<Resident_Other_Income_Invoice />} />
+        {/* Resident Security Protocols */}
+        <Route path='/resident/security_protocols' element={<Resident_Security_Protocols />} />
 
       </Routes>
     </BrowserRouter>

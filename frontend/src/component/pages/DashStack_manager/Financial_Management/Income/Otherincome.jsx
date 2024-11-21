@@ -30,7 +30,7 @@ const Otherincome = () => {
       } else {
         setError('Failed to load data or data is invalid.');
       }
-  ;
+      ;
     });
   };
 
@@ -96,11 +96,14 @@ const Otherincome = () => {
                       <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-10">
                         <ul className="py-1 text-gray-700">
                           <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={handleEditForm}>
-                            Edit 
+                            Edit
                           </li>
                           {EditIncome && <EditOIncome setEditIncome={closeEditForm} />}
-                          <Link className="px-4 py-2 hover:bg-gray-100 cursor-pointer" to="/financial_management/ViewParticipation">
-                            View
+                          <Link to="/financial_management/ViewParticipation">
+                            <li className='px-4 py-2 hover:bg-gray-100 cursor-pointer'>
+
+                              View
+                            </li>
                           </Link>
                           <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={handleDelete}>
                             Delete

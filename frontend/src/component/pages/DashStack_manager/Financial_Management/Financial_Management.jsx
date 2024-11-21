@@ -10,13 +10,11 @@ import Otherincome from './Income/Otherincome';
 import SetMaintenancePwd from '../../../Modals/SetMaintenancePwd';
 import Viewmaintenance from '../../../Modals/Viewmaintenance ';
 import { GetMaintenance } from '../../../services/Api/api';
+import { GrFormView } from 'react-icons/gr';
 
 const Financial_Management = () => {
   const [data, setData] = useState(280);
   const [getdata, setGetdata] = useState(280);
-
-
-
 
   function openNav() {
     setData(280);
@@ -30,36 +28,36 @@ const Financial_Management = () => {
 
   const [activeTab, setActiveTab] = useState("Maintenance");
 
-  
   const [ShowMaintenance, setShowMaintenance] = useState(false);
-  
+
   const OpenMaintenance = () => {
     setShowMaintenance(true);
   };
   const CloseMaintenance = () => {
     setShowMaintenance(false);
   };
-  
-  const [ShowViewUser, setShowViewUser] = useState(false);
 
-  const OpenView = () => {
+  const [ShowViewUser, setShowViewUser] = useState(false);
+  const [IdShow, setIdShow] = useState([])
+
+  const OpenView = (id) => {
     setShowViewUser(true);
+    setIdShow(id)
   };
   const CloseView = () => {
     setShowViewUser(false);
   };
-  
-  const [udata,setudata]=useState([])
 
-  // console.log(udata);
-  
-  useEffect(()=>{
-  Fdata()
-  },[])
-  const Fdata = () =>{
+  const [udata, setudata] = useState([])
+
+  useEffect(() => {
+    Fdata()
+  }, [])
+
+  const Fdata = () => {
     GetMaintenance(setudata)
   }
-  
+
   return (
     <div >
       <Sidebar closeNav={closeNav} data={data} />
@@ -87,14 +85,14 @@ const Financial_Management = () => {
               </div>
 
               {/* Set Maintenance Button */}
-              <button    onClick={OpenMaintenance} className="px-4 py-2 w-full lg:w-auto bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200">
+              <button onClick={OpenMaintenance} className="px-4 py-2 w-full lg:w-auto bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200">
                 Set Maintenance
               </button>
               {ShowMaintenance && (
-                    <SetMaintenancePwd  Fdata={Fdata}
-                    setShowMaintenance={CloseMaintenance}
-                    />
-                  )}
+                <SetMaintenancePwd Fdata={Fdata}
+                  setShowMaintenance={CloseMaintenance}
+                />
+              )}
             </div>
           )}
 
@@ -127,73 +125,75 @@ const Financial_Management = () => {
                 <thead className="bg-blue-100 text-gray-700">
                   <tr>
                     <th className="px-4 py-2 text-left">Name</th>
-                    <th className="px-4 py-2 text-left">Unit Number</th>
-                    <th className="px-4 py-2 text-left">Date</th>
-                    <th className="px-4 py-2 text-left">Status</th>
-                    <th className="px-4 py-2 text-left">Phone Number</th>
-                    <th className="px-4 py-2 text-left">Amount</th>
-                    <th className="px-4 py-2 text-left">Penalty</th>
-                    <th className="px-4 py-2 text-left">Status</th>
-                    <th className="px-4 py-2 text-left">Payment</th>
-                    <th className="px-4 py-2 text-left">Action</th>
+                    <th className="px-4 py-2 text-create">Unit Number</th>
+                    <th className="px-4 py-2 text-create">Date</th>
+                    <th className="px-4 py-2 text-create">Status</th>
+                    <th className="px-4 py-2 text-create">Phone Number</th>
+                    <th className="px-4 py-2 text-create">Amount</th>
+                    <th className="px-4 py-2 text-create">Penalty</th>
+                    <th className="px-4 py-2 text-create">Status</th>
+                    <th className="px-4 py-2 text-create">Payment</th>
+                    <th className="px-4 py-2 text-create">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {udata.map((item, index) => (
-                    <tr key={index} className="border-b">
-                      <td className="px-4 py-3 flex items-center space-x-2">
-                        <img src={item.img} alt="Profile" className="w-9 h-9 rounded-full" />
-                        <span>{item.name}</span>
+                  {udata.map((e, index) => (
+                    <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium text-center md:font-semibold overflow-x-scroll">
+                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex items-center">
+                        <img className="w-8 h-8 rounded-full mr-1" src={e.img} alt="profile" />
+                        <span>{e.name}</span>
                       </td>
-                      <td className="px-4 py-3">
-                        <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-600">{item.unit}</span>
+                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">
+                        <samp className=' px-2 py-1 text-[#5678e9] bg-[#f6f8fb] mr-2 rounded-full'>{e.unit}</samp>
+                        {e.unit_Num}
                       </td>
-                      <td className="px-4 py-3">{item.date}</td>
-                      <td className="p-4">
-                        {item.status === 'Owner' ? (
-                          <span className="px-2 py-1 flex items-center gap-1 rounded-full text-blue-700 bg-blue-100">
-                            <FaUser /> Owner
+                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.date}</td>
+                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">
+                        {e.status === 'Owner' ? (
+                          <span className="px-2 py-1 flex justify-center items-center gap-1 rounded-full font-medium text-[#4f46e5] bg-[#f1f0ff]">
+                            <BsPersonBoundingBox className='text-sm' />Owner
                           </span>
                         ) : (
-                          <span className="px-2 py-1 flex items-center gap-1 rounded-full text-pink-700 bg-pink-100">
-                            <BsPersonBoundingBox /> Tenant
+                          <span className="px-2 py-1 flex justify-center items-center gap-1 rounded-full font-medium text-[#ec4899] bg-[#fff1f8]">
+                            <FaUser className='text-sm' /> Tenant
                           </span>
                         )}
                       </td>
-                      <td className="px-4 py-3">{item.phone}</td>
-                      <td className="px-4 py-3 text-green-600 font-bold">{item.amount}</td>
-                      <td className="p-4">{item.penalty ? <span className="text-red-600  font-semibold">{item.penalty}</span> : '--'}</td>
+                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.phone}</td>
+                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.amount}</td>
                       <td className="p-4">
-                        {item.paymentStatus === 'Pending' ? (
-                          <span className="px-2 py-1 flex items-center gap-1 rounded-full text-yellow-700 bg-yellow-100">
+                        {e.penalty === '-' ? (
+                          <span className="bg-[#f6f8fb] text-xs flex justify-center rounded-full py-1 px-3 font-semibold">{e.penalty}</span>
+                        ) : (
+                          <span className="bg-[#e74c3c] text-xs flex justify-center rounded-full py-1 px-3 text-white font-semibold">{e.penalty}</span>
+                        )}
+                      </td>
+                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 ">
+                        {e.paymentstatus === 'Pending' ? (
+                          <span className="px-2 py-1 flex justify-center items-center gap-1 rounded-full font-medium bg-[#fff9e7] text-[#ffc313]">
                             <MdOutlinePendingActions /> Pending
                           </span>
                         ) : (
-                          <span className="px-2 py-1 flex items-center gap-1 rounded-full text-green-700 bg-green-100">
+                          <span className="px-2 py-1 flex justify-center items-center gap-1 rounded-full font-medium bg-[#ebf5ec] text-[#39973d]">
                             <FaCheckCircle /> Done
                           </span>
                         )}
                       </td>
-                      <td className="p-4">
-                        {item.paymentMethod === 'Online' ? (
-                          <span className="px-2 py-1 flex items-center gap-1 rounded-full bg-blue-100 text-blue-600">
+                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
+                        {e.paymentMethod === 'Online' ? (
+                          <span className="px-2 py-1 flex justify-center items-center gap-1 rounded-full font-medium bg-[#eef1fd] text-[#5678e9]">
                             <IoMdWallet /> Online
                           </span>
                         ) : (
-                          <span className="px-2 py-1 flex items-center gap-1 rounded-full bg-gray-200 text-gray-600">
+                          <span className="px-2 py-1 flex justify-center items-center gap-1 rounded-full font-medium bg-[#f4f4f4] text-[#202224]">
                             <HiOutlineCash /> Cash
                           </span>
                         )}
                       </td>
-                      <td className="px-4 py-3">
-                        <button className="p-2 bg-gray-200 rounded-full hover:bg-gray-300" onClick={OpenView} >
-                          <FaEye className="text-customBlue"  />
+                      <td className="px-2 justify-center md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-2 md:space-x-2">
+                        <button className="text-blue-500 bg-[#f6f8fb] px-1 text-2xl rounded-lg" onClick={() => OpenView(e.id)}>
+                          <GrFormView />
                         </button>
-                        {ShowViewUser && (
-                    <Viewmaintenance
-                    setShowViewUser={CloseView}
-                    />
-                  )}
                       </td>
                     </tr>
                   ))}
@@ -207,7 +207,7 @@ const Financial_Management = () => {
               <Otherincome />
             </div>
           )}
-
+          {ShowViewUser && (<Viewmaintenance close={CloseView} id={IdShow} />)}
         </main>
       </div>
     </div>

@@ -322,7 +322,6 @@ export const DeleteAnnouncement = (_id, Fdata, ClaseDeleteAnnouncement) => {
 
 export const GetMaintenance = (setudata) => {
     axios.get('http://localhost:3030/Maintenance').then((res) => {
-        // console.log(res.data);
         setudata(res.data)
     })
 }

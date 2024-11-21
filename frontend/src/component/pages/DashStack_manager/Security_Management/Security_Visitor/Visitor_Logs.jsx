@@ -65,7 +65,7 @@ const Visitor_Logs = () => {
                                     {visitorLogs.map((item, index) => (
                                         <tr key={index} className="border-b">
                                             <td className="px-4 py-3 flex items-center space-x-2">
-                                                <FaUser className="w-9 h-9 rounded-full border border-gray-400" />
+                                                <FaUser className="w-8 h-8 rounded-full border border-gray-400" />
                                                 <span>{item.name}</span>
                                             </td>
                                             <td className="px-4 py-3">{item.phone}</td>
