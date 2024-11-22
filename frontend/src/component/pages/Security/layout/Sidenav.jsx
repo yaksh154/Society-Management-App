@@ -35,11 +35,6 @@ export default function Sidenav({ closeNav, data }) {
             ×
           </button>
 
-          
-        
-
-
-         
           <Link
             onClick={toggleDropdown}
             aria-current={pathname.startsWith("/resident/community") ? "page" : undefined}
@@ -65,8 +60,8 @@ export default function Sidenav({ closeNav, data }) {
               <ul className="w-full">
                 <li className="ml-6">
                   <Link
-                    to="/Security"
-                    className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/Security") ? "border-black font-semibold" : ""}`}
+                    to="/Security/visitor"
+                    className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/Security/visitor") ? "border-black font-semibold" : ""}`}
                   >
                   Visitor Tracking
                   </Link>
