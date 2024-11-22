@@ -20,7 +20,6 @@ const expensesSchema = new mongoose.Schema(
     },
     Bill: {
       type: String,
-      require: true
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,

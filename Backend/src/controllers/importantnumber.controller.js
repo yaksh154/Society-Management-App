@@ -6,9 +6,6 @@ const createImportantNumber = async (req, res) => {
         console.log("🚀 ~ createImportantNumber ~ num:", num)
         const number = await importantnumber_servise.findbynumber(num)
         console.log("🚀 ~ createImportantNumber ~ number:", number)
-        if (number) {
-            return res.status(400).json({ message: "Number already exists" });
-        }
         const importantNumber = await importantnumber_servise.create(req.body);
         res.status(201).json(importantNumber);
     } catch (error) {

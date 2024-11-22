@@ -102,8 +102,9 @@ const login = async (req, res) => {
     };
 
     const token = jwt.sign(payload, process.env.SECRET_key, { expiresIn: "1d" });
-    res.cookie("token", token);
-    res.WriteHeader('Authorization', `Bearer ${token}`);
+    // res.cookie("token", token);
+    // res.WriteHeader('Authorization', `Bearer ${token}`);
+    console.log('Authorization Header:', req.headers);
     console.log("🚀 ~ login ~ token generated:", token);
     res.status(200).json({ message: "manager Login Successful", token: token });
   } catch (error) {
