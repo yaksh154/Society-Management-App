@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PaymentmethodModal from './PaymentmethodModal';
+import CloseBtn from '../../../layout/CloseButton'
 
 const GetPassModal = ({ close }) => {
     const [selectMember, setSelectMember] = useState("");
@@ -13,7 +14,7 @@ const GetPassModal = ({ close }) => {
         setPaymentMethod(true)
     };
 
-    const ClosePaymentMethod = () =>{
+    const ClosePaymentMethod = () => {
         setPaymentMethod(false)
     }
 
@@ -58,26 +59,19 @@ const GetPassModal = ({ close }) => {
                     </div>
 
                     <div className="flex justify-end mt-4">
-                        <button
-                            type="button"
-                            className="bg-white border rounded-lg w-1/2 font-semibold text-gray-700 py-2 mr-2 hover:bg-[#f0f5fb]"
-                            onClick={close}
-                        >
-                            Cancel
-                        </button>
+                        <CloseBtn type="button" CloseName="Cancel" onClick={close} Addclass='w-1/2' />
                         <button
                             onClick={totleAmount}
                             disabled={totalAmount === 0}
-                            className={`px-4 py-2 w-1/2 rounded-lg font-semibold shadow-lg transition duration-200 ${
-                                totalAmount === 0
-                                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                                    : "bg-gradient-to-r from-orange-500 to-yellow-500 text-white hover:from-orange-600 hover:to-yellow-600"
-                            }`}
+                            className={`px-4 py-2 w-1/2 rounded-lg font-semibold shadow-lg transition duration-200 ${totalAmount === 0
+                                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                                : "bg-gradient-to-r from-orange-500 to-yellow-500 text-white hover:from-orange-600 hover:to-yellow-600"
+                                }`}
                         >
                             Get Pass
                         </button>
                     </div>
-                    {PaymentMethod && (<PaymentmethodModal close1={close} close2={ClosePaymentMethod}/>)}
+                    {PaymentMethod && (<PaymentmethodModal close1={close} close2={ClosePaymentMethod} />)}
                 </div>
             </div>
         </div>

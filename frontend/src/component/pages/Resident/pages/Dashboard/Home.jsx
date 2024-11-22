@@ -80,7 +80,6 @@ const Home = () => {
               <div className="flex justify-between items-center mb-6">
                 <h1 className='font-semibold md:text-xl text-md'>Detail of the Per Person</h1>
                 <Button onClick={() => setGetPass(true)} Btn_Name="Get Pass" />
-
                 {GetPass && (<GetPassModal close={closeGetPass} />)}
               </div>
             </div>

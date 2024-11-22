@@ -1,5 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import CloseBtn from '../../../layout/CloseButton'
+import Button from '../../../layout/Button_gradient'
 
 const ComplaintModal = ({ close }) => {
     const getCurrentDate = () => {
@@ -152,19 +154,12 @@ const ComplaintModal = ({ close }) => {
                         {errors.Complain_Status && <p className="text-red-500 text-xs mt-1">{errors.Complain_Status.message}</p>}
                     </div>
                     <div className="flex justify-end mt-4">
-                        <button
-                            type="button"
-                            className="bg-gray-100 w-1/2 font-semibold text-gray-700 mr-2"
-                            onClick={close}
-                        >
-                            Cancel
-                        </button>
-                        <button
+                        <CloseBtn type="button" Addclass='w-1/2' onClick={close} CloseName='Cancel' />
+                        <Button
                             type="submit"
-                            className="bg-orange-500 hover:bg-orange-600 text-white w-1/2 font-semibold py-1 rounded text-sm"
-                        >
-                            Save
-                        </button>
+                            Btn_Name='Create'
+                            Addclass='w-1/2'
+                        />
                     </div>
                 </form>
             </div>

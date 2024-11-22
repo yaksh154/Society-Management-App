@@ -27,9 +27,11 @@ const Service_And_Complaint = () => {
     // Delete 
 
     const [Delete, setDelete] = useState(false)
+    const [DId, setDId] = useState('')
 
     const OpneDelete = () =>{
         setDelete(true);
+        setDId()
     }
     
     const closeDelete = () => {
@@ -37,6 +39,7 @@ const Service_And_Complaint = () => {
     }
 
     const DeleteClick = () =>{
+        DId()
         console.log("Delete data");
     }
 
