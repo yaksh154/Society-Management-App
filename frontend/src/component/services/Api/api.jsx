@@ -2,7 +2,6 @@ import axios from "axios";
 
 const url = 'https://society-management-app-server.onrender.com'
 
-
 // login Manger
 
 export const ManagerLogin = (data, setLoginError, navigate, storetokenInLs, setLoading, reset) => {
@@ -157,17 +156,36 @@ export const UserCreateSociety = (newSociety, CloseCreatenewSociety) => {
         });
 }
 
+axios.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
 // ImportantNumbers page Home
 
 // ImportantNumbers get
 
 export const ImportantNumbersGet = (setContacts, setLoading) => {
-
     setLoading(true);
-
-    axios.get(`${url}/importantnumber/getAllImportantNumbers`)
+    // const token = localStorage.getItem('token')
+    // console.log(token);
+    axios.get(`${url}/importantnumber/getAllImportantNumbers`
+        //  {
+        //     headers: {
+        //         'Authorization': `Bearer ${token}`
+        //     }
+        // }
+    )
         .then((res) => {
-
+            console.log(res.headers)
             setContacts(res.data);
             setLoading(false);
         })
@@ -181,10 +199,16 @@ export const ImportantNumbersGet = (setContacts, setLoading) => {
 // ImportantNumbers post
 
 export const ImportantNumbersPost = (newNumber, Fdata) => {
-    axios.post(`${url}/importantnumber/createImportantNumber`, newNumber)
+    const token = localStorage.getItem('token')
+    axios.post(`${url}/importantnumber/createImportantNumber`, newNumber, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
         .then((res) => {
             console.log(res);
             Fdata()
+
         })
         .catch((err) => {
             console.error('Error fetching important numbers:', err);
@@ -208,7 +232,7 @@ export const ImportantNumbersDelete = (_id, contacts, setContacts, ClosedeleteCo
 
 // ImportantNumbers edit
 
-export const updateImportantNumber = (_id, editNumber,Fdata, closeEditModal) => {
+export const updateImportantNumber = (_id, editNumber, Fdata, closeEditModal) => {
     axios.put(`${url}/importantnumber/updateImportantNumber/${_id}`, editNumber)
         .then(() => {
             closeEditModal();
@@ -343,22 +367,22 @@ export const GetOtherIncome = (setIncomeData) => {
     })
 }
 
-export const PostOtherIncome= (data, Fdata, setCreateIncome) => {
+export const PostOtherIncome = (data, Fdata, setCreateIncome) => {
     axios.post(`http://localhost:3030/OtherIncome`, data).then((res) => {
         Fdata()
         setCreateIncome(false)
     })
 }
 export const UpdateOtherIncome = async (id, data) => {
-  try {
-    const response = await axios.put(`http://localhost:3030/OtherIncome/${id}`, data);
-    return response.data; // Backend should return `{ success: true, data: updatedItem }`
-  } catch (error) {
-    console.error('Error in UpdateOtherIncome API:', error);
-    throw error;
-  }
+    try {
+        const response = await axios.put(`http://localhost:3030/OtherIncome/${id}`, data);
+        return response.data; // Backend should return `{ success: true, data: updatedItem }`
+    } catch (error) {
+        console.error('Error in UpdateOtherIncome API:', error);
+        throw error;
+    }
 };
-export const DeleteOtherIncome= (data, Fdata, setCreateIncome) => {
+export const DeleteOtherIncome = (data, Fdata, setCreateIncome) => {
     axios.delete(`http://localhost:3030/OtherIncome/:id`, data).then((res) => {
         Fdata()
         setCreateIncome(false)
@@ -370,13 +394,13 @@ export const DeleteOtherIncome= (data, Fdata, setCreateIncome) => {
 
 export const GetExpanse = (setAddExpense) => {
     axios.get(`${url}/expenses/getAllexpensess`).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setAddExpense(res.data)
     })
 }
 
 
-export const PostExpanse= (data, Fdata, setAddExpense) => {
+export const PostExpanse = (data, Fdata, setAddExpense) => {
     axios.post(`${url}/expenses/createexpenses`, data).then((res) => {
         Fdata()
         setAddExpense(false)
@@ -389,7 +413,7 @@ export const PutExpense = (setIncomeData) => {
     })
 }
 
-export const DeleteExpense= (data, Fdata, setCreateIncome) => {
+export const DeleteExpense = (data, Fdata, setCreateIncome) => {
     axios.post(`http://localhost:3030/Expenses/:id`, data).then((res) => {
         Fdata()
         setCreateIncome(false)
@@ -425,9 +449,9 @@ export const GetNotes = (setNotes) => {
     })
 }
 
-export const PostNotes = (data, setcreate,Fdata) => {
-        axios.post('http://localhost:3030/Notes', data).then((res) =>{
-            Fdata()
+export const PostNotes = (data, setcreate, Fdata) => {
+    axios.post('http://localhost:3030/Notes', data).then((res) => {
+        Fdata()
         setcreate(res.data)
     })
 }
