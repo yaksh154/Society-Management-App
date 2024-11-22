@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../../layout/Sidebar'
 import Header from '../../layout/Header'
 import Button from '../../layout/Button_gradient'
@@ -6,6 +6,9 @@ import Home_totle_card from '../../../../layout/Home_totle_card';
 import { TiThMenu } from 'react-icons/ti';
 import { MdOutlineAttachMoney } from 'react-icons/md';
 import GetPassModal from './Modal/GetPassModal';
+import TotalBalanceChart from '../../../../layout/TotalBalanceChart';
+import { ImportantNumbersGet } from '../../../../services/Api/api';
+import axios from 'axios';
 
 const Home = () => {
   let [data, setdata] = useState(280);
@@ -24,6 +27,31 @@ const Home = () => {
 
   const closeGetPass = () => {
     setGetPass(false)
+  }
+
+  const [loading, setLoading] = useState(true);
+  const [contacts, setContacts] = useState('');
+
+  useEffect(() => {
+    Fdata()
+  }, [])
+
+  const Fdata = () => {
+    ImportantNumbersGet(setContacts, setLoading)
+  }
+
+  // Pending Maintenances
+
+  const [PendingData, setPendingData] = useState('');
+
+  useEffect(() => {
+    GetPendMain()
+  }, [])
+
+  const GetPendMain = () => {
+    axios.get('http://localhost:3030/PendingMaintenances').then((res)=>{
+      
+    })
   }
 
   return (
@@ -72,15 +100,62 @@ const Home = () => {
               totle_simbol={<MdOutlineAttachMoney />}
             />
           </div>
+          <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-1 gap-4">
+            <div className="bg-white rounded-lg max-[425px]:overflow-x-auto shadow-lg xl:col-span-2 col-span-1">
+              <TotalBalanceChart />
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-lg col-span-1">
+              <div className=" bg-white rounded-lg">
+                <div className="flex justify-between items-center mb-5">
+                  <h2 className="text-lg font-semibold text-gray-800">Important Numbers</h2>
+                </div>
+                <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
+                  {loading ? (
+                    <div className="text-center text-gray-500">Loading...</div>
+                  ) : (
+                    <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
+                      {contacts.map(contact => (
+                        <div
+                          key={contact._id}
+                          className="flex justify-between items-center p-4 bg-gray-100 rounded-lg"
+                        >
+                          <div>
+                            <p className="text-sm font-medium">
+                              Name: <span className='text-[#a7a7a7]'>{contact.Fullname}</span>
+                            </p>
+                            <p className="text-sm">
+                              Phone Number: <span className='text-[#a7a7a7]'>{contact.Phonenumber}</span>
+                            </p>
+                            <p className="text-sm">
+                              Work: <span className='text-[#a7a7a7]'>{contact.Work}</span>
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="bg-white p-4 rounded-lg shadow-lg col-span-1">
+              <div className="flex justify-between items-center mb-4">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-lg font-semibold">Pending Maintenances</h2>
+                </div>
+                <div className="space-y-4 overflow-y-auto max-h-80 px-2">
 
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
         <div className="flex-1 bg-[#f0f5fb]">
-          <div className="p-6">
+          <div className="p-6 pt-0">
             <div className="bg-white shadow-md rounded-lg p-6">
               <div className="flex justify-between items-center mb-6">
                 <h1 className='font-semibold md:text-xl text-md'>Detail of the Per Person</h1>
                 <Button onClick={() => setGetPass(true)} Btn_Name="Get Pass" />
-
                 {GetPass && (<GetPassModal close={closeGetPass} />)}
               </div>
             </div>

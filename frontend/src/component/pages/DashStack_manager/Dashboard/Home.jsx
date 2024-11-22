@@ -39,7 +39,7 @@ const Home = () => {
     setget(0);
   }
 
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState('');
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editModal, seteditModal] = useState(false);

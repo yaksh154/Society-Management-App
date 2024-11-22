@@ -1,4 +1,5 @@
 import React from 'react'
+import CloseBtn from '../layout/CloseButton'
 
 const DeleteModal = (props) => {
     return (
@@ -12,13 +13,12 @@ const DeleteModal = (props) => {
                 <div className="p-5">
                     <p className='text-md text-[#a7a7a7]'>Are you sure you want to delete this Complain?</p>
                     <div className="flex justify-end mt-4">
-                        <button
+                        <CloseBtn
                             type="button"
-                            className="bg-white border rounded-lg w-1/2 font-semibold text-gray-700 py-2 mr-2"
                             onClick={props.close}
-                        >
-                            Cancel
-                        </button>
+                            CloseName='Cancel'
+                            Addclass='w-1/2'
+                        />
                         <button
                             onClick={props.DeleteClick}
                             className="bg-[#e74c3c] hover:bg-orange-600 text-white w-1/2 font-semibold py-1 rounded-lg text-sm"

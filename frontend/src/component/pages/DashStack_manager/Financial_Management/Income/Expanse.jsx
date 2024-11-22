@@ -38,19 +38,19 @@ const Expanse = () => {
   const RemoveOpen = () => setRemove(true);
   const RemoveView = () => setRemove(false);
 
- 
-    const Fdata = async () => {
-      setError(null);
+
+  const Fdata = async () => {
+    setError(null);
     GetExpanse((data) => {
       if (data && Array.isArray(data)) {
         setExpenses(data);
       } else {
         setError('Failed to load data or data is invalid.');
       }
-  ;
+      ;
     });
-    };
-    useEffect(() => {
+  };
+  useEffect(() => {
     Fdata();
   }, []);
 
@@ -71,7 +71,7 @@ const Expanse = () => {
               >
                 <FaSquarePlus className="mr-2" /> Add New Expenses Details
               </button>
-              {AddExpense && <AddExpenseForm   Fdata={Fdata} setAddExpense={Close}  />}
+              {AddExpense && <AddExpenseForm Fdata={Fdata} setAddExpense={Close} />}
             </div>
             <div className="p-4 bg-white rounded-lg shadow-lg">
               <table className="min-w-full bg-white rounded-lg">
@@ -88,10 +88,14 @@ const Expanse = () => {
                 <tbody>
                   {expenses.map((expense, index) => (
                     <tr key={index} className="border-b hover:bg-gray-50 font-medium md:font-semibold">
-                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{expense.title}</td>
-                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{expense.description}</td>
-                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{expense.date}</td>
-                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-green-500">₹ {expense.amount}</td>
+                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{expense.Title}</td>
+                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{expense.Description}</td>
+                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{new Date(expense.Date).toLocaleDateString("en-US", {
+                        month: "2-digit",
+                        day: "2-digit",
+                        year: "numeric",
+                      })}</td>
+                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-green-500">₹ {expense.Amount}</td>
                       <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
                         {expense.format === 'PDF' ? (
                           <span className="flex items-center space-x-1">
