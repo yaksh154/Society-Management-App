@@ -4,7 +4,7 @@ import { FaCalendarAlt } from 'react-icons/fa';
 import { BiImageAdd } from 'react-icons/bi';
 import { PostExpanse } from '../services/Api/api';
 
-const AddExpenseForm = ({ setAddExpense ,Fdata }) => {
+const AddExpenseForm = ({ setAddExpense, Fdata }) => {
   const {
     register,
     handleSubmit,
@@ -12,14 +12,14 @@ const AddExpenseForm = ({ setAddExpense ,Fdata }) => {
     reset,
     setValue,
   } = useForm();
-  
+
   const fileInputRef = useRef(null);
   const [previewImage, setPreviewImage] = useState(null); // For image preview
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setValue('bill', file);
+      setValue('Bill', file);
       // Create a preview URL for the image
       const fileURL = URL.createObjectURL(file);
       setPreviewImage(fileURL);
@@ -31,10 +31,10 @@ const AddExpenseForm = ({ setAddExpense ,Fdata }) => {
   };
 
   const onSubmit = (data) => {
-console.log(data);
+    console.log(data);
 
-    const { bill, ...formData } = data;
-    PostExpanse (data,Fdata,setAddExpense)
+    const { Bill, ...formData } = data;
+    PostExpanse(data, Fdata, setAddExpense)
   };
 
   const handleCancel = () => {
@@ -47,7 +47,7 @@ console.log(data);
       <div className="p-6 bg-white rounded-lg shadow-md max-w-md w-full mx-auto relative z-60">
         <h2 className="text-xl font-semibold mb-4">Add Expenses Details</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-4">
+          <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Title <span className="text-red-500">*</span>
             </label>
@@ -110,7 +110,7 @@ console.log(data);
             </div>
           </div>
 
-          
+
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Upload Bill <span className="text-red-500">*</span>
@@ -120,30 +120,30 @@ console.log(data);
               onClick={handleFileClick}
             >
               <input
-  type="file"
-  {...register('bill', {
-    validate: {
-      isImage: (fileList) => {
-        if (fileList && fileList.length > 0) {
-          const fileType = fileList[0].type;
-          const allowedTypes = ['image/png', 'image/jpeg', 'image/gif'];
-          return allowedTypes.includes(fileType) || 'Only PNG, JPG, and GIF files are allowed';
-        }
-        return true; // No file selected; allow form submission
-      },
-      maxSize: (fileList) => {
-        if (fileList && fileList.length > 0) {
-          const fileSize = fileList[0].size;
-          return fileSize <= 10 * 1024 * 1024 || 'File size should be up to 10MB';
-        }
-        return true; // No file selected; allow form submission
-      },
-    },
-  })}
-  onChange={handleFileChange}
-  ref={fileInputRef}
-  className="hidden"
-/>
+                type="file"
+                {...register('Bill', {
+                  validate: {
+                    isImage: (fileList) => {
+                      if (fileList && fileList.length > 0) {
+                        const fileType = fileList[0].type;
+                        const allowedTypes = ['image/png', 'image/jpeg', 'image/gif'];
+                        return allowedTypes.includes(fileType) || 'Only PNG, JPG, and GIF files are allowed';
+                      }
+                      return true; // No file selected; allow form submission
+                    },
+                    maxSize: (fileList) => {
+                      if (fileList && fileList.length > 0) {
+                        const fileSize = fileList[0].size;
+                        return fileSize <= 10 * 1024 * 1024 || 'File size should be up to 10MB';
+                      }
+                      return true; // No file selected; allow form submission
+                    },
+                  },
+                })}
+                onChange={handleFileChange}
+                ref={fileInputRef}
+                className="hidden"
+              />
 
               <div>
                 {previewImage ? (

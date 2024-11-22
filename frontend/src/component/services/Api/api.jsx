@@ -369,15 +369,15 @@ export const DeleteOtherIncome= (data, Fdata, setCreateIncome) => {
 ///Expanse 
 
 export const GetExpanse = (setAddExpense) => {
-    axios.get('http://localhost:3030/Expenses').then((res) => {
-        // console.log(res.data);
+    axios.get(`${url}/expenses/getAllexpensess`).then((res) => {
+        console.log(res.data);
         setAddExpense(res.data)
     })
 }
 
 
 export const PostExpanse= (data, Fdata, setAddExpense) => {
-    axios.post(`http://localhost:3030/Expenses`, data).then((res) => {
+    axios.post(`${url}/expenses/createexpenses`, data).then((res) => {
         Fdata()
         setAddExpense(false)
     })

@@ -6,11 +6,11 @@ const SetMaintenancePwd = ({ setShowMaintenance,Fdata }) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isIncorrect, setIsIncorrect] = useState(false);
-  const [showAddDetail, setShowAddDetail] = useState(false); // State for showing the AddMaintenanceDetail modal
+  const [showAddDetail, setShowAddDetail] = useState(false);
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    setIsIncorrect(false); // Reset incorrect password message when typing
+    setIsIncorrect(false);
   };
 
   const togglePasswordVisibility = () => {
@@ -18,22 +18,21 @@ const SetMaintenancePwd = ({ setShowMaintenance,Fdata }) => {
   };
 
   const handleCancel = () => {
-    setShowMaintenance(false); // Close the modal if applicable
+    setShowMaintenance(false);
   };
 
   const handleContinue = () => {
-    // Check if the password is '1111' after trimming whitespace
     if (password.trim() === '1111') {
-      setIsIncorrect(false); // Password is correct
-      setShowAddDetail(true); // Show the AddMaintenanceDetail modal
+      setIsIncorrect(false);
+      setShowAddDetail(true);
     } else {
-      setIsIncorrect(true); // Password is incorrect, show the warning
-      setShowAddDetail(false); // Do not show the modal if the password is wrong
+      setIsIncorrect(true);
+      setShowAddDetail(false);
     }
   };
 
   const closeAddDetail = () => {
-    setShowAddDetail(false); // Close the AddMaintenanceDetail modal
+    setShowAddDetail(false);
   };
 
   return (

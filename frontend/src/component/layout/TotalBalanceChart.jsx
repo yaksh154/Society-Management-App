@@ -1,25 +1,60 @@
 import { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 
-
 function TotalBalanceChart() {
   const [selectedRange, setSelectedRange] = useState('Last month');
 
-  const data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    datasets: [
-      {
-        label: 'Balance',
-        data: [10, 15, 25, 20, 30, 35, 30, 40, 45, 30, 35, 50],
-        fill: false,
-        backgroundColor: '#6B75FF',
-        borderColor: '#6B75FF',
-        pointBackgroundColor: '#6B75FF',
-        pointBorderColor: '#6B75FF',
-        tension: 0.4,
-      },
-    ],
+  // Data for each range
+  const dataByRange = {
+    'Last week': {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      datasets: [
+        {
+          label: 'Balance',
+          data: [5, 10, 12, 15, 20, 25, 30], // Example data for last week
+          fill: false,
+          backgroundColor: '#6B75FF',
+          borderColor: '#6B75FF',
+          pointBackgroundColor: '#6B75FF',
+          pointBorderColor: '#6B75FF',
+          tension: 0.4,
+        },
+      ],
+    },
+    'Last month': {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      datasets: [
+        {
+          label: 'Balance',
+          data: [10, 15, 25, 20, 30, 35, 30, 40, 45, 30, 35, 50], // Example data for last month
+          fill: false,
+          backgroundColor: '#6B75FF',
+          borderColor: '#6B75FF',
+          pointBackgroundColor: '#6B75FF',
+          pointBorderColor: '#6B75FF',
+          tension: 0.4,
+        },
+      ],
+    },
+    'Last year': {
+      labels: ['2023 Q1', '2023 Q2', '2023 Q3', '2023 Q4'],
+      datasets: [
+        {
+          label: 'Balance',
+          data: [100, 120, 150, 200], // Example data for last year
+          fill: false,
+          backgroundColor: '#6B75FF',
+          borderColor: '#6B75FF',
+          pointBackgroundColor: '#6B75FF',
+          pointBorderColor: '#6B75FF',
+          tension: 0.4,
+        },
+      ],
+    },
   };
+
+  // Set the data based on the selected range
+  const data = dataByRange[selectedRange];
 
   const options = {
     plugins: {
@@ -57,7 +92,7 @@ function TotalBalanceChart() {
           boxSizing: 'border-box',
           display: 'block',
           height: '100%',
-          width: '100%'
+          width: '100%',
         }} data={data} options={options} />
       </div>
     </div>

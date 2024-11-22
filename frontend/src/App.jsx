@@ -50,38 +50,28 @@ function App() {
         {/* Dashboard */}
         <Route path='/' element={<Home />} />
         <Route path='/profile' element={<Profile />} />
-
         {/* resident_management */}
         <Route path='/resident_management' element={<Resident_Management />} />
         <Route path='/resident_management/resident_owner_Form' element={<Resident_Owner_Form />} />
-
         {/* financial_management */}
         <Route path='/financial_management/income' element={<Financial_Management />} />
-
         {/* ...Income & OtherIncome....*/}
         <Route path='/financial_management/otherincome' element={<Otherincome />} />
         <Route path='/financial_management/ViewParticipation' element={<ParticipantTable />} />
-
         {/* Expenses */}
         <Route path='/financial_management/Expanse' element={<Expanse />} />
-
         {/* Note */}
         <Route path='/financial_management/Note' element={<Note />} />
-
         {/* facility_management */}
         <Route path='/facility_management' element={<Facility_Management />} />
-
         {/* complaint_tracking */}
         <Route path='/complaint_tracking/Create_Complaint' element={<Create_Complaint />} />
         <Route path='/complaint_tracking/Request_Tracking' element={<Request_Tracking />} />
-
         {/* security_management */}
         <Route path='/security_management/visitor_logs' element={<Visitor_Logs />} />
         <Route path='/security_management/security_protocols' element={<Security_Protocols />} />
-
         {/* security_guard */}
         <Route path='/security_guard' element={<Security_Guard />} />
-
         {/* announcement */}
         <Route path='/announcement' element={<Announcement />} />
 
