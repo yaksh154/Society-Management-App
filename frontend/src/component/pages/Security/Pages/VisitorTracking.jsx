@@ -5,6 +5,7 @@ import Sidenav from '../layout/Sidenav';
 import Header from '../layout/Header';
 import { GetVisiter } from '../../../services/Api/api';
 import { AiOutlinePlus } from 'react-icons/ai';
+import AddVisiter from './Models/AddVisiter';
 
 const VisitorTracking = () => {
     const [data, setData] = useState(280);
@@ -13,20 +14,20 @@ const VisitorTracking = () => {
     const [error, setError] = useState(null);
 
     // Replace with your API endpoint
-    useEffect(() => {
-    const fetchVisitorLogs = async () => {
-      setError(null);
-      GetVisiter((data) => {
-        if (data && Array.isArray(data)) {
-          setVisitorLogs(data);
-        } else {
-          setError('Failed to load data or data is invalid.');
-        }
-    ;
-      });
+    const Fdata = async () => {
+        setError(null);
+        GetVisiter((data) => {
+            if (data && Array.isArray(data)) {
+                setVisitorLogs(data);
+            } else {
+                setError('Failed to load data or data is invalid.');
+            }
+            ;
+        });
     };
 
-        fetchVisitorLogs();
+    useEffect(() => {
+        Fdata();
     }, []);
 
     function openNav() {
@@ -38,6 +39,18 @@ const VisitorTracking = () => {
         setData(0);
         setGetData(0);
     }
+  
+    const [AddVisiterbox, setAddVisiterbox] = useState(false);
+
+    const OpenVisiterBox = () => {
+        console.log("hii");
+        
+      setAddVisiterbox(true);
+    };
+    const CloseVisiterBox = () => {
+      setAddVisiterbox(false);
+    };
+  
 
   return (
     <div>
@@ -50,10 +63,15 @@ const VisitorTracking = () => {
                     <div className="overflow-x-auto bg-white p-4 rounded-xl">
                     <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-semibold text-gray-700">Visitor Tracking</h1>
-        <button className="flex items-center bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition">
-          <AiOutlinePlus className="mr-2" size={20} />
+        <button className="flex items-center bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition" onClick={OpenVisiterBox}>
+          <AiOutlinePlus className="mr-2" size={20}  />
           Add Visitor Details
         </button>
+        {AddVisiterbox && (
+                <AddVisiter Fdata={Fdata}
+                setAddVisiterbox={CloseVisiterBox}
+                />
+              )}
       </div>
 
                             <table className="w-full table-auto">
@@ -76,7 +94,7 @@ const VisitorTracking = () => {
                                             <td className="px-4 py-3">{item.phone}</td>
                                             <td className="px-4 py-3">{item.date}</td>
                                             <td className="px-4 py-3">
-                                                <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-600">{item.unit}</span>
+                                                <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-600">{item.wing} {item.unit}</span>
                                             </td>
                                             <td className="px-4 py-3">
                                                 <span className="px-2 py-1 rounded-full bg-gray-200 text-black">{item.time}</span>

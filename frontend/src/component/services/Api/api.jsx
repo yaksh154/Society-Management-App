@@ -398,12 +398,22 @@ export const DeleteExpense= (data, Fdata, setCreateIncome) => {
 
 ///Visiter Data
 
-export const GetVisiter = (setAddExpense) => {
+export const GetVisiter = (setVisitorLogs) => {
     axios.get('http://localhost:3030/Visitors').then((res) => {
         // console.log(res.data);
-        setAddExpense(res.data)
+  
+        setVisitorLogs(res.data)
     })
 }
+
+export const PostVisiter = ( data, Fdata, setAddVisiterbox) => {
+    axios.post('http://localhost:3030/Visitors',data).then((res) => {
+        Fdata()
+        setAddVisiterbox(res.data)
+    })
+}
+
+
 
 
 //Notes
