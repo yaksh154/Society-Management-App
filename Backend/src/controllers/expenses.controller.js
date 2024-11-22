@@ -4,19 +4,22 @@ const { uploadFile } = require("../middleware/upload")
 const createexpenses = async (req, res) => {
     try {
         const reqbody = req.body
-        if (reqbody) {
-            return res.status(400).json({ message: "all field required" });
-        }
-        const img = req.files.Image[0].path
+        console.log("🚀 ~ createexpenses ~ reqbody:", reqbody)
+        // if (reqbody) {
+        //     return res.status(400).json({ message: "all field required" });
+        // }
+        const img = req.files.Bill[0].path
+        console.log("🚀 ~ createexpenses ~ img:", img)
         const upload = await uploadFile(img);
+        console.log("🚀 ~ createexpenses ~ upload:", upload)
         const body = {
             Title : reqbody.title,
             Description : reqbody.description,
             Date : reqbody.date,
             Amount : reqbody.amount,
             Bill: upload.secure_url,
-            createdBy: req.user._id,
-            Society: req.user.societyid
+            // createdBy: req.user._id,
+            // Society: req.user.societyid
         }
         const expenses = await expenses_servise.create(body);
         res.status(201).json(expenses);
@@ -25,7 +28,7 @@ const createexpenses = async (req, res) => {
     }
 };
 
-// Get all expenses 
+// Get all expenses
 const getAllexpenses = async (req, res) => {
     try {
         const expensess = await expenses_servise.getAll();
