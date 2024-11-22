@@ -2,13 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../../../../layout/Sidebar';
 import Header from '../../../../layout/Header';
-import { FaEye, FaFileImage, FaFilePdf, FaPen, FaTrashAlt } from 'react-icons/fa';
+import { FaEdit, FaEye, FaFileImage, FaFilePdf, FaPen, FaTrashAlt } from 'react-icons/fa';
 import { FaSquarePlus } from 'react-icons/fa6';
 import AddExpenseForm from '../../../../Modals/AddExpenseForm';
 import EditExpensesForm from '../../../../Modals/EditExpensesForm';
 import ViewExpense from '../../../../Modals/ViewExpense';
 import DeleteExpence from '../../../../Modals/DeleteExpence';
 import { GetExpanse } from '../../../../services/Api/api';
+import { GrFormView } from 'react-icons/gr';
 
 const Expanse = () => {
   const [sidebarWidth, setSidebarWidth] = useState(280);
@@ -79,10 +80,10 @@ const Expanse = () => {
                   <tr>
                     <th className="px-2 md:px-4 py-2 md:py-3 text-left text-xs md:text-sm text-gray-600">Title</th>
                     <th className="px-2 md:px-4 py-2 md:py-3 text-left text-xs md:text-sm text-gray-600">Description</th>
-                    <th className="px-2 md:px-4 py-2 md:py-3 text-left text-xs md:text-sm text-gray-600">Date</th>
-                    <th className="px-2 md:px-4 py-2 md:py-3 text-left text-xs md:text-sm text-gray-600">Amount</th>
-                    <th className="px-2 md:px-4 py-2 md:py-3 text-left text-xs md:text-sm text-gray-600">Bill Format</th>
-                    <th className="px-2 md:px-4 py-2 md:py-3 text-left text-xs md:text-sm text-gray-600">Action</th>
+                    <th className="px-2 md:px-4 py-2 md:py-3 text-left text-xs md:text-sm text-gray-600 text-center">Date</th>
+                    <th className="px-2 md:px-4 py-2 md:py-3 text-left text-xs md:text-sm text-gray-600 text-center">Amount</th>
+                    <th className="px-2 md:px-4 py-2 md:py-3 text-left text-xs md:text-sm text-gray-600 text-center">Bill Format</th>
+                    <th className="px-2 md:px-4 py-2 md:py-3 text-left text-xs md:text-sm text-gray-600 text-center">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -90,55 +91,45 @@ const Expanse = () => {
                     <tr key={index} className="border-b hover:bg-gray-50 font-medium md:font-semibold">
                       <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{expense.Title}</td>
                       <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{expense.Description}</td>
-                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{new Date(expense.Date).toLocaleDateString("en-US", {
+                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 text-center">{new Date(expense.Date).toLocaleDateString("en-US", {
                         month: "2-digit",
                         day: "2-digit",
                         year: "numeric",
                       })}</td>
-                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-green-500">₹ {expense.Amount}</td>
+                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-green-500 text-center">₹ {expense.Amount}</td>
                       <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
                         {expense.format === 'PDF' ? (
-                          <span className="flex items-center space-x-1">
+                          <span className="flex items-center space-x-1 justify-center">
                             <FaFilePdf className="text-red-500 bg-slate-200 w-4 md:w-6 h-4 md:h-6 py-1 rounded-sm" />
                             <span>PDF</span>
                           </span>
                         ) : (
-                          <span className="flex items-center space-x-1">
+                          <span className="flex items-center space-x-1 justify-center">
                             <FaFileImage className="text-blue-500 bg-slate-200 w-4 md:w-6 h-4 md:h-6 py-1 rounded-sm" />
                             <span>JPG</span>
                           </span>
                         )}
                       </td>
-                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-1 md:space-x-2">
-                        <button
-                          className="text-green-500 hover:text-green-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm"
-                          onClick={EditOpen}
-                          aria-label="Edit"
-                        >
-                          <FaPen />
+                      <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-2 md:space-x-2 justify-center">
+                        <button aria-label="Edit" onClick={EditOpen} className="text-green-500 p-1">
+                          <FaEdit />
                         </button>
-                        {EditData && <EditExpensesForm setEditData={CloseForm} />}
-                        <button
-                          className="text-blue-500 hover:text-blue-600 bg-slate-200 px-1 md:px-2 py-1 rounded-sm"
-                          aria-label="View"
-                          onClick={ViewOpen}
-                        >
-                          <FaEye />
+
+                        <button aria-label="View" onClick={ViewOpen} className="text-blue-500 text-2xl rounded">
+                          <GrFormView />
                         </button>
-                        {View && <ViewExpense setView={CloseView} />}
-                        <button
-                          className="text-red-500 bg-slate-200 px-1 md:px-2 py-1 rounded-sm hover:text-red-600"
-                          aria-label="Delete"
-                          onClick={RemoveOpen}
-                        >
+
+                        <button aria-label="Delete" onClick={RemoveOpen} className="text-red-500 p-1">
                           <FaTrashAlt />
                         </button>
-                        {Remove && <DeleteExpence setRemove={RemoveView} />}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+              {EditData && <EditExpensesForm setEditData={CloseForm} />}
+              {View && <ViewExpense setView={CloseView} />}
+              {Remove && <DeleteExpence setRemove={RemoveView} />}
             </div>
           </div>
         </div>
