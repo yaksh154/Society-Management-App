@@ -413,11 +413,12 @@ export const PutExpense = (setIncomeData) => {
     })
 }
 
-export const DeleteExpense = (data, Fdata, setCreateIncome) => {
-    axios.post(`http://localhost:3030/Expenses/:id`, data).then((res) => {
-        Fdata()
-        setCreateIncome(false)
-    })
+export const DeleteExpense = (RemoveId, Fdata) => {
+    const _id = RemoveId;
+    console.log(_id);    
+    // axios.post(`${url}/expenses//deleteexpenses/${_id}`).then((res) => {
+    //     Fdata()
+    // })
 }
 
 ///Visiter Data

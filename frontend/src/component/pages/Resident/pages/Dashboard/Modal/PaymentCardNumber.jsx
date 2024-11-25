@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
-import Button from '../../../layout/Button_gradient'
+import Button from '../../../../../layout/Button_gradient'
 
 const PaymentCardNumber = ({ close1, close2, close3 }) => {
 

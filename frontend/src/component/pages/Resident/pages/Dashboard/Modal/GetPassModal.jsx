@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PaymentmethodModal from './PaymentmethodModal';
-import CloseBtn from '../../../layout/CloseButton'
+import CloseBtn from '../../../../../layout/CloseButton'
 
 const GetPassModal = ({ close }) => {
     const [selectMember, setSelectMember] = useState("");

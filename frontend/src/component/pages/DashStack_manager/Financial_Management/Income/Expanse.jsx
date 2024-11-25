@@ -2,14 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../../../../layout/Sidebar';
 import Header from '../../../../layout/Header';
-import { FaEdit, FaEye, FaFileImage, FaFilePdf, FaPen, FaTrashAlt } from 'react-icons/fa';
+import { FaEdit, FaFileImage, FaFilePdf, FaTrashAlt } from 'react-icons/fa';
 import { FaSquarePlus } from 'react-icons/fa6';
 import AddExpenseForm from '../../../../Modals/AddExpenseForm';
-import EditExpensesForm from '../../../../Modals/EditExpensesForm';
-import ViewExpense from '../../../../Modals/ViewExpense';
 import DeleteExpence from '../../../../Modals/DeleteExpence';
-import { GetExpanse } from '../../../../services/Api/api';
+import { DeleteExpense, GetExpanse } from '../../../../services/Api/api';
 import { GrFormView } from 'react-icons/gr';
+import EditExpensesModal from '../../../../Modals/EditExpensesModal';
+import ViewExpenseModal from '../../../../Modals/ViewExpenseModal';
+import DeleteModal from '../../../../layout/DeleteModal';
 
 const Expanse = () => {
   const [sidebarWidth, setSidebarWidth] = useState(280);
@@ -26,19 +27,12 @@ const Expanse = () => {
 
   // Add
   const [AddExpense, setAddExpense] = useState(false);
-  const [EditData, setEditData] = useState(false);
-  const [View, setView] = useState(false);
-  const [Remove, setRemove] = useState(false);
-
   const Open = () => setAddExpense(true);
   const Close = () => setAddExpense(false);
-  const EditOpen = () => setEditData(true);
-  const CloseForm = () => setEditData(false);
-  const ViewOpen = () => setView(true);
-  const CloseView = () => setView(false);
-  const RemoveOpen = () => setRemove(true);
-  const RemoveView = () => setRemove(false);
 
+  useEffect(() => {
+    Fdata();
+  }, []);
 
   const Fdata = async () => {
     setError(null);
@@ -51,11 +45,44 @@ const Expanse = () => {
       ;
     });
   };
-  useEffect(() => {
-    Fdata();
-  }, []);
 
+  // view
 
+  const [View, setView] = useState(false);
+  const [ViewId, setViewId] = useState('')
+
+  const ViewOpen = (_id) => {
+    setView(true);
+    setViewId(_id)
+  };
+
+  const CloseView = () => setView(false);
+
+  // Delete 
+
+  const [Remove, setRemove] = useState(false);
+  const [RemoveId, setRemoveId] = useState('')
+  const RemoveView = () => setRemove(false);
+
+  const RemoveOpen = (_id) => {
+    setRemove(true);
+    setRemoveId(_id)
+  }
+
+  const DeleteExpanse = () => {
+    DeleteExpense(RemoveId,Fdata)
+  }
+
+  // Edit
+
+  const [EditData, setEditData] = useState(false);
+  const [EditId, setEditId] = useState('')
+
+  const EditOpen = (_id) => {
+    setEditData(true)
+    setEditId(_id)
+  };
+  const CloseForm = () => setEditData(false);
 
   return (
     <div className="flex">
@@ -74,6 +101,7 @@ const Expanse = () => {
               </button>
               {AddExpense && <AddExpenseForm Fdata={Fdata} setAddExpense={Close} />}
             </div>
+            {error}
             <div className="p-4 bg-white rounded-lg shadow-lg">
               <table className="min-w-full bg-white rounded-lg">
                 <thead className="bg-slate-100 font-extrabold rounded-t-lg">
@@ -111,15 +139,15 @@ const Expanse = () => {
                         )}
                       </td>
                       <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-2 md:space-x-2 justify-center">
-                        <button aria-label="Edit" onClick={EditOpen} className="text-green-500 p-1">
+                        <button aria-label="Edit" onClick={() => EditOpen(expense._id)} className="text-green-500 p-1">
                           <FaEdit />
                         </button>
 
-                        <button aria-label="View" onClick={ViewOpen} className="text-blue-500 text-2xl rounded">
+                        <button aria-label="View" onClick={() => ViewOpen(expense._id)} className="text-blue-500 text-2xl rounded">
                           <GrFormView />
                         </button>
 
-                        <button aria-label="Delete" onClick={RemoveOpen} className="text-red-500 p-1">
+                        <button aria-label="Delete" onClick={() => RemoveOpen(expense._id)} className="text-red-500 p-1">
                           <FaTrashAlt />
                         </button>
                       </td>
@@ -127,9 +155,9 @@ const Expanse = () => {
                   ))}
                 </tbody>
               </table>
-              {EditData && <EditExpensesForm setEditData={CloseForm} />}
-              {View && <ViewExpense setView={CloseView} />}
-              {Remove && <DeleteExpence setRemove={RemoveView} />}
+              {EditData && <EditExpensesModal _id={EditId} Close={CloseForm} />}
+              {View && <ViewExpenseModal _id={ViewId} Close={CloseView} />}
+              {Remove && <DeleteModal close={RemoveView} DeleteClick={DeleteExpanse} />}
             </div>
           </div>
         </div>

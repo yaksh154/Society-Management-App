@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PaymentCardNumber from './PaymentCardNumber';
-import Button from '../../../layout/Button_gradient'
+import Button from '../../../../../layout/Button_gradient'
 
 const PaymentmethodModal = ({close1,close2}) => {
     const [selectedMethod, setSelectedMethod] = useState("");

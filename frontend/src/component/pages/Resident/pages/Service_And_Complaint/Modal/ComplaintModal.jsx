@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import CloseBtn from '../../../layout/CloseButton'
-import Button from '../../../layout/Button_gradient'
+import CloseBtn from '../../../../../layout/CloseButton'
+import Button from '../../../../../layout/Button_gradient'
 
 const ComplaintModal = ({ close }) => {
     const getCurrentDate = () => {

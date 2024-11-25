@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Sidebar from '../../layout/Sidebar'
 import Header from '../../layout/Header'
-import Button from '../../layout/Button_gradient'
+import Button from '../../../../layout/Button_gradient'
 import ComplaintModal from './Modal/ComplaintModal';
-import DeleteModal from '../../layout/DeleteModal';
+import DeleteModal from '../../../../layout/DeleteModal';
 
 const Service_And_Complaint = () => {
     let [data, setdata] = useState(280);

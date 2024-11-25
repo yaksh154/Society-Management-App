@@ -1,8 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { BiBell, BiCheck, BiX } from 'react-icons/bi';
 import { IoIosNotifications } from 'react-icons/io';
+import GetPassModal from '../pages/Dashboard/Modal/GetPassModal';
 
 const OpneNotification = () => {
+    const [GetPass, setGetPass] = useState(false)
+
+    const closeGetPass = () => {
+        setGetPass(false)
+    }
+
     const [notifications, setNotifications] = useState([
         {
             id: '1',
@@ -37,6 +44,7 @@ const OpneNotification = () => {
         setNotifications(notifications.map(notif =>
             notif.id === id ? { ...notif, status: 'accepted' } : notif
         ));
+        setGetPass(true)
     };
 
     const handleDecline = (id) => {
@@ -195,6 +203,7 @@ const OpneNotification = () => {
                     </div>
                 </div>
             )}
+            {GetPass && (<GetPassModal close={closeGetPass} />)}
         </div>
     )
 }

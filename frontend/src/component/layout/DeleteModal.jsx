@@ -1,5 +1,5 @@
 import React from 'react'
-import CloseBtn from '../layout/CloseButton'
+import CloseBtn from './CloseButton'
 
 const DeleteModal = (props) => {
     return (

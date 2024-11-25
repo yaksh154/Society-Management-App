@@ -20,7 +20,6 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
     const file = event.target.files[0];
     if (file) {
       setValue('Bill', file);
-      // Create a preview URL for the image
       const fileURL = URL.createObjectURL(file);
       setPreviewImage(fileURL);
     }
@@ -31,22 +30,24 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
-
+    const formattedDate = new Date(data.date).toISOString();
     const { Bill, ...formData } = data;
-    PostExpanse(data, Fdata, setAddExpense)
+    const formattedData = { ...formData, date: formattedDate, Bill };
+
+    console.log(formattedData.Bill); 
+    PostExpanse(formattedData, Fdata, setAddExpense);
   };
 
   const handleCancel = () => {
-    setAddExpense(false); // Close the modal
-    setPreviewImage(null); // Reset preview
+    setAddExpense(false);
+    setPreviewImage(null); 
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
       <div className="p-6 bg-white rounded-lg shadow-md max-w-md w-full mx-auto relative z-60">
         <h2 className="text-xl font-semibold mb-4">Add Expenses Details</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}  encType='multioart/form-data'>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Title <span className="text-red-500">*</span>
@@ -110,7 +111,6 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
             </div>
           </div>
 
-
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Upload Bill <span className="text-red-500">*</span>
@@ -120,7 +120,7 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
               onClick={handleFileClick}
             >
               <input
-                type="file"
+                type="file" 
                 {...register('Bill', {
                   validate: {
                     isImage: (fileList) => {
