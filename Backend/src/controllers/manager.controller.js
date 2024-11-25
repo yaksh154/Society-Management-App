@@ -73,9 +73,9 @@ const update = async (req, res) => {
       body.Image = upload.secure_url
     }
     const updatedmanager = await manager_service.update(id, body);
-    res.status(200).json(updatedmanager);
+    return res.status(200).json(updatedmanager);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 }
 
@@ -98,6 +98,7 @@ const login = async (req, res) => {
     const payload = {
       _id: manager._id,
       email: manager.Email,
+      role: manager.Role,
       societyid: manager.society
     };
 
@@ -106,10 +107,10 @@ const login = async (req, res) => {
     // res.WriteHeader('Authorization', `Bearer ${token}`);
     console.log('Authorization Header:', req.headers);
     console.log("🚀 ~ login ~ token generated:", token);
-    res.status(200).json({ message: "manager Login Successful", token: token });
+    return res.status(200).json({ message: "manager Login Successful", token: token });
   } catch (error) {
     console.error("🚀 ~ login ~ error:", error.message);
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 }
 
@@ -125,11 +126,11 @@ const sed_otp = async (req, res) => {
     const otp = Math.floor(1000 + Math.random() * 9000);
     console.log("🚀 ~ sed_otp ~ otp:", otp)
     const addotp = await manager_service.addotp(manager._id, otp)
-    const ot = await send_otp(Email,manager.Firstname, manager.Lastname, otp);
-    res.status(200).json({ message: "OTP sent successfully", data: Email });
+    const ot = await send_otp(Email, manager.Firstname, manager.Lastname, otp);
+    return res.status(200).json({ message: "OTP sent successfully", data: Email });
   } catch (error) {
     console.error("🚀 ~ sed_otp ~ error:", error.message);
-    res.status(500).json({ message: error.message })
+    return res.status(500).json({ message: error.message })
   }
 }
 
@@ -143,14 +144,14 @@ const otpverify = async (req, res) => {
       return res.status(403).json({ message: "manager Not Found" })
     }
     if (otp != manager.OTP) {
-      res.status(404).json({ message: "Incorrect OTP" });
+      return res.status(404).json({ message: "Incorrect OTP" });
     }
     const updatedmanager = await manager_service.removeotp(manager._id)
     console.log("🚀 ~ otpverify ~ updatedmanager:", updatedmanager)
-    res.status(200).json({ message: "OTP verified successfully" });
+    return res.status(200).json({ message: "OTP verified successfully" });
   } catch (error) {
     console.error(error.message);
-    res.status(500).json({ message: error.message })
+    return res.status(500).json({ message: error.message })
   }
 }
 
@@ -167,10 +168,10 @@ const forgotpassword = async (req, res) => {
     console.log("🚀 ~ forgotpassword ~ bcrpass:", bcrpass)
     const updatedmanager = await manager_service.updatepassword(manager._id, bcrpass)
     console.log("🚀 ~ forgotpassword ~ updatedmanager:", updatedmanager)
-    res.status(200).json({ message: "Password updated successfully" });
+    return res.status(200).json({ message: "Password updated successfully" });
   } catch (error) {
     console.error("🚀 ~ forgotpassword ~ error:", error.message);
-    res.status(500).json({ message: error.message })
+    return res.status(500).json({ message: error.message })
   }
 }
 
@@ -183,10 +184,10 @@ const getProfile = async (req, res) => {
     if (!manager) {
       return res.status(403).json({ message: "Not found" });
     }
-    res.status(200).json(manager);
+    return res.status(200).json(manager);
   } catch (error) {
     console.error("🚀 ~ getProfile ~ error:", error.message);
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 }
 

@@ -82,47 +82,52 @@ const residentSchema = new mongoose.Schema(
     Member_Counting: [{
       Fullname: {
         type: String,
-        require: true
+        // require: true
       },
       Phone: {
         type: String,
-        require: true
+        // require: true
       },
       Email: {
         type: String,
-        require: true,
+        // require: true,
         match: [/^\S+@\S+\.\S+$/]
       },
       Age: {
         type: String,
-        require: true
+        // require: true
       },
       Gender: {
         type: String,
         enum: ["Male", "Female", "Other"],
-        require: true
+        // require: true
       },
       Relation: {
         type: String,
-        require: true
+        // require: true
       },
     }],
     Vehicle_Counting: [{
       Vehicle_Type: {
         type: String,
-        require: true
+        // require: true
       },
       Vehicle_Name: {
         type: String,
-        require: true
+        // require: true
       },
       Vehicle_Number: {
         type: String,
-        require: true
+        // require: true
       }
     }],
     Password: {
       type: String,
+      require: true
+    },
+    Rol: {
+      type: String,
+      default: 'Resident',
       require: true
     },
     createdBy: {
@@ -136,7 +141,7 @@ const residentSchema = new mongoose.Schema(
     OTP: {
       type: Number,
       default: null,
-      required: true
+      // required: true
     }
   },
   {

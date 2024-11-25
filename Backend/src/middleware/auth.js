@@ -12,6 +12,7 @@ const authUser = async (req, res, next) => {
   try {
     const secretKey = "society_management";
     const userData = jwt.verify(token, secretKey);
+    console.log("🚀 ~ authUser ~ userData:", userData)
 
     req.user = userData;
     next();

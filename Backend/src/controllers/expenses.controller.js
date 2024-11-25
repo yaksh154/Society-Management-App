@@ -5,9 +5,6 @@ const createexpenses = async (req, res) => {
     try {
         const reqbody = req.body
         console.log("🚀 ~ createexpenses ~ reqbody:", reqbody)
-        // if (reqbody) {
-        //     return res.status(400).json({ message: "all field required" });
-        // }
         const img = req.files.Bill[0].path
         console.log("🚀 ~ createexpenses ~ img:", img)
         const upload = await uploadFile(img);
@@ -18,13 +15,13 @@ const createexpenses = async (req, res) => {
             Date : reqbody.date,
             Amount : reqbody.amount,
             Bill: upload.secure_url,
-            // createdBy: req.user._id,
-            // Society: req.user.societyid
+            createdBy: req.user._id,
+            Society: req.user.societyid
         }
         const expenses = await expenses_servise.create(body);
-        res.status(201).json(expenses);
+        return res.status(201).json(expenses);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        return res.status(400).json({ message: error.message });
     }
 };
 
@@ -32,13 +29,24 @@ const createexpenses = async (req, res) => {
 const getAllexpenses = async (req, res) => {
     try {
         const expensess = await expenses_servise.getAll();
-        res.status(200).json(expensess);
+        return res.status(200).json(expensess);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 };
 
-
+const getexpense = async (req, res) => {
+    try {
+        const { id } = req.params
+        const expenses = await expenses_servise.getById(id);
+        if (!expenses) {
+            return res.status(404).json({ message: "Not found" });
+        }
+        return res.status(200).json(expenses);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
 
 // Update an expenses
 
@@ -49,11 +57,23 @@ const updateexpenses = async (req, res) => {
         if (!expenses) {
             return res.status(404).json({ message: "Not found" });
         }
-        const updatedexpenses = await expenses_servise.update(id, req.body);
+        const updetbody = {};
+        if(req.body){
+            updetbody.Title = req.body.title,
+            updetbody.Description = req.body.description,
+            updetbody.Date = req.body.date,
+            updetbody.Amount = req.body.amount
+        }
+        if(req.files){
+            const Bill = req.files.Bill[0].path
+            const upload = await uploadFile(Bill);
+            updetbody.Bill = upload.secure_url;
+        }
+        const updatedexpenses = await expenses_servise.update(id, updetbody);
         if (!updatedexpenses) return res.status(404).json({ message: "Not found" });
-        res.status(200).json(updatedexpenses);
+        return res.status(200).json(updatedexpenses);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        return res.status(400).json({ message: error.message });
     }
 };
 
@@ -67,9 +87,9 @@ const deleteexpenses = async (req, res) => {
         }
         const deletedexpenses = await expenses_servise.remove(req.params.id);
         if (!deletedexpenses) return res.status(404).json({ message: "Not found" });
-        res.status(200).json({ message: "Deleted successfully" });
+        return res.status(200).json({ message: "Deleted successfully" });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 };
 
@@ -79,4 +99,5 @@ module.exports = {
     getAllexpenses,
     updateexpenses,
     deleteexpenses,
+    getexpense
 }
