@@ -85,7 +85,7 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
                   {...register('date', { required: 'Date is required' })}
                   className="w-full border rounded p-2 text-gray-700"
                 />
-                <FaCalendarAlt className="absolute top-3 right-3 text-gray-400" />
+                {/* <FaCalendarAlt className="absolute top-3 right-3 text-gray-400" /> */}
               </div>
               {errors.date && <p className="text-red-500 text-xs mt-1">{errors.date.message}</p>}
             </div>

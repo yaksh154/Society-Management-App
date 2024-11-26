@@ -4,21 +4,21 @@ const router = express.Router();
 const { authUser } = require("../middleware/auth")
 const { upload } = require("../middleware/upload")
 
-router.post("/create", upload.fields([
+router.post("/create",authUser, upload.fields([
     { name: "residentphoto", maxCount: 1 },
     { name: "AadharCard_FrontSide", maxCount: 1 },
     { name: "AadharCard_BackSide", maxCount: 1 },
     { name: "VeraBill_OR_LightBill", maxCount: 1 },
     { name: "Rent_Agreement", maxCount: 1 },
 ]), resident_controller.createResident)
-router.get("/getall", resident_controller.getAllResident)
-router.put("/update", upload.fields([
+router.get("/getall/:id",authUser, resident_controller.getResident)
+router.put("/update/:id",authUser, upload.fields([
     { name: "residentphoto", maxCount: 1 },
     { name: "AadharCard_FrontSide", maxCount: 1 },
     { name: "AadharCard_BackSide", maxCount: 1 },
     { name: "VeraBill_OR_LightBill", maxCount: 1 },
     { name: "Rent_Agreement", maxCount: 1 },
-]),resident_controller.updateresident)
-router.delete("/delete",resident_controller.deleteresident)
+]),resident_controller.updateResident)
+router.delete("/delete/:id",authUser,resident_controller.deleteResident)
 
-/* ------------------------ module.exports = router; ------------------------ */
+module.exports = router;
