@@ -70,7 +70,7 @@ const Expanse = () => {
   }
 
   const DeleteExpanse = () => {
-    DeleteExpense(RemoveId,Fdata)
+    DeleteExpense(RemoveId,Fdata,RemoveView)
   }
 
   // Edit

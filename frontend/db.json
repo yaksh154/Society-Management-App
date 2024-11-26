@@ -868,7 +868,7 @@
       "id": "f9ba"
     }
   ],
-  "PendingMaintenances":[
+  "PendingMaintenances": [
     {
       "Name": "Roger Lubin",
       "Status": "2 Month Pending",
@@ -899,6 +899,117 @@
       "Status": "2 Month Pending",
       "Amount": "₹5,000"
     }
+  ],
+  "Complaint_Submission": [
+    {
+      "id": "0f54a1",
+      "ComplainerName": "Evelyn Harper",
+      "ComplaintName": "Unethical Behavior",
+      "Description": "The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in Resident.",
+      "Wing": "A",
+      "Unit": "1001",
+      "Priority": "Medium",
+      "Status": "Open",
+      "Date": "2024-11-15T00:00:00.000Z"
+    },
+    {
+      "id": "0f54b2",
+      "ComplainerName": "Michael Scott",
+      "ComplaintName": "Noise Disturbance",
+      "Description": "Loud music played in the common area during late hours.",
+      "Wing": "B",
+      "Unit": "202",
+      "Priority": "High",
+      "Status": "Open",
+      "Date": "2024-11-14T00:00:00.000Z"
+    },
+    {
+      "id": "0f54c3",
+      "ComplainerName": "Pam Beesly",
+      "ComplaintName": "Parking Issue",
+      "Description": "Unauthorized vehicle parked in my reserved spot.",
+      "Wing": "C",
+      "Unit": "303",
+      "Priority": "Medium",
+      "Status": "Pending",
+      "Date": "2024-11-13T00:00:00.000Z"
+    },
+    {
+      "id": "0f54d4",
+      "ComplainerName": "Jim Halpert",
+      "ComplaintName": "Maintenance Delay",
+      "Description": "Repair of broken elevator taking too long.",
+      "Wing": "D",
+      "Unit": "404",
+      "Priority": "High",
+      "Status": "Open",
+      "Date": "2024-11-12T00:00:00.000Z"
+    },
+    {
+      "id": "0f54e5",
+      "ComplainerName": "Dwight Schrute",
+      "ComplaintName": "Unauthorized Access",
+      "Description": "Strangers frequently seen in the restricted building area.",
+      "Wing": "E",
+      "Unit": "505",
+      "Priority": "High",
+      "Status": "Open",
+      "Date": "2024-11-11T00:00:00.000Z"
+    },
+    {
+      "id": "0f54f6",
+      "ComplainerName": "Angela Martin",
+      "ComplaintName": "Pet Policy Violation",
+      "Description": "Pets being allowed in areas where they are restricted.",
+      "Wing": "F",
+      "Unit": "606",
+      "Priority": "Medium",
+      "Status": "Pending",
+      "Date": "2024-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "0f54g7",
+      "ComplainerName": "Oscar Martinez",
+      "ComplaintName": "Billing Dispute",
+      "Description": "Incorrect maintenance charges added to my account.",
+      "Wing": "G",
+      "Unit": "707",
+      "Priority": "Low",
+      "Status": "Solve",
+      "Date": "2024-11-09T00:00:00.000Z"
+    },
+    {
+      "id": "0f54h8",
+      "ComplainerName": "Stanley Hudson",
+      "ComplaintName": "Water Leakage",
+      "Description": "Persistent water leakage in the ceiling causing damage.",
+      "Wing": "H",
+      "Unit": "808",
+      "Priority": "High",
+      "Status": "Open",
+      "Date": "2024-11-08T00:00:00.000Z"
+    },
+    {
+      "id": "0f54i9",
+      "ComplainerName": "Kelly Kapoor",
+      "ComplaintName": "Internet Issues",
+      "Description": "Intermittent connectivity problems in the community Wi-Fi.",
+      "Wing": "I",
+      "Unit": "909",
+      "Priority": "Medium",
+      "Status": "Pending",
+      "Date": "2024-11-07T00:00:00.000Z"
+    },
+    {
+      "id": "b47b",
+      "ComplainerName": "111",
+      "ComplaintName": "2121",
+      "Description": "3434",
+      "Wing": "A",
+      "Unit": "111",
+      "Priority": "Low",
+      "Status": "Open",
+      "Date": "26/11/2024"
+    }
   ]
-  
 }

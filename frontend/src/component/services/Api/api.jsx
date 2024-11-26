@@ -400,11 +400,27 @@ export const GetExpanse = (setAddExpense) => {
 }
 
 
-export const PostExpanse = (data, Fdata, setAddExpense) => {
-    axios.post(`${url}/expenses/createexpenses`, data).then((res) => {
-        Fdata()
-        setAddExpense(false)
-    })
+export const PostExpanse = async (data, Fdata, setAddExpense, setPreviewImage, reset, handleCancel) => {
+    const formData = new FormData();
+    formData.append('title', data.title);
+    formData.append('description', data.description);
+    formData.append('date', new Date(data.date).toISOString());
+    formData.append('amount', data.amount);
+    if (data.Bill && data.Bill.length > 0) {
+        formData.append('Bill', data.Bill[0]);
+    }
+    try {
+        await axios.post('https://society-management-app-server.onrender.com/expenses/createexpenses', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        Fdata();
+        setAddExpense(false);
+        reset();
+        setPreviewImage(null);
+        handleCancel()
+    } catch (error) {
+        console.error('Error submitting expense:', error);
+    }
 }
 
 export const PutExpense = (setIncomeData) => {
@@ -413,12 +429,11 @@ export const PutExpense = (setIncomeData) => {
     })
 }
 
-export const DeleteExpense = (RemoveId, Fdata) => {
-    const _id = RemoveId;
-    console.log(_id);    
-    // axios.post(`${url}/expenses//deleteexpenses/${_id}`).then((res) => {
-    //     Fdata()
-    // })
+export const DeleteExpense = (RemoveId, Fdata, RemoveView) => {
+    axios.delete(`${url}/expenses/deleteexpenses/${RemoveId}`).then((res) => {
+        Fdata()
+        RemoveView()
+    })
 }
 
 ///Visiter Data
@@ -426,13 +441,13 @@ export const DeleteExpense = (RemoveId, Fdata) => {
 export const GetVisiter = (setVisitorLogs) => {
     axios.get('http://localhost:3030/Visitors').then((res) => {
         // console.log(res.data);
-  
+
         setVisitorLogs(res.data)
     })
 }
 
-export const PostVisiter = ( data, Fdata, setAddVisiterbox) => {
-    axios.post('http://localhost:3030/Visitors',data).then((res) => {
+export const PostVisiter = (data, Fdata, setAddVisiterbox) => {
+    axios.post('http://localhost:3030/Visitors', data).then((res) => {
         Fdata()
         setAddVisiterbox(res.data)
     })

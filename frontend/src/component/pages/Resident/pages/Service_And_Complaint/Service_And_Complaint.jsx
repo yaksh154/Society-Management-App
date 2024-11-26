@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import Sidebar from '../../layout/Sidebar'
 import Header from '../../layout/Header'
-import Button from '../../../../layout/Button_gradient'
-import ComplaintModal from './Modal/ComplaintModal';
-import DeleteModal from '../../../../layout/DeleteModal';
+import Complaint_Submission from './Pages/Complaint_Submission';
 
 const Service_And_Complaint = () => {
     let [data, setdata] = useState(280);
@@ -18,60 +16,40 @@ const Service_And_Complaint = () => {
         setget(0);
     }
 
-    const [Complaint, setComplaint] = useState(false)
-
-    const closeComplaint = () => {
-        setComplaint(false)
-    }
-
-    // Delete 
-
-    const [Delete, setDelete] = useState(false)
-    const [DId, setDId] = useState('')
-
-    const OpneDelete = () =>{
-        setDelete(true);
-        setDId()
-    }
-    
-    const closeDelete = () => {
-        setDelete(false);
-    }
-
-    const DeleteClick = () =>{
-        DId()
-        console.log("Delete data");
-    }
+    const [activeTab, setActiveTab] = useState("Complaint_Submission");
 
     return (
-        <div className='bg-[#f0f5fb] h-screen'>
+        <div className='bg-[#f0f5fb]'>
             <Sidebar closeNav={closeNav} data={data} />
             <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
                 <div className="open_he">
                     <Header openNav={openNav} />
                 </div>
-                <div className="flex-1 bg-[#f0f5fb]">
-                    <div className="p-6">
-                        <div className="bg-white shadow-md rounded-lg p-6">
-                            <div className="flex justify-between items-center mb-6">
-                                <h1 className='font-semibold md:text-2xl text-md'>Create Complaint</h1>
-                                <Button onClick={() => setComplaint(true)} Btn_Name="Get Pass" />
-                                {Complaint && (<ComplaintModal close={closeComplaint} />)}
-                            </div>
-                        </div>
-                    </div>
+                <div className="flex p-5 pb-0">
+                    <button
+                        className={`py-2 px-8 font-semibold text-center rounded-t-lg border-b-2 border-b-orange-500 ${activeTab === "Complaint_Submission"
+                            ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white"
+                            : "bg-white text-gray-700"
+                            }`}
+                        onClick={() => setActiveTab("Complaint_Submission")}
+                    >
+                        Complaint Submission
+                    </button>
+                    <button
+                        className={`py-2 px-8 font-semibold text-center rounded-t-lg border-b-2 border-b-orange-500 ${activeTab === "Request_Submission"
+                            ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white"
+                            : "bg-white text-gray-700"
+                            }`}
+                        onClick={() => setActiveTab("Request_Submission")}
+                    >
+                        Request Submission
+                    </button>
                 </div>
-                <div className="flex-1 bg-[#f0f5fb]">
-                    <div className="p-6">
-                        <div className="bg-white shadow-md rounded-lg p-6">
-                            <div className="flex justify-between items-center mb-6">
-                                <h1 className='font-semibold md:text-2xl text-md'>Delete</h1>
-                                <Button onClick={() => OpneDelete()} Btn_Name="Delete" />
-                                {Delete && (<DeleteModal close={closeDelete} DeleteClick={DeleteClick} />)}
-                            </div>
-                        </div>
+                {activeTab === "Complaint_Submission" && (
+                    <div className='p-5 pt-0'>
+                        <Complaint_Submission/>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     )

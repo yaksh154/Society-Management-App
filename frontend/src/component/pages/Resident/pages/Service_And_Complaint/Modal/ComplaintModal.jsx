@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import CloseBtn from '../../../../../layout/CloseButton'
 import Button from '../../../../../layout/Button_gradient'
+import axios from 'axios';
 
 const ComplaintModal = ({ close }) => {
     const getCurrentDate = () => {
@@ -11,20 +12,22 @@ const ComplaintModal = ({ close }) => {
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
-            Complainer_Name: '',
-            Complaint_Name: '',
+            ComplainerName: '',
+            ComplaintName: '',
             Description: '',
             Wing: '',
-            Unit_Number: '',
+            Unit: '',
             Priority: '',
-            Complain_Status: '',
+            Status: '',
             Date: getCurrentDate(),
         },
     });
 
     const onSubmit = (data) => {
         console.log(data);
-        // CreateComplaint(data,setClosecreateComplint,getComplaintdata)
+        axios.post('http://localhost:3030/Complaint_Submission',data).then((res)=>{
+            console.log(res.data);
+        })
     };
     return (
         <div className='fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50'>
@@ -35,13 +38,13 @@ const ComplaintModal = ({ close }) => {
                         &times;
                     </button>
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form action='/profile' method='post' enctype='multipart/form-data' onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-3">
                         <label className="block text-sm font-medium pb-2">Complainer Name<span className="text-red-500">*</span></label>
                         <input
                             type="text"
                             className="w-full p-1 text-sm border border-gray-300 rounded"
-                            {...register("Complainer_Name", { required: "Complainer name is required" })}
+                            {...register("ComplainerName", { required: "Complainer name is required" })}
                             placeholder="Enter Complainer Name"
                         />
                         {errors.Complainer_Name && <p className="text-red-500 text-xs mt-1">{errors.Complainer_Name.message}</p>}
@@ -51,7 +54,7 @@ const ComplaintModal = ({ close }) => {
                         <input
                             type="text"
                             className="w-full p-1 text-sm border border-gray-300 rounded"
-                            {...register("Complaint_Name", { required: "Complaint name is required" })}
+                            {...register("ComplaintName", { required: "Complaint name is required" })}
                             placeholder="Enter Complaint Name"
                         />
                         {errors.Complaint_Name && <p className="text-red-500 text-xs mt-1">{errors.Complaint_Name.message}</p>}
@@ -81,10 +84,10 @@ const ComplaintModal = ({ close }) => {
                             <input
                                 type="text"
                                 className="w-full p-1 text-sm border border-gray-300 rounded"
-                                {...register("Unit_Number", { required: "Unit is required" })}
+                                {...register("Unit", { required: "Unit is required" })}
                                 placeholder="Enter Unit"
                             />
-                            {errors.Unit_Number && <p className="text-red-500 text-xs mt-1">{errors.Unit_Number.message}</p>}
+                            {errors.Unit && <p className="text-red-500 text-xs mt-1">{errors.Unit.message}</p>}
                         </div>
                     </div>
                     <div className="mb-3">
@@ -123,35 +126,35 @@ const ComplaintModal = ({ close }) => {
                     <div className="mb-3">
                         <label className="block text-sm font-medium pb-2">Status<span className="text-red-500">*</span></label>
                         <div className="flex gap-2">
-                            <label className={`flex items-center px-3 py-1 border rounded-lg ${errors.Complain_Status ? 'border-red-500' : ''}`}>
+                            <label className={`flex items-center px-3 py-1 border rounded-lg ${errors.Status ? 'border-red-500' : ''}`}>
                                 <input
                                     className="mr-2"
                                     type="radio"
                                     value="Open"
-                                    {...register("Complain_Status", { required: "Status is required" })}
+                                    {...register("Status", { required: "Status is required" })}
                                 />
                                 Open
                             </label>
-                            <label className={`flex items-center px-3 py-1 border rounded-lg ${errors.Complain_Status ? 'border-red-500' : ''}`}>
+                            <label className={`flex items-center px-3 py-1 border rounded-lg ${errors.Status ? 'border-red-500' : ''}`}>
                                 <input
                                     className="mr-2"
                                     type="radio"
                                     value="Pending"
-                                    {...register("Complain_Status")}
+                                    {...register("Status")}
                                 />
                                 Pending
                             </label>
-                            <label className={`flex items-center px-3 py-1 border rounded-lg ${errors.Complain_Status ? 'border-red-500' : ''}`}>
+                            <label className={`flex items-center px-3 py-1 border rounded-lg ${errors.Status ? 'border-red-500' : ''}`}>
                                 <input
                                     className="mr-2"
                                     type="radio"
                                     value="Solve"
-                                    {...register("Complain_Status")}
+                                    {...register("Status")}
                                 />
                                 Solve
                             </label>
                         </div>
-                        {errors.Complain_Status && <p className="text-red-500 text-xs mt-1">{errors.Complain_Status.message}</p>}
+                        {errors.Status && <p className="text-red-500 text-xs mt-1">{errors.Status.message}</p>}
                     </div>
                     <div className="flex justify-end mt-4">
                         <CloseBtn type="button" Addclass='w-1/2' onClick={close} CloseName='Cancel' />

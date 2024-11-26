@@ -14,12 +14,12 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
   } = useForm();
 
   const fileInputRef = useRef(null);
-  const [previewImage, setPreviewImage] = useState(null); // For image preview
+  const [previewImage, setPreviewImage] = useState(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setValue('Bill', file);
+      setValue('Bill', [file]); // Set the file as an array for React Hook Form
       const fileURL = URL.createObjectURL(file);
       setPreviewImage(fileURL);
     }
@@ -29,25 +29,24 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
     fileInputRef.current.click();
   };
 
-  const onSubmit = (data) => {
-    const formattedDate = new Date(data.date).toISOString();
-    const { Bill, ...formData } = data;
-    const formattedData = { ...formData, date: formattedDate, Bill };
+  
 
-    console.log(formattedData.Bill); 
-    PostExpanse(formattedData, Fdata, setAddExpense);
+  const onSubmit = (data) => {
+    PostExpanse(data, Fdata, setAddExpense,setPreviewImage,reset,handleCancel);
+    
   };
 
   const handleCancel = () => {
     setAddExpense(false);
-    setPreviewImage(null); 
+    setPreviewImage(null);
+    reset();
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
       <div className="p-6 bg-white rounded-lg shadow-md max-w-md w-full mx-auto relative z-60">
         <h2 className="text-xl font-semibold mb-4">Add Expenses Details</h2>
-        <form onSubmit={handleSubmit(onSubmit)}  encType='multioart/form-data'>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Title <span className="text-red-500">*</span>
@@ -58,9 +57,7 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
               className="w-full border rounded p-2 text-gray-700"
               placeholder="Enter Title"
             />
-            {errors.title && (
-              <p className="text-red-500 text-xs mt-1">{errors.title.message}</p>
-            )}
+            {errors.title && <p className="text-red-500 text-xs mt-1">{errors.title.message}</p>}
           </div>
 
           <div className="mb-4">
@@ -90,9 +87,7 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
                 />
                 <FaCalendarAlt className="absolute top-3 right-3 text-gray-400" />
               </div>
-              {errors.date && (
-                <p className="text-red-500 text-xs mt-1">{errors.date.message}</p>
-              )}
+              {errors.date && <p className="text-red-500 text-xs mt-1">{errors.date.message}</p>}
             </div>
 
             <div className="w-1/2">
@@ -105,9 +100,7 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
                 className="w-full border rounded p-2 text-gray-700"
                 placeholder="₹ 0000"
               />
-              {errors.amount && (
-                <p className="text-red-500 text-xs mt-1">{errors.amount.message}</p>
-              )}
+              {errors.amount && <p className="text-red-500 text-xs mt-1">{errors.amount.message}</p>}
             </div>
           </div>
 
@@ -120,31 +113,12 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
               onClick={handleFileClick}
             >
               <input
-                type="file" 
-                {...register('Bill', {
-                  validate: {
-                    isImage: (fileList) => {
-                      if (fileList && fileList.length > 0) {
-                        const fileType = fileList[0].type;
-                        const allowedTypes = ['image/png', 'image/jpeg', 'image/gif'];
-                        return allowedTypes.includes(fileType) || 'Only PNG, JPG, and GIF files are allowed';
-                      }
-                      return true; // No file selected; allow form submission
-                    },
-                    maxSize: (fileList) => {
-                      if (fileList && fileList.length > 0) {
-                        const fileSize = fileList[0].size;
-                        return fileSize <= 10 * 1024 * 1024 || 'File size should be up to 10MB';
-                      }
-                      return true; // No file selected; allow form submission
-                    },
-                  },
-                })}
+                type="file"
+                {...register('Bill')}
                 onChange={handleFileChange}
                 ref={fileInputRef}
                 className="hidden"
               />
-
               <div>
                 {previewImage ? (
                   <img src={previewImage} alt="Preview" className="mx-auto h-32 w-32 object-cover rounded-md mb-2" />
@@ -158,9 +132,6 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
                 <p className="text-gray-400 text-xs">PNG, JPG, GIF up to 10MB</p>
               </div>
             </div>
-            {errors.bill && (
-              <p className="text-red-500 text-xs mt-1">{errors.bill.message}</p>
-            )}
           </div>
 
           <div className="flex justify-between mt-4">
