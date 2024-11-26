@@ -55,23 +55,23 @@ const Personal_Detail = () => {
     const [vehicles] = useState([
       {
         type: 'Two Wheelers',
-        name: 'Splendor',
-        number: 'GJ-5216',
+        VehicleName: 'Splendor',
+        VehicleNumber: 'GJ-5216',
       },
       {
         type: 'Four Wheelers',
-        name: 'Fortuner',
-        number: 'GJ-5216',
+        VehicleName: 'Fortuner',
+        VehicleNumber: 'GJ-5216',
       },
       {
         type: 'Two Wheelers',
-        name: 'Splendor',
-        number: 'GJ-5216',
+        VehicleName: 'Splendor',
+        VehicleNumber: 'GJ-5216',
       },
       {
         type: 'Two Wheelers',
-        name: 'Splendor',
-        number: 'GJ-5216',
+        VehicleName: 'Splendor',
+        VehicleNumber: 'GJ-5216',
       },
     ]);
     const Pending = [
@@ -129,283 +129,194 @@ const Personal_Detail = () => {
                     <Header openNav={openNav} />
                 </div>
                 <div className="p-6 bg-gray-100 min-h-screen">
-      {/* Tabs Section */}
-      <div className="flex">
-            <button
-              className={`py-2 px-8 font-semibold text-center rounded-t-lg border-b-2 border-b-orange-500 ${activeTab === "Owner"
-                ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white"
-                : "bg-white text-gray-700"
-                }`}
-              onClick={() => setActiveTab("Owner")}
-            >
-              Owner
-            </button>
-            <button
-              className={`py-2 px-8 font-semibold text-center rounded-t-lg border-b-2 border-b-orange-500 ${activeTab === "Tenant"
-                ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white"
-                : "bg-white text-gray-700"
-                }`}
-              onClick={() => setActiveTab("Tenant")}
-            >
-            Tenant
-            </button>
-          </div>
+  {/* Tabs Section */}
+  <div className="flex flex-wrap ">
+    <button
+      className={`py-2 px-8 font-semibold text-center rounded-t-lg border-b-2 border-b-orange-500 ${activeTab === "Owner"
+        ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white"
+        : "bg-white text-gray-700"
+        }`}
+      onClick={() => setActiveTab("Owner")}
+    >
+      Owner
+    </button>
+    <button
+      className={`py-2 px-8 font-semibold text-center rounded-t-lg border-b-2 border-b-orange-500 ${activeTab === "Tenant"
+        ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white"
+        : "bg-white text-gray-700"
+        }`}
+      onClick={() => setActiveTab("Tenant")}
+    >
+      Tenant
+    </button>
+  </div>
 
-      {/* Profile Section */}
-      <div className="bg-white p-6 shadow rounded-md ">
-        <div className="flex justify-between items-center mx-6 ">
-          {/* Left Section: Profile Picture and Info */}
-          <div className="flex items-center gap-6  ">
-            <img
-              src="../../../../../../public/images/Profile.png"
-              alt="Profile"
-              className="rounded-full w-36 h-36  border-gray-950 border-spacing-6  border-wither-6 border"
-            />
-       <div>
-            {/* <h2 className="text-lg font-semibold">Arlene McCoy</h2> */}
-            <div className="grid grid-cols-4 gap-8 mt-2 text-lg text-gray-700 mx-20">
-              <p>
-                <span className="font-medium">Full Name:</span> <br /> <span>Arlene McCoy </span>
+  {/* Profile Section */}
+  <div className="bg-white p-6 shadow rounded-md">
+    <div className="flex flex-wrap gap-6 items-center justify-between">
+      {/* Left Section: Profile Picture and Info */}
+      <div className="flex flex-wrap items-center gap-6">
+        <img
+          src="../../../../../../public/images/Profile.png"
+          alt="Profile"
+          className="rounded-full w-24 h-24 md:w-36 md:h-36 border border-gray-300"
+        />
+        <div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-gray-700">
+            {[
+              ["Full Name", "Arlene McCoy"],
+              ["Phone Number", "+91 99130 44537"],
+              ["Email Address", "arlenemccoy@gmail.com"],
+              ["Gender", "Male"],
+              ["Wing", "A"],
+              ["Age", "20"],
+              ["Unit", "1001"],
+              ["Relation", "Father"],
+            ].map(([label, value]) => (
+              <p key={label}>
+                <span className="font-medium">{label}:</span> <br />
+                <span>{value}</span>
               </p>
-              <p>
-                <span className="font-medium">Phone Number:</span> <br /> <span>+91 99130 44537</span>
-              </p>
-              <p>
-                <span className="font-medium">Email Address:</span>  <br />
-                <span>arlenemccoy@gmail.com</span>
-              </p>
-              <p>
-                <span className="font-medium">Gender:</span> <br /> <span>Male</span>
-              </p>
-              <p>
-                <span className="font-medium">Wing:</span><br /> <span>A</span>
-              </p>
-              <p>
-                <span className="font-medium">Age:</span>  <br /> <span>20</span>
-              </p>
-              <p>
-                <span className="font-medium">Unit:</span> <br /> <span>1001</span>
-              </p>
-              <p>
-                <span className="font-medium">Relation:</span> <br /> <span>Father</span>
-              </p>
-            </div>
-          </div>
-          </div>
-
-          {/* Right Section: Documents */}
-          <div className="space-y-3">
-            <div className="flex items-center gap-3 p-3 bg-gray-50 border rounded-md">
-              <FaFileAlt className="text-blue-500" />
-              <div>
-                <p>Syncfusion Essential Adharcard Front Side.JPG</p>
-                <p className="text-xs text-gray-500">3.5 MB</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-3 bg-gray-50 border rounded-md">
-              <FaFileAlt className="text-blue-500" />
-              <div>
-                <p>Address Proof Front Side.PDF</p>
-                <p className="text-xs text-gray-500">3.5 MB</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Members Section */}
-      <div className="bg-white p-6 shadow rounded-md mt-8 ">
-        <h2 className="text-lg font-bold text-black p-1">Member : (04)</h2>
-      <div className="grid gap-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4  ">
-                {members.map((member, index) => (
-                  <div key={index} className="bg-white shadow-md rounded-md relative  ">
-                    <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-[#5678e9]">
-                      <h2 className="text-lg font-semibold text-white">{member.name}</h2>
-                    </div>
-                    <div className="maincontc p-2">
-                    <p className="text-sm text-gray-600 mb-1">
-                <strong>Email:</strong> {member.email}
-              </p>
-              <p className="text-sm text-gray-600 mb-1">
-                <strong>Phone Number:</strong> {member.phone}
-              </p>
-              <p className="text-sm text-gray-600 mb-1">
-                <strong>Age:</strong> {member.age}
-              </p>
-              <p className="text-sm text-gray-600 mb-1">
-                <strong>Gender:</strong> {member.gender}
-              </p>
-              <p className="text-sm text-gray-600">
-                <strong>Relation:</strong> {member.relation}
-              </p>
-              </div>
-                  </div>
-                 ))}
-              </div>
-              </div>
-
-
-      {/* Vehicle Section */}
-      <div className="bg-white p-6 shadow rounded-md mt-8 ">
-        <h2 className="text-lg font-bold text-black p-1">Vehicle : (04)</h2>
-      <div className="grid gap-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4  ">
-                {vehicles.map((vehicle, index) => (
-                  <div key={index} className="bg-white shadow-md rounded-md relative  ">
-                    <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-[#5678e9]">
-                      <h2 className="text-lg font-semibold text-white">{vehicle.type}</h2>
-                    </div>
-                    <div className="maincontc p-2">
-                    <p className="text-sm text-gray-600 mb-1">
-                <strong>Email:</strong> {vehicle.name}
-              </p>
-              <p className="text-sm text-gray-600 mb-1">
-                <strong>Phone Number:</strong> {vehicle.number}
-              </p>
-              </div>
-                  </div>
-                 ))}
-              </div>
-              </div>
-
-              {/* Maintenance Details */}
-                 <div className="flex flex-col lg:flex-row items-center justify-between p-4 mb-4 bg-white rounded-lg space-y-4   lg:space-y-0 mt-6">
-              <h2 className="px-4 py-2 w-full lg:w-auto text-black rounded-lg text-lg font-semibold  ">
-              Show Maintenance Details
-              </h2>
-              <div className="flex space-x-4">
-                <div className="p-4 bg-white rounded-lg shadow-lg border-l-4 border-green-500 w-full lg:w-60">
-                  <h3 className="text-gray-600 font-medium">Maintenance Amount</h3>
-                  <p className="text-green-500 font-bold text-2xl">₹ 0</p>
-                </div>
-                <div className="p-4 bg-white rounded-lg shadow-lg border-l-4 border-red-500 w-full lg:w-60">
-                  <h3 className="text-gray-600 font-medium">Penalty Amount</h3>
-                  <p className="text-red-500 font-bold text-2xl">₹ 0</p>
-                </div>
-              </div>
-            </div>
-
-
-            {/* Pending Maintenance */}
-    <div className=" bg-white rounded-lg p-4  items-center justify-center ">
-      <h2 className="text-lg   font-semibold m-4">Pending Maintenance</h2>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-        {Pending.map((item, index) => (
+      {/* Right Section: Documents */}
+      <div className="space-y-3 flex-1 max-w-sm">
+        {[
+          ["Syncfusion Essential Adharcard Front Side.JPG", "3.5 MB"],
+          ["Address Proof Front Side.PDF", "3.5 MB"],
+        ].map(([fileName, size], index) => (
           <div
             key={index}
-            className="bg-white shadow-md rounded-lg   "
+            className="flex items-center gap-3 p-3 bg-gray-50 border rounded-md"
           >
-              <div className="flex justify-between items-center mb-3 rounded-t-lg  bg-[#5678e9] p-2">
-            <div className="flex justify-between items-center ">
-                      <h2 className="text-lg font-semibold text-white">Maintenance</h2>
-                    </div>
+            <FaFileAlt className="text-blue-500" />
+            <div>
+              <p>{fileName}</p>
+              <p className="text-xs text-gray-500">{size}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {/* Sections: Members, Vehicles, etc. */}
+  {[{ title: "Member", items: members }, { title: "Vehicle", items: vehicles }].map(({ title, items }, sectionIndex) => (
+    <div key={sectionIndex} className="bg-white p-6 shadow rounded-md mt-8">
+      <h2 className="text-lg font-semibold mb-4">
+        {title}: ({items.length})
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {items.map((item, index) => (
+          <div key={index} className="bg-white shadow-md rounded-md">
+            <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-[#5678e9]">
+              <h2 className="text-lg font-semibold text-white">
+                {item.name || item.type}
+              </h2>
+            </div>
+            <div className="p-2">
+              {Object.entries(item).map(
+                ([key, value]) =>
+                  key !== "name" && key !== "type" && (
+                    <p key={key} className="text-sm text-gray-600 mb-1">
+                      <strong>{key}:</strong> {value} 
+                    </p>
+                    
+                  )
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+
+  {/* Maintenance Details */}
+  <div className="flex flex-wrap lg:flex-nowrap items-center justify-between p-4 mb-4 bg-white rounded-lg space-y-4 lg:space-y-0 mt-6">
+    <h2 className="text-2xl font-semibold">Show Maintenance Details</h2>
+    <div className="flex flex-wrap space-x-4">
+      {[
+        ["Maintenance Amount", "₹ 0", "border-green-500", "text-green-500"],
+        ["Penalty Amount", "₹ 0", "border-red-500", "text-red-500"],
+      ].map(([label, value, borderClass, textClass]) => (
+        <div
+          key={label}
+          className={`p-4 bg-white rounded-lg shadow-lg border-l-4 ${borderClass} w-full lg:w-60`}
+        >
+          <h3 className="text-gray-600 font-medium">{label}</h3>
+          <p className={`font-bold text-2xl ${textClass}`}>{value}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Pending and Due Maintenance */}
+  {[{ title: "Pending Maintenance", data: Pending }, { title: "Due Maintenance", data: duePending }].map(({ title, data }, index) => (
+    <div key={index} className="bg-white p-4 rounded-lg mt-5">
+      <h2 className="text-2xl font-semibold mb-4">{title}</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        {data.map((item, index) => (
+          <div key={index} className="bg-white shadow-md rounded-lg">
+            <div className="flex justify-between items-center p-2 rounded-t-lg bg-[#5678e9]">
+              <h2 className="text-lg font-semibold text-white">
+                Maintenance
+              </h2>
               <span className="text-sm bg-blue-700 text-white py-1 px-3 rounded-full">
                 Pending
               </span>
             </div>
             <div className="mt-4 text-gray-700 p-2">
-              <div className="flex justify-between">
-                <span>Bill Date</span>
-                <span>{item.billDate}</span>
-              </div>
-              <div className="flex justify-between mt-2">
-                <span>Pending Date</span>
-                <span>{item.pendingDate}</span>
-              </div>
-              <hr />
-              
-              <div className="flex justify-between mt-2 text-red-500">
-                <span>Maintenance Amount</span>
-                <span>₹ {item.maintenanceAmount.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between mt-2 text-red-500">
-                <span>Maintenance Penalty Amount</span>
-                <span>₹ {item.penaltyAmount.toFixed(2)}</span>
-              </div>
-              <hr />
-              <div className="flex justify-between mt-4 font-bold text-green-600">
-                <span>Grand Total</span>
-                <span>₹ {item.totalAmount.toFixed(2)}</span>
-              </div>
+              {Object.entries(item).map(([key, value]) => (
+                <div key={key} className="flex justify-between mt-2">
+                  <span>{key}</span>
+                  <span>₹ {typeof value === "number" ? value.toFixed(2) : value}</span>
+                </div>
+              ))}
+              <button className="mt-4 w-full bg-gradient-to-r from-orange-500 to-yellow-400 text-white py-2 rounded-lg shadow">
+                Pay Now
+              </button>
             </div>
-            <button className="mt-4 w-10/12 bg-gradient-to-r from-orange-500 to-yellow-400 text-white py-2  mx-8  mb-2 justify-center rounded-lg shadow">
-              Pay Now
-            </button>
           </div>
         ))}
       </div>
     </div>
+  ))}
 
-    {/* Due  Maintenance */}
-    <div className="p-4 bg-gray-100   items-center justify-center ">
-      <h2 className="text-2xl font-semibold mb-4">Due Maintenance</h2>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-        {duePending.map((item, index) => (
-          <div
-            key={index}
-            className="bg-white shadow-md rounded-lg  "
-          >
-              <div className="flex justify-between items-center mb-3 rounded-t-lg  bg-[#5678e9] p-2">
-            <div className="flex justify-between items-center ">
-                      <h2 className="text-lg font-semibold text-white">Maintenance</h2>
-                    </div>
-              <span className="text-sm bg-blue-500 text-white py-1 px-3 rounded-full">
-                Pending
-              </span>
-            </div>
-            <div className="mt-4 text-gray-700 p-2">
-              <div className="flex justify-between">
-                <span> Date</span>
-                <span>{item.Date}</span>
-              </div>
-                        <hr />
-  
-              <div className="flex justify-between mt-2 text-red-500">
-                <span> Amount</span>
-                <span>₹ {item.Amount.toFixed(2)}</span>
-              </div>
-           
-              <div className="flex justify-between mt-2  text-red-500">
-                <span>Due Maintenance Amount  </span>
-                <span>₹ {item.dueAmount.toFixed(2)}</span>
-              </div>
-              <hr />
-            </div>
-            <button className="mt-4 w-10/12 bg-gradient-to-r from-orange-500 to-yellow-400 text-white py-2  mx-8  mb-2 justify-center rounded-lg shadow">
-              Pay Now
-            </button>
-          </div>
-        ))}
+<div className="bg-white p-6 shadow rounded-md mt-5">
+  <h2 className="text-xl md:text-2xl font-semibold mb-4">Announcements</h2>
+  <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    {Announcement.map((Annou, index) => (
+      <div
+        key={index}
+        className="bg-white shadow-md rounded-md relative border border-gray-200"
+      >
+        {/* Header Section */}
+        <div className="flex justify-between items-center rounded-t-lg p-2 bg-[#5678e9]">
+          <h2 className="text-lg font-semibold text-white">{Annou.name}</h2>
+        </div>
+
+        {/* Content Section */}
+        <div className="p-4">
+          <p className="text-sm text-gray-600 mb-2">
+            <strong>Date:</strong> {Annou.Date}
+          </p>
+          <p className="text-sm text-gray-600 mb-2">
+            <strong>Time:</strong> {Annou.Time}
+          </p>
+          <p className="text-sm text-gray-600">
+            <strong>Description:</strong> <span>{Annou.Description}</span>
+          </p>
+        </div>
       </div>
-    </div>
+    ))}
+  </div>
+</div>
 
-    {/* Announcement  */}
-    <div className="bg-white p-6 shadow rounded-md mt-8 ">
-        <h2 className="text-lg font-bold text-black p-1">Member : (04)</h2>
-      <div className="grid gap-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4  ">
-                {Announcement.map((Annou, index) => (
-                  <div key={index} className="bg-white shadow-md rounded-md relative  ">
-                    <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-[#5678e9]">
-                      <h2 className="text-lg font-semibold text-white">{Annou.name}</h2>
-                    </div>
-                    <div className="maincontc p-2">
-                    <p className="text-sm text-gray-600 mb-1">
-                <strong>Date:</strong> {Annou.Date}
-              </p>
-              <p className="text-sm text-gray-600 mb-1">
-                <strong>Time:</strong> {Annou.Time}
-              </p>
-              <p className="text-sm text-gray-600 mb-1">
-                <strong>Description:</strong> 
-                <span>{Annou.Description}</span>
-              </p>
-             
-              </div>
-                  </div>
-                 ))}
-              </div>
-              </div>
+</div>
 
-    </div>
             </div>
         </div>
     )
