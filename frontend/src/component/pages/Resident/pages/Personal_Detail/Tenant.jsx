@@ -1,162 +1,157 @@
 import React, { useState } from 'react'
-import Sidebar from '../../layout/Sidebar'
 import Header from '../../layout/Header'
-import { FaFileAlt } from "react-icons/fa";
-import Tenant from './Tenant';
+import Sidenav from '../../layout/Sidebar'
+import { FaFileAlt } from 'react-icons/fa';
 
-
-const Personal_Detail = () => {
-    let [data, setdata] = useState(280);
-    let [getdata, setget] = useState(280);
+const Tenant = () => {
     const [activeTab, setActiveTab] = useState("Owner");
 
-    function openNav() {
-        setdata(280);
-        setget(280);
+  const details = {
+    Owner: {
+      name: "Arlene McCoy",
+      phone: "+91 9575225165",
+      address: "C-101, Dhara Arcade, Mota Varachha Surat",
+    },
+    Tenant: {
+      name: "John Doe",
+      phone: "+91 9876543210",
+      address: "B-202, Skyline Tower, City Center",
+    },
+  };
+
+  const data = details[activeTab];
+
+  const [members] = useState([
+    {
+      name: 'Arlene McCoy',
+      email: 'Arlenemccoy@gmail.com',
+      phone: '+91 99130 52221',
+      age: 22,
+      gender: 'Male',
+      relation: 'Brother',
+    },
+    {
+      name: 'Arlene McCoy',
+      email: 'BrooklynSimmons@gmail.com',
+      phone: '+91 99233 66134',
+      age: 22,
+      gender: 'Male',
+      relation: 'Uncle',
+    },
+    {
+      name: 'Arlene McCoy',
+      email: 'JennyWilson@gmail.com',
+      phone: '+91 99130 52221',
+      age: 22,
+      gender: 'Male',
+      relation: 'Sister',
+    },
+    {
+      name: 'Arlene McCoy',
+      email: 'JaneCooper@gmail.com',
+      phone: '+91 99130 52221',
+      age: 22,
+      gender: 'Male',
+      relation: 'Mother',
+    },
+  ]);
+
+  const [vehicles] = useState([
+    {
+      type: 'Two Wheelers',
+      VehicleName: 'Splendor',
+      VehicleNumber: 'GJ-5216',
+    },
+    {
+      type: 'Four Wheelers',
+      VehicleName: 'Fortuner',
+      VehicleNumber: 'GJ-5216',
+    },
+    {
+      type: 'Two Wheelers',
+      VehicleName: 'Splendor',
+      VehicleNumber: 'GJ-5216',
+    },
+    {
+      type: 'Two Wheelers',
+      VehicleName: 'Splendor',
+      VehicleNumber: 'GJ-5216',
+    },
+  ]);
+  const Pending = [
+    {
+      billDate: "11/01/2024",
+      pendingDate: "11/01/2024",
+      maintenanceAmount: 1000,
+      penaltyAmount: 250,
+      totalAmount: 1250,
+    },
+    {
+      billDate: "11/01/2024",
+      pendingDate: "11/01/2024",
+      maintenanceAmount: 1000,
+      penaltyAmount: 250,
+      totalAmount: 1250,
+    },
+    {
+      billDate: "11/01/2024",
+      pendingDate: "11/01/2024",
+      maintenanceAmount: 1000,
+      penaltyAmount: 250,
+      totalAmount: 1250,
+    },
+  ];
+  const duePending =[
+    {
+      Date: "11/01/2024",
+      Amount: 1000,
+      dueAmount: 250,
+    }, {
+      Date: "11/01/2024",
+      Amount: 1000,
+      dueAmount: 250,
     }
-    function closeNav() {
-        setdata(0);
-        setget(0);
+  ];
+  const Announcement =[
+    {
+      Date: "11/01/2024",
+      Time:"8:15 PM",
+      name: "Annual Maintenance",
+      Description: "All vehicles should be checked and serviced annually.",
+    }, {
+      Date: "11/01/2024",
+      Time:"9:55 AM",
+      name: "Annual Maintenance",
+      Description: "All vehicles should be checked and serviced annually.",
     }
-    const [members] = useState([
-      {
-        name: 'Arlene McCoy',
-        email: 'Arlenemccoy@gmail.com',
-        phone: '+91 99130 52221',
-        age: 22,
-        gender: 'Male',
-        relation: 'Brother',
-      },
-      {
-        name: 'Arlene McCoy',
-        email: 'BrooklynSimmons@gmail.com',
-        phone: '+91 99233 66134',
-        age: 22,
-        gender: 'Male',
-        relation: 'Uncle',
-      },
-      {
-        name: 'Arlene McCoy',
-        email: 'JennyWilson@gmail.com',
-        phone: '+91 99130 52221',
-        age: 22,
-        gender: 'Male',
-        relation: 'Sister',
-      },
-      {
-        name: 'Arlene McCoy',
-        email: 'JaneCooper@gmail.com',
-        phone: '+91 99130 52221',
-        age: 22,
-        gender: 'Male',
-        relation: 'Mother',
-      },
-    ]);
-  
-    const [vehicles] = useState([
-      {
-        type: 'Two Wheelers',
-        VehicleName: 'Splendor',
-        VehicleNumber: 'GJ-5216',
-      },
-      {
-        type: 'Four Wheelers',
-        VehicleName: 'Fortuner',
-        VehicleNumber: 'GJ-5216',
-      },
-      {
-        type: 'Two Wheelers',
-        VehicleName: 'Splendor',
-        VehicleNumber: 'GJ-5216',
-      },
-      {
-        type: 'Two Wheelers',
-        VehicleName: 'Splendor',
-        VehicleNumber: 'GJ-5216',
-      },
-    ]);
-    const Pending = [
-      {
-        billDate: "11/01/2024",
-        pendingDate: "11/01/2024",
-        maintenanceAmount: 1000,
-        penaltyAmount: 250,
-        totalAmount: 1250,
-      },
-      {
-        billDate: "11/01/2024",
-        pendingDate: "11/01/2024",
-        maintenanceAmount: 1000,
-        penaltyAmount: 250,
-        totalAmount: 1250,
-      },
-      {
-        billDate: "11/01/2024",
-        pendingDate: "11/01/2024",
-        maintenanceAmount: 1000,
-        penaltyAmount: 250,
-        totalAmount: 1250,
-      },
-    ];
-    const duePending =[
-      {
-        Date: "11/01/2024",
-        Amount: 1000,
-        dueAmount: 250,
-      }, {
-        Date: "11/01/2024",
-        Amount: 1000,
-        dueAmount: 250,
-      }
-    ];
-    const Announcement =[
-      {
-        Date: "11/01/2024",
-        Time:"8:15 PM",
-        name: "Annual Maintenance",
-        Description: "All vehicles should be checked and serviced annually.",
-      }, {
-        Date: "11/01/2024",
-        Time:"9:55 AM",
-        name: "Annual Maintenance",
-        Description: "All vehicles should be checked and serviced annually.",
-      }
-    ]
+  ]
+
     return (
-        <div className='bg-[#f0f5fb] h-screen'>
-            <Sidebar closeNav={closeNav} data={data} />
-            <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
-                <div className="open_he">
-                    <Header openNav={openNav} />
-                </div>
-                <div className="p-6 bg-gray-100 min-h-screen">
-  {/* Tabs Section */}
-  <div className="flex flex-wrap ">
-    <button
-      className={`py-2 px-8 font-semibold text-center rounded-t-lg border-b-2 border-b-orange-500 ${activeTab === "Owner"
-        ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white"
-        : "bg-white text-gray-700"
-        }`}
-      onClick={() => setActiveTab("Owner")}
-    >
-      Owner
-    </button>
-    <button
-      className={`py-2 px-8 font-semibold text-center rounded-t-lg border-b-2 border-b-orange-500 ${activeTab === "Tenant"
-        ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white"
-        : "bg-white text-gray-700"
-        }`}
-      onClick={() => setActiveTab("Tenant")}
-    >
-      Tenant
-    </button>
-  </div>
-  {activeTab === "Owner" && (
-  <div>
+    <div>
+
+      {/* Data Display Section */}
+        <div className="p-6 bg-white rounded-lg shadow ">
+        <table className="w-full text-left">
+          <thead>
+            <tr className="text-gray-600 font-semibold">
+              <th className="p-2">Name</th>
+              <th className="p-2">Phone</th>
+              <th className="p-2">Address</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="text-gray-700">
+              <td className="p-2">{data.name}</td>
+              <td className="p-2">{data.phone}</td>
+              <td className="p-2">{data.address}</td>
+            </tr>
+          </tbody>
+        </table></div>
+
   {/* Profile Section */}
-  <div className="bg-white p-6 shadow rounded-md">
-    <div className="flex flex-wrap gap-6 items-center justify-between">
+        <div className="bg-white p-6 shadow rounded-md mt-5" >
       {/* Left Section: Profile Picture and Info */}
+    <div className="flex flex-wrap gap-6 items-center justify-between">
       <div className="flex flex-wrap items-center gap-6">
         <img
           src="../../../../../../public/images/Profile.png"
@@ -236,8 +231,8 @@ const Personal_Detail = () => {
     </div>
   ))}
 
-  {/* Maintenance Details */}
-  <div className="flex flex-wrap lg:flex-nowrap items-center justify-between p-4 mb-4 bg-white rounded-lg space-y-4 lg:space-y-0 mt-6">
+    {/* Maintenance Details */}
+    <div className="flex flex-wrap lg:flex-nowrap items-center justify-between p-4 mb-4 bg-white rounded-lg space-y-4 lg:space-y-0 mt-6">
   <h2 className="text-2xl font-semibold flex-grow lg:flex-grow-0">Show Maintenance Details</h2>
   <div className="flex flex-wrap lg:flex-nowrap gap-4">
     {[
@@ -257,8 +252,10 @@ const Personal_Detail = () => {
     ))}
   </div>
 </div>
-  {/* Pending and Due Maintenance */}
-  {[{ title: "Pending Maintenance", data: Pending }, { title: "Due Maintenance", data: duePending }].map(({ title, data }, index) => (
+
+
+    {/* Pending and Due Maintenance */}
+    {[{ title: "Pending Maintenance", data: Pending }, { title: "Due Maintenance", data: duePending }].map(({ title, data }, index) => (
     <div key={index} className="bg-white p-4 rounded-lg mt-5">
       <h2 className="text-2xl font-semibold mb-4">{title}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -289,6 +286,7 @@ const Personal_Detail = () => {
     </div>
   ))}
 
+        {/* Announcements */}
 <div className="bg-white p-6 shadow rounded-md mt-5">
   <h2 className="text-xl md:text-2xl font-semibold mb-4">Announcements</h2>
   <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -319,18 +317,8 @@ const Personal_Detail = () => {
   </div>
 </div>
 
- </div>
-  )} 
-
-{activeTab === "Tenant" && (
-     
-          <Tenant/>
-          )}
-</div>
-
-            </div>
-        </div>
+      </div>
     )
 }
 
-export default Personal_Detail
+export default Tenant

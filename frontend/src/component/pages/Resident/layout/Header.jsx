@@ -3,6 +3,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from 'react-router-dom';
 import OpneNotificationModal from '../layout/OpneNotification';
 
+
 const Header = (props) => {
   return (
     <div>
@@ -17,9 +18,9 @@ const Header = (props) => {
 
           <OpneNotificationModal />
           <div className="flex items-center space-x-4" >
-            <div className="Profie-img"><img src="../../../public/images/user.jpg" alt="Profile" className="w-8 h-8 rounded-full" /> </div>
-            <div className="profile-text">  <p className="font-medium">Moni Roy</p>
-              <p className='text-gray-400'>Admin</p></div>
+            <div className="Profie-img"><img src="../../../../../../public/images/Profile.png" alt="Profile" className="w-8 h-8 rounded-full" /> </div>
+            <div className="profile-text">  <p className="font-medium">Arlene McCoy</p>
+              <p className='text-gray-400'>Resident</p></div>
           </div>
         </div>
       </header>

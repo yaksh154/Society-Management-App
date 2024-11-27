@@ -36,6 +36,7 @@ const Security_Protocols = () => {
                 </div>
                 <div className="p-6 rounded-lg ">
           <div className="overflow-x-auto bg-white p-4 rounded-xl">
+          <h2 className="text-2xl font-bold mb-4">Security Protocols</h2>
             <table className="w-full table-auto">
               <thead className="bg-blue-100 text-gray-700 ">
                 <tr>
