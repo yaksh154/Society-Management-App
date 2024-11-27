@@ -1,81 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FaUser from "../../../../../../public/images/Profile.png";
+import { GetActivityData } from '../../Api/api';
 
 const Activity = () => {
-    const activityData = [
-        {
-          ParticipatorName: "Cody Fisher",
-          Description: "Event and recreational activities.",
-          ActivityTime: "2:45 PM",
-          ActivityDate: "10/02/2024",
-          ActivityName: "Society Meeting",
-        },
-        {
-          ParticipatorName: "Esther Howard",
-          Description: "Securing critical government systems.",
-          ActivityTime: "1:45 PM",
-          ActivityDate: "11/02/2024",
-          ActivityName: "Holi Festival",
-        },
-        {
-          ParticipatorName: "Jenny Wilson",
-          Description: "Implementing surveillance public spaces.",
-          ActivityTime: "7:00 PM",
-          ActivityDate: "12/02/2024",
-          ActivityName: "Navratri Festival",
-        },
-        {
-          ParticipatorName: "Robert Fox",
-          Description: "Event and recreational activities.",
-          ActivityTime: "4:45 PM",
-          ActivityDate: "13/02/2024",
-          ActivityName: "Ganesh Chaturthi",
-        },
-        {
-          ParticipatorName: "Albert Flores",
-          Description: "Securing critical government systems.",
-          ActivityTime: "1:00 PM",
-          ActivityDate: "14/02/2024",
-          ActivityName: "Society Meeting",
-        },
-        {
-          ParticipatorName: "Floyd Miles",
-          Description: "Implementing surveillance public spaces.",
-          ActivityTime: "6:45 PM",
-          ActivityDate: "15/02/2024",
-          ActivityName: "Holi Festival",
-        },
-        {
-          ParticipatorName: "Albert Flores",
-          Description: "Event and recreational activities.",
-          ActivityTime: "7:35 PM",
-          ActivityDate: "16/02/2024",
-          ActivityName: "Navratri Festival",
-        },
-        {
-          ParticipatorName: "Floyd Miles",
-          Description: "Securing critical government systems.",
-          ActivityTime: "4:30 PM",
-          ActivityDate: "17/02/2024",
-          ActivityName: "Ganesh Chaturthi",
-        },
-        {
-          ParticipatorName: "Cody Fisher",
-          Description: "Implementing surveillance public spaces.",
-          ActivityTime: "1:30 PM",
-          ActivityDate: "18/02/2024",
-          ActivityName: "Society Meeting",
-        },
-        {
-          ParticipatorName: "Cody Fisher",
-          Description: "Event and recreational activities.",
-          ActivityTime: "3:45 PM",
-          ActivityDate: "19/02/2024",
-          ActivityName: "Holi Festival",
-        },
     
-      ];
       const [activeTab, setActiveTab] = useState("Activity");
+      const [ActivityData, setActivityData] = useState([]);
+
+      useEffect(() => {
+        Fdata();
+      }, []);
+    
+      const Fdata = async () => {
+        try {
+          await GetActivityData(setActivityData);
+          // console.log("Fetched event data:", ActivityData); // Debug log
+        } catch (error) {
+          console.error("Error fetching event data:", error);
+        }
+      };
+    
 
     return (
         <div className="overflow-x-auto bg-white p-4 rounded-xl shadow-lg">
@@ -91,7 +35,7 @@ const Activity = () => {
             </tr>
           </thead>
           <tbody>
-            {activityData.map((item, index) => (
+            {ActivityData.map((item, index) => (
               <tr key={index} className="border-b">
                 <td className="px-4 py-3 flex items-center space-x-2">
                   <img
