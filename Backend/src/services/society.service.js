@@ -8,14 +8,19 @@ const byid = async (id) => {
   return await Society.findById(id);
 }
 
-const updateunit = async (id,Residentid) => {
-  return await Society.findByIdAndUpdate(id,
-    {
-      $inc: { unit: 1 },
-      $push: { resident: Residentid },
-  },
-  { new: true }
-  )
+const updateunit = async (id, Residentid) => {
+  try {
+    return await Society.findByIdAndUpdate(id,
+      {
+        $inc: { unit: 1 },
+        $push: { resident: Residentid },
+      },
+      { new: true }
+    )
+  } catch (error) {
+    console.error("🚀 ~ updateunitRemove ~ error:", error);
+    throw new Error("Failed to update society");
+  }
 }
 
 const getSociety = async () => {
@@ -25,16 +30,16 @@ const getSociety = async () => {
 const updateunitRemove = async (societyId, residentId) => {
   try {
     return updatedSociety = await Society.findByIdAndUpdate(
-          societyId,
-          {
-              $pull: { resident: residentId },
-              $inc: { unit: -1 },
-          },
-          { new: true }
-      );
+      societyId,
+      {
+        $pull: { resident: residentId },
+        $inc: { unit: -1 },
+      },
+      { new: true }
+    );
   } catch (error) {
-      console.error("🚀 ~ updateunitRemove ~ error:", error);
-      throw new Error("Failed to update society");
+    console.error("🚀 ~ updateunitRemove ~ error:", error);
+    throw new Error("Failed to update society");
   }
 };
 

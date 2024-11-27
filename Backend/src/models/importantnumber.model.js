@@ -13,7 +13,11 @@ const importantnumberSchema = new mongoose.Schema(
     Work: {
       type: String,
       require: true
-    }
+    },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Manager'
+    },
   },
   {
     timestamps: true,

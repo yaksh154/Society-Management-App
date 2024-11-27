@@ -10,10 +10,10 @@ const createexpenses = async (req, res) => {
         const upload = await uploadFile(img);
         console.log("🚀 ~ createexpenses ~ upload:", upload)
         const body = {
-            Title : reqbody.title,
-            Description : reqbody.description,
-            Date : reqbody.date,
-            Amount : reqbody.amount,
+            Title: reqbody.title,
+            Description: reqbody.description,
+            Date: reqbody.date,
+            Amount: reqbody.amount,
             Bill: upload.secure_url,
             createdBy: req.user._id,
             Society: req.user.societyid
@@ -52,30 +52,46 @@ const getexpense = async (req, res) => {
 
 const updateexpenses = async (req, res) => {
     try {
-        const { id } = req.params
+        const { id } = req.params;
         const expenses = await expenses_servise.getById(id);
+        console.log("🚀 ~ updateexpenses ~ expenses:", expenses);
+
         if (!expenses) {
             return res.status(404).json({ message: "Not found" });
         }
+
         const updetbody = {};
-        if(req.body){
-            updetbody.Title = req.body.title,
-            updetbody.Description = req.body.description,
-            updetbody.Date = req.body.date,
-            updetbody.Amount = req.body.amount
+        if (req.body) {
+            updetbody.Title = req.body.title;
+            updetbody.Description = req.body.description;
+            updetbody.Date = req.body.date;
+            updetbody.Amount = req.body.amount;
         }
-        if(req.files){
-            const Bill = req.files.Bill[0].path
+        console.log("🚀 ~ updateexpenses ~ updetbody:", updetbody);
+
+        
+        if (req.files) {
+            const Bill = req.files.Bill[0].path;
             const upload = await uploadFile(Bill);
             updetbody.Bill = upload.secure_url;
+        } else {
+            console.log("🚀 ~ updateexpenses ~ No Bill file provided.");
         }
+
         const updatedexpenses = await expenses_servise.update(id, updetbody);
-        if (!updatedexpenses) return res.status(404).json({ message: "Not found" });
+        console.log("🚀 ~ updateexpenses ~ updatedexpenses:", updatedexpenses);
+
+        if (!updatedexpenses) {
+            return res.status(404).json({ message: "Not found" });
+        }
+
         return res.status(200).json(updatedexpenses);
     } catch (error) {
+        console.error("🚀 ~ updateexpenses ~ error:", error);
         return res.status(400).json({ message: error.message });
     }
 };
+
 
 // Delete an expenses 
 const deleteexpenses = async (req, res) => {

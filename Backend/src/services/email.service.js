@@ -12,7 +12,7 @@ let transporter = nodemailer.createTransport({
 });
 
 // send mail with defined transport object
-const send_maile = async (email, password, Firstname, Lastname) => {
+const send_maile = async (email, password, Fullname) => {
     try {
         return transporter.sendMail({
             from: 'vraj.patel@swiftrut.com',
@@ -29,7 +29,7 @@ const send_maile = async (email, password, Firstname, Lastname) => {
                         </tr>
                         <tr>
                             <td style="padding: 8px; border: 1px solid #ddd;">Name</td>
-                            <td style="padding: 8px; border: 1px solid #ddd;">${Firstname} ${Lastname}</td>
+                            <td style="padding: 8px; border: 1px solid #ddd;">${Fullname}</td>
                         </tr>
                         <tr>
                             <td style="padding: 8px; border: 1px solid #ddd;">Email</td>

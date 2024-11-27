@@ -2,30 +2,27 @@ const resident_service = require("../services/resident.service")
 const Society = require("../services/society.service")
 const bcrypt = require("bcryptjs");
 const { uploadFile } = require("../middleware/upload")
+const { send_maile } = require("../services/email.service")
 
 const createResident = async (req, res) => {
     try {
         const residentData = req.body;
+        console.log("🚀 ~ createResident ~ residentData:", residentData)
         console.log("🚀 ~ req.body:", req.body);
         console.log("🚀 ~ req.files:", req.files);
         const pass = Math.floor(1000 + Math.random() * 9000);
         const bcrpass = await bcrypt.hash(pass.toString(), 10);
-        const residentph = req.files.residentphoto[0].path;
-        console.log("🚀 ~ createResident ~ residentph:", residentph)
-        const AadharCard_Front = req.files.AadharCard_FrontSide[0].path;
-        const AadharCard_Back = req.files.AadharCard_BackSide[0].path;
-        const Vera_OR_LightBill = req.files.VeraBill_OR_LightBill[0].path;
-        const RentAgreement = req.files.Rent_Agreement[0].path;
+        const photoPath = req.files.residentphoto[0].path;
+        const aadharFrontPath = req.files.AadharCard_FrontSide[0].path;
+        const AadharBackPath = req.files.AadharCard_BackSide[0].path;
+        const Vera_OR_LightBillPath = req.files.VeraBill_OR_LightBill[0].path;
+        const Rent_AgreementPath = req.files.Rent_Agreement[0].path;
 
-        // if (!residentph || !AadharCard_Front || !AadharCard_Back || !Vera_OR_LightBill || !RentAgreement) {
-        //     return res.status(400).json({ error: "All required files must be uploaded" });
-        // }
-
-        const residentphoto = await uploadFile(residentph);
-        const AadharCard_FrontSide = await uploadFile(AadharCard_Front);
-        const AadharCard_BackSide = await uploadFile(AadharCard_Back);
-        const VeraBill_OR_LightBill = await uploadFile(Vera_OR_LightBill);
-        const Rent_Agreement = await uploadFile(RentAgreement);
+        const residentphoto = await uploadFile(photoPath);
+        const AadharCard_FrontSide = await uploadFile(aadharFrontPath);
+        const AadharCard_BackSide = await uploadFile(AadharBackPath);
+        const VeraBill_OR_LightBill = await uploadFile(Vera_OR_LightBillPath);
+        const Rent_Agreement = await uploadFile(Rent_AgreementPath);
         const body = {
             Fullname: residentData.fullname,
             Phone: residentData.phone,
@@ -61,7 +58,6 @@ const createResident = async (req, res) => {
         //     $push:{resident:newResident._id}
         // })
         // console.log("🚀 ~ createResident ~ Soci:", Soci)
-        const mongoose = require("mongoose");
         const societyId = req.user.societyid
         console.log("🚀 ~ createResident ~ req.user.societyid:", req.user.societyid);
         console.log("🚀 ~ Validated Society ID:", societyId);
@@ -82,6 +78,7 @@ const createResident = async (req, res) => {
         if (!updatedSociety) {
             return res.status(500).json({ error: "Failed to update society" });
         }
+        await send_maile(newResident.Email, pass, newResident.Fullname)
 
         return res.status(201).json({ message: "create Successful", data: newResident });
     } catch (error) {
@@ -130,7 +127,7 @@ const updateResident = async (req, res) => {
                 updatedData.residentphoto = residentPhoto.secure_url;
             }
             if (req.files.AadharCard_FrontSide) {
-                constRent_AgreementPath = req.files.AadharCard_FrontSide[0].path;
+                const aadharFrontPath = req.files.AadharCard_FrontSide[0].path;
                 const frontUrl = await uploadFile(aadharFrontPath);
                 updatedData.AadharCard_FrontSide = frontUrl.secure_url;
             }
@@ -166,7 +163,7 @@ const updateResident = async (req, res) => {
 const deleteResident = async (req, res) => {
     try {
         const { id } = req.params;
-        const deletedResident = await resident_service.delete(id);
+        const deletedResident = await resident_service.deleteResident(id);
         if (!deletedResident) {
             return res.status(404).json({ error: "Resident not found" });
         }
@@ -182,9 +179,39 @@ const deleteResident = async (req, res) => {
 };
 
 
+const login = async (req, res) => {
+    console.log("============login============");
+    try {
+        const body = req.body;
+        const { Password, Email } = body;
+        console.log("🚀 ~ login ~ Password:", Password)
+        const resident = await resident_service.findemail(Email)
+        if (!resident) {
+            return res.status(403).json({ message: "resident Not Found" })
+        }
+        const bcryptpass = await bcrypt.compare(Password, resident.Password)
+        console.log("🚀 ~ login ~ bcryptpass:", bcryptpass)
+        if (!bcryptpass) {
+            return res.status(404).json({ message: "Incorrect Password" })
+        }
+        const payload = {
+            _id: resident._id,
+            email: resident.Email,
+            role: resident.Role,
+            societyid: resident.society
+        };
+        const token = jwt.sign(payload, process.env.SECRET_key, { expiresIn: "1d" });
+        return res.status(200).json({ message: "resident Login Successful", token: token });
+    } catch (error) {
+        console.error("🚀 ~ login ~ error:", error.message);
+        return res.status(500).json({ message: error.message });
+    }
+}
+
 module.exports = {
     createResident,
     getResident,
     updateResident,
     deleteResident,
+    login
 };

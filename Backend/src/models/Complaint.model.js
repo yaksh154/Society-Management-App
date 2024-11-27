@@ -15,7 +15,7 @@ const complaintSchema = new mongoose.Schema(
             require: true
         },
         Wing: {
-            type: Date,
+            type: String,
             require: true
         },
         Unit: {

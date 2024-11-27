@@ -14,14 +14,6 @@ const noteSchema = new mongoose.Schema(
       type: Date,
       require: true
     },
-    Amount: {
-      type: Number,
-      require: true
-    },
-    Upload_Bill: {
-      type: String,
-      require: true
-    },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Manager'

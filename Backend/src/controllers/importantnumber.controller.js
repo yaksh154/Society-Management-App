@@ -5,7 +5,13 @@ const createImportantNumber = async (req, res) => {
         const num = req.body.Phonenumber
         console.log("🚀 ~ createImportantNumber ~ num:", num)
         const number = await importantnumber_servise.findbynumber(num)
-        const importantNumber = await importantnumber_servise.create(req.body);
+        const body = {
+            Fullname:req.body.Fullname ,
+            Phonenumber:req.body.Phonenumber,
+            Work:req.body.Work ,
+            createdBy:req.user.user._id,
+        }
+        const importantNumber = await importantnumber_servise.create(body);
         return res.status(201).json(importantNumber);
     } catch (error) {
         return res.status(400).json({ message: error.message });
