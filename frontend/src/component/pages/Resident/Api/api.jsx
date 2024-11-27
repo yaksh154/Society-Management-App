@@ -1,11 +1,17 @@
-import React from 'react'
+import axios from "axios";
 
-const api = () => {
-  return (
-    <div>
-      api
-    </div>
-  )
+const url = 'https://society-management-app-server.onrender.com'
+
+export const GetEventData = (setEventData) => {
+  axios.get('http://localhost:3030/EventData').then((res) => {
+      // console.log(res.data);
+      setEventData(res.data)
+  })
 }
 
-export default api
+export const GetActivityData = (setActivityData) => {
+  axios.get('http://localhost:3030/ActivityData').then((res) => {
+      // console.log(res.data);
+      setActivityData(res.data)
+  })
+}
