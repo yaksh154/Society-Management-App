@@ -249,7 +249,7 @@ const Home = () => {
                   <h2 className="text-lg font-semibold">Pending Maintenances</h2>
                   <a href="#" className="text-blue-500 text-sm">View all</a>
                 </div>
-                <div className="space-y-4 overflow-y-auto max-h-80 px-2">
+                <div className="space-y-4 overflow-y-auto h-full px-2">
                   <div>
                     {/* Maintenance Item */}
                     <div className="flex justify-between items-center">

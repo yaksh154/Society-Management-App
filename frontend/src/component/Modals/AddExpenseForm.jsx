@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { BiImageAdd } from 'react-icons/bi';
 import { PostExpanse } from '../services/Api/api';
+import Loding_Button from '../layout/Loding_Button';
+import Close_Button from '../layout/CloseButton';
 
 const AddExpenseForm = ({ setAddExpense, Fdata }) => {
   const {
@@ -15,11 +17,12 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
 
   const fileInputRef = useRef(null);
   const [previewImage, setPreviewImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setValue('Bill', [file]); // Set the file as an array for React Hook Form
+      setValue('Bill', [file]); 
       const fileURL = URL.createObjectURL(file);
       setPreviewImage(fileURL);
     }
@@ -29,11 +32,11 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
     fileInputRef.current.click();
   };
 
-  
+
 
   const onSubmit = (data) => {
-    PostExpanse(data, Fdata, setAddExpense,setPreviewImage,reset,handleCancel);
-    
+    setLoading(true)
+    PostExpanse(data, Fdata, setAddExpense, setPreviewImage, reset, setLoading, handleCancel);
   };
 
   const handleCancel = () => {
@@ -85,7 +88,7 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
                   {...register('date', { required: 'Date is required' })}
                   className="w-full border rounded p-2 text-gray-700"
                 />
-                {/* <FaCalendarAlt className="absolute top-3 right-3 text-gray-400" /> */}
+                <FaCalendarAlt className="absolute top-3 right-3 text-gray-400" />
               </div>
               {errors.date && <p className="text-red-500 text-xs mt-1">{errors.date.message}</p>}
             </div>
@@ -135,19 +138,17 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
           </div>
 
           <div className="flex justify-between mt-4">
-            <button
-              type="button"
-              className="px-4 py-2 border border-gray-300 font-semibold rounded text-gray-700 hover:text-gray-800 hover:border-gray-500"
+            <Close_Button
+              Addclass='w-1/2'
               onClick={handleCancel}
-            >
-              Cancel
-            </button>
-            <button
+              CloseName='Cancel'
+            />
+            <Loding_Button
               type="submit"
-              className="px-4 py-2 text-white rounded-md font-semibold bg-gradient-to-r from-orange-400 to-red-500 hover:from-orange-500 hover:to-red-600"
-            >
-              Save
-            </button>
+              loading={loading}
+              Btn_Name='Save'
+              Addclass='w-1/2'
+            />
           </div>
         </form>
       </div>

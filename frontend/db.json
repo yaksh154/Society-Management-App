@@ -1011,5 +1011,128 @@
       "Status": "Open",
       "Date": "26/11/2024"
     }
+  ],
+  "Request_Submission": [
+    {
+      "id": "1a25b7",
+      "ComplainerName": "Rahul Sharma",
+      "ComplaintName": "Loud Noise Disturbance",
+      "Description": "Excessive noise during late-night events affecting residents.",
+      "Wing": "B",
+      "Unit": "203",
+      "Priority": "High",
+      "Status": "Open",
+      "Date": "2024-11-16T00:00:00.000Z"
+    },
+    {
+      "id": "2c67d8",
+      "ComplainerName": "Priya Menon",
+      "ComplaintName": "Parking Violation",
+      "Description": "Unauthorized vehicles parked in designated spots.",
+      "Wing": "C",
+      "Unit": "305",
+      "Priority": "Medium",
+      "Status": "In Progress",
+      "Date": "2024-11-17T00:00:00.000Z"
+    },
+    {
+      "id": "3e78f9",
+      "ComplainerName": "Amit Roy",
+      "ComplaintName": "Water Leakage Issue",
+      "Description": "Persistent water leakage from the ceiling.",
+      "Wing": "A",
+      "Unit": "407",
+      "Priority": "High",
+      "Status": "Open",
+      "Date": "2024-11-18T00:00:00.000Z"
+    },
+    {
+      "id": "4g90h1",
+      "ComplainerName": "Sunita Joshi",
+      "ComplaintName": "Unauthorized Construction",
+      "Description": "Construction work carried out without prior approval.",
+      "Wing": "D",
+      "Unit": "509",
+      "Priority": "Low",
+      "Status": "Closed",
+      "Date": "2024-11-19T00:00:00.000Z"
+    },
+    {
+      "id": "5i01j2",
+      "ComplainerName": "Vikram Gupta",
+      "ComplaintName": "Garbage Disposal Issue",
+      "Description": "Improper disposal of garbage in common areas.",
+      "Wing": "A",
+      "Unit": "601",
+      "Priority": "Medium",
+      "Status": "Open",
+      "Date": "2024-11-20T00:00:00.000Z"
+    },
+    {
+      "id": "6k23l4",
+      "ComplainerName": "Anjali Verma",
+      "ComplaintName": "Elevator Malfunction",
+      "Description": "Elevator not functioning properly for the past week.",
+      "Wing": "B",
+      "Unit": "702",
+      "Priority": "High",
+      "Status": "In Progress",
+      "Date": "2024-11-21T00:00:00.000Z"
+    },
+    {
+      "id": "7m45n6",
+      "ComplainerName": "Rajesh Kumar",
+      "ComplaintName": "Security Lapse",
+      "Description": "Unknown visitors entering the premises without proper checks.",
+      "Wing": "C",
+      "Unit": "804",
+      "Priority": "High",
+      "Status": "Open",
+      "Date": "2024-11-22T00:00:00.000Z"
+    },
+    {
+      "id": "8o67p8",
+      "ComplainerName": "Kavita Singh",
+      "ComplaintName": "Power Fluctuation",
+      "Description": "Frequent power fluctuations causing inconvenience.",
+      "Wing": "D",
+      "Unit": "905",
+      "Priority": "Medium",
+      "Status": "In Progress",
+      "Date": "2024-11-23T00:00:00.000Z"
+    },
+    {
+      "id": "9q89r0",
+      "ComplainerName": "Arjun Nair",
+      "ComplaintName": "Blocked Drainage",
+      "Description": "Drainage system clogged, causing waterlogging.",
+      "Wing": "A",
+      "Unit": "1006",
+      "Priority": "High",
+      "Status": "Open",
+      "Date": "2024-11-24T00:00:00.000Z"
+    },
+    {
+      "id": "0s12t3",
+      "ComplainerName": "Meera Das",
+      "ComplaintName": "Unhygienic Conditions",
+      "Description": "Common areas not cleaned regularly.",
+      "Wing": "B",
+      "Unit": "1102",
+      "Priority": "Low",
+      "Status": "Closed",
+      "Date": "2024-11-25T00:00:00.000Z"
+    },
+    {
+      "id": "dae1",
+      "ComplainerName": "111111",
+      "ComplaintName": "111",
+      "Description": "122",
+      "Wing": "A",
+      "Unit": "111",
+      "Priority": "Medium",
+      "Status": "Solve",
+      "Date": "27/11/2024"
+    }
   ]
 }

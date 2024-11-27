@@ -198,7 +198,7 @@ export const ImportantNumbersGet = (setContacts, setLoading) => {
 
 // ImportantNumbers post
 
-export const ImportantNumbersPost = (newNumber, Fdata) => {
+export const ImportantNumbersPost = (newNumber, Fdata, setLoading) => {
     const token = localStorage.getItem('token')
     axios.post(`${url}/importantnumber/createImportantNumber`, newNumber, {
         headers: {
@@ -206,39 +206,46 @@ export const ImportantNumbersPost = (newNumber, Fdata) => {
         }
     })
         .then((res) => {
-            console.log(res);
+            setLoading(false)
             Fdata()
 
         })
         .catch((err) => {
+            setLoading(false)
             console.error('Error fetching important numbers:', err);
         });
 }
 
 // ImportantNumbers delete
 
-export const ImportantNumbersDelete = (_id, contacts, setContacts, ClosedeleteContact) => {
+export const ImportantNumbersDelete = (_id, contacts, setContacts, ClosedeleteContact, setLoading) => {
     axios.delete(`${url}/importantnumber/deleteImportantNumber/${_id}`)
         .then((res) => {
             console.log(res);
             const deletData = contacts.filter((e) => e._id !== _id)
             setContacts(deletData)
             ClosedeleteContact()
+            setLoading(false)
         })
         .catch((err) => {
             console.error('Error fetching important numbers:', err);
+            setLoading(false)
         });
 }
 
 // ImportantNumbers edit
 
-export const updateImportantNumber = (_id, editNumber, Fdata, closeEditModal) => {
+export const updateImportantNumber = (_id, editNumber, Fdata, closeEditModal, setLoading) => {
     axios.put(`${url}/importantnumber/updateImportantNumber/${_id}`, editNumber)
         .then(() => {
             closeEditModal();
             Fdata()
+            setLoading(false)
         })
-        .catch((error) => console.error("Error saving data:", error));
+        .catch((error) => {
+            console.error("Error saving data:", error)
+            setLoading(false)
+        });
 };
 
 // Complaint Tracking page
@@ -400,7 +407,7 @@ export const GetExpanse = (setAddExpense) => {
 }
 
 
-export const PostExpanse = async (data, Fdata, setAddExpense, setPreviewImage, reset, handleCancel) => {
+export const PostExpanse = async (data, Fdata, setAddExpense, setPreviewImage, reset, handleCancel, setLoading) => {
     const formData = new FormData();
     formData.append('title', data.title);
     formData.append('description', data.description);
@@ -418,21 +425,43 @@ export const PostExpanse = async (data, Fdata, setAddExpense, setPreviewImage, r
         reset();
         setPreviewImage(null);
         handleCancel()
+        setLoading(false)
     } catch (error) {
         console.error('Error submitting expense:', error);
+        setLoading(false)
     }
 }
 
-export const PutExpense = (setIncomeData) => {
-    axios.get('http://localhost:3030/Expenses/:id').then((res) => {
-        setIncomeData(res.data)
-    })
+export const PutExpense = async (data, Fdata, setAddExpense, setPreviewImage, reset, handleCancel) => {
+    const formData = new FormData();
+    formData.append('title', data.title);
+    formData.append('description', data.description);
+    formData.append('date', new Date(data.date).toISOString());
+    formData.append('amount', data.amount);
+    if (data.Bill && data.Bill.length > 0) {
+        formData.append('Bill', data.Bill[0]);
+    }
+    try {
+        await axios.post('https://society-management-app-server.onrender.com/expenses/createexpenses', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        Fdata();
+        setAddExpense(false);
+        reset();
+        setPreviewImage(null);
+        handleCancel()
+        setLoading(false)
+    } catch (error) {
+        console.error('Error submitting expense:', error);
+        setLoading(false)
+    }
 }
 
-export const DeleteExpense = (RemoveId, Fdata, RemoveView) => {
+export const DeleteExpense = (RemoveId, Fdata, RemoveView,setLoading) => {
     axios.delete(`${url}/expenses/deleteexpenses/${RemoveId}`).then((res) => {
         Fdata()
         RemoveView()
+        setLoading(false)
     })
 }
 

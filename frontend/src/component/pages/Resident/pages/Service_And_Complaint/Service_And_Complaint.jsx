@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Sidebar from '../../layout/Sidebar'
 import Header from '../../layout/Header'
 import Complaint_Submission from './Pages/Complaint_Submission';
+import Request_Submission from './Pages/Request_Submission';
 
 const Service_And_Complaint = () => {
     let [data, setdata] = useState(280);
@@ -48,6 +49,11 @@ const Service_And_Complaint = () => {
                 {activeTab === "Complaint_Submission" && (
                     <div className='p-5 pt-0'>
                         <Complaint_Submission/>
+                    </div>
+                )}
+                {activeTab === "Request_Submission" && (
+                    <div className='p-5 pt-0'>
+                        <Request_Submission/>
                     </div>
                 )}
             </div>

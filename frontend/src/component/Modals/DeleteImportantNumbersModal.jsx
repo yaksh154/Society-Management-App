@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ImportantNumbersDelete } from '../services/Api/api'
+import Close_Button from '../layout/CloseButton';
+
 
 const DeleteImportantNumbersModal = ({ _id, ClosedeleteContact, contacts, setContacts }) => {
 
+    const [loading, setLoading] = useState(false);
+
     const deletedata = () => {
-        ImportantNumbersDelete(_id, contacts, setContacts, ClosedeleteContact)
+        setLoading(true)
+        ImportantNumbersDelete(_id, contacts, setContacts, ClosedeleteContact, setLoading)
     }
     return (
         <div
@@ -17,18 +22,13 @@ const DeleteImportantNumbersModal = ({ _id, ClosedeleteContact, contacts, setCon
                 <div className="p-5">
                     <p className='text-md text-[#a7a7a7]'>Are you sure you want to delete this Complain?</p>
                     <div className="flex justify-end mt-4">
-                        <button
-                            type="button"
-                            className="bg-white border rounded-lg w-1/2 font-semibold text-gray-700 py-2 mr-2"
+                        <Close_Button
+                            Addclass='w-1/2'
                             onClick={ClosedeleteContact}
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            onClick={deletedata}
-                            className="bg-[#e74c3c] hover:bg-orange-600 text-white w-1/2 font-semibold py-1 rounded-lg text-sm"
-                        >
-                            Delete
+                            CloseName='Cancel'
+                        />
+                        <button onClick={deletedata} className={`bg-[#e74c3c] hover:bg-orange-600 text-white w-1/2 font-semibold py-1 rounded-lg text-sm ${loading && 'opacity-50 cursor-not-allowed cursor-progress'}`} disabled={loading}>
+                            {loading ? 'Deleteing...' : 'Delete'}
                         </button>
                     </div>
                 </div>

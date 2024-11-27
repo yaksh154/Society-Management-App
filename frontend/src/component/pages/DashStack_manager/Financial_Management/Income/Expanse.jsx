@@ -5,12 +5,11 @@ import Header from '../../../../layout/Header';
 import { FaEdit, FaFileImage, FaFilePdf, FaTrashAlt } from 'react-icons/fa';
 import { FaSquarePlus } from 'react-icons/fa6';
 import AddExpenseForm from '../../../../Modals/AddExpenseForm';
-import DeleteExpence from '../../../../Modals/DeleteExpence';
 import { DeleteExpense, GetExpanse } from '../../../../services/Api/api';
 import { GrFormView } from 'react-icons/gr';
 import EditExpensesModal from '../../../../Modals/EditExpensesModal';
 import ViewExpenseModal from '../../../../Modals/ViewExpenseModal';
-import DeleteModal from '../../../../layout/DeleteModal';
+import DeleteModal from '../../../../layout/DeleteLoding';
 
 const Expanse = () => {
   const [sidebarWidth, setSidebarWidth] = useState(280);
@@ -62,7 +61,11 @@ const Expanse = () => {
 
   const [Remove, setRemove] = useState(false);
   const [RemoveId, setRemoveId] = useState('')
-  const RemoveView = () => setRemove(false);
+  const RemoveView = () => {
+    setRemove(false)
+  };
+  const [loading, setLoading] = useState(false);
+
 
   const RemoveOpen = (_id) => {
     setRemove(true);
@@ -70,7 +73,8 @@ const Expanse = () => {
   }
 
   const DeleteExpanse = () => {
-    DeleteExpense(RemoveId,Fdata,RemoveView)
+    setLoading(true)
+    DeleteExpense(RemoveId,Fdata,RemoveView,setLoading)
   }
 
   // Edit
@@ -157,7 +161,7 @@ const Expanse = () => {
               </table>
               {EditData && <EditExpensesModal _id={EditId} Close={CloseForm} />}
               {View && <ViewExpenseModal _id={ViewId} Close={CloseView} />}
-              {Remove && <DeleteModal close={RemoveView} DeleteClick={DeleteExpanse} />}
+              {Remove && <DeleteModal loading={loading} close={RemoveView} DeleteClick={DeleteExpanse} />}
             </div>
           </div>
         </div>

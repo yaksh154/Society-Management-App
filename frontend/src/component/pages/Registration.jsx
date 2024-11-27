@@ -178,7 +178,7 @@ const Registration = () => {
                                         {...register("Password", { required: true })}
                                         className="w-full p-1 text-sm border border-gray-300 rounded"
                                         placeholder="Enter Password"
-                                        autoComplete="new-password" // Added this line
+                                        autoComplete="new-password" 
                                     />
                                     <button
                                         type="button"
@@ -198,7 +198,7 @@ const Registration = () => {
                                         {...register("confirmPassword", { required: true })}
                                         className="w-full p-1 text-sm border border-gray-300 rounded"
                                         placeholder="Confirm Password"
-                                        autoComplete="new-password" // Added this line
+                                        autoComplete="new-password"
                                     />
                                     <button
                                         type="button"
