@@ -1278,5 +1278,81 @@
       "ActivityDate": "19/02/2024",
       "ActivityName": "Holi Festival"
     }
+  ],
+  "OwnPoll":[
+    {
+      "id": 1,
+      "title": "Sales Deal with Toyota - Azure HF - AMS Amplify?",
+      "votesYes": 75,
+      "votesNo": 40,
+      "totalVotes": 115,
+      "author": "Arlene McCoy",
+      "createdAt": "01/07/2024, 10:00 AM"
+    },
+    {
+      "id": 2,
+      "title": "Cloud Migration - Should we move forward with AWS?",
+      "votesYes": 120,
+      "votesNo": 80,
+      "totalVotes": 200,
+      "author": "John Doe",
+      "createdAt": "01/10/2024, 9:00 AM"
+    },
+    {
+      "id": 3,
+      "title": "Sales Deal with Toyota - Azure HF - AMS Amplify?",
+      "votesYes": 75,
+      "votesNo": 40,
+      "totalVotes": 115,
+      "author": "Arlene McCoy",
+      "createdAt": "01/07/2024, 10:00 AM"
+    },
+    {
+      "id": 4,
+      "title": "Cloud Migration - Should we move forward with AWS?",
+      "votesYes": 120,
+      "votesNo": 80,
+      "totalVotes": 200,
+      "author": "John Doe",
+      "createdAt": "01/10/2024, 9:00 AM"
+    }
+  ],
+  "New":[
+    {
+      "id": 1,
+      "title": "Sales Deal with Toyota - Azure HF - AMS Amplify?",
+      "votesYes": 75,
+      "votesNo": 40,
+      "totalVotes": 115,
+      "author": "Arlene McCoy",
+      "createdAt": "01/07/2024, 10:00 AM"
+    },
+    {
+      "id": 2,
+      "title": "Cloud Migration - Should we move forward with AWS?",
+      "votesYes": 120,
+      "votesNo": 80,
+      "totalVotes": 200,
+      "author": "John Doe",
+      "createdAt": "01/10/2024, 9:00 AM"
+    },
+    {
+      "id": 3,
+      "title": "Sales Deal with Toyota - Azure HF - AMS Amplify?",
+      "votesYes": 75,
+      "votesNo": 40,
+      "totalVotes": 115,
+      "author": "Arlene McCoy",
+      "createdAt": "01/07/2024, 10:00 AM"
+    },
+    {
+      "id": 4,
+      "title": "Cloud Migration - Should we move forward with AWS?",
+      "votesYes": 120,
+      "votesNo": 80,
+      "totalVotes": 200,
+      "author": "John Doe",
+      "createdAt": "01/10/2024, 9:00 AM"
+    }
   ]
 }

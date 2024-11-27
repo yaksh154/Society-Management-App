@@ -24,9 +24,9 @@ import Resident_home from './component/pages/Resident/pages/Dashboard/Home.jsx'
 import Resident_Personal_Detail from './component/pages/Resident/pages/Personal_Detail/Personal_Detail.jsx'
 import Resident_Service_And_Complaint from './component/pages/Resident/pages/Service_And_Complaint/Service_And_Complaint.jsx'
 import Resident_Events_Participation from './component/pages/Resident/pages/Events_Participation/Events_Participation.jsx'
-import Resident_Access_Forums from './component/pages/Resident/pages/Community/pages/Access_Forums.jsx'
-import Resident_Polls from './component/pages/Resident/pages/Community/pages/Polls.jsx'
-import Resident_Communities_Discussion from './component/pages/Resident/pages/Community/pages/Communities_Discussion.jsx'
+import Resident_Access_Forums from './component/pages/Resident/pages/Community/pages/Forums/Access_Forums.jsx'
+import Polls from './component/pages/Resident/pages/Community/pages/Poll/Polls.jsx'
+import Resident_Communities_Discussion from './component/pages/Resident/pages/Community/pages/Communities/Communities_Discussion.jsx'
 import Resident_Maintenance_Invoices from './component/pages/Resident/pages/Payment_Portal/pages/Maintenance_Invoices.jsx'
 import Resident_Other_Income_Invoice from './component/pages/Resident/pages/Payment_Portal/pages/Other_Income_Invoice.jsx'
 import Resident_Security_Protocols from './component/pages/Resident/pages/Security_Protocols/Security_Protocols.jsx'
@@ -86,7 +86,7 @@ function App() {
         <Route path='/resident/events_participation' element={<Resident_Events_Participation />} />
         {/* Resident Community */}
         <Route path='/resident/community/access_forums' element={<Resident_Access_Forums />} />
-        <Route path='/resident/community/polls' element={<Resident_Polls />} />
+        <Route path='/resident/community/polls' element={<Polls />} />
         <Route path='/resident/community/communities_discussion' element={<Resident_Communities_Discussion />} />
         {/* Resident Payment Portal */}
         <Route path='/resident/payment_portal/maintenance_invoices' element={<Resident_Maintenance_Invoices />} />

@@ -15,3 +15,20 @@ export const GetActivityData = (setActivityData) => {
       setActivityData(res.data)
   })
 }
+
+
+//Polls 
+export const GetOwnPoll = async () => {
+  const res = await axios.get('http://localhost:3030/OwnPoll');
+  return res.data;
+};
+
+export const GetNewPoll = async () => {
+  const res = await axios.get('http://localhost:3030/NewPoll');
+  return res.data;
+};
+
+export const GetPreviousPoll = async () => {
+  const res = await axios.get('http://localhost:3030/PreviousPoll');
+  return res.data;
+};
