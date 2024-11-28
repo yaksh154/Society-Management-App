@@ -2,6 +2,8 @@ import axios from "axios";
 
 const url = 'https://society-management-app-server.onrender.com'
 
+
+// EventData
 export const GetEventData = (setEventData) => {
   axios.get('http://localhost:3030/EventData').then((res) => {
       // console.log(res.data);

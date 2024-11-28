@@ -83,7 +83,7 @@ const Events_Participation = () => {
                 </tr>
               </thead>
               <tbody>
-                {data_lines.map((item, index) => (
+                {EventData.map((item, index) => (
                   <tr key={index} className="border-b">
                     <td className="px-4 py-3 flex items-center space-x-2">
                       <img
