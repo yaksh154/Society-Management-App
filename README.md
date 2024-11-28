@@ -48,3 +48,10 @@ The **Society Management App** is an all-in-one solution for managing housing so
    ```bash
    git clone https://github.com/yaksh154/Society-Management-App.git
    cd Society-Management-App
+2. **Install dependencies**:
+    ```bash
+    npm install
+3. **Start the development server**:
+  ```bash
+  npm start
+
