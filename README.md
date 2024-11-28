@@ -51,9 +51,12 @@ The **Society Management App** is an all-in-one solution for managing housing so
 2. **Install dependencies**:
     ```bash
     npm install
-3. **Start the development server**:
+3. **Start the Backend server**:
     ```bash
     npm start
+3. **Start the Frontend server**:
+    ```bash
+    npm run dev
 
 ---
 
