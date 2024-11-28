@@ -54,5 +54,27 @@ The **Society Management App** is an all-in-one solution for managing housing so
 3. **Start the development server**:
     ```bash
     npm start
-    
 
+---
+
+##🤝 Contributing
+
+### We welcome contributions to make this project better! Follow these steps:
+
+1. **Fork the repository.**
+2. **Create a new branch for your feature**:
+    ```bash
+    git checkout -b feature-namegit checkout -b feature-name
+3. **Commit your changes**:
+    ```bash
+    git commit -m "Add feature description"
+4. **Push the changes to your fork**:
+     ```bash
+     git push origin feature-name
+5. **Open a pull request to the main branch.**
+
+---
+
+##📜 License
+
+###This project is licensed under the MIT License. You are free to use, modify, and distribute this software under the terms of the license.
