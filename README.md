@@ -52,6 +52,7 @@ The **Society Management App** is an all-in-one solution for managing housing so
     ```bash
     npm install
 3. **Start the development server**:
-  ```bash
-  npm start
+    ```bash
+    npm start
+    
 
