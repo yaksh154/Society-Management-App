@@ -33,7 +33,7 @@ The **Society Management App** is an all-in-one solution for managing housing so
 - **Backend**:
   - Node.js and Express for server-side operations.
 - **Database**:
-  - SQLite for efficient and reliable data storage.
+  - MongoDB for efficient and reliable data storage.
 
 ---
 
