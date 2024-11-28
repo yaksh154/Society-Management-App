@@ -32,6 +32,7 @@ import Resident_Other_Income_Invoice from './component/pages/Resident/pages/Paym
 import Resident_Security_Protocols from './component/pages/Resident/pages/Security_Protocols/Security_Protocols.jsx'
 import VisitorTracking from './component/pages/Security/Pages/VisitorTracking.jsx'
 import Emergency from './component/pages/Security/Pages/Emergency.jsx'
+import Maintenance_Invoices_data from './component/pages/Resident/pages/Payment_Portal/pages/Maintenance_Invoices_data.jsx'
 import AddVisiter from './component/pages/Security/Pages/Models/AddVisiter.jsx'
 
 
@@ -90,6 +91,7 @@ function App() {
         <Route path='/resident/community/communities_discussion' element={<Resident_Communities_Discussion />} />
         {/* Resident Payment Portal */}
         <Route path='/resident/payment_portal/maintenance_invoices' element={<Resident_Maintenance_Invoices />} />
+        <Route path='/resident/payment_portal/maintenance_invoices_data' element={<Maintenance_Invoices_data />} />
         <Route path='/resident/payment_portal/other_income_invoice' element={<Resident_Other_Income_Invoice />} />
         {/* Resident Security Protocols */}
         <Route path='/resident/security_protocols' element={<Resident_Security_Protocols />} />

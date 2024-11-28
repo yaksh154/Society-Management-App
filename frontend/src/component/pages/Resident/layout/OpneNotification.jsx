@@ -55,9 +55,8 @@ const OpneNotification = () => {
 
     const handleClearAll = () => {
         setNotifications([]);
-
-
     };
+    
     const [isNotificationOpen, setIsNotificationOpen] = useState(false);
     const dropdownRef = useRef(null);
 

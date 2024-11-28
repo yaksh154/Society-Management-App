@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { ImportantNumbersPost } from '../services/Api/api';
+import Close_Button from '../layout/CloseButton';
+import Loding_Button from '../layout/Loding_Button';
 
-const CreateImportantNumbers = ({ setShowModal,Fdata }) => { 
+const CreateImportantNumbers = ({ setShowModal, Fdata }) => {
     const [newNumber, setNewNumber] = useState({
         Fullname: '',
         Phonenumber: '',
@@ -9,6 +11,7 @@ const CreateImportantNumbers = ({ setShowModal,Fdata }) => {
     });
 
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleNewNumberChange = (e) => {
         const { name, value } = e.target;
@@ -27,12 +30,12 @@ const CreateImportantNumbers = ({ setShowModal,Fdata }) => {
     };
 
     const handleAddSociety = () => {
-        // Check for errors before submitting
         if (newNumber.Phonenumber.length !== 10) {
             setError('Phone number must be exactly 10 digits');
             return;
         }
-        ImportantNumbersPost(newNumber ,Fdata); 
+        setLoading(true)
+        ImportantNumbersPost(newNumber, Fdata,setLoading);
         setShowModal(false);
     };
 
@@ -89,20 +92,17 @@ const CreateImportantNumbers = ({ setShowModal,Fdata }) => {
                     </div>
                     {/* Buttons for Cancel and Add Society */}
                     <div className="flex justify-end mt-4">
-                        <button
-                            type="button"
-                            className="bg-gray-100 w-1/2 font-semibold text-gray-700 mr-2"
+                        <Close_Button
+                            Addclass='w-1/2'
                             onClick={() => setShowModal(false)}
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            type="button"
-                            className="bg-gray-100 w-1/2 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold py-1 rounded text-sm"
+                            CloseName='Cancel'
+                        />
+                        <Loding_Button
+                            loading={loading}
+                            Btn_Name='Add Society'
                             onClick={handleAddSociety}
-                        >
-                            Add Society
-                        </button>
+                            Addclass='w-1/2'
+                        />
                     </div>
                 </div>
             </div>

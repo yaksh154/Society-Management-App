@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { updateImportantNumber } from '../services/Api/api';
 import axios from 'axios';
+import Close_Button from '../layout/CloseButton';
+import Loding_Button from '../layout/Loding_Button';
 
-const EditImportantNumbers = ({ _id,Fdata, closeEditModal }) => {
+
+const EditImportantNumbers = ({ _id, Fdata, closeEditModal }) => {
 
     const [editNumber, setEditNumber] = useState({
         Fullname: '',
         Phonenumber: '',
         Work: ''
     });
+    const [loading, setLoading] = useState(false);
+
 
     const url = 'https:/society-management-app-server.onrender.com'
     useEffect(() => {
         editdata()
     }, []);
-    
-    const editdata = () =>{
-        axios.put(`${url}/importantnumber/updateImportantNumber/${_id}`).then((res)=>{
+
+    const editdata = () => {
+        axios.put(`${url}/importantnumber/updateImportantNumber/${_id}`).then((res) => {
             setEditNumber(res.data);
         })
     }
@@ -26,7 +31,8 @@ const EditImportantNumbers = ({ _id,Fdata, closeEditModal }) => {
     };
 
     const handleSave = () => {
-        updateImportantNumber(_id,editNumber ,closeEditModal,Fdata)
+        setLoading(true)
+        updateImportantNumber(_id, editNumber, closeEditModal, Fdata, setLoading)
     };
 
     return (
@@ -77,25 +83,23 @@ const EditImportantNumbers = ({ _id,Fdata, closeEditModal }) => {
                         />
                     </div>
                     <div className="flex justify-end mt-4">
-                        <button
+                        <Close_Button
+                            Addclass='w-1/2'
+                            onClick={closeEditModal}
+                            CloseName='Cancel'
+                        />
+                        <Loding_Button
                             type="button"
-                            className="bg-gray-100 w-1/2 font-semibold text-gray-700 mr-2"
-                            onClick={closeEditModal} // Closes modal without saving
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            type="button"
-                            className="bg-gray-100 w-1/2 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold py-1 rounded text-sm"
-                            onClick={handleSave} // Saves changes
-                        >
-                            Save Changes
-                        </button>
+                            onClick={handleSave}
+                            loading={loading}
+                            Btn_Name='Save Changes'
+                            Addclass='w-1/2'
+                        />
                     </div>
 
                 </div>
             </div>
-        </div>  
+        </div>
     );
 };
 
