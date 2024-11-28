@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import PaymentCardNumber from './PaymentCardNumber';
 import Button from '../../../../../layout/Button_gradient'
+import Master_Card from '../../../../../../../public/images/Master_Card_icon.png'
+import Visa_card from '../../../../../../../public/images/Visa_card_icon.png'
+import Cash_Payment from '../../../../../../../public/images/Cash_Payment_icon.png'
 
 const PaymentmethodModal = ({close1,close2}) => {
     const [selectedMethod, setSelectedMethod] = useState("");
@@ -33,9 +36,9 @@ const PaymentmethodModal = ({close1,close2}) => {
                             }`}
                     >
                         <img
-                            src="https://via.placeholder.com/40"
+                            src={Master_Card}
                             alt="Master Card"
-                            className="w-8 h-8 mr-3"
+                            className="w-8 h-8 mr-3 p-1 bg-[#f4f4f4] rounded-lg"
                         />
                         <span className="text-sm font-medium">Master Card</span>
                     </div>
@@ -47,9 +50,9 @@ const PaymentmethodModal = ({close1,close2}) => {
                             }`}
                     >
                         <img
-                            src="https://via.placeholder.com/40"
+                            src={Visa_card}
                             alt="Visa Card"
-                            className="w-8 h-8 mr-3"
+                            className="w-8 h-8 mr-3 p-1 bg-[#f4f4f4] rounded-lg"
                         />
                         <span className="text-sm font-medium">Visa Card</span>
                     </div>
@@ -61,9 +64,9 @@ const PaymentmethodModal = ({close1,close2}) => {
                             }`}
                     >
                         <img
-                            src="https://via.placeholder.com/40"
+                            src={Cash_Payment}
                             alt="Cash Payment"
-                            className="w-8 h-8 mr-3"
+                            className="w-8 h-8 mr-3 p-1 bg-[#f4f4f4] rounded-lg"
                         />
                         <span className="text-sm font-medium">Cash Payment</span>
                     </div>

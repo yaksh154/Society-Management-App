@@ -3,9 +3,7 @@ import Sidebar from '../../../layout/Sidebar';
 import Header from '../../../layout/Header';
 import Button from '../../../../../layout/Button_gradient';
 import axios from 'axios';
-import Home_totle_card from '../../../../../layout/Home_totle_card';
 import ShowMaintenanceDetails from '../Modal/ShowMaintenanceDetails';
-import GetPassModal from '../../Dashboard/Modal/GetPassModal';
 import PaymentmethodModal from '../../Dashboard/Modal/PaymentmethodModal';
 import { useNavigate } from 'react-router-dom';
 
