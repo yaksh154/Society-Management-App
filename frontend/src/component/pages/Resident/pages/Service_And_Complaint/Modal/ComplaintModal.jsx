@@ -3,8 +3,9 @@ import { useForm } from 'react-hook-form';
 import CloseBtn from '../../../../../layout/CloseButton'
 import Button from '../../../../../layout/Button_gradient'
 import axios from 'axios';
+import { PostComplaint } from '../../../Api/api';
 
-const ComplaintModal = ({ close }) => {
+const ComplaintModal = ({ close ,Fdata}) => {
     const getCurrentDate = () => {
         const today = new Date();
         return `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`;
@@ -24,10 +25,7 @@ const ComplaintModal = ({ close }) => {
     });
 
     const onSubmit = (data) => {
-        console.log(data);
-        axios.post('http://localhost:3030/Complaint_Submission',data).then((res)=>{
-            console.log(res.data);
-        })
+        PostComplaint(data, Fdata, close)
     };
     return (
         <div className='fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50'>

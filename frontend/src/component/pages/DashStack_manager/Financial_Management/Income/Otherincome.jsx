@@ -3,7 +3,6 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import { FaRupeeSign } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-import DeleteModal from '../../../../Modals/DeleteModal';
 import CreateOincome from '../../../../Modals/CreateOincome';
 import EditOIncome from '../../../../Modals/EditOIncome';
 import { GetOtherIncome } from '../../../../services/Api/api';
@@ -149,7 +148,7 @@ const Otherincome = () => {
           onUpdate={fetchData} // Refresh data after update
         />
       )}
-      {DeleteBox && <DeleteModal setDeleteBox={closeDeleteBox} />}
+      {/* {DeleteBox && <DeleteModal setDeleteBox={closeDeleteBox} />} */}
     </div>
   );
 };

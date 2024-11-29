@@ -321,7 +321,6 @@ export const GetGuard_Details = (setGuard_Details) => {
 
 // Get Announcement
 
-
 export const GetAnnouncement = (setgetAnnouncement) => {
     axios.get('http://localhost:3030/incomeData').then((res) => {
         setgetAnnouncement(res.data)
@@ -346,6 +345,51 @@ export const DeleteAnnouncement = (_id, Fdata, ClaseDeleteAnnouncement) => {
     })
 }
 
+// Facility Management page
+
+// Facility Management Get
+
+export const Facility_Management_Get = (setincomeData) => {
+    axios.get(`${url}/facility/getAllFacilities`).then((res) => {
+        setincomeData(res.data)
+    })
+}
+
+// Facility Management Post
+
+export const Facility_Management_Post = (data, Fdata, setClosecreate_facility, setloading) => {
+    setloading(true)
+    axios.post(`${url}/facility/createFacility`, data).then((res) => {
+        console.log(res.data);
+        Fdata()
+        setClosecreate_facility(false)
+        setloading(false)
+    })
+}
+
+// Facility Management Delete
+
+export const Facility_Management_Delete = (DeleteData, DeleteClose, setloading, incomeData, setincomeData) => {
+    setloading(true)
+    axios.delete(`${url}/facility/deleteFacility/${DeleteData}`).then((res) => {
+        DeleteClose()
+        const deletData = incomeData.filter((e) => e._id !== DeleteData)
+        setincomeData(deletData)
+        setloading(false)
+    })
+}
+
+// Facility Management Edit
+
+export const Facility_Management_Edit = (_id, data, setloading, seteditcreate_facility, lodData) => {
+    setloading(true)
+    axios.put(`${url}/facility/updateFacility/${_id}`, data).then((res) => {
+        console.log(res.data);
+        lodData()
+        seteditcreate_facility(false)
+        setloading(false)
+    })
+}
 
 // Financial Maintenance page
 
@@ -364,7 +408,6 @@ export const PostIncome = (data, Fdata, setShowAddDetail) => {
         setShowAddDetail(false)
     })
 }
-
 
 //Other Income
 export const GetOtherIncome = (setIncomeData) => {
@@ -395,7 +438,6 @@ export const DeleteOtherIncome = (data, Fdata, setCreateIncome) => {
         setCreateIncome(false)
     })
 }
-
 
 ///Expanse 
 
@@ -457,7 +499,7 @@ export const PutExpense = async (data, Fdata, setAddExpense, setPreviewImage, re
     }
 }
 
-export const DeleteExpense = (RemoveId, Fdata, RemoveView,setLoading) => {
+export const DeleteExpense = (RemoveId, Fdata, RemoveView, setLoading) => {
     axios.delete(`${url}/expenses/deleteexpenses/${RemoveId}`).then((res) => {
         Fdata()
         RemoveView()
@@ -482,21 +524,44 @@ export const PostVisiter = (data, Fdata, setAddVisiterbox) => {
     })
 }
 
-
-
-
 //Notes
 
 export const GetNotes = (setNotes) => {
-    axios.get('http://localhost:3030/Notes').then((res) => {
-        // console.log(res.data);
+    axios.get(`${url}/note/getAllNotes`).then((res) => {
         setNotes(res.data)
     })
 }
 
-export const PostNotes = (data, setcreate, Fdata) => {
-    axios.post('http://localhost:3030/Notes', data).then((res) => {
+export const PostNotes = (data, Fdata, setcreate, setloading) => {
+    setloading(true)
+    axios.post(`${url}/note/createNote`, data).then((res) => {
+        setloading(false)
         Fdata()
-        setcreate(res.data)
+        setcreate(false)
     })
+}
+
+export const DeleteNotes = (DeleteId, setloading, DeleteClose, Fdata) => {
+    setloading(true)
+    axios.delete(`${url}/note/deleteNote/${DeleteId}`).then((res) => {
+        setloading(false)
+        Fdata()
+        DeleteClose()
+    })
+}
+
+export const EditNotes = async (_id,formData,setloading,seteditcreate) => {
+    console.log("Submitted Data:", formData);
+    setloading(true)
+    try {
+        const response = await axios.put(`https://society-management-app-server.onrender.com/note/updateNote/${_id}`, formData);
+        console.log(response.data);
+        
+        seteditcreate(false);
+        setloading(false)
+    } catch (error) {
+        console.error("Error updating note:", error);
+        alert("Failed to update note");
+        setloading(false)
+    }
 }

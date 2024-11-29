@@ -6,6 +6,7 @@ import axios from 'axios';
 import ShowMaintenanceDetails from '../Modal/ShowMaintenanceDetails';
 import PaymentmethodModal from '../../Dashboard/Modal/PaymentmethodModal';
 import { useNavigate } from 'react-router-dom';
+import { Get_Pending_Maintanance } from '../../../Api/api';
 
 const Maintenance_Invoices = () => {
     let [data, setdata] = useState(280);
@@ -33,9 +34,7 @@ const Maintenance_Invoices = () => {
     }
 
     const Fdata = () => {
-        axios.get('http://localhost:3030/Pending_Maintanance').then((res) => {
-            setMaintanance(res.data);
-        });
+        Get_Pending_Maintanance(setMaintanance)
     };
 
     const OpneData = () =>{
@@ -74,7 +73,7 @@ const Maintenance_Invoices = () => {
                     </div>
                     <div className="bg-white shadow-md rounded-lg p-6">
                         <div className="flex justify-between items-center mb-4">
-                            <h1 className="font-semibold md:text-2xl text-md">Due Event Payment</h1>
+                            <h1 className="font-semibold md:text-2xl text-md">Pending Maintanance</h1>
                             <Button onClick={OpneData} Btn_Name="View Invoice" />
                         </div>
                         <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

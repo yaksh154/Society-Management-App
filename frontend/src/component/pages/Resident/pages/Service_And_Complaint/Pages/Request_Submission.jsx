@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import RequestModal from '../Modal/RequestModal';
 import DeleteModal from '../../../../../layout/DeleteModal';
+import { DeleteRequest_Submission, GetRequest_Submission } from '../../../Api/api';
 
 const Request_Submission = () => {
 
@@ -26,9 +27,7 @@ const Request_Submission = () => {
     const [data, setdata] = useState('')
 
     const Fdata = () => {
-        axios.get('http://localhost:3030/Request_Submission').then((res) => {
-            setdata(res.data);
-        })
+        GetRequest_Submission(setdata)
     }
 
     // Delete
@@ -48,14 +47,7 @@ const Request_Submission = () => {
     }
 
     const DeleteClick = () => {
-        axios.delete(`http://localhost:3030/Request_Submission/${DId}`).then((res) => {
-                console.log("Deleted:", res.data);
-                setdata((prevData) => prevData.filter((item) => item.id !== DId));
-                closeDelete();
-            })
-            .catch((err) => {
-                console.error("Error deleting:", err);
-            });
+        DeleteRequest_Submission(setdata, closeDelete, DId)
     };
 
     return (

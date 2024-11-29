@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import CloseBtn from '../../../../../layout/CloseButton'
 import Button from '../../../../../layout/Button_gradient'
 import axios from 'axios';
+import { PostRequest_Submission } from '../../../Api/api';
 
 const RequestModal = ({close,Fdata}) => {
     const getCurrentDate = () => {
@@ -25,11 +26,7 @@ const RequestModal = ({close,Fdata}) => {
 
     const onSubmit = (data) => {
         console.log(data);
-        axios.post('http://localhost:3030/Request_Submission', data).then((res) => {
-            console.log(res.data);
-        })
-        Fdata()
-        close()
+        PostRequest_Submission(data,Fdata,close)
     };
     return (
         <div className='fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50'>

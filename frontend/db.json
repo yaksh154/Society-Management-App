@@ -866,6 +866,12 @@
       "title": "Breakdown",
       "description": "A visual representation of your spending categories visual representation.",
       "id": "f9ba"
+    },
+    {
+      "id": "bdb7",
+      "title": "meet bhai",
+      "description": "kem che palti",
+      "date": "2024-11-29"
     }
   ],
   "PendingMaintenances": [
@@ -999,17 +1005,6 @@
       "Priority": "Medium",
       "Status": "Pending",
       "Date": "2024-11-07T00:00:00.000Z"
-    },
-    {
-      "id": "b47b",
-      "ComplainerName": "111",
-      "ComplaintName": "2121",
-      "Description": "3434",
-      "Wing": "A",
-      "Unit": "111",
-      "Priority": "Low",
-      "Status": "Open",
-      "Date": "26/11/2024"
     }
   ],
   "Request_Submission": [
@@ -1122,17 +1117,6 @@
       "Priority": "Low",
       "Status": "Closed",
       "Date": "2024-11-25T00:00:00.000Z"
-    },
-    {
-      "id": "dae1",
-      "ComplainerName": "111111",
-      "ComplaintName": "111",
-      "Description": "122",
-      "Wing": "A",
-      "Unit": "111",
-      "Priority": "Medium",
-      "Status": "Solve",
-      "Date": "27/11/2024"
     }
   ],
   "Pending_Maintanance": [
@@ -1140,41 +1124,41 @@
       "status": "Pending",
       "bill_date": "12/01/2024",
       "pending_date": "15/01/2024",
-      "maintenance_amount": 1100.0,
-      "penalty_amount": 200.0,
-      "grand_total": 1300.0
+      "maintenance_amount": 1100,
+      "penalty_amount": 200,
+      "grand_total": 1300
     },
     {
       "status": "Pending",
       "bill_date": "10/01/2024",
       "pending_date": "14/01/2024",
-      "maintenance_amount": 980.0,
-      "penalty_amount": 300.0,
-      "grand_total": 1280.0
+      "maintenance_amount": 980,
+      "penalty_amount": 300,
+      "grand_total": 1280
     },
     {
       "status": "Pending",
       "bill_date": "14/01/2024",
       "pending_date": "18/01/2024",
-      "maintenance_amount": 1050.0,
-      "penalty_amount": 240.0,
-      "grand_total": 1290.0
+      "maintenance_amount": 1050,
+      "penalty_amount": 240,
+      "grand_total": 1290
     },
     {
       "status": "Pending",
       "bill_date": "08/01/2024",
       "pending_date": "11/01/2024",
-      "maintenance_amount": 1000.0,
-      "penalty_amount": 270.0,
-      "grand_total": 1270.0
+      "maintenance_amount": 1000,
+      "penalty_amount": 270,
+      "grand_total": 1270
     },
     {
       "status": "Pending",
       "bill_date": "13/01/2024",
       "pending_date": "16/01/2024",
-      "maintenance_amount": 1025.0,
-      "penalty_amount": 225.0,
-      "grand_total": 1250.0
+      "maintenance_amount": 1025,
+      "penalty_amount": 225,
+      "grand_total": 1250
     }
   ],
   "Maintenance_Invoices_data": [
@@ -1449,42 +1433,42 @@
       "Status": "Pending",
       "Event_name": "Navratri",
       "Event_due_date": "12/01/2024",
-      "Amount": 200.0
+      "Amount": 200
     },
     {
       "id": 2,
       "Status": "Completed",
       "Event_name": "Diwali",
       "Event_due_date": "11/12/2023",
-      "Amount": 300.0
+      "Amount": 300
     },
     {
       "id": 3,
       "Status": "Pending",
       "Event_name": "Christmas",
       "Event_due_date": "12/25/2023",
-      "Amount": 250.0
+      "Amount": 250
     },
     {
       "id": 4,
       "Status": "Pending",
       "Event_name": "New Year",
       "Event_due_date": "01/01/2024",
-      "Amount": 400.0
+      "Amount": 400
     },
     {
       "id": 5,
       "Status": "Completed",
       "Event_name": "Eid",
       "Event_due_date": "04/10/2023",
-      "Amount": 150.0
+      "Amount": 150
     },
     {
       "id": 6,
       "Status": "Pending",
       "Event_name": "Thanksgiving",
       "Event_due_date": "11/28/2023",
-      "Amount": 180.0
+      "Amount": 180
     }
   ]
 }
