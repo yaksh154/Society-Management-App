@@ -351,8 +351,8 @@ const Home = () => {
             </div>
             {/* Complaint List and Upcoming Activity */}
             <div className="grid xl:grid-cols-4 grid-cols-1 gap-4">
-              <div className="bg-white xl:col-span-3 rounded-lg shadow">
-                <div className="bg-white rounded-lg p-4">
+              <div className="bg-white  xl:col-span-3 rounded-lg shadow">
+                <div className="bg-white  rounded-lg p-4">
                   <div className="flex justify-between items-center mb-4">
                     <h2 className="text-lg font-semibold">Complaint List</h2>
                     <select className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -376,7 +376,7 @@ const Home = () => {
                       <tbody>
                         {getComplaint.map((e, index) => {
                           return (
-                            <tr key={index} className="border-b">
+                            <tr key={index} className="border-b hover:bg-gray-50">
                               <td className="px-4 py-2 flex items-center space-x-2">
                                 <img className="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
                                 <span>{e.Complainer_Name}</span>

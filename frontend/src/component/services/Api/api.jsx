@@ -474,29 +474,27 @@ export const PostExpanse = async (data, Fdata, setAddExpense, setPreviewImage, r
     }
 }
 
-export const PutExpense = async (data, Fdata, setAddExpense, setPreviewImage, reset, handleCancel) => {
+export const PutExpense = async (_id,data, lodData, setPreviewImage, Close, setLoading) => {
     const formData = new FormData();
-    formData.append('title', data.title);
-    formData.append('description', data.description);
-    formData.append('date', new Date(data.date).toISOString());
-    formData.append('amount', data.amount);
-    if (data.Bill && data.Bill.length > 0) {
-        formData.append('Bill', data.Bill[0]);
-    }
-    try {
-        await axios.post('https://society-management-app-server.onrender.com/expenses/createexpenses', formData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-        });
-        Fdata();
-        setAddExpense(false);
-        reset();
-        setPreviewImage(null);
-        handleCancel()
-        setLoading(false)
-    } catch (error) {
-        console.error('Error submitting expense:', error);
-        setLoading(false)
-    }
+        formData.append('title', data.Title);
+        formData.append('description', data.Description);
+        formData.append('date', data.Date);
+        formData.append('amount', data.Amount);
+        if (data.Bill && data.Bill.length > 0) {
+            formData.append('Bill', data.Bill[0]);
+        }
+        try {
+            await axios.put(`https://society-management-app-server.onrender.com/expenses/updateexpenses/${_id}`, formData,
+                { headers: { 'Content-Type': 'multipart/form-data' } }
+            );
+            lodData();
+            setPreviewImage(null);
+            Close();
+            setLoading(false);
+        } catch (error) {
+            console.error('Error submitting expense:', error);
+            setLoading(false);
+        }
 }
 
 export const DeleteExpense = (RemoveId, Fdata, RemoveView, setLoading) => {
@@ -550,13 +548,13 @@ export const DeleteNotes = (DeleteId, setloading, DeleteClose, Fdata) => {
     })
 }
 
-export const EditNotes = async (_id,formData,setloading,seteditcreate) => {
+export const EditNotes = async (_id, formData, setloading, seteditcreate) => {
     console.log("Submitted Data:", formData);
     setloading(true)
     try {
         const response = await axios.put(`https://society-management-app-server.onrender.com/note/updateNote/${_id}`, formData);
         console.log(response.data);
-        
+
         seteditcreate(false);
         setloading(false)
     } catch (error) {
