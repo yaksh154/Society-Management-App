@@ -60,12 +60,13 @@ const Home = () => {
   }, [])
 
   let [getComplaint, setgetComplaint] = useState([]);
+  const [loadingcomplaint, setloadingcomplaint] = useState(true)
   const getComplaintdata = () => {
-    GetComplainy(setgetComplaint)
+    GetComplainy(setgetComplaint, setloadingcomplaint)
   }
 
   return (
-    <div className='bg-[#f0f5fb] h-screen'>
+    <div className='bg-[#f0f5fb] h-full'>
       <Sidebar closeNav={closeNav} data={data} />
       <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
         <div className="open_he">
@@ -152,7 +153,7 @@ const Home = () => {
                 <h2 className="text-lg font-semibold">Pending Maintenances</h2>
                 <a href="#" className="text-blue-500 text-sm">View all</a>
               </div>
-              <div className="space-y-4 overflow-y-auto w-full px-2">
+              <div className="space-y-4 overflow-y-auto w-full h-96 px-2">
                 {PendingData.length > 0 ? (
                   PendingData.map((e, index) => (
                     <div key={index} className="flex justify-between items-center">
@@ -177,7 +178,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="grid xl:grid-cols-4 grid-cols-1 gap-4">
+        <div className="grid xl:grid-cols-4 grid-cols-1 gap-4 p-6">
           <div className="bg-white xl:col-span-3 rounded-lg shadow">
             <div className="bg-white rounded-lg p-4">
               <div className="flex justify-between items-center mb-4">
@@ -189,43 +190,54 @@ const Home = () => {
                 </select>
               </div>
               <div className="overflow-x-auto h-32 px-2">
-                <table className="min-w-full text-left">
-                  <thead>
-                    <tr className="bg-gray-100 text-gray-700">
-                      <th className="px-4 py-2">Complainer Name</th>
-                      <th className="px-4 py-2">Complaint Name</th>
-                      <th className="px-4 py-2">Date</th>
-                      <th className="px-4 py-2">Priority</th>
-                      <th className="px-4 py-2">Complain Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {getComplaint.map((e, index) => {
-                      return (
-                        <tr key={index} className="border-b">
-                          <td className="px-4 py-2 flex items-center space-x-2">
-                            <img className="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
-                            <span>{e.Complainer_Name}</span>
-                          </td>
-                          <td className="px-4 py-2">{e.Complaint_Name}</td>
-                          <td className="px-4 py-2">{e.Date}</td>
-                          <td className="px-4 py-2 text-center">
-                            <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
-                              e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
-                                e.Priority === "Low" ? "bg-[#39973d] text-white" : null
-                              }`}>{e.Priority}</span>
-                          </td>
-                          <td className="px-4 py-2 text-center">
-                            <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Complain_Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
-                              e.Complain_Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
-                                e.Complain_Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
-                              }`}>{e.Complain_Status}</span>
-                          </td>
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                </table>
+                {loadingcomplaint ? (
+                  <div className="text-center">Loding...</div>
+                ) : (
+                  <table className="min-w-full text-left">
+                    <thead>
+                      <tr className="bg-gray-100 text-gray-700">
+                        <th className="px-4 py-2">Complainer Name</th>
+                        <th className="px-4 py-2">Complaint Name</th>
+                        <th className="px-4 py-2 text-center">Date</th>
+                        <th className="px-4 py-2 text-center">Priority</th>
+                        <th className="px-4 py-2 text-center">Complain Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {getComplaint.map((e, index) => {
+                        return (
+                          <tr key={index} className="border-b hover:bg-gray-50">
+                                <td className="px-4 py-2 flex items-center space-x-2">
+                                  <img className="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
+                                  <span>{e.Complainer_Name}</span>
+                                </td>
+                                <td className="px-4 py-2">{e.Complaint_Name}</td>
+                                <td className="px-4 py-2 text-center">
+                                  {new Date(e.createdAt).toLocaleDateString("en-US", {
+                                    month: "2-digit",
+                                    day: "2-digit",
+                                    year: "numeric",
+                                  })}
+                                </td>
+                                <td className="px-4 py-2 text-center">
+                                  <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
+                                    e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
+                                      e.Priority === "Low" ? "bg-[#39973d] text-white" : null
+                                    }`}>{e.Priority}</span>
+                                </td>
+                                <td className="px-4 py-2 text-center">
+                                  <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
+                                    e.Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
+                                      e.Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
+                                    }`}>{e.Status}</span>
+                                </td>
+                              </tr>
+                        )
+                      })}
+                    </tbody>
+                  </table>
+                )}
+
               </div>
             </div>
           </div>

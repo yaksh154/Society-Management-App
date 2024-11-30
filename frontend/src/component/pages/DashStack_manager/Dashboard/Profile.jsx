@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '../../../layout/Sidebar';
 import Header from '../../../layout/Header';
 // import userImg from '../../../../../public/images/userImg'
-import { Profile_img } from '../../../services/Api/api';
+import { GetCreateSocirty, Profile_img } from '../../../services/Api/api';
 
 const Profile = () => {
   const [data, setData] = useState(280);
@@ -21,6 +21,16 @@ const Profile = () => {
     Number: '',
     Email: '',
   });
+
+  const [societies, setSocieties] = useState([]);
+
+  useEffect(() => {
+    Getsocieties()
+  }, [])
+
+  const Getsocieties = () => {
+    GetCreateSocirty(setSocieties)
+  }
 
   useEffect(() => {
     Fdata();
@@ -64,18 +74,18 @@ const Profile = () => {
       return;
     }
     setError('');
-  
+
     const updatedFormData = {
       ...formData,
-      profileImage: previewImage, 
+      profileImage: previewImage,
     };
-  
+
     console.log('Form submitted:', updatedFormData);
     console.log(previewImage);
-  
+
     setIsEditable(false);
   };
-  
+
 
   return (
     <div>
@@ -190,19 +200,25 @@ const Profile = () => {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs sm:text-sm font-medium text-gray-700">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                         Select Society*
                       </label>
-                      <input
-                        type="text"
+                      <select
                         name="society"
                         value={formData.society}
                         onChange={handleChange}
-                        className="mt-1 border rounded-md p-2 w-full text-xs sm:text-sm"
-                        required
                         disabled={!isEditable}
-                      />
+                        className="w-full p-2 text-sm border border-gray-300 rounded"
+                      >
+                        <option value="">Select Society</option>
+                        {societies.map((e, index) => (
+                          <option key={index} value={e._id}>
+                            {e.societyname}
+                          </option>
+                        ))}
+                      </select>
                     </div>
+
                     <div>
                       <label className="block text-xs sm:text-sm font-medium text-gray-700">
                         Country*
