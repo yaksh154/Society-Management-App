@@ -185,7 +185,7 @@ export const ImportantNumbersGet = (setContacts, setLoading) => {
         // }
     )
         .then((res) => {
-            console.log(res.headers)
+            // console.log(res.headers)
             setContacts(res.data);
             setLoading(false);
         })

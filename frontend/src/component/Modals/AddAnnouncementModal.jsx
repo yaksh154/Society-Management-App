@@ -96,7 +96,7 @@ const AddAnnouncementModal = ({ ClaseAddAnnouncement, Fdata }) => {
                         </button>
                         <button
                             type="submit"
-                            className="bg-gray-100 px-4 py-2 w-1/2 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold py-1 rounded text-sm"
+                            className="bg-gray-100 px-4  w-1/2 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold py-1 rounded text-sm"
                         >
                             Save
                         </button>
