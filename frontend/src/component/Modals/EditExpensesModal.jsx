@@ -229,7 +229,7 @@ const EditExpensesModal = ({ Close, _id, lodData }) => {
                             </div>
                         </div>
                         <div className="flex">
-                            <CloseBtn Addclass="w-1/2" onClick={Close} CloseName="Cancel" />
+                            <CloseBtn type="button" Addclass="w-1/2" onClick={Close} CloseName="Cancel" />
                             <Loding_Button type="submit" Addclass="w-1/2" Btn_Name="Submit" loading={loading} />
                         </div>
                     </form>

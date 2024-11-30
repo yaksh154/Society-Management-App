@@ -185,7 +185,6 @@ export const ImportantNumbersGet = (setContacts, setLoading) => {
         // }
     )
         .then((res) => {
-            console.log(res.headers)
             setContacts(res.data);
             setLoading(false);
         })
@@ -250,34 +249,104 @@ export const updateImportantNumber = (_id, editNumber, Fdata, closeEditModal, se
 
 // Complaint Tracking page
 
-// === Create Complaint get
+// === Complaint get
 
 export const GetComplainy = (setgetComplaint) => {
-    axios.get('http://localhost:3030/user').then((res) => {
+    axios.get(`${url}/complaint/getAllComplaints`).then((res) => {
         setgetComplaint(res.data);
     })
 }
 
-// === Create Complaint create
+// === Complaint create
 
-export const CreateComplaint = async (data, setClosecreateComplint, getComplaintdata) => {
+export const CreateComplaint = async (data, setClosecreateComplint, getComplaintdata, setloading) => {
+    setloading(true)
     try {
-        const response = await axios.post("http://localhost:3030/user", data);
+        const response = await axios.post(`${url}/complaint/createComplaint`, data);
         console.log(response.data);
         getComplaintdata()
         setClosecreateComplint(false);
+        setloading(false)
     } catch (error) {
         console.error("Error submitting complaint:", error);
+        setloading(false)
     }
 }
 
-// === Create Complaint delete
+// === Complaint delete
 
-export const DeleteComplaint = async (_id, getComplaint) => {
-    axios.delete(`http://localhost:3030/user/${_id}`).then((res) => {
-        console.log(res);
-        getComplaint()
+export const DeleteComplaint = async (_id, setloadingcomplint, CloseDeleteComplint, getComplaint, setgetComplaint) => {
+    setloadingcomplint(true)
+    axios.delete(`${url}/complaint/deleteComplaint/${_id}`).then((res) => {
+        const Deletedata = getComplaint.filter((e) => e._id !== _id)
+        setgetComplaint(Deletedata)
+        setloadingcomplint(false)
+        CloseDeleteComplint()
     })
+}
+
+// === Complaint Edit
+
+export const EditComplaint = async (closeEditComplint,_id,editComplaint,setloading) =>{
+    setloading(true)
+    try {
+        const res = await axios.put(`${url}/complaint/updateComplaint/${_id}`, editComplaint);
+        console.log(res.data);
+        closeEditComplint();
+        setloading(false)
+    } catch (error) {
+        console.error('Error saving complaint:', error);
+        setloading(false)
+    }
+}
+
+// Request Tracking page
+
+// Get Request
+
+export const GetRequest = (setgetComplaint) =>{
+    axios.get(`${url}/request/getAllRequests`).then((res)=>{
+        setgetComplaint(res.data);
+    })
+}
+
+// Post Request
+
+export const PostRequest = (data,getComplaintdata,setClosecreateComplint,setloading) =>{
+    setloading(true)
+    axios.post(`${url}/request/createRequest`,data).then((res)=>{
+        setClosecreateComplint()
+        getComplaintdata()
+        setloading(false)
+    })
+}
+
+// Delete Request
+
+export const DeleteRequest = (_id,setloadingDelete,CloseDeleteComplint,getComplaint, setgetComplaint) =>{
+    setloadingDelete(true)
+    axios.delete(`${url}/request/deleteRequest/${_id}`).then((res)=>{
+        console.log(res.data);
+        const Deletedata = getComplaint.filter((e) => e._id !== _id)
+        setgetComplaint(Deletedata)
+        setloadingDelete(false)
+        CloseDeleteComplint()
+    })
+}
+
+// Edit Request
+
+export const EditRequest = async (_id,editComplaint,closeEditComplint,setloading) =>{
+    setloading(true)
+    try {
+        const res = await axios.put(`${url}/request/updateRequest/${_id}`, editComplaint);
+        console.log(res.data);
+        setloading(false)
+        closeEditComplint();
+    } catch (error) {
+        console.error('Error saving complaint:', error);
+        setloading(false)
+    }
 }
 
 // Security Management page
