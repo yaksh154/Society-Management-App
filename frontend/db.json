@@ -92,6 +92,13 @@
       "Announcement_Time": "10:15",
       "description": "The celebration of Holi involves the installation of clay idols of Ganesha in.",
       "id": "4895"
+    },
+    {
+      "id": "ce69",
+      "question": "sadsad",
+      "option1": "sadas",
+      "option2": "sdsdds",
+      "pollType": "ranking"
     }
   ],
   "Guard_Details": [
@@ -1357,8 +1364,11 @@
       "title": "Sales Deal with Toyota - Azure HF - AMS Amplify?",
       "votesYes": 75,
       "votesNo": 40,
+      "pollType": "text",
       "totalVotes": 115,
       "author": "Arlene McCoy",
+      "option1": "Yes",
+      "option2": "No",
       "createdAt": "01/07/2024, 10:00 AM"
     },
     {
@@ -1367,7 +1377,10 @@
       "votesYes": 120,
       "votesNo": 80,
       "totalVotes": 200,
+      "pollType": "text",
       "author": "John Doe",
+      "option1": "Yes",
+      "option2": "No",
       "createdAt": "01/10/2024, 9:00 AM"
     },
     {
@@ -1375,28 +1388,55 @@
       "title": "Sales Deal with Toyota - Azure HF - AMS Amplify?",
       "votesYes": 75,
       "votesNo": 40,
+      "pollType": "text",
       "totalVotes": 115,
       "author": "Arlene McCoy",
+      "option1": "Yes",
+      "option2": "No",
       "createdAt": "01/07/2024, 10:00 AM"
     },
     {
       "id": 4,
       "title": "Cloud Migration - Should we move forward with AWS?",
       "votesYes": 120,
+      "pollType": "text",
       "votesNo": 80,
       "totalVotes": 200,
       "author": "John Doe",
+      "option1": "Yes",
+      "option2": "No",
       "createdAt": "01/10/2024, 9:00 AM"
+    },
+    {
+      "id": "4e4c",
+      "author": "",
+      "createdAt": "30/11/2024 6:30 AM",
+      "question": "wqwr",
+      "option1": "RRTYRTYRT",
+      "option2": "YRTY",
+      "pollType": "ranking"
+    },
+    {
+      "id": "5adf",
+      "author": "",
+      "createdAt": "30/11/2024 6:53 AM",
+      "question": "sadsad",
+      "option1": "gujdg",
+      "option2": "fdsfds",
+      "pollType": "rating"
     }
   ],
-  "New": [
+  "NewPoll": [
     {
       "id": 1,
       "title": "Sales Deal with Toyota - Azure HF - AMS Amplify?",
       "votesYes": 75,
       "votesNo": 40,
+      "pollType": "text",
       "totalVotes": 115,
       "author": "Arlene McCoy",
+      "option1": "Yes",
+      "option2": "No",
       "createdAt": "01/07/2024, 10:00 AM"
     },
     {
@@ -1405,7 +1445,10 @@
       "votesYes": 120,
       "votesNo": 80,
       "totalVotes": 200,
+      "pollType": "text",
       "author": "John Doe",
+      "option1": "Yes",
+      "option2": "No",
       "createdAt": "01/10/2024, 9:00 AM"
     },
     {
@@ -1413,17 +1456,73 @@
       "title": "Sales Deal with Toyota - Azure HF - AMS Amplify?",
       "votesYes": 75,
       "votesNo": 40,
+      "pollType": "text",
       "totalVotes": 115,
       "author": "Arlene McCoy",
+      "option1": "Yes",
+      "option2": "No",
       "createdAt": "01/07/2024, 10:00 AM"
     },
     {
       "id": 4,
       "title": "Cloud Migration - Should we move forward with AWS?",
       "votesYes": 120,
+      "pollType": "text",
       "votesNo": 80,
       "totalVotes": 200,
       "author": "John Doe",
+      "option1": "Yes",
+      "option2": "No",
+      "createdAt": "30/11/2024, 9:00 AM"
+    }
+  ],
+  "PreviousPoll": [
+    {
+      "id": 1,
+      "title": "Sales Deal with Toyota - Azure HF - AMS Amplify?",
+      "votesYes": 75,
+      "votesNo": 40,
+      "pollType": "text",
+      "totalVotes": 115,
+      "author": "Arlene McCoy",
+      "option1": "Yes",
+      "option2": "No",
+      "createdAt": "01/07/2024, 10:00 AM"
+    },
+    {
+      "id": 2,
+      "title": "Cloud Migration - Should we move forward with AWS?",
+      "votesYes": 120,
+      "votesNo": 80,
+      "totalVotes": 200,
+      "pollType": "text",
+      "author": "John Doe",
+      "option1": "Yes",
+      "option2": "No",
+      "createdAt": "01/10/2024, 9:00 AM"
+    },
+    {
+      "id": 3,
+      "title": "Sales Deal with Toyota - Azure HF - AMS Amplify?",
+      "votesYes": 75,
+      "votesNo": 40,
+      "pollType": "text",
+      "totalVotes": 115,
+      "author": "Arlene McCoy",
+      "option1": "Yes",
+      "option2": "No",
+      "createdAt": "01/07/2024, 10:00 AM"
+    },
+    {
+      "id": 4,
+      "title": "Cloud Migration - Should we move forward with AWS?",
+      "votesYes": 120,
+      "pollType": "text",
+      "votesNo": 80,
+      "totalVotes": 200,
+      "author": "John Doe",
+      "option1": "Yes",
+      "option2": "No",
       "createdAt": "01/10/2024, 9:00 AM"
     }
   ],

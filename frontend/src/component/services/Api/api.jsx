@@ -481,7 +481,7 @@ export const GetMaintenance = (setudata) => {
     })
 }
 
-//   Income page 
+//   Income page
 export const PostIncome = (data, Fdata, setShowAddDetail) => {
     axios.post(`http://localhost:3030/Income`, data).then((res) => {
         Fdata()

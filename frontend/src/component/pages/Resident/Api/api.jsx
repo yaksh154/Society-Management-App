@@ -110,12 +110,28 @@ export const GetOwnPoll = async () => {
   return res.data;
 };
 
+
+export const PostOwnpoll = (data, Fdata, closeCreatePoll) => {
+  console.log(data);
+
+  axios.post(`http://localhost:3030/OwnPoll`, data).then((res) => {
+    closeCreatePoll(false)
+    Fdata()
+  })
+}
+
+
+
+
+
 export const GetNewPoll = async () => {
-  const res = await axios.get('http://localhost:3030/NewPoll');
+  const res = await axios.get('http://localhost:3030/OwnPoll');
   return res.data;
 };
 
 export const GetPreviousPoll = async () => {
-  const res = await axios.get('http://localhost:3030/PreviousPoll');
+  const res = await axios.get('http://localhost:3030/OwnPoll');
   return res.data;
 };
+
+
