@@ -185,10 +185,6 @@ export const ImportantNumbersGet = (setContacts, setLoading) => {
         // }
     )
         .then((res) => {
-<<<<<<< HEAD
-            // console.log(res.headers)
-=======
->>>>>>> ff9ffe67519a3a6ad4567728b47016e26cf48fcc
             setContacts(res.data);
             setLoading(false);
         })
@@ -474,7 +470,7 @@ export const GetMaintenance = (setudata) => {
     })
 }
 
-//   Income page 
+//   Income page
 export const PostIncome = (data, Fdata, setShowAddDetail) => {
     axios.post(`http://localhost:3030/Income`, data).then((res) => {
         Fdata()
