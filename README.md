@@ -77,7 +77,3 @@ The **Society Management App** is an all-in-one solution for managing housing so
 5. **Open a pull request to the main branch.**
 
 ---
-
-##📜 License
-
-### This project is licensed under the MIT License. You are free to use, modify, and distribute this software under the terms of the license.
