@@ -1415,6 +1415,15 @@
       "option1": "RRTYRTYRT",
       "option2": "YRTY",
       "pollType": "ranking"
+    },
+    {
+      "id": "5adf",
+      "author": "",
+      "createdAt": "30/11/2024 6:53 AM",
+      "question": "sadsad",
+      "option1": "gujdg",
+      "option2": "fdsfds",
+      "pollType": "rating"
     }
   ],
   "NewPoll": [

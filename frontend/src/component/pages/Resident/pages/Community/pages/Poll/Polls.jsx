@@ -16,12 +16,23 @@ const Polls = () => {
   const openCreatePoll = () => setCreate(true);
   const closeCreatePoll = () => setCreate(false);
 
-  // Format date to 'dd-mm-yyyy'
+  // Format date to 'dd-mm-yyyy' (only date part, ignoring time)
   const formatDateToDDMMYYYY = (date) => {
     const d = new Date(date);
     return `${d.getDate().toString().padStart(2, '0')}-${(d.getMonth() + 1)
       .toString()
       .padStart(2, '0')}-${d.getFullYear()}`;
+  };
+
+  // Parse 'createdAt' field in 'dd/mm/yyyy h:mm AM/PM' format to Date object
+  const parseCreatedAt = (createdAt) => {
+    const [datePart, timePart] = createdAt.split(' ');
+
+    const [day, month, year] = datePart.split('/');
+
+    const formattedDate = `${month}/${day}/${year} ${timePart}`;
+
+    return new Date(formattedDate);
   };
 
   // Fetch data based on poll type
@@ -35,15 +46,35 @@ const Polls = () => {
         data = await GetOwnPoll();
       } else if (pollType === 'New') {
         const newPolls = await GetNewPoll();
+
+        // Debugging to check the data returned from the API
+        console.log('Fetched New Polls:', newPolls);
+
         // Filter polls to show only those created today based on 'createdAt'
         data = newPolls.filter((poll) => {
-          const pollDate = new Date(poll.createdAt); // Parse createdAt field to Date object
-          const formattedPollDate = formatDateToDDMMYYYY(pollDate);
-          return formattedPollDate === formattedToday;
+          if (poll.createdAt) {
+            const pollDate = parseCreatedAt(poll.createdAt); // Parse createdAt field to Date object
+            const formattedPollDate = formatDateToDDMMYYYY(pollDate); // Format it to 'dd-mm-yyyy'
+            return formattedPollDate === formattedToday; // Only show polls created today
+          }
+          return false; // Skip polls that don't have a valid createdAt field
         });
+
         console.log('New Polls (Today):', data); // Debugging
       } else if (pollType === 'Previous') {
-        data = await GetPreviousPoll();
+        const previousPolls = await GetPreviousPoll();
+
+        // Filter out today's polls from the previous polls
+        data = previousPolls.filter((poll) => {
+          if (poll.createdAt) {
+            const pollDate = parseCreatedAt(poll.createdAt); // Parse createdAt field to Date object
+            const formattedPollDate = formatDateToDDMMYYYY(pollDate); // Format it to 'dd-mm-yyyy'
+            return formattedPollDate !== formattedToday; // Exclude today's polls
+          }
+          return true; // Include poll if no valid createdAt field
+        });
+
+        console.log('Previous Polls (Excluding Today):', data); // Debugging
       }
     } catch (error) {
       console.error('Error fetching polls:', error);

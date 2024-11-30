@@ -31,7 +31,7 @@ const PollComponent = ({ polls }) => {
                     className="w-12 h-12 rounded-full border"
                   />
                   <div className="ml-4">
-                    <h5 className="text-lg font-bold text-blue-500">{poll.author}</h5>
+                    <h5 className="text-lg font-bold text-blue-500">{poll.author || "User"}</h5>
                     <p className="text-sm text-gray-500">{poll.pollType}</p>
                   </div>
                 </div>
