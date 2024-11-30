@@ -8,7 +8,7 @@ import TotalBalanceChart from '../../../layout/TotalBalanceChart';
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, } from 'chart.js';
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip);
 import { FaTrashAlt, FaEdit, FaPlus } from 'react-icons/fa';
-import { GetComplainy, ImportantNumbersGet } from '../../../services/Api/api';
+import { GetComplainy, ImportantNumbersGet, Profile_img } from '../../../services/Api/api';
 import { TiThMenu } from "react-icons/ti";
 import CreateImportantNumbers from '../../../Modals/CreateImportantNumbers';
 import EditImportantNumbers from '../../../Modals/EditImportantNumbers';
@@ -100,8 +100,9 @@ const Home = () => {
   }, [])
 
   let [getComplaint, setgetComplaint] = useState([]);
+  const [loadingcomplaint, setloadingcomplaint] = useState(true)
   const getComplaintdata = () => {
-    GetComplainy(setgetComplaint)
+    GetComplainy(setgetComplaint, setloadingcomplaint)
   }
 
   // edit complaint List pop_up
@@ -256,7 +257,7 @@ const Home = () => {
                   <h2 className="text-lg font-semibold">Pending Maintenances</h2>
                   <a href="#" className="text-blue-500 text-sm">View all</a>
                 </div>
-                <div className="space-y-4 overflow-y-auto h-full px-2">
+                <div className="space-y-4 overflow-y-auto h-96 px-2">
                   <div>
                     {/* Maintenance Item */}
                     <div className="flex justify-between items-center">
@@ -369,61 +370,66 @@ const Home = () => {
                     </select>
                   </div>
                   <div className="overflow-x-auto h-32 px-2">
-                    <table className="min-w-full text-left">
-                      <thead>
-                        <tr className="bg-gray-100 text-gray-700">
-                          <th className="px-4 py-2">Complainer Name</th>
-                          <th className="px-4 py-2">Complaint Name</th>
-                          <th className="px-4 py-2">Date</th>
-                          <th className="px-4 py-2 text-center">Priority</th>
-                          <th className="px-4 py-2 text-center">Complain Status</th>
-                          <th className="px-4 py-2 text-center">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {getComplaint.map((e, index) => {
-                          return (
-                            <tr key={index} className="border-b hover:bg-gray-50">
-                              <td className="px-4 py-2 flex items-center space-x-2">
-                                <img className="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
-                                <span>{e.Complainer_Name}</span>
-                              </td>
-                              <td className="px-4 py-2">{e.Complaint_Name}</td>
-                              <td className="px-4 py-2">
-                                {new Date(e.createdAt).toLocaleDateString("en-US", {
-                                  month: "2-digit",
-                                  day: "2-digit",
-                                  year: "numeric",
-                                })}
-                              </td>
-                              <td className="px-4 py-2 text-center">
-                                <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
-                                  e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
-                                    e.Priority === "Low" ? "bg-[#39973d] text-white" : null
-                                  }`}>{e.Priority}</span>
-                              </td>
-                              <td className="px-4 py-2 text-center">
-                                <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
-                                  e.Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
-                                    e.Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
-                                  }`}>{e.Status}</span>
-                              </td>
-                              <td className="px-4 py-2 flex space-x-2">
-                                <button className="text-green-500 p-1" onClick={() => OpneEditComplint(e._id)}>
-                                  <FaEdit />
-                                </button>
-                                <button className="text-blue-500 text-2xl rounded" onClick={() => OpneViewComplint(e._id)}>
-                                  <GrFormView />
-                                </button>
-                                <button onClick={() => OpneDeleteComplint(e._id)} className="text-red-500 p-1">
-                                  <FaTrashAlt />
-                                </button>
-                              </td>
-                            </tr>
-                          )
-                        })}
-                      </tbody>
-                    </table>
+                    {loadingcomplaint ? (
+                      <div className="text-center text-gray-500">Loading...</div>
+                    ) : (
+                      <table className="min-w-full text-left">
+                        <thead>
+                          <tr className="bg-gray-100 text-gray-700">
+                            <th className="px-4 py-2">Complainer Name</th>
+                            <th className="px-4 py-2">Complaint Name</th>
+                            <th className="px-4 py-2">Date</th>
+                            <th className="px-4 py-2 text-center">Priority</th>
+                            <th className="px-4 py-2 text-center">Complain Status</th>
+                            <th className="px-4 py-2 text-center">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {getComplaint.map((e, index) => {
+                            return (
+                              <tr key={index} className="border-b hover:bg-gray-50">
+                                <td className="px-4 py-2 flex items-center space-x-2">
+                                  <img className="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
+                                  <span>{e.Complainer_Name}</span>
+                                </td>
+                                <td className="px-4 py-2">{e.Complaint_Name}</td>
+                                <td className="px-4 py-2">
+                                  {new Date(e.createdAt).toLocaleDateString("en-US", {
+                                    month: "2-digit",
+                                    day: "2-digit",
+                                    year: "numeric",
+                                  })}
+                                </td>
+                                <td className="px-4 py-2 text-center">
+                                  <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
+                                    e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
+                                      e.Priority === "Low" ? "bg-[#39973d] text-white" : null
+                                    }`}>{e.Priority}</span>
+                                </td>
+                                <td className="px-4 py-2 text-center">
+                                  <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
+                                    e.Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
+                                      e.Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
+                                    }`}>{e.Status}</span>
+                                </td>
+                                <td className="px-4 py-2 flex space-x-2">
+                                  <button className="text-green-500 p-1" onClick={() => OpneEditComplint(e._id)}>
+                                    <FaEdit />
+                                  </button>
+                                  <button className="text-blue-500 text-2xl rounded" onClick={() => OpneViewComplint(e._id)}>
+                                    <GrFormView />
+                                  </button>
+                                  <button onClick={() => OpneDeleteComplint(e._id)} className="text-red-500 p-1">
+                                    <FaTrashAlt />
+                                  </button>
+                                </td>
+                              </tr>
+                            )
+                          })}
+                        </tbody>
+                      </table>
+                    )}
+
                     {EditComplint && <OpenEditComplintModel _id={a_id} closeEditComplint={closeEditComplint} />}
                     {ViewComplint && <ViewComplintModel _id={b_id} closeViewComplint={closeViewComplint} />}
                     {DeleteComplint && <LodingDelete loading={loadingcomplint} DeleteClick={ComlintDelete} close={CloseDeleteComplint} getComplaint={getComplaint} />}

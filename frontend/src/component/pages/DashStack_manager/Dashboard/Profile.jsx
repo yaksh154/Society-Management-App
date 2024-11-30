@@ -1,35 +1,44 @@
-import React, { useState } from 'react';
-import { FaPencilAlt } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
 import Sidebar from '../../../layout/Sidebar';
 import Header from '../../../layout/Header';
+// import userImg from '../../../../../public/images/userImg'
+import { Profile_img } from '../../../services/Api/api';
 
 const Profile = () => {
-
-  let [data, setdata] = useState(280);
-  let [getdata, setget] = useState(280);
-
-  function openNav() {
-    setdata(280);
-    setget(280);
-  }
-  function closeNav() {
-    setdata(0);
-    setget(0);
-  }
-
+  const [data, setData] = useState(280);
+  const [getData, setGetData] = useState(280);
+  const [previewImage, setPreviewImage] = useState('');
+  const [isEditable, setIsEditable] = useState(false);
+  const [error, setError] = useState('');
 
   const [formData, setFormData] = useState({
-    firstName: 'Arlene',
-    lastName: 'McCoy',
-    society: 'Shantigram residency',
-    country: 'India',
-    state: 'Gujarat',
-    city: 'Baroda',
-    phoneNumber: '84018741520', // Initialize phoneNumber
-    email: 'dssfsdf@gmail.copm', // Initialize email
+    Firstname: '',
+    Lastname: '',
+    society: '',
+    Country: '',
+    State: '',
+    City: '',
+    Number: '',
+    Email: '',
   });
 
-  const [error, setError] = useState('');
+  useEffect(() => {
+    Fdata();
+  }, []);
+
+  const Fdata = () => {
+    Profile_img(setFormData);
+  };
+
+  const openNav = () => {
+    setData(280);
+    setGetData(280);
+  };
+
+  const closeNav = () => {
+    setData(0);
+    setGetData(0);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,28 +48,42 @@ const Profile = () => {
     }));
   };
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const fileURL = URL.createObjectURL(file);
+      setPreviewImage(fileURL);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.Email)) {
       setError('Please enter a valid email address.');
       return;
     }
     setError('');
-    console.log(formData);
+  
+    const updatedFormData = {
+      ...formData,
+      profileImage: previewImage, 
+    };
+  
+    console.log('Form submitted:', updatedFormData);
+    console.log(previewImage);
+  
+    setIsEditable(false);
   };
+  
 
   return (
     <div>
-    <Sidebar closeNav={closeNav} data={data} />
-    <div
-      id="main"
-      className="max-[425px]:ml-0"
-      style={{ marginLeft: getdata }}
-    >
-      <div className="open_he">
-        <Header openNav={openNav} />
-      </div>
-      {/* Main Content */}
+      <Sidebar closeNav={closeNav} data={data} />
+      <div id="main" className="max-[425px]:ml-0" style={{ marginLeft: getData }}>
+        <div className="open_he">
+          <Header openNav={openNav} />
+        </div>
         <div
           className="flex justify-center items-center h-80 bg-cover bg-center relative bg-no-repeat p-4"
           style={{ backgroundImage: "url('/images/bg.png')" }}
@@ -68,23 +91,39 @@ const Profile = () => {
           <div className="bg-white rounded-lg shadow-lg p-4 sm:p-8 w-full max-w-2xl lg:max-w-4xl absolute top-28">
             <div className="flex flex-col lg:flex-row">
               {/* Left side: Profile Picture */}
-              <div className="lg:w-1/4 flex justify-center lg:justify-start items-center mb-4 lg:mb-0">
-  <div className="text-center relative mx-6 mb-14">
-    <img
-      className="w-28 h-28 sm:w-36 sm:h-36 rounded-full mx-auto"
-      src="../../../public/images/Profile.png"
-      alt="Profile"
-    />
-    <div className="absolute top-20 sm:top-28 right-1 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white border border-gray-200 flex items-center justify-center">
-      <div className="bg-gray-800 p-1.5 rounded-md">
-        <FaPencilAlt className="text-white text-xs sm:text-sm" />
-      </div>
-    </div>
-    <h2 className="mt-4 text-lg sm:text-xl font-semibold">
-      {`${formData.firstName} ${formData.lastName}`}
-    </h2>
-  </div>
-</div>
+              <div className="lg:w-1/4 flex flex-col justify-center items-center mb-4 lg:mb-0">
+                <div className="relative">
+                  <img
+                    src={previewImage || "../../../public/images/user.png"}
+                    alt="Profile"
+                    className="w-24 h-24 rounded-full object-cover border"
+                  />
+                  {isEditable && (
+                    <label
+                      htmlFor="imageUpload"
+                      className="absolute bottom-0 right-0 bg-white p-1 rounded-full border cursor-pointer"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4 text-gray-700"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path d="M17.707 7.707a1 1 0 010-1.414L16.293 5.293a1 1 0 00-1.414 0L14 6.172 16.828 9l1.879-1.879a1 1 0 000-1.414zM11 9.586L8.172 12.414a1 1 0 00-.293.707v2.828a1 1 0 001 1h2.828a1 1 0 00.707-.293l2.828-2.828L11 9.586z" />
+                      </svg>
+                    </label>
+                  )}
+                  <input
+                    type="file"
+                    id="imageUpload"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleFileChange}
+                    disabled={!isEditable}
+                  />
+                </div>
+                <p className="mt-2 text-gray-700 text-sm">{`${formData.Firstname} ${formData.Lastname}`}</p>
+              </div>
               {/* Right side: Form */}
               <div className="lg:w-2/3 lg:pl-8">
                 {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -96,11 +135,12 @@ const Profile = () => {
                       </label>
                       <input
                         type="text"
-                        name="firstName"
-                        value={formData.firstName}
+                        name="Firstname"
+                        value={formData.Firstname}
                         onChange={handleChange}
                         className="mt-1 border rounded-md p-2 w-full text-xs sm:text-sm"
                         required
+                        disabled={!isEditable}
                       />
                     </div>
                     <div>
@@ -109,11 +149,12 @@ const Profile = () => {
                       </label>
                       <input
                         type="text"
-                        name="lastName"
-                        value={formData.lastName}
+                        name="Lastname"
+                        value={formData.Lastname}
                         onChange={handleChange}
                         className="mt-1 border rounded-md p-2 w-full text-xs sm:text-sm"
                         required
+                        disabled={!isEditable}
                       />
                     </div>
                   </div>
@@ -124,11 +165,12 @@ const Profile = () => {
                       </label>
                       <input
                         type="tel"
-                        name="phoneNumber"
-                        value={formData.phoneNumber}
+                        name="Number"
+                        value={formData.Number}
                         onChange={handleChange}
                         className="mt-1 border rounded-md p-2 w-full text-xs sm:text-sm"
                         required
+                        disabled={!isEditable}
                       />
                     </div>
                     <div>
@@ -137,11 +179,12 @@ const Profile = () => {
                       </label>
                       <input
                         type="email"
-                        name="email"
-                        value={formData.email}
+                        name="Email"
+                        value={formData.Email}
                         onChange={handleChange}
                         className="mt-1 border rounded-md p-2 w-full text-xs sm:text-sm"
                         required
+                        disabled={!isEditable}
                       />
                     </div>
                   </div>
@@ -157,6 +200,7 @@ const Profile = () => {
                         onChange={handleChange}
                         className="mt-1 border rounded-md p-2 w-full text-xs sm:text-sm"
                         required
+                        disabled={!isEditable}
                       />
                     </div>
                     <div>
@@ -165,11 +209,12 @@ const Profile = () => {
                       </label>
                       <input
                         type="text"
-                        name="country"
-                        value={formData.country}
+                        name="Country"
+                        value={formData.Country}
                         onChange={handleChange}
                         className="mt-1 border rounded-md p-2 w-full text-xs sm:text-sm"
                         required
+                        disabled={!isEditable}
                       />
                     </div>
                   </div>
@@ -180,11 +225,12 @@ const Profile = () => {
                       </label>
                       <input
                         type="text"
-                        name="state"
-                        value={formData.state}
+                        name="State"
+                        value={formData.State}
                         onChange={handleChange}
                         className="mt-1 border rounded-md p-2 w-full text-xs sm:text-sm"
                         required
+                        disabled={!isEditable}
                       />
                     </div>
                     <div>
@@ -193,21 +239,42 @@ const Profile = () => {
                       </label>
                       <input
                         type="text"
-                        name="city"
-                        value={formData.city}
+                        name="City"
+                        value={formData.City}
                         onChange={handleChange}
                         className="mt-1 border rounded-md p-2 w-full text-xs sm:text-sm"
                         required
+                        disabled={!isEditable}
                       />
                     </div>
                   </div>
                   <div className="flex justify-end">
-                    <button
-                      type="submit"
-                      className="mt-4 sm:mt-6 px-4 sm:px-8 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-md hover:bg-orange-600 text-xs sm:text-sm"
-                    >
-                      Update Profile
-                    </button>
+                    {!isEditable && (
+                      <button
+                        type="button"
+                        className="mt-4 sm:mt-6 px-4 sm:px-8 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-md hover:bg-orange-600 text-xs sm:text-sm"
+                        onClick={() => setIsEditable(true)}
+                      >
+                        View Profile
+                      </button>
+                    )}
+                    {isEditable && (
+                      <>
+                        <button
+                          type="submit"
+                          className="mt-4 sm:mt-6 px-4 sm:px-8 py-2 bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-md hover:bg-green-600 text-xs sm:text-sm"
+                        >
+                          Update Profile
+                        </button>
+                        <button
+                          type="button"
+                          className="mt-4 sm:mt-6 ml-2 px-4 sm:px-8 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 text-xs sm:text-sm"
+                          onClick={() => setIsEditable(false)}
+                        >
+                          Cancel
+                        </button>
+                      </>
+                    )}
                   </div>
                 </form>
               </div>

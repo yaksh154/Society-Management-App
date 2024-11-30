@@ -29,8 +29,9 @@ const Create_Complaint = () => {
   }, [])
 
   const [getComplaint, setgetComplaint] = useState([]);
+  const [loadingcomplaint, setloadingcomplaint] = useState(true)
   const getComplaintdata = () => {
-    GetComplainy(setgetComplaint)
+    GetComplainy(setgetComplaint,setloadingcomplaint)
   }
 
   const [createComplint, setcreateComplint] = useState(false);
@@ -69,8 +70,8 @@ const Create_Complaint = () => {
   const CloseDeleteComplint = () => {
     setDeleteComplint(false);
   }
-  
-  const Deletecomplint = () =>{
+
+  const Deletecomplint = () => {
     const _id = c_id
     DeleteComplaint(_id, setloadingcomplint, CloseDeleteComplint, getComplaint, setgetComplaint)
   }
@@ -91,77 +92,82 @@ const Create_Complaint = () => {
                 {createComplint && (<Create_Complint_model setClosecreateComplint={closecreateComplint} getComplaintdata={getComplaintdata} />)}
               </div>
               <div className="overflow-auto">
-                <table className="min-w-full bg-[#eef1fd] rounded-lg">
-                  <thead>
-                    <tr>
-                      <th className="px-6 py-3 border-b font-medium ">
-                        Complainer Name
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium ">
-                        Complaint Name
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium ">
-                        Description
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium ">
-                        Unit Number
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium ">
-                        Priority
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium ">
-                        Status
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium ">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {getComplaint.map((e, index) => {
-                      return (
-                        <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium text-center md:font-semibold overflow-x-scroll">
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex items-center">
-                            <img className="w-8 h-8 rounded-full mr-1" src="https://via.placeholder.com/40" alt="profile" />
-                            <span>{e.Complainer_Name}</span>
-                          </td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Complaint_Name}</td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Description}</td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">
-                            <samp className=' px-2 py-1 text-[#5678e9] bg-[#f6f8fb] mr-2 rounded-full'>{e.Wing}</samp>
-                            {e.Unit_Number}
-                          </td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 ">
-                            <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
-                              e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
-                                e.Priority === "Low" ? "bg-[#39973d] text-white" : null
-                              }`}>{e.Priority}</span>
-                          </td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
-                            <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
-                              e.Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
-                                e.Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
-                              }`}>{e.Status}</span>
-                          </td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-2 md:space-x-2">
-                            <button className="text-green-500 p-1" onClick={() => OpneEditComplint(e._id)}>
-                              <FaEdit />
-                            </button>
+                {loadingcomplaint ? (
+                  <div className="text-center text-gray-500">Loading...</div>
+                ) : (
+                  <table className="min-w-full bg-[#eef1fd] rounded-lg">
+                    <thead>
+                      <tr>
+                        <th className="px-6 py-3 border-b font-medium ">
+                          Complainer Name
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium ">
+                          Complaint Name
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium ">
+                          Description
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium ">
+                          Unit Number
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium ">
+                          Priority
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium ">
+                          Status
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium ">
+                          Action
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {getComplaint.map((e, index) => {
+                        return (
+                          <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium md:font-semibold overflow-x-scroll">
+                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex items-center">
+                              <img className="w-8 h-8 rounded-full mr-1" src="https://via.placeholder.com/40" alt="profile" />
+                              <span>{e.Complainer_Name}</span>
+                            </td>
+                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Complaint_Name}</td>
+                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Description}</td>
+                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate text-center">
+                              <samp className=' px-2 py-1 text-[#5678e9] bg-[#f6f8fb] mr-2 rounded-full'>{e.Wing}</samp>
+                              {e.Unit_Number}
+                            </td>
+                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 ">
+                              <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
+                                e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
+                                  e.Priority === "Low" ? "bg-[#39973d] text-white" : null
+                                }`}>{e.Priority}</span>
+                            </td>
+                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
+                              <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
+                                e.Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
+                                  e.Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
+                                }`}>{e.Status}</span>
+                            </td>
+                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-2 md:space-x-2 justify-center">
+                              <button className="text-green-500 p-1" onClick={() => OpneEditComplint(e._id)}>
+                                <FaEdit />
+                              </button>
 
-                            <button className="text-blue-500 text-2xl rounded" onClick={() => OpneViewComplint(e._id)}>
-                              <GrFormView />
-                            </button>
+                              <button className="text-blue-500 text-2xl rounded" onClick={() => OpneViewComplint(e._id)}>
+                                <GrFormView />
+                              </button>
 
-                            <button onClick={() => OpneDeleteComplint(e._id)} className="text-red-500 p-1">
-                              <FaTrashAlt />
-                            </button>
-                          </td>
-                        </tr>
-                      )
-                    })}
+                              <button onClick={() => OpneDeleteComplint(e._id)} className="text-red-500 p-1">
+                                <FaTrashAlt />
+                              </button>
+                            </td>
+                          </tr>
+                        )
+                      })}
 
-                  </tbody>
-                </table>
+                    </tbody>
+                  </table>
+                )}
+
                 {EditComplint && <OpenEditComplintModel _id={a_id} closeEditComplint={closeEditComplint} />}
                 {ViewComplint && <ViewComplintModel _id={b_id} closeViewComplint={closeViewComplint} />}
                 {DeleteComplint && <LodingDelete loading={loadingcomplint} DeleteClick={Deletecomplint} close={CloseDeleteComplint} getComplaint={getComplaint} />}

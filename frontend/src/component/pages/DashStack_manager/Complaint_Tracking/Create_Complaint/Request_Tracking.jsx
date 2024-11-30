@@ -28,8 +28,9 @@ const Request_Tracking = () => {
   }, [])
 
   const [getComplaint, setgetComplaint] = useState([]);
+  const [loadingRequest, setloadingRequest] = useState(true)
   const getComplaintdata = () => {
-    GetRequest(setgetComplaint)
+    GetRequest(setgetComplaint,setloadingRequest)
   }
 
   const [createComplint, setcreateComplint] = useState(false);
@@ -68,9 +69,9 @@ const Request_Tracking = () => {
   const CloseDeleteComplint = () => {
     setDeleteComplint(false);
   }
-  const DeleteData = () =>{
+  const DeleteData = () => {
     const _id = c_id
-    DeleteRequest(_id,setloadingDelete,CloseDeleteComplint,getComplaint, setgetComplaint)
+    DeleteRequest(_id, setloadingDelete, CloseDeleteComplint, getComplaint, setgetComplaint)
   }
 
   return (
@@ -89,88 +90,93 @@ const Request_Tracking = () => {
                 {createComplint && (<Create_Request setClosecreateComplint={closecreateComplint} getComplaintdata={getComplaintdata} />)}
               </div>
               <div className="overflow-auto">
-                <table className="min-w-full bg-[#eef1fd] rounded-lg">
-                  <thead>
-                    <tr>
-                      <th className="px-6 py-3 border-b font-medium ">
-                        Requester Name
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium ">
-                        Request Name
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium ">
-                        Description
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium ">
-                        Request Date
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium ">
-                        Unit Number
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium ">
-                        Priority
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium ">
-                        Status
-                      </th>
-                      <th className="px-6 py-3 border-b font-medium ">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {getComplaint.map((e, index) => {
-                      return (
-                        <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium text-center md:font-semibold overflow-x-scroll">
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex items-center">
-                            <img className="w-8 h-8 rounded-full mr-1" src="https://via.placeholder.com/40" alt="profile" />
-                            <span>{e.Requester_Name}</span>
-                          </td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Request_Name}</td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Description}</td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">
-                            {new Date(e.Request_Date).toLocaleDateString("en-US", {
-                              month: "2-digit",
-                              day: "2-digit",
-                              year: "numeric",
-                            })}
-                          </td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">
-                            <samp className=' px-2 py-1 text-[#5678e9] bg-[#f6f8fb] mr-2 rounded-full'>{e.Wing}</samp>
-                            {e.Unit}
-                          </td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 ">
-                            <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
-                              e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
-                                e.Priority === "Low" ? "bg-[#39973d] text-white" : null
-                              }`}>{e.Priority}</span>
-                          </td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
-                            <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
-                              e.Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
-                                e.Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
-                              }`}>{e.Status}
-                            </span>
-                          </td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-2 md:space-x-2">
-                            <button className="text-green-500 p-1" onClick={() => OpneEditComplint(e._id)}>
-                              <FaEdit />
-                            </button>
+                {loadingRequest ? (
+                  <div className="text-center text-gray-500">Loading...</div>
+                ) : (
+                  <table className="min-w-full bg-[#eef1fd] rounded-lg">
+                    <thead>
+                      <tr>
+                        <th className="px-6 py-3 border-b font-medium ">
+                          Requester Name
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium ">
+                          Request Name
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium ">
+                          Description
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium ">
+                          Request Date
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium ">
+                          Unit Number
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium ">
+                          Priority
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium ">
+                          Status
+                        </th>
+                        <th className="px-6 py-3 border-b font-medium ">
+                          Action
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {getComplaint.map((e, index) => {
+                        return (
+                          <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium text-center md:font-semibold overflow-x-scroll">
+                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex items-center">
+                              <img className="w-8 h-8 rounded-full mr-1" src="https://via.placeholder.com/40" alt="profile" />
+                              <span>{e.Requester_Name}</span>
+                            </td>
+                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Request_Name}</td>
+                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Description}</td>
+                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">
+                              {new Date(e.Request_Date).toLocaleDateString("en-US", {
+                                month: "2-digit",
+                                day: "2-digit",
+                                year: "numeric",
+                              })}
+                            </td>
+                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">
+                              <samp className=' px-2 py-1 text-[#5678e9] bg-[#f6f8fb] mr-2 rounded-full'>{e.Wing}</samp>
+                              {e.Unit}
+                            </td>
+                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 ">
+                              <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
+                                e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
+                                  e.Priority === "Low" ? "bg-[#39973d] text-white" : null
+                                }`}>{e.Priority}</span>
+                            </td>
+                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
+                              <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
+                                e.Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
+                                  e.Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
+                                }`}>{e.Status}
+                              </span>
+                            </td>
+                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-2 md:space-x-2">
+                              <button className="text-green-500 p-1" onClick={() => OpneEditComplint(e._id)}>
+                                <FaEdit />
+                              </button>
 
-                            <button className="text-blue-500 text-2xl rounded" onClick={() => OpneViewComplint(e._id)}>
-                              <GrFormView />
-                            </button>
+                              <button className="text-blue-500 text-2xl rounded" onClick={() => OpneViewComplint(e._id)}>
+                                <GrFormView />
+                              </button>
 
-                            <button onClick={() => OpneDeleteComplint(e._id)} className="text-red-500 p-1">
-                              <FaTrashAlt />
-                            </button>
-                          </td>
-                        </tr>
-                      )
-                    })}
+                              <button onClick={() => OpneDeleteComplint(e._id)} className="text-red-500 p-1">
+                                <FaTrashAlt />
+                              </button>
+                            </td>
+                          </tr>
+                        )
+                      })}
 
-                  </tbody>
-                </table>
+                    </tbody>
+                  </table>
+                )}
+
                 {EditComplint && <OpenEditReq _id={a_id} closeEditComplint={closeEditComplint} />}
                 {ViewComplint && <ViewReq _id={b_id} closeViewComplint={closeViewComplint} />}
                 {DeleteComplint && <DeleteLoding close={CloseDeleteComplint} loading={loadingDelete} DeleteClick={DeleteData} />}

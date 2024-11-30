@@ -169,6 +169,14 @@ axios.interceptors.request.use(
     }
 );
 
+// Profile 
+export const Profile_img = (setFormData) => {
+    axios.get(`${url}/manager/profile`).then((res) => {
+        // console.log(res.data);  
+        setFormData(res.data);
+    })
+}
+
 // ImportantNumbers page Home
 
 // ImportantNumbers get
@@ -251,9 +259,10 @@ export const updateImportantNumber = (_id, editNumber, Fdata, closeEditModal, se
 
 // === Complaint get
 
-export const GetComplainy = (setgetComplaint) => {
+export const GetComplainy = (setgetComplaint, setloadingcomplaint) => {
     axios.get(`${url}/complaint/getAllComplaints`).then((res) => {
         setgetComplaint(res.data);
+        setloadingcomplaint(false)
     })
 }
 
@@ -287,7 +296,7 @@ export const DeleteComplaint = async (_id, setloadingcomplint, CloseDeleteCompli
 
 // === Complaint Edit
 
-export const EditComplaint = async (closeEditComplint,_id,editComplaint,setloading) =>{
+export const EditComplaint = async (closeEditComplint, _id, editComplaint, setloading) => {
     setloading(true)
     try {
         const res = await axios.put(`${url}/complaint/updateComplaint/${_id}`, editComplaint);
@@ -304,17 +313,18 @@ export const EditComplaint = async (closeEditComplint,_id,editComplaint,setloadi
 
 // Get Request
 
-export const GetRequest = (setgetComplaint) =>{
-    axios.get(`${url}/request/getAllRequests`).then((res)=>{
+export const GetRequest = (setgetComplaint,setloadingRequest) => {
+    axios.get(`${url}/request/getAllRequests`).then((res) => {
         setgetComplaint(res.data);
+        setloadingRequest(false)
     })
 }
 
 // Post Request
 
-export const PostRequest = (data,getComplaintdata,setClosecreateComplint,setloading) =>{
+export const PostRequest = (data, getComplaintdata, setClosecreateComplint, setloading) => {
     setloading(true)
-    axios.post(`${url}/request/createRequest`,data).then((res)=>{
+    axios.post(`${url}/request/createRequest`, data).then((res) => {
         setClosecreateComplint()
         getComplaintdata()
         setloading(false)
@@ -323,9 +333,9 @@ export const PostRequest = (data,getComplaintdata,setClosecreateComplint,setload
 
 // Delete Request
 
-export const DeleteRequest = (_id,setloadingDelete,CloseDeleteComplint,getComplaint, setgetComplaint) =>{
+export const DeleteRequest = (_id, setloadingDelete, CloseDeleteComplint, getComplaint, setgetComplaint) => {
     setloadingDelete(true)
-    axios.delete(`${url}/request/deleteRequest/${_id}`).then((res)=>{
+    axios.delete(`${url}/request/deleteRequest/${_id}`).then((res) => {
         console.log(res.data);
         const Deletedata = getComplaint.filter((e) => e._id !== _id)
         setgetComplaint(Deletedata)
@@ -336,7 +346,7 @@ export const DeleteRequest = (_id,setloadingDelete,CloseDeleteComplint,getCompla
 
 // Edit Request
 
-export const EditRequest = async (_id,editComplaint,closeEditComplint,setloading) =>{
+export const EditRequest = async (_id, editComplaint, closeEditComplint, setloading) => {
     setloading(true)
     try {
         const res = await axios.put(`${url}/request/updateRequest/${_id}`, editComplaint);
@@ -418,9 +428,10 @@ export const DeleteAnnouncement = (_id, Fdata, ClaseDeleteAnnouncement) => {
 
 // Facility Management Get
 
-export const Facility_Management_Get = (setincomeData) => {
+export const Facility_Management_Get = (setincomeData, setloadingFacility) => {
     axios.get(`${url}/facility/getAllFacilities`).then((res) => {
         setincomeData(res.data)
+        setloadingFacility(false)
     })
 }
 
@@ -543,27 +554,27 @@ export const PostExpanse = async (data, Fdata, setAddExpense, setPreviewImage, r
     }
 }
 
-export const PutExpense = async (_id,data, lodData, setPreviewImage, Close, setLoading) => {
+export const PutExpense = async (_id, data, lodData, setPreviewImage, Close, setLoading) => {
     const formData = new FormData();
-        formData.append('title', data.Title);
-        formData.append('description', data.Description);
-        formData.append('date', data.Date);
-        formData.append('amount', data.Amount);
-        if (data.Bill && data.Bill.length > 0) {
-            formData.append('Bill', data.Bill[0]);
-        }
-        try {
-            await axios.put(`https://society-management-app-server.onrender.com/expenses/updateexpenses/${_id}`, formData,
-                { headers: { 'Content-Type': 'multipart/form-data' } }
-            );
-            lodData();
-            setPreviewImage(null);
-            Close();
-            setLoading(false);
-        } catch (error) {
-            console.error('Error submitting expense:', error);
-            setLoading(false);
-        }
+    formData.append('title', data.Title);
+    formData.append('description', data.Description);
+    formData.append('date', data.Date);
+    formData.append('amount', data.Amount);
+    if (data.Bill && data.Bill.length > 0) {
+        formData.append('Bill', data.Bill[0]);
+    }
+    try {
+        await axios.put(`https://society-management-app-server.onrender.com/expenses/updateexpenses/${_id}`, formData,
+            { headers: { 'Content-Type': 'multipart/form-data' } }
+        );
+        lodData();
+        setPreviewImage(null);
+        Close();
+        setLoading(false);
+    } catch (error) {
+        console.error('Error submitting expense:', error);
+        setLoading(false);
+    }
 }
 
 export const DeleteExpense = (RemoveId, Fdata, RemoveView, setLoading) => {
