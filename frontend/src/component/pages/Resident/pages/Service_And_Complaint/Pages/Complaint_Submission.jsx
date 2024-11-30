@@ -4,6 +4,7 @@ import ComplaintModal from '../Modal/ComplaintModal';
 import Button from '../../../../../layout/Button_gradient';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import DeleteModal from '../../../../../layout/DeleteModal';
+import { DeleteComplaint, GetComplaint } from '../../../Api/api';
 
 const Complaint_Submission = () => {
 
@@ -26,10 +27,7 @@ const Complaint_Submission = () => {
     const [data, setdata] = useState('')
 
     const Fdata = () => {
-        axios.get('http://localhost:3030/Complaint_Submission').then((res) => {
-            setdata(res.data);
-
-        })
+        GetComplaint(setdata)
     }
 
     // Delete
@@ -49,16 +47,8 @@ const Complaint_Submission = () => {
     }
 
     const DeleteClick = () => {
-        axios.delete(`http://localhost:3030/Complaint_Submission/${DId}`).then((res) => {
-                console.log("Deleted:", res.data);
-                setdata((prevData) => prevData.filter((item) => item.id !== DId));
-                closeDelete();
-            })
-            .catch((err) => {
-                console.error("Error deleting:", err);
-            });
+        DeleteComplaint(setdata,closeDelete,DId)
     };
-
 
     return (
         <div>
@@ -66,7 +56,7 @@ const Complaint_Submission = () => {
                 <div className="flex justify-between items-center mb-6  ">
                     <h1 className="text-2xl font-semibold">Complaint</h1>
                     <Button onClick={() => setComplaint(true)} Btn_Name="Create Complaint" />
-                    {Complaint && (<ComplaintModal close={closeComplaint} />)}
+                    {Complaint && (<ComplaintModal close={closeComplaint} Fdata={Fdata} />)}
                 </div>
                 <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
                     {data.length > 0 ? (

@@ -5,14 +5,7 @@ import '../../../../style/home.css'
 import Home_totle_card from '../../../layout/Home_totle_card';
 import { MdOutlineAttachMoney } from "react-icons/md";
 import TotalBalanceChart from '../../../layout/TotalBalanceChart';
-import {
-  Chart as ChartJS,
-  LineElement,
-  PointElement,
-  LinearScale,
-  CategoryScale,
-  Tooltip,
-} from 'chart.js';
+import { Chart as ChartJS, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, } from 'chart.js';
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip);
 import { FaTrashAlt, FaEdit, FaPlus } from 'react-icons/fa';
 import { GetComplainy, ImportantNumbersGet } from '../../../services/Api/api';
@@ -22,11 +15,21 @@ import EditImportantNumbers from '../../../Modals/EditImportantNumbers';
 import OpenEditComplintModel from '../../../Modals/OpenEditComplintModel';
 import { GrFormView } from 'react-icons/gr';
 import ViewComplintModel from '../../../Modals/ViewComplintModel';
-import DeleteComplintModal from '../../../Modals/DeleteComplintModal';
 import DeleteImportantNumbersModal from '../../../Modals/DeleteImportantNumbersModal';
+import LodingDelete from '../../../layout/DeleteLoding'
+import { DeleteComplaint } from '../../../services/Api/api';
 
 
 const Home = () => {
+
+  // const [data, setdata] = useState(window.innerWidth > 425 ? 280 : 0);
+
+  // useEffect(() => {
+  //   const updateData = () => setData(window.innerWidth > 425 ? 280 : 0);
+  //   window.addEventListener('resize', updateData);
+  //   return () => window.removeEventListener('resize', updateData);
+  // }, []);
+
   let [data, setdata] = useState(280);
   let [getdata, setget] = useState(280);
 
@@ -106,6 +109,7 @@ const Home = () => {
   const [EditComplint, setEditComplint] = useState(false);
   const [ViewComplint, setViewComplint] = useState(false);
   const [DeleteComplint, setDeleteComplint] = useState(false);
+  const [loadingcomplint, setloadingcomplint] = useState(false)
   const [a_id, seta_id] = useState([]);
   const [b_id, setb_id] = useState([]);
   const [c_id, setc_id] = useState([]);
@@ -132,6 +136,9 @@ const Home = () => {
   }
   const CloseDeleteComplint = () => {
     setDeleteComplint(false);
+  }
+  const ComlintDelete = () => {
+    DeleteComplaint(c_id, setloadingcomplint, CloseDeleteComplint, getComplaint, setgetComplaint)
   }
 
   return (
@@ -351,8 +358,8 @@ const Home = () => {
             </div>
             {/* Complaint List and Upcoming Activity */}
             <div className="grid xl:grid-cols-4 grid-cols-1 gap-4">
-              <div className="bg-white xl:col-span-3 rounded-lg shadow">
-                <div className="bg-white rounded-lg p-4">
+              <div className="bg-white  xl:col-span-3 rounded-lg shadow">
+                <div className="bg-white  rounded-lg p-4">
                   <div className="flex justify-between items-center mb-4">
                     <h2 className="text-lg font-semibold">Complaint List</h2>
                     <select className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -368,21 +375,27 @@ const Home = () => {
                           <th className="px-4 py-2">Complainer Name</th>
                           <th className="px-4 py-2">Complaint Name</th>
                           <th className="px-4 py-2">Date</th>
-                          <th className="px-4 py-2">Priority</th>
-                          <th className="px-4 py-2">Complain Status</th>
-                          <th className="px-4 py-2">Action</th>
+                          <th className="px-4 py-2 text-center">Priority</th>
+                          <th className="px-4 py-2 text-center">Complain Status</th>
+                          <th className="px-4 py-2 text-center">Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         {getComplaint.map((e, index) => {
                           return (
-                            <tr key={index} className="border-b">
+                            <tr key={index} className="border-b hover:bg-gray-50">
                               <td className="px-4 py-2 flex items-center space-x-2">
                                 <img className="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
                                 <span>{e.Complainer_Name}</span>
                               </td>
                               <td className="px-4 py-2">{e.Complaint_Name}</td>
-                              <td className="px-4 py-2">{e.Date}</td>
+                              <td className="px-4 py-2">
+                                {new Date(e.createdAt).toLocaleDateString("en-US", {
+                                  month: "2-digit",
+                                  day: "2-digit",
+                                  year: "numeric",
+                                })}
+                              </td>
                               <td className="px-4 py-2 text-center">
                                 <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
                                   e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
@@ -390,10 +403,10 @@ const Home = () => {
                                   }`}>{e.Priority}</span>
                               </td>
                               <td className="px-4 py-2 text-center">
-                                <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Complain_Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
-                                  e.Complain_Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
-                                    e.Complain_Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
-                                  }`}>{e.Complain_Status}</span>
+                                <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
+                                  e.Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
+                                    e.Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
+                                  }`}>{e.Status}</span>
                               </td>
                               <td className="px-4 py-2 flex space-x-2">
                                 <button className="text-green-500 p-1" onClick={() => OpneEditComplint(e._id)}>
@@ -413,7 +426,7 @@ const Home = () => {
                     </table>
                     {EditComplint && <OpenEditComplintModel _id={a_id} closeEditComplint={closeEditComplint} />}
                     {ViewComplint && <ViewComplintModel _id={b_id} closeViewComplint={closeViewComplint} />}
-                    {DeleteComplint && <DeleteComplintModal CloseDeleteComplint={CloseDeleteComplint} _id={c_id} getComplaint={getComplaint} />}
+                    {DeleteComplint && <LodingDelete loading={loadingcomplint} DeleteClick={ComlintDelete} close={CloseDeleteComplint} getComplaint={getComplaint} />}
                   </div>
                 </div>
               </div>

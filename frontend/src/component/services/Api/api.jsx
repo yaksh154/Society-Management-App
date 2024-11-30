@@ -185,7 +185,10 @@ export const ImportantNumbersGet = (setContacts, setLoading) => {
         // }
     )
         .then((res) => {
+<<<<<<< HEAD
             // console.log(res.headers)
+=======
+>>>>>>> ff9ffe67519a3a6ad4567728b47016e26cf48fcc
             setContacts(res.data);
             setLoading(false);
         })
@@ -250,34 +253,104 @@ export const updateImportantNumber = (_id, editNumber, Fdata, closeEditModal, se
 
 // Complaint Tracking page
 
-// === Create Complaint get
+// === Complaint get
 
 export const GetComplainy = (setgetComplaint) => {
-    axios.get('http://localhost:3030/user').then((res) => {
+    axios.get(`${url}/complaint/getAllComplaints`).then((res) => {
         setgetComplaint(res.data);
     })
 }
 
-// === Create Complaint create
+// === Complaint create
 
-export const CreateComplaint = async (data, setClosecreateComplint, getComplaintdata) => {
+export const CreateComplaint = async (data, setClosecreateComplint, getComplaintdata, setloading) => {
+    setloading(true)
     try {
-        const response = await axios.post("http://localhost:3030/user", data);
+        const response = await axios.post(`${url}/complaint/createComplaint`, data);
         console.log(response.data);
         getComplaintdata()
         setClosecreateComplint(false);
+        setloading(false)
     } catch (error) {
         console.error("Error submitting complaint:", error);
+        setloading(false)
     }
 }
 
-// === Create Complaint delete
+// === Complaint delete
 
-export const DeleteComplaint = async (_id, getComplaint) => {
-    axios.delete(`http://localhost:3030/user/${_id}`).then((res) => {
-        console.log(res);
-        getComplaint()
+export const DeleteComplaint = async (_id, setloadingcomplint, CloseDeleteComplint, getComplaint, setgetComplaint) => {
+    setloadingcomplint(true)
+    axios.delete(`${url}/complaint/deleteComplaint/${_id}`).then((res) => {
+        const Deletedata = getComplaint.filter((e) => e._id !== _id)
+        setgetComplaint(Deletedata)
+        setloadingcomplint(false)
+        CloseDeleteComplint()
     })
+}
+
+// === Complaint Edit
+
+export const EditComplaint = async (closeEditComplint,_id,editComplaint,setloading) =>{
+    setloading(true)
+    try {
+        const res = await axios.put(`${url}/complaint/updateComplaint/${_id}`, editComplaint);
+        console.log(res.data);
+        closeEditComplint();
+        setloading(false)
+    } catch (error) {
+        console.error('Error saving complaint:', error);
+        setloading(false)
+    }
+}
+
+// Request Tracking page
+
+// Get Request
+
+export const GetRequest = (setgetComplaint) =>{
+    axios.get(`${url}/request/getAllRequests`).then((res)=>{
+        setgetComplaint(res.data);
+    })
+}
+
+// Post Request
+
+export const PostRequest = (data,getComplaintdata,setClosecreateComplint,setloading) =>{
+    setloading(true)
+    axios.post(`${url}/request/createRequest`,data).then((res)=>{
+        setClosecreateComplint()
+        getComplaintdata()
+        setloading(false)
+    })
+}
+
+// Delete Request
+
+export const DeleteRequest = (_id,setloadingDelete,CloseDeleteComplint,getComplaint, setgetComplaint) =>{
+    setloadingDelete(true)
+    axios.delete(`${url}/request/deleteRequest/${_id}`).then((res)=>{
+        console.log(res.data);
+        const Deletedata = getComplaint.filter((e) => e._id !== _id)
+        setgetComplaint(Deletedata)
+        setloadingDelete(false)
+        CloseDeleteComplint()
+    })
+}
+
+// Edit Request
+
+export const EditRequest = async (_id,editComplaint,closeEditComplint,setloading) =>{
+    setloading(true)
+    try {
+        const res = await axios.put(`${url}/request/updateRequest/${_id}`, editComplaint);
+        console.log(res.data);
+        setloading(false)
+        closeEditComplint();
+    } catch (error) {
+        console.error('Error saving complaint:', error);
+        setloading(false)
+    }
 }
 
 // Security Management page
@@ -321,7 +394,6 @@ export const GetGuard_Details = (setGuard_Details) => {
 
 // Get Announcement
 
-
 export const GetAnnouncement = (setgetAnnouncement) => {
     axios.get('http://localhost:3030/incomeData').then((res) => {
         setgetAnnouncement(res.data)
@@ -346,6 +418,51 @@ export const DeleteAnnouncement = (_id, Fdata, ClaseDeleteAnnouncement) => {
     })
 }
 
+// Facility Management page
+
+// Facility Management Get
+
+export const Facility_Management_Get = (setincomeData) => {
+    axios.get(`${url}/facility/getAllFacilities`).then((res) => {
+        setincomeData(res.data)
+    })
+}
+
+// Facility Management Post
+
+export const Facility_Management_Post = (data, Fdata, setClosecreate_facility, setloading) => {
+    setloading(true)
+    axios.post(`${url}/facility/createFacility`, data).then((res) => {
+        console.log(res.data);
+        Fdata()
+        setClosecreate_facility(false)
+        setloading(false)
+    })
+}
+
+// Facility Management Delete
+
+export const Facility_Management_Delete = (DeleteData, DeleteClose, setloading, incomeData, setincomeData) => {
+    setloading(true)
+    axios.delete(`${url}/facility/deleteFacility/${DeleteData}`).then((res) => {
+        DeleteClose()
+        const deletData = incomeData.filter((e) => e._id !== DeleteData)
+        setincomeData(deletData)
+        setloading(false)
+    })
+}
+
+// Facility Management Edit
+
+export const Facility_Management_Edit = (_id, data, setloading, seteditcreate_facility, lodData) => {
+    setloading(true)
+    axios.put(`${url}/facility/updateFacility/${_id}`, data).then((res) => {
+        console.log(res.data);
+        lodData()
+        seteditcreate_facility(false)
+        setloading(false)
+    })
+}
 
 // Financial Maintenance page
 
@@ -364,7 +481,6 @@ export const PostIncome = (data, Fdata, setShowAddDetail) => {
         setShowAddDetail(false)
     })
 }
-
 
 //Other Income
 export const GetOtherIncome = (setIncomeData) => {
@@ -395,7 +511,6 @@ export const DeleteOtherIncome = (data, Fdata, setCreateIncome) => {
         setCreateIncome(false)
     })
 }
-
 
 ///Expanse 
 
@@ -432,32 +547,30 @@ export const PostExpanse = async (data, Fdata, setAddExpense, setPreviewImage, r
     }
 }
 
-export const PutExpense = async (data, Fdata, setAddExpense, setPreviewImage, reset, handleCancel) => {
+export const PutExpense = async (_id,data, lodData, setPreviewImage, Close, setLoading) => {
     const formData = new FormData();
-    formData.append('title', data.title);
-    formData.append('description', data.description);
-    formData.append('date', new Date(data.date).toISOString());
-    formData.append('amount', data.amount);
-    if (data.Bill && data.Bill.length > 0) {
-        formData.append('Bill', data.Bill[0]);
-    }
-    try {
-        await axios.post('https://society-management-app-server.onrender.com/expenses/createexpenses', formData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-        });
-        Fdata();
-        setAddExpense(false);
-        reset();
-        setPreviewImage(null);
-        handleCancel()
-        setLoading(false)
-    } catch (error) {
-        console.error('Error submitting expense:', error);
-        setLoading(false)
-    }
+        formData.append('title', data.Title);
+        formData.append('description', data.Description);
+        formData.append('date', data.Date);
+        formData.append('amount', data.Amount);
+        if (data.Bill && data.Bill.length > 0) {
+            formData.append('Bill', data.Bill[0]);
+        }
+        try {
+            await axios.put(`https://society-management-app-server.onrender.com/expenses/updateexpenses/${_id}`, formData,
+                { headers: { 'Content-Type': 'multipart/form-data' } }
+            );
+            lodData();
+            setPreviewImage(null);
+            Close();
+            setLoading(false);
+        } catch (error) {
+            console.error('Error submitting expense:', error);
+            setLoading(false);
+        }
 }
 
-export const DeleteExpense = (RemoveId, Fdata, RemoveView,setLoading) => {
+export const DeleteExpense = (RemoveId, Fdata, RemoveView, setLoading) => {
     axios.delete(`${url}/expenses/deleteexpenses/${RemoveId}`).then((res) => {
         Fdata()
         RemoveView()
@@ -482,21 +595,44 @@ export const PostVisiter = (data, Fdata, setAddVisiterbox) => {
     })
 }
 
-
-
-
 //Notes
 
 export const GetNotes = (setNotes) => {
-    axios.get('http://localhost:3030/Notes').then((res) => {
-        // console.log(res.data);
+    axios.get(`${url}/note/getAllNotes`).then((res) => {
         setNotes(res.data)
     })
 }
 
-export const PostNotes = (data, setcreate, Fdata) => {
-    axios.post('http://localhost:3030/Notes', data).then((res) => {
+export const PostNotes = (data, Fdata, setcreate, setloading) => {
+    setloading(true)
+    axios.post(`${url}/note/createNote`, data).then((res) => {
+        setloading(false)
         Fdata()
-        setcreate(res.data)
+        setcreate(false)
     })
+}
+
+export const DeleteNotes = (DeleteId, setloading, DeleteClose, Fdata) => {
+    setloading(true)
+    axios.delete(`${url}/note/deleteNote/${DeleteId}`).then((res) => {
+        setloading(false)
+        Fdata()
+        DeleteClose()
+    })
+}
+
+export const EditNotes = async (_id, formData, setloading, seteditcreate) => {
+    console.log("Submitted Data:", formData);
+    setloading(true)
+    try {
+        const response = await axios.put(`https://society-management-app-server.onrender.com/note/updateNote/${_id}`, formData);
+        console.log(response.data);
+
+        seteditcreate(false);
+        setloading(false)
+    } catch (error) {
+        console.error("Error updating note:", error);
+        alert("Failed to update note");
+        setloading(false)
+    }
 }

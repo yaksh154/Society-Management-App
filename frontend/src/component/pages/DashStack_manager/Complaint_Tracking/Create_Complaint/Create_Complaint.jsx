@@ -7,8 +7,9 @@ import { GrFormView } from 'react-icons/gr';
 import OpenEditComplintModel from '../../../../Modals/OpenEditComplintModel';
 import ViewComplintModel from '../../../../Modals/ViewComplintModel';
 import Create_Complint_model from '../../../../Modals/Create_Complint_model';
-import DeleteComplintModal from '../../../../Modals/DeleteComplintModal';
-import { GetComplainy } from '../../../../services/Api/api';
+import { DeleteComplaint, GetComplainy } from '../../../../services/Api/api';
+import LodingDelete from '../../../../layout/DeleteLoding'
+import Button from '../../../../layout/Button_gradient'
 
 const Create_Complaint = () => {
   let [data, setdata] = useState(280);
@@ -35,6 +36,7 @@ const Create_Complaint = () => {
   const [createComplint, setcreateComplint] = useState(false);
   const [EditComplint, setEditComplint] = useState(false);
   const [DeleteComplint, setDeleteComplint] = useState(false);
+  const [loadingcomplint, setloadingcomplint] = useState(false)
   const [ViewComplint, setViewComplint] = useState(false);
   const [a_id, seta_id] = useState([]);
   const [b_id, setb_id] = useState([]);
@@ -67,6 +69,11 @@ const Create_Complaint = () => {
   const CloseDeleteComplint = () => {
     setDeleteComplint(false);
   }
+  
+  const Deletecomplint = () =>{
+    const _id = c_id
+    DeleteComplaint(_id, setloadingcomplint, CloseDeleteComplint, getComplaint, setgetComplaint)
+  }
 
   return (
     <div>
@@ -80,15 +87,8 @@ const Create_Complaint = () => {
             <div className="bg-white shadow-md rounded-lg p-6 h-svh">
               <div className="flex justify-between items-center mb-6">
                 <h1 className='font-semibold md:text-2xl text-md'>Create Complaint</h1>
-                <button onClick={() => setcreateComplint(true)} className="px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200">
-                  Create Complaint
-                </button>
-                {createComplint && (
-                  <Create_Complint_model
-                    setClosecreateComplint={closecreateComplint}
-                    getComplaintdata={getComplaintdata}
-                  />
-                )}
+                <Button type="button" onClick={() => setcreateComplint(true)} Btn_Name="Create Complaint" />
+                {createComplint && (<Create_Complint_model setClosecreateComplint={closecreateComplint} getComplaintdata={getComplaintdata} />)}
               </div>
               <div className="overflow-auto">
                 <table className="min-w-full bg-[#eef1fd] rounded-lg">
@@ -138,10 +138,10 @@ const Create_Complaint = () => {
                               }`}>{e.Priority}</span>
                           </td>
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
-                            <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Complain_Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
-                              e.Complain_Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
-                                e.Complain_Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
-                              }`}>{e.Complain_Status}</span>
+                            <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
+                              e.Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
+                                e.Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
+                              }`}>{e.Status}</span>
                           </td>
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-2 md:space-x-2">
                             <button className="text-green-500 p-1" onClick={() => OpneEditComplint(e._id)}>
@@ -164,7 +164,7 @@ const Create_Complaint = () => {
                 </table>
                 {EditComplint && <OpenEditComplintModel _id={a_id} closeEditComplint={closeEditComplint} />}
                 {ViewComplint && <ViewComplintModel _id={b_id} closeViewComplint={closeViewComplint} />}
-                {DeleteComplint && <DeleteComplintModal CloseDeleteComplint={CloseDeleteComplint} _id={c_id} getComplaint={getComplaint} />}
+                {DeleteComplint && <LodingDelete loading={loadingcomplint} DeleteClick={Deletecomplint} close={CloseDeleteComplint} getComplaint={getComplaint} />}
               </div>
             </div>
           </div>

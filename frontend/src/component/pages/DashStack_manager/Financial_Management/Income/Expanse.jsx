@@ -159,7 +159,7 @@ const Expanse = () => {
                   ))}
                 </tbody>
               </table>
-              {EditData && <EditExpensesModal _id={EditId} Close={CloseForm} />}
+              {EditData && <EditExpensesModal _id={EditId} lodData={Fdata} Close={CloseForm} />}
               {View && <ViewExpenseModal _id={ViewId} Close={CloseView} />}
               {Remove && <DeleteModal loading={loading} close={RemoveView} DeleteClick={DeleteExpanse} />}
             </div>

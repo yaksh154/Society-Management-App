@@ -9,6 +9,7 @@ import GetPassModal from './Modal/GetPassModal';
 import TotalBalanceChart from '../../../../layout/TotalBalanceChart';
 import { GetComplainy, ImportantNumbersGet } from '../../../../services/Api/api';
 import axios from 'axios';
+import { Get_Pending_Maintenances } from '../../Api/api';
 
 const Home = () => {
   let [data, setdata] = useState(280);
@@ -49,9 +50,7 @@ const Home = () => {
   }, [])
 
   const GetPendMain = () => {
-    axios.get('http://localhost:3030/PendingMaintenances').then((res) => {
-      setPendingData(res.data)
-    })
+    Get_Pending_Maintenances(setPendingData)
   }
 
   // get complaint List
@@ -153,7 +152,7 @@ const Home = () => {
                 <h2 className="text-lg font-semibold">Pending Maintenances</h2>
                 <a href="#" className="text-blue-500 text-sm">View all</a>
               </div>
-              <div className="space-y-4 overflow-y-auto max-h-80 w-full px-2">
+              <div className="space-y-4 overflow-y-auto w-full px-2">
                 {PendingData.length > 0 ? (
                   PendingData.map((e, index) => (
                     <div key={index} className="flex justify-between items-center">
@@ -290,17 +289,6 @@ const Home = () => {
 
           </div>
         </div>
-        {/* <div className="flex-1 bg-[#f0f5fb]">
-          <div className="p-6 pt-0">
-            <div className="bg-white shadow-md rounded-lg p-6">
-              <div className="flex justify-between items-center mb-6">
-                <h1 className='font-semibold md:text-xl text-md'>Detail of the Per Person</h1>
-                <Button onClick={() => setGetPass(true)} Btn_Name="Get Pass" />
-                {GetPass && (<GetPassModal close={closeGetPass} />)}
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   )

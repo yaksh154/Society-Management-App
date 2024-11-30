@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { PostNotes } from '../services/Api/api';
+import CloseButton from '../layout/CloseButton';
+import LodingButton from '../layout/Loding_Button'
 
-const CreateNote = ({ setcreate, Fdata }) => {
+const CreateNote = ({ Fdata, setcreate }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const [loading, setloading] = useState(false)
+
   const onSubmit = (data) => {
-    console.log(data); 
-    PostNotes(data,Fdata,setcreate)
+    PostNotes(data, Fdata, setcreate, setloading)
   };
 
   return (
@@ -24,14 +27,9 @@ const CreateNote = ({ setcreate, Fdata }) => {
             <label className="block text-gray-700 text-sm font-medium mb-2">
               Title<span className="text-red-500">*</span>
             </label>
-            <input
-              type="text"
-              placeholder="Enter Title"
-              {...register('title', { required: 'Title is required.' })}
-              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-                errors.title ? 'border-red-500 focus:ring-red-500' : 'focus:ring-orange-500'
-              }`}
-            />
+            <input type="text" placeholder="Enter Title" {...register('title', { required: 'Title is required.' })}
+              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.title ? 'border-red-500 focus:ring-red-500' : 'focus:ring-orange-500'
+                }`} />
             {errors.title && (
               <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
             )}
@@ -45,9 +43,8 @@ const CreateNote = ({ setcreate, Fdata }) => {
             <textarea
               placeholder="Enter Description"
               {...register('description', { required: 'Description is required.' })}
-              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-                errors.description ? 'border-red-500 focus:ring-red-500' : 'focus:ring-orange-500'
-              }`}
+              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.description ? 'border-red-500 focus:ring-red-500' : 'focus:ring-orange-500'
+                }`}
             />
             {errors.description && (
               <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>
@@ -66,9 +63,8 @@ const CreateNote = ({ setcreate, Fdata }) => {
                 validate: (value) =>
                   new Date(value) >= new Date() || 'Date cannot be in the past.',
               })}
-              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-                errors.date ? 'border-red-500 focus:ring-red-500' : 'focus:ring-orange-500'
-              }`}
+              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.date ? 'border-red-500 focus:ring-red-500' : 'focus:ring-orange-500'
+                }`}
             />
             {errors.date && (
               <p className="text-red-500 text-sm mt-1">{errors.date.message}</p>
@@ -77,19 +73,8 @@ const CreateNote = ({ setcreate, Fdata }) => {
 
           {/* Buttons */}
           <div className="flex justify-between mt-4">
-            <button
-              type="button"
-              onClick={() => setcreate(false)}
-              className="bg-white border w-full py-2 mr-2 text-gray-700 font-semibold rounded"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="py-2 w-full bg-[#f6f8fb] hover:bg-gradient-to-r from-orange-500 to-yellow-500 hover:text-white rounded-lg font-semibold hover:from-orange-600 hover:to-yellow-600 transition duration-200"
-            >
-              Save
-            </button>
+            <CloseButton type="button" CloseName="Cancel" onClick={() => setcreate(false)} Addclass="w-1/2" />
+            <LodingButton loading={loading} Addclass="w-1/2" type="submit" Btn_Name="Save" />
           </div>
         </form>
       </div>

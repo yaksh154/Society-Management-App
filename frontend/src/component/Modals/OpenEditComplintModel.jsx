@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { EditComplaint } from '../services/Api/api';
+import CloseButton from '../layout/CloseButton';
+import LodingButton from '../layout/Loding_Button'
 
 const OpenEditComplintModel = ({ _id, closeEditComplint }) => {
 
@@ -8,30 +11,30 @@ const OpenEditComplintModel = ({ _id, closeEditComplint }) => {
         Complaint_Name: '',
         Description: '',
         Wing: '',
-        Unit_Number: '',
+        Unit: '',
         Priority: '',
-        Complain_Status: ''
+        Status: ''
     });
 
+    const [loading, setloading] = useState(false)
     useEffect(() => {
         editdata(_id);
     }, []);
 
     const editdata = async (_id) => {
         try {
-            const res = await axios.get(`http://localhost:3030/user/${_id}`);
+            const res = await axios.get(`https://society-management-app-server.onrender.com/complaint/getComplaint/${_id}`);
             if (res.data) {
                 seteditComplaint({
                     Complainer_Name: res.data.Complainer_Name || '',
                     Complaint_Name: res.data.Complaint_Name || '',
                     Description: res.data.Description || '',
                     Wing: res.data.Wing || '',
-                    Unit_Number: res.data.Unit_Number || '',
+                    Unit: res.data.Unit || '',
                     Priority: res.data.Priority || '',
-                    Complain_Status: res.data.Complain_Status || ''
+                    Status: res.data.Status || ''
                 });
             }
-            console.log('Fetched data:', res.data);
         } catch (error) {
             console.error('Error fetching complaint data:', error);
         }
@@ -42,12 +45,7 @@ const OpenEditComplintModel = ({ _id, closeEditComplint }) => {
     };
 
     const handleSave = async () => {
-        try {
-            await axios.put(`http://localhost:3030/user/${_id}`, editComplaint);
-            closeEditComplint();
-        } catch (error) {
-            console.error('Error saving complaint:', error);
-        }
+        EditComplaint(closeEditComplint,_id,editComplaint,setloading)
     };
 
     return (
@@ -113,8 +111,8 @@ const OpenEditComplintModel = ({ _id, closeEditComplint }) => {
                             <input
                                 type="text"
                                 className="w-full p-1 text-sm border border-gray-300 rounded"
-                                name="Unit_Number"
-                                value={editComplaint.Unit_Number}
+                                name="Unit"
+                                value={editComplaint.Unit}
                                 onChange={handleInputChange}
                                 placeholder="Enter Unit"
                             />
@@ -161,56 +159,44 @@ const OpenEditComplintModel = ({ _id, closeEditComplint }) => {
                     <div className="mb-3">
                         <label className="block text-sm font-medium pb-2">Status<span className='text-red'>*</span></label>
                         <div className="flex gap-2">
-                            <label className={`flex items-center px-3 py-1 border rounded-lg ${editComplaint.Complain_Status === "Open" ? 'border-yellow-500' : ''}`}>
+                            <label className={`flex items-center px-3 py-1 border rounded-lg ${editComplaint.Status === "Open" ? 'border-yellow-500' : ''}`}>
                                 <input
                                     className="mr-2"
                                     type="radio"
-                                    name="Complain_Status"
+                                    name="Status"
                                     value="Open"
-                                    checked={editComplaint.Complain_Status === "Open"}
+                                    checked={editComplaint.Status === "Open"}
                                     onChange={handleInputChange}
                                 />
                                 Open
                             </label>
-                            <label className={`flex items-center px-3 py-1 border rounded-lg ${editComplaint.Complain_Status === "Pending" ? 'border-yellow-500' : ''}`}>
+                            <label className={`flex items-center px-3 py-1 border rounded-lg ${editComplaint.Status === "Pending" ? 'border-yellow-500' : ''}`}>
                                 <input
                                     className="mr-2"
                                     type="radio"
-                                    name="Complain_Status"
+                                    name="Status"
                                     value="Pending"
-                                    checked={editComplaint.Complain_Status === "Pending"}
+                                    checked={editComplaint.Status === "Pending"}
                                     onChange={handleInputChange}
                                 />
                                 Pending
                             </label>
-                            <label className={`flex items-center px-3 py-1 border rounded-lg ${editComplaint.Complain_Status === "Solved" ? 'border-yellow-500' : ''}`}>
+                            <label className={`flex items-center px-3 py-1 border rounded-lg ${editComplaint.Status === "Solve" ? 'border-yellow-500' : ''}`}>
                                 <input
                                     className="mr-2"
                                     type="radio"
-                                    name="Complain_Status"
-                                    value="Solved"
-                                    checked={editComplaint.Complain_Status === "Solved"}
+                                    name="Status"
+                                    value="Solve"
+                                    checked={editComplaint.Status === "Solve"}
                                     onChange={handleInputChange}
                                 />
-                                Solved
+                                Solve
                             </label>
                         </div>
                     </div>
                     <div className="flex justify-end mt-4">
-                        <button
-                            type="button"
-                            className="bg-gray-100 w-1/2 font-semibold text-gray-700 mr-2"
-                            onClick={closeEditComplint}
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            type="button"
-                            className="bg-orange-500 hover:bg-orange-600 text-white w-1/2 font-semibold py-1 rounded text-sm"
-                            onClick={handleSave}
-                        >
-                            Save
-                        </button>
+                        <CloseButton Addclass="w-1/2" type="button" onClick={closeEditComplint} CloseName="Cancel"/>
+                        <LodingButton loading={loading} onClick={handleSave} type="button" Btn_Name="Save" Addclass="w-1/2"/>
                     </div>
                 </div>
             </div>

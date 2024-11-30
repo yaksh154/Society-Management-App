@@ -3,9 +3,10 @@ import { useForm } from "react-hook-form";
 import CloseBtn from "../layout/CloseButton";
 import axios from "axios";
 import { BiImageAdd } from "react-icons/bi";
-import Loding_Button from '../layout/Loding_Button'
+import Loding_Button from '../layout/Loding_Button';
+import { PutExpense } from "../services/Api/api";
 
-const EditExpensesModal = ({ Close, _id }) => {
+const EditExpensesModal = ({ Close, _id, lodData }) => {
     const {
         register,
         handleSubmit,
@@ -28,11 +29,8 @@ const EditExpensesModal = ({ Close, _id }) => {
 
     const Fdata = async () => {
         try {
-            const response = await axios.put(
-                `https://society-management-app-server.onrender.com/expenses/updateexpenses/${_id}`
-            );
+            const response = await axios.put(`https://society-management-app-server.onrender.com/expenses/updateexpenses/${_id}`);
             const data = response.data;
-
             setExpenses({
                 Title: data.Title || "",
                 Description: data.Description || "",
@@ -62,52 +60,21 @@ const EditExpensesModal = ({ Close, _id }) => {
         fileInputRef.current.click();
     };
 
-    // Handle other input changes
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setValue(name, value);
-        if (data.Bill) {
-            setExpenses((prev) => ({
-                ...prev,
-                [name]: value,
-                Bill: `https://example.com/uploads/${data.Bill}`, 
-            }));
-        }
-
+        setExpenses((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
     };
 
     // Handle form submission
-
     const onSubmit = async (data) => {
         setLoading(true)
-        const formData = new FormData();
-        formData.append('title', data.Title);
-        formData.append('description', data.Description);
-        formData.append('date', data.Date);
-        formData.append('amount', data.Amount);
-        if (data.Bill && data.Bill.length > 0) {
-            formData.append('Bill', data.Bill[0]);
-        }
-        
-        try {
-            const response = await axios.put(`https://society-management-app-server.onrender.com/expenses/updateexpenses/${_id}`, formData,
-                { headers: { 'Content-Type': 'multipart/form-data' } }
-            );
-            
-            const billUrl = response.data.Bill;
-            console.log("Uploaded Bill URL:", billUrl);
-            
-            Fdata();
-            setPreviewImage(null);
-            Close();
-            setLoading(false)
-        } catch (error) {
-            console.error('Error submitting expense:', error);
-            setLoading(false)
-        }
-        console.log("Form Submitted Data:", formData);
+        PutExpense(_id,data, lodData, setPreviewImage, Close, setLoading)
     };
-    
+
     return (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
             <div className="bg-white rounded-lg shadow-lg w-11/12 lg:w-1/4 md:w-1/2">
@@ -128,9 +95,7 @@ const EditExpensesModal = ({ Close, _id }) => {
                             <label className="block text-sm font-medium mb-2" htmlFor="Title">
                                 Title
                             </label>
-                            <input
-                                type="text"
-                                id="Title"
+                            <input type="text" id="Title"
                                 {...register("Title", { required: "Title is required" })}
                                 className={`w-full border ${errors.title ? "border-red-500" : "border-gray-300"
                                     } rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.title ? "focus:ring-red-500" : "focus:ring-indigo-300"
@@ -145,10 +110,7 @@ const EditExpensesModal = ({ Close, _id }) => {
 
                         {/* Description */}
                         <div className="mb-4">
-                            <label
-                                className="block text-sm font-medium mb-2"
-                                htmlFor="Description"
-                            >
+                            <label className="block text-sm font-medium mb-2" htmlFor="Description">
                                 Description
                             </label>
                             <textarea
@@ -211,15 +173,10 @@ const EditExpensesModal = ({ Close, _id }) => {
 
                             {/* Amount */}
                             <div className="mb-4 w-1/2">
-                                <label
-                                    className="block text-sm font-medium mb-2"
-                                    htmlFor="Amount"
-                                >
+                                <label className="block text-sm font-medium mb-2" htmlFor="Amount">
                                     Amount
                                 </label>
-                                <input
-                                    type="number"
-                                    id="Amount"
+                                <input type="number" id="Amount"
                                     {...register("Amount", {
                                         required: "Amount is required",
                                         min: {
@@ -238,9 +195,7 @@ const EditExpensesModal = ({ Close, _id }) => {
                                     value={expenses.Amount}
                                 />
                                 {errors.amount && (
-                                    <p className="mt-1 text-sm text-red-500">
-                                        {errors.amount.message}
-                                    </p>
+                                    <p className="mt-1 text-sm text-red-500"> {errors.amount.message} </p>
                                 )}
                             </div>
                         </div>
@@ -254,56 +209,28 @@ const EditExpensesModal = ({ Close, _id }) => {
                                 className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-gray-400 focus-within:border-blue-500 cursor-pointer"
                                 onClick={handleFileClick}
                             >
-                                <input
-                                    type="file"
-                                    {...register("Bill")}
-                                    onChange={handleFileChange}
-                                    ref={fileInputRef}
-                                    className="hidden"
-                                />
+                                <input type="file" {...register("Bill")} onChange={handleFileChange} ref={fileInputRef} className="hidden" />
                                 <div>
                                     {previewImage ? (
-                                        <img
-                                            src={previewImage}
-                                            alt="Preview"
-                                            className="mx-auto h-32 w-32 object-cover rounded-md mb-2"
-                                        />
+
+                                        <img src={previewImage} alt="Preview" className="mx-auto h-32 w-32 object-cover rounded-md mb-2" />
+
                                     ) : expenses.Bill ? (
-                                        <img
-                                            src={expenses.Bill}
-                                            alt="Existing Bill"
-                                            className="mx-auto h-32 w-32 object-cover rounded-md mb-2"
-                                        />
+
+                                        <img src={expenses.Bill} alt="Existing Bill" className="mx-auto h-32 w-32 object-cover rounded-md mb-2" />
+
                                     ) : (
                                         <div className="flex justify-center mb-2">
                                             <BiImageAdd className="text-gray-400 text-4xl" />
                                         </div>
                                     )}
-                                    <p className="text-blue-500 font-semibold">
-                                        Upload a file
-                                    </p>
-                                    <p className="text-gray-500">or drag and drop</p>
-                                    <p className="text-gray-400 text-xs">
-                                        PNG, JPG, GIF up to 10MB
-                                    </p>
+                                    <p className="text-blue-500 font-semibold"> Upload a file </p>
                                 </div>
                             </div>
                         </div>
-
-                        {/* Buttons */}
-                        <div className="flex justify-end space-x-3">
-                            <CloseBtn
-                                type="button"
-                                onClick={Close}
-                                CloseName="Cancel"
-                                Addclass="w-1/2"
-                            />
-                            <Loding_Button
-                                loading={loading}
-                                Btn_Name='Add Society'
-                                type="submit"
-                                Addclass='w-1/2'
-                            />
+                        <div className="flex">
+                            <CloseBtn type="button" Addclass="w-1/2" onClick={Close} CloseName="Cancel" />
+                            <Loding_Button type="submit" Addclass="w-1/2" Btn_Name="Submit" loading={loading} />
                         </div>
                     </form>
                 </div>

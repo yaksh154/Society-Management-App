@@ -4,6 +4,7 @@ import Header from '../../../layout/Header';
 import { GrFormView } from 'react-icons/gr';
 import axios from 'axios';
 import ViewData_invoices_to from '../Modal/ViewData_invoices_to';
+import { Get_Maintenance_Invoices_data } from '../../../Api/api';
 
 const Maintenance_Invoices_data = () => {
     let [data, setdata] = useState(280);
@@ -35,9 +36,7 @@ const Maintenance_Invoices_data = () => {
     }, []);
 
     const Fdata = () => {
-        axios.get('http://localhost:3030/Maintenance_Invoices_data').then((res) => {
-            setgetInvoices(res.data);
-        });
+        Get_Maintenance_Invoices_data(setgetInvoices)
     };
 
     // Filter invoices based on selected month

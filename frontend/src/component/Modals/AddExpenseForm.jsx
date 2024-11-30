@@ -22,7 +22,7 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setValue('Bill', [file]); 
+      setValue('Bill', [file]);
       const fileURL = URL.createObjectURL(file);
       setPreviewImage(fileURL);
     }
@@ -138,17 +138,8 @@ const AddExpenseForm = ({ setAddExpense, Fdata }) => {
           </div>
 
           <div className="flex justify-between mt-4">
-            <Close_Button
-              Addclass='w-1/2'
-              onClick={handleCancel}
-              CloseName='Cancel'
-            />
-            <Loding_Button
-              type="submit"
-              loading={loading}
-              Btn_Name='Save'
-              Addclass='w-1/2'
-            />
+            <Close_Button type="button" Addclass='w-1/2' onClick={handleCancel} CloseName='Cancel' />
+            <Loding_Button type="submit" loading={loading} Btn_Name='Save' Addclass='w-1/2' />
           </div>
         </form>
       </div>
