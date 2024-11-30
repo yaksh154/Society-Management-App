@@ -38,7 +38,7 @@ const managerSchema = new mongoose.Schema(
       type: String,
       require: true
     },
-    Rol:{
+    Role:{
       type:String,
       default: 'Manager',
       require:true

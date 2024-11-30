@@ -125,7 +125,7 @@ const residentSchema = new mongoose.Schema(
       type: String,
       require: true
     },
-    Rol: {
+    Role: {
       type: String,
       default: 'Resident',
       require: true
