@@ -9,7 +9,7 @@ const createImportantNumber = async (req, res) => {
             Fullname:req.body.Fullname ,
             Phonenumber:req.body.Phonenumber,
             Work:req.body.Work ,
-            createdBy:req.user.user._id,
+            createdBy:req.user._id,
             Society: req.user.societyid
         }
         const importantNumber = await importantnumber_servise.create(body);
