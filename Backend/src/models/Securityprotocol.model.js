@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const securitySchema = new mongoose.Schema(
+const securityprotocolSchema = new mongoose.Schema(
     {
         photo: {
             type: String,
@@ -52,6 +52,6 @@ const securitySchema = new mongoose.Schema(
 
 
 
-const Security = mongoose.model("Security", securitySchema);
+const Securityprotocol = mongoose.model("Securityprotocol", securityprotocolSchema);
 
-module.exports = Security;
+module.exports = Securityprotocol;

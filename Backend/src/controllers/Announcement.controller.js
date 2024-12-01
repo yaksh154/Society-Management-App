@@ -13,8 +13,8 @@ const createAnnouncement = async (req, res) => {
       description,
       date,
       time,
-      adminId: req.user._id,
-      societyId: req.user.society._id,
+      createdBy: req.user._id,
+      Society: req.user.society._id,
     });
 
     await announcement.save();
@@ -25,12 +25,12 @@ const createAnnouncement = async (req, res) => {
 };
 const getAllAnnouncements = async (req, res) => {
   try {
-    // Filter announcements by societyId
-    const announcements = await Announcement.find({ societyId: req.user.society._id })
-      .populate('adminId', 'name email') // Populate admin details (name and email)
-      .populate('societyId', 'name address'); // Populate society details
+    // Filter announcements by Society
+    const announcements = await Announcement.find({ Society: req.user.society._id })
+      .populate('Manager', 'Firstname Lastname Email') // Populate admin details (name and email)
+      .populate('Society', 'societyname societyaddress'); // Populate society details
 
-      return res.status(200).json(announcements);
+    return res.status(200).json(announcements);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -38,8 +38,8 @@ const getAllAnnouncements = async (req, res) => {
 const getAnnouncement = async (req, res) => {
   try {
     const announcement = await Announcement.findById(req.params.id)
-      .populate('adminId', 'name email') // Populate admin details
-      .populate('societyId', 'name address'); // Populate society details
+      .populate('Manager', 'Firstname Lastname Email') // Populate admin details (name and email)
+      .populate('Society', 'societyname societyaddress');  // Populate society details
 
     if (!announcement) {
       return res.status(404).json({ message: 'Announcement not found' });
@@ -61,13 +61,13 @@ const updateAnnouncement = async (req, res) => {
         description,
         date,
         time,
-        adminId: req.user._id, // Update adminId
-        societyId: req.user.society._id, // Update societyId
+        createdBy: req.user._id, // Update createdBy
+        Society: req.user.society._id, // Update Society
       },
       { new: true }
     )
-      .populate('adminId', 'name email') // Populate updated admin details
-      .populate('societyId', 'name address'); // Populate updated society details
+    .populate('Manager', 'Firstname Lastname Email') // Populate admin details (name and email)
+    .populate('Society', 'societyname societyaddress');  // Populate updated society details
 
     if (!announcement) {
       return res.status(404).json({ message: 'Announcement not found' });
@@ -95,10 +95,10 @@ const deleteAnnouncement = async (req, res) => {
   }
 };
 
-module.exports = { 
-    createAnnouncement,
-    getAllAnnouncements,
-    getAnnouncement,
-    updateAnnouncement,
-    deleteAnnouncement,
+module.exports = {
+  createAnnouncement,
+  getAllAnnouncements,
+  getAnnouncement,
+  updateAnnouncement,
+  deleteAnnouncement,
 };
