@@ -27,7 +27,8 @@ const createComplaint = async (req, res) => {
 
 const getAllComplaints = async (req, res) => {
     try {
-        const societyid = req.user.society
+        const societyid = req.user.societyid
+        console.log("🚀 ~ getAllComplaints ~ societyid:", societyid)
         const complaints = await complaintService.getAll(societyid);
         return res.status(200).json(complaints);
     } catch (error) {

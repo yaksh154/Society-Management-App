@@ -22,6 +22,7 @@ const createImportantNumber = async (req, res) => {
 const getAllImportantNumbers = async (req, res) => {
     try {
         const societyid = req.user.societyid
+        console.log("🚀 ~ getAllImportantNumbers ~ societyid:", societyid)
         const importantNumbers = await importantnumber_servise.getAll(societyid);
         return res.status(200).json(importantNumbers);
     } catch (error) {
