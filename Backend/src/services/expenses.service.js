@@ -6,8 +6,8 @@ const create = async (data) => {
 };
 
 
-const getAll = async () => {
-  return await Expenses.find();
+const getAll = async (id) => {
+  return await Expenses.find({ Society: id });
 };
 
 
@@ -26,7 +26,7 @@ const remove = async (id) => {
 };
 
 
-module.exports ={
+module.exports = {
   create,
   getAll,
   getById,

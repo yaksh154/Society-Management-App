@@ -20,7 +20,8 @@ const createFacility = async (req, res) => {
 
 const getAllFacilities = async (req, res) => {
     try {
-        const facilities = await facilityService.getAll();
+        const societyid = req.user.society._id
+        const facilities = await facilityService.getAll(societyid);
         return res.status(200).json(facilities);
     } catch (error) {
         return res.status(500).json({ message: error.message });

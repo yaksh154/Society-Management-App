@@ -4,8 +4,8 @@ const create = async (data) => {
     return await Complaint.create(data);
 };
 
-const getAll = async () => {
-    return await Complaint.find().populate("createdBy");
+const getAll = async (id) => {
+    return await Complaint.find({ Society: id }).populate("createdBy");
 };
 
 const getById = async (id) => {
