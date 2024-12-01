@@ -22,7 +22,7 @@ const createMaintenance = async (req, res) => {
 // Get all maintenance records
 const getAllMaintenances = async (req, res) => {
   try {
-    const societyid = req.user.society._id
+    const societyid = req.user.societyid
     const maintenances = await maintenanceService.getAll(societyid);
     return res.status(200).json(maintenances);
   } catch (error) {

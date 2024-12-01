@@ -21,7 +21,7 @@ const createImportantNumber = async (req, res) => {
 // Get all important numbers
 const getAllImportantNumbers = async (req, res) => {
     try {
-        const societyid = req.user.society._id
+        const societyid = req.user.societyid
         const importantNumbers = await importantnumber_servise.getAll(societyid);
         return res.status(200).json(importantNumbers);
     } catch (error) {

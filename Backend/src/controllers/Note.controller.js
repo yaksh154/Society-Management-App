@@ -25,7 +25,7 @@ const createNote = async (req, res) => {
 // Get all notes
 const getAllNotes = async (req, res) => {
   try {
-    const societyid = req.user.society._id
+    const societyid = req.user.societyid
     const notes = await noteService.getAll(societyid);
     return res.status(200).json(notes);
   } catch (error) {
