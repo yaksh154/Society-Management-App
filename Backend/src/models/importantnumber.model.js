@@ -18,6 +18,10 @@ const importantnumberSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Manager'
     },
+    Society: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Society'
+    }
   },
   {
     timestamps: true,

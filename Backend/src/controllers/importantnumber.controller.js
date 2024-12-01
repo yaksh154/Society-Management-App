@@ -10,6 +10,7 @@ const createImportantNumber = async (req, res) => {
             Phonenumber:req.body.Phonenumber,
             Work:req.body.Work ,
             createdBy:req.user.user._id,
+            Society: req.user.societyid
         }
         const importantNumber = await importantnumber_servise.create(body);
         return res.status(201).json(importantNumber);
