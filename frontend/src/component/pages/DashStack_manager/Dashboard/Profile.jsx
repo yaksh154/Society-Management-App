@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '../../../layout/Sidebar';
 import Header from '../../../layout/Header';
 // import userImg from '../../../../../public/images/userImg'
-import { GetCreateSocirty, Profile_img } from '../../../services/Api/api';
+import { EditProfile, GetCreateSocirty, Profile_img } from '../../../services/Api/api';
+import axios from 'axios';
 
 const Profile = () => {
   const [data, setData] = useState(280);
   const [getData, setGetData] = useState(280);
-  const [previewImage, setPreviewImage] = useState('');
+  const [Image, setImage] = useState('');
   const [isEditable, setIsEditable] = useState(false);
   const [error, setError] = useState('');
 
@@ -20,6 +21,7 @@ const Profile = () => {
     City: '',
     Number: '',
     Email: '',
+    Image: ""
   });
 
   const [societies, setSocieties] = useState([]);
@@ -59,32 +61,47 @@ const Profile = () => {
   };
 
   const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const fileURL = URL.createObjectURL(file);
-      setPreviewImage(fileURL);
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      setImage(selectedFile);
     }
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.Email)) {
-      setError('Please enter a valid email address.');
+      setError('Invalid email format');
       return;
     }
+    if (formData.Number.length < 10) {
+      setError('Phone number must be at least 10 digits');
+      return;
+    }
+
     setError('');
 
-    const updatedFormData = {
-      ...formData,
-      profileImage: previewImage,
-    };
+    const form = new FormData();
+    form.append('Firstname', formData.Firstname);
+    form.append('Lastname', formData.Lastname);
+    form.append('society', formData.society);
+    form.append('Country', formData.Country);
+    form.append('State', formData.State);
+    form.append('City', formData.City);
+    form.append('Number', formData.Number);
+    form.append('Email', formData.Email);
+    console.log(Image);
 
-    console.log('Form submitted:', updatedFormData);
-    console.log(previewImage);
+    if (Image) {
+      form.append('Image', Image);
+    }
 
+    EditProfile(form, Fdata)
     setIsEditable(false);
   };
+
 
 
   return (
@@ -100,14 +117,13 @@ const Profile = () => {
         >
           <div className="bg-white rounded-lg shadow-lg p-4 sm:p-8 w-full max-w-2xl lg:max-w-4xl absolute top-28">
             <div className="flex flex-col lg:flex-row">
-              {/* Left side: Profile Picture */}
               <div className="lg:w-1/4 flex flex-col justify-center items-center mb-4 lg:mb-0">
                 <div className="relative">
-                  <img
-                    src={previewImage || "../../../public/images/user.png"}
-                    alt="Profile"
-                    className="w-24 h-24 rounded-full object-cover border"
-                  />
+                  {Image
+                    && <img src={URL.createObjectURL(Image)} alt="Uploaded" className="w-24 h-24 rounded-full object-cover border" />
+                    || <img src={Image || formData.Image || "../../../public/images/user.png"} alt="Profile" className="w-24 h-24 rounded-full object-cover border" />
+                  }
+
                   {isEditable && (
                     <label
                       htmlFor="imageUpload"
@@ -126,7 +142,6 @@ const Profile = () => {
                   <input
                     type="file"
                     id="imageUpload"
-                    accept="image/*"
                     className="hidden"
                     onChange={handleFileChange}
                     disabled={!isEditable}

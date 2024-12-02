@@ -2,6 +2,19 @@ import axios from "axios";
 
 const url = 'https://society-management-app-server.onrender.com'
 
+axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 // Home page 
 // Pending Maintenances
 
@@ -15,29 +28,36 @@ export const Get_Pending_Maintenances = (setPendingData) => {
 // Complaint_Submissionpage
 // Complaint data Get
 
-export const GetComplaint = (setdata) => {
-  axios.get('http://localhost:3030/Complaint_Submission').then((res) => {
+export const GetComplaint = (setdata, setloadingcomplaint) => {
+  axios.get(`${url}/complaint/getAllComplaints`).then((res) => {
+    // console.log(res.data);
     setdata(res.data);
+    setloadingcomplaint(false)
   })
 }
 
 // Complaint data Post
-export const PostComplaint = (data, Fdata, close) => {
-  axios.post('http://localhost:3030/Complaint_Submission', data).then((res) => {
+export const PostComplaint = (data, Fdata, close, setloading) => {
+  setloading(true)
+  axios.post(`${url}/complaint/createComplaint`, data).then((res) => {
+    console.log(res.data);
     Fdata()
     close()
+    setloading(false)
   })
 }
 
 // Complaint data Delete
-export const DeleteComplaint = (setdata, closeDelete, DId) => {
-  axios.delete(`http://localhost:3030/Complaint_Submission/${DId}`).then((res) => {
-    console.log("Deleted:", res.data);
-    setdata((prevData) => prevData.filter((item) => item.id !== DId));
+export const DeleteComplaint = (setdata, closeDelete, DId, setloadingDelete) => {
+  setloadingDelete(true)
+  axios.delete(`${url}/complaint/deleteComplaint/${DId}`).then((res) => {
+    setdata((prevData) => prevData.filter((item) => item._id !== DId));
     closeDelete();
+    setloadingDelete(false)
   })
     .catch((err) => {
       console.error("Error deleting:", err);
+      setloadingDelete(false)
     });
 }
 
@@ -45,26 +65,33 @@ export const DeleteComplaint = (setdata, closeDelete, DId) => {
 
 // Request_Submission data Get
 
-export const GetRequest_Submission = (setdata) => {
-  axios.get('http://localhost:3030/Request_Submission').then((res) => {
+export const GetRequest_Submission = (setdata, setloadingData) => {
+  axios.get(`${url}/request/getAllRequests`).then((res) => {
     setdata(res.data);
+    setloadingData(false)
   })
 }
 
 // Complaint data Post
-export const PostRequest_Submission = (data, Fdata, close) => {
-  axios.post('http://localhost:3030/Request_Submission', data).then((res) => {
-    Fdata()
+export const PostRequest_Submission = (data, Fdata, close, setloading) => {
+  setloading(true)
+  axios.post(`${url}/request/createRequest`, data).then((res) => {
     close()
+    Fdata()
+    setloading(false)
+    console.log(res.data);
   })
 }
 
 // Complaint data Delete
-export const DeleteRequest_Submission = (setdata, closeDelete, DId) => {
-  axios.delete(`http://localhost:3030/Request_Submission/${DId}`).then((res) => {
-    console.log("Deleted:", res.data);
-    setdata((prevData) => prevData.filter((item) => item.id !== DId));
-    closeDelete();
+export const DeleteRequest_Submission = (data, setdata, closeDelete, DId, setloadingDelete) => {
+  setloadingDelete(true)
+  axios.delete(`${url}/request/deleteRequest/${DId}`).then((res) => {
+    console.log(res.data);
+    const Deletedata = data.filter((item) => item._id !== DId);
+    setdata(Deletedata)
+    setloadingDelete(false)
+    closeDelete()
   })
     .catch((err) => {
       console.error("Error deleting:", err);
@@ -74,18 +101,18 @@ export const DeleteRequest_Submission = (setdata, closeDelete, DId) => {
 // payment portal page
 // Maintenance_Invoices page
 // Pending Maintanance Get
-export const Get_Pending_Maintanance = (setMaintanance) =>{
+export const Get_Pending_Maintanance = (setMaintanance) => {
   axios.get('http://localhost:3030/Pending_Maintanance').then((res) => {
     setMaintanance(res.data);
-});
+  });
 }
 
 // Pending Maintanance User Data Get
 
-export const Get_Maintenance_Invoices_data = () =>{
+export const Get_Maintenance_Invoices_data = () => {
   axios.get('http://localhost:3030/Maintenance_Invoices_data').then((res) => {
     setgetInvoices(res.data);
-});
+  });
 }
 
 

@@ -169,11 +169,20 @@ axios.interceptors.request.use(
     }
 );
 
-// Profile 
+// Profile Get 
 export const Profile_img = (setFormData) => {
     axios.get(`${url}/manager/profile`).then((res) => {
-        // console.log(res.data);  
         setFormData(res.data);
+    })
+}
+
+// Profile Post 
+export const EditProfile = async (form, Fdata) => {
+    axios.put(`${url}/manager/updatemanger`, form, { headers: { 'Content-Type': 'multipart/form-data' } }).then((res) => {
+        console.log(res);
+        Fdata()
+    }).catch((error) => {
+        console.error('Error submitting form:', error);
     })
 }
 
@@ -261,7 +270,7 @@ export const updateImportantNumber = (_id, editNumber, Fdata, closeEditModal, se
 
 export const GetComplainy = (setgetComplaint, setloadingcomplaint) => {
     axios.get(`${url}/complaint/getAllComplaints`).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setgetComplaint(res.data);
         setloadingcomplaint(false)
     })
@@ -314,7 +323,7 @@ export const EditComplaint = async (closeEditComplint, _id, editComplaint, setlo
 
 // Get Request
 
-export const GetRequest = (setgetComplaint,setloadingRequest) => {
+export const GetRequest = (setgetComplaint, setloadingRequest) => {
     axios.get(`${url}/request/getAllRequests`).then((res) => {
         setgetComplaint(res.data);
         setloadingRequest(false)
@@ -531,7 +540,9 @@ export const GetExpanse = (setAddExpense) => {
 
 
 export const PostExpanse = async (data, Fdata, setAddExpense, setPreviewImage, reset, handleCancel, setLoading) => {
-    const formData = new FormData();
+    console.log(data.Bill);
+
+    let formData = new FormData();
     formData.append('title', data.title);
     formData.append('description', data.description);
     formData.append('date', new Date(data.date).toISOString());
@@ -540,10 +551,12 @@ export const PostExpanse = async (data, Fdata, setAddExpense, setPreviewImage, r
         formData.append('Bill', data.Bill[0]);
     }
     try {
-        await axios.post('https://society-management-app-server.onrender.com/expenses/createexpenses', formData, {
+        const res = await axios.post('https://society-management-app-server.onrender.com/expenses/createexpenses', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
         });
         Fdata();
+        console.log(res);
+
         setAddExpense(false);
         reset();
         setPreviewImage(null);
