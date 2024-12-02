@@ -4,7 +4,7 @@ const createAnnouncement = async (req, res) => {
   try {
     const { title, description, date, time } = req.body;
 
-    if (!req.user || !req.user._id || !req.user.society) {
+    if (!req.user || !req.user._id) {
       return res.status(400).json({ error: 'User or society information is missing' });
     }
 
@@ -16,6 +16,8 @@ const createAnnouncement = async (req, res) => {
       createdBy: req.user._id,
       Society: req.user.societyid,
     });
+    console.log("🚀 ~ createAnnouncement ~  req.user.societyid:", req.user.societyid)
+    console.log("🚀 ~ createAnnouncement ~  req.user._id:", req.user._id)
 
     await announcement.save();
     return res.status(201).json({ message: 'Announcement created successfully', announcement });
@@ -26,9 +28,9 @@ const createAnnouncement = async (req, res) => {
 const getAllAnnouncements = async (req, res) => {
   try {
     // Filter announcements by Society
-    const announcements = await Announcement.find({ Society: req.user.societyid})
-      .populate('Manager', 'Firstname Lastname Email') // Populate admin details (name and email)
-      .populate('Society', 'societyname societyaddress'); // Populate society details
+    const announcements = await Announcement.find({ Society: req.user.societyid })
+      .populate('Society') // Populate admin details (name and email)
+      .populate('createdBy'); // Populate society details
 
     return res.status(200).json(announcements);
   } catch (error) {
@@ -38,8 +40,8 @@ const getAllAnnouncements = async (req, res) => {
 const getAnnouncement = async (req, res) => {
   try {
     const announcement = await Announcement.findById(req.params.id)
-      .populate('Manager', 'Firstname Lastname Email') // Populate admin details (name and email)
-      .populate('Society', 'societyname societyaddress');  // Populate society details
+      .populate('Society') // Populate admin details (name and email)
+      .populate('createdBy');  // Populate society details
 
     if (!announcement) {
       return res.status(404).json({ message: 'Announcement not found' });
@@ -60,15 +62,12 @@ const updateAnnouncement = async (req, res) => {
         title,
         description,
         date,
-        time,
-        createdBy: req.user._id, // Update createdBy
-        Society: req.user.societyid, // Update Society
+        time
       },
       { new: true }
     )
-    .populate('Manager', 'Firstname Lastname Email') // Populate admin details (name and email)
-    .populate('Society', 'societyname societyaddress');  // Populate updated society details
-
+      .populate('Society')
+      .populate('createdBy');
     if (!announcement) {
       return res.status(404).json({ message: 'Announcement not found' });
     }
