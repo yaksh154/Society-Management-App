@@ -12,6 +12,7 @@ const createVisitor = async (req, res) => {
             Unit: reqbody.Unit,
             Date: reqbody.Date,
             Time: reqbody.Time,
+            Phone: reqbody.Phone,
             createdBy: req.user._id,
             Society: req.user.societyid
         };

@@ -1,34 +1,30 @@
 const mongoose = require("mongoose");
 
-const visitorSchema = new mongoose.Schema(
+const otherincomeSchema = new mongoose.Schema(
     {
-        Visitor_Name: {
-            type: String,
-            require: true
-        },
-        Wing: {
-            type: String,
-            require: true
-        },
-        Unit: {
-            type: String,
+        Title: {
+            type: string,
             require: true
         },
         Date: {
             type: Date,
             require: true
         },
-        Phone: {
-            type: Number,
+        Due_Date: {
+            type: Date,
             require: true
         },
-        Time: {
-            type: String,
+        Description: {
+            type: string,
+            require: true
+        },
+        Amount: {
+            type: Number,
             require: true
         },
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Manager'
+            ref: 'otherincome'
         },
         Society: {
             type: mongoose.Schema.Types.ObjectId,
@@ -42,6 +38,6 @@ const visitorSchema = new mongoose.Schema(
 
 
 
-const Visitor = mongoose.model("Visitor", visitorSchema);
+const Otherincome = mongoose.model("Otherincome", otherincomeSchema);
 
-module.exports = Visitor;
+module.exports = Otherincome;
