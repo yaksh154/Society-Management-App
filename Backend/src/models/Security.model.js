@@ -36,6 +36,11 @@ const securitySchema = new mongoose.Schema(
             type: String,
             require: true
         },
+        Role:{
+            type:String,
+            default:"security",
+            require:true
+        },
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Manager'
