@@ -14,7 +14,7 @@ const createAnnouncement = async (req, res) => {
       date,
       time,
       createdBy: req.user._id,
-      Society: req.user.society._id,
+      Society: req.user.societyid,
     });
 
     await announcement.save();
@@ -26,7 +26,7 @@ const createAnnouncement = async (req, res) => {
 const getAllAnnouncements = async (req, res) => {
   try {
     // Filter announcements by Society
-    const announcements = await Announcement.find({ Society: req.user.society._id })
+    const announcements = await Announcement.find({ Society: req.user.societyid})
       .populate('Manager', 'Firstname Lastname Email') // Populate admin details (name and email)
       .populate('Society', 'societyname societyaddress'); // Populate society details
 
@@ -62,7 +62,7 @@ const updateAnnouncement = async (req, res) => {
         date,
         time,
         createdBy: req.user._id, // Update createdBy
-        Society: req.user.society._id, // Update Society
+        Society: req.user.societyid, // Update Society
       },
       { new: true }
     )

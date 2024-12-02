@@ -26,7 +26,8 @@ const createRequest = async (req, res) => {
 
 const getAllRequests = async (req, res) => {
     try {
-        const requests = await requestService.getAll();
+        const societyid = req.user.societyid
+        const requests = await requestService.getAll(societyid);
         return res.status(200).json(requests);
     } catch (error) {
         return res.status(500).json({ message: error.message });

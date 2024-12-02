@@ -4,8 +4,8 @@ const create = async (data) => {
     return await Maintenance.create(data);
 };
 
-const getAll = async () => {
-    return await Maintenance.find();
+const getAll = async (id) => {
+    return await Maintenance.find({Society: id});
 };
 
 const getById = async (id) => {

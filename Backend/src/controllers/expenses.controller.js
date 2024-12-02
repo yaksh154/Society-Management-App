@@ -28,7 +28,8 @@ const createexpenses = async (req, res) => {
 // Get all expenses
 const getAllexpenses = async (req, res) => {
     try {
-        const expensess = await expenses_servise.getAll();
+        const societyid = req.user.societyid
+        const expensess = await expenses_servise.getAll(societyid);
         return res.status(200).json(expensess);
     } catch (error) {
         return res.status(500).json({ message: error.message });

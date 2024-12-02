@@ -6,8 +6,8 @@ const create = async (data) => {
 };
 
 
-const getAll = async () => {
-  return await Importantnumber.find();
+const getAll = async (id) => {
+  return await Importantnumber.find({Society: id});
 };
 
 
