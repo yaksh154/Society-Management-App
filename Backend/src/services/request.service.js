@@ -5,11 +5,11 @@ const create = async (data) => {
 };
 
 const getAll = async (id) => {
-    return await Request.find({Society: id});
+    return await Request.find({Society: id}).populate("createdBy");
 };
 
 const getById = async (id) => {
-    return await Request.findById(id);
+    return await Request.findById(id).populate("createdBy");
 };
 
 const update = async (id, data) => {
