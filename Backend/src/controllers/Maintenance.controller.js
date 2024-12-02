@@ -54,10 +54,10 @@ const updateMaintenance = async (req, res) => {
     }
     const body = {}
     if (req.body) {
-      body.Maintenance_Amount = req.body.maintenanceAmount;
-      body.Penalty_Amount = req.body.penaltyAmount;
-      body.Maintenance_Due_Date = req.body.maintenanceDueDate;
-      body.Penalty_Applied_After_Day_Selection = req.body.penaltyAppliedAfterDaySelection;
+      body.Maintenance_Amount = req.body.Maintenance_Amount;
+      body.Penalty_Amount = req.body.Penalty_Amount;
+      body.Maintenance_Due_Date = req.body.Maintenance_Due_Date;
+      body.Penalty_Applied_After_Day_Selection = req.body.Penalty_Applied_After_Day_Selection;
     }
 
     const updatedMaintenance = await maintenanceService.update(id, body);

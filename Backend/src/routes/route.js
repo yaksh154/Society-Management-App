@@ -11,6 +11,7 @@ const maintenanceroute = require("./maintenance.route")
 const noteroute = require("./note.route")
 const announcementroute = require("./announcement.route")
 const requestroute = require("./request.route")
+const securityroute = require("./security.route")
 
 routes.use("/announcement",announcementroute)
 routes.use("/manager",managerroute)
@@ -23,5 +24,6 @@ routes.use("/facility",facilityroute)
 routes.use("/maintenance",maintenanceroute)
 routes.use("/note",noteroute)
 routes.use("/request",requestroute)
+routes.use("/security",securityroute)
 
 module.exports = routes;

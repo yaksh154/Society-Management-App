@@ -56,13 +56,13 @@ const updateRequest = async (req, res) => {
         }
         const body = {};
         if (req.body) {
-            body.Requester_Name = req.body.requestername;
-            body.Request_Name = req.body.requestname;
-            body.Request_Date = req.body.requestdate;
-            body.Wing = req.body.wing;
-            body.Unit = req.body.unit;
-            body.Priority = req.body.priority;
-            body.Status = req.body.status;
+            body.Requester_Name = req.body.Requester_Name;
+            body.Request_Name = req.body.Request_Name;
+            body.Request_Date = req.body.Request_Date;
+            body.Wing = req.body.Wing;
+            body.Unit = req.body.Unit;
+            body.Priority = req.body.Priority;
+            body.Status = req.body.Status;
         }
         const updatedRequest = await requestService.update(id, body);
         return res.status(200).json(updatedRequest);

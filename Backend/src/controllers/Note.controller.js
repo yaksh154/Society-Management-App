@@ -57,9 +57,9 @@ const updateNote = async (req, res) => {
 
     const updatedData = {};
     if (req.body) {
-      updatedData.Title = req.body.title;
-      updatedData.Description = req.body.description;
-      updatedData.Date = req.body.date;
+      updatedData.Title = req.body.Title;
+      updatedData.Description = req.body.Description;
+      updatedData.Date = req.body.Date;
     }
 
     const updatedNote = await noteService.update(id, updatedData);

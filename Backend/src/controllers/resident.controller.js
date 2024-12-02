@@ -110,14 +110,14 @@ const updateResident = async (req, res) => {
 
 
         if (req.body) {
-            updatedData.Fullname = req.body.fullname;
-            updatedData.Phone = req.body.phone;
-            updatedData.Email = req.body.email;
-            updatedData.Age = req.body.age;
-            updatedData.Gender = req.body.gender;
+            updatedData.Fullname = req.body.Fullname;
+            updatedData.Phone = req.body.Phone;
+            updatedData.Email = req.body.Email;
+            updatedData.Age = req.body.Age;
+            updatedData.Gender = req.body.Gender;
             updatedData.Wing = req.body.Wing;
-            updatedData.Unit = req.body.unit;
-            updatedData.Relation = req.body.relation;
+            updatedData.Unit = req.body.Unit;
+            updatedData.Relation = req.body.Relation;
         }
 
         if (req.files) {
