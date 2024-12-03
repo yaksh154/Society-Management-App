@@ -8,11 +8,14 @@ const register = async (req, res) => {
     try {
         const registersecurity = req.body;
 
+        console.log("🚀 ~ register ~ req.file:", req.files)
         const photopath = req.files.photo[0].path;
         const aadharcardpath = req.files.Aadhar_Card[0].path;
 
         const photo = await uploadFile(photopath);
+        console.log("🚀 ~ register ~ photo:", photo)
         const Aadhar_Card = await uploadFile(aadharcardpath);
+        console.log("🚀 ~ register ~ Aadhar_Card:", Aadhar_Card)
         const body = {
             photo: photo.secure_url,
             Full_Name: registersecurity.Full_Name,
@@ -25,6 +28,8 @@ const register = async (req, res) => {
             createdBy: req.user._id,
             Society: req.user.societyid
         }
+        console.log("🚀 ~ register ~ body.photo.secure_url:", body.photo.secure_url)
+        console.log("🚀 ~ register ~ body.Aadhar_Card.secure_url,:", body.Aadhar_Card.secure_url,)
         // assuming auth middleware adds user info
         const security = await securityService.register(body);
         res.status(201).json({ message: "Security personnel registered", data: security });
