@@ -1,6 +1,7 @@
 const Security = require("../models/Security.model");
 
 const register = async (body) => {
+    console.log("🚀 ~ register ~ body:", body)
     return await Security.create(body);
 };
 
