@@ -10,25 +10,6 @@ import { GetVisiter } from '../../../../services/Api/api';
 const Visitor_Logs = () => {
     const [data, setData] = useState(280);
     const [getData, setGetData] = useState(280);
-    const [visitorLogs, setVisitorLogs] = useState([]);
-    const [error, setError] = useState(null);
-
-    // Replace with your API endpoint
-    useEffect(() => {
-        const fetchVisitorLogs = async () => {
-            setError(null);
-            GetVisiter((data) => {
-                if (data && Array.isArray(data)) {
-                    setVisitorLogs(data);
-                } else {
-                    setError('Failed to load data or data is invalid.');
-                }
-                ;
-            });
-        };
-
-        fetchVisitorLogs();
-    }, []);
 
     function openNav() {
         setData(280);
@@ -40,6 +21,16 @@ const Visitor_Logs = () => {
         setGetData(0);
     }
 
+    const [visitorLogs, setVisitorLogs] = useState([]);
+
+    useEffect(() => {
+        fetchVisitorLogs();
+    }, []);
+
+    const fetchVisitorLogs = async () => {
+        GetVisiter(setVisitorLogs);
+    };
+
     return (
         <div>
             <Sidebar closeNav={closeNav} data={data} />
@@ -50,33 +41,61 @@ const Visitor_Logs = () => {
                 <div className="p-6 bg-gray-100 rounded-lg shadow-lg">
                     <div className="overflow-x-auto bg-white p-4 rounded-xl">
                         <h2 className="text-2xl font-bold mb-4">Visitor Logs</h2>
-                        <table className="w-full table-auto">
-                            <thead className="bg-blue-100 text-gray-700">
+                        <table className="min-w-full bg-[#eef1fd] rounded-lg">
+                            <thead>
                                 <tr>
-                                    <th className="px-4 py-2 text-left">Name</th>
-                                    <th className="px-4 py-2 text-left">Phone Number</th>
-                                    <th className="px-4 py-2 text-left">Date</th>
-                                    <th className="px-4 py-2 text-left">Unit Number</th>
-                                    <th className="px-4 py-2 text-left">Time</th>
+                                    <th className="px-6 py-3 border-b font-medium text-left">
+                                        Visitor Name
+                                    </th>
+                                    <th className="px-6 py-3 border-b font-medium ">
+                                        Phone Number
+                                    </th>
+                                    <th className="px-6 py-3 border-b font-medium ">
+                                        Date
+                                    </th>
+                                    <th className="px-6 py-3 border-b font-medium ">
+                                        Unit Number
+                                    </th>
+                                    <th className="px-6 py-3 border-b font-medium ">
+                                        Time
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {visitorLogs.map((item, index) => (
-                                    <tr key={index} className="border-b">
-                                        <td className="px-4 py-3 flex items-center space-x-2">
-                                            <FaUser className="w-8 h-8 rounded-full border border-gray-400" />
-                                            <span>{item.name}</span>
-                                        </td>
-                                        <td className="px-4 py-3">{item.phone}</td>
-                                        <td className="px-4 py-3">{item.date}</td>
-                                        <td className="px-4 py-3">
-                                            <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-600">{item.unit}</span>
-                                        </td>
-                                        <td className="px-4 py-3">
-                                            <span className="px-2 py-1 rounded-full bg-gray-200 text-black">{item.time}</span>
-                                        </td>
-                                    </tr>
-                                ))}
+                                {visitorLogs.map((e, index) => {
+                                    return (
+                                        <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium md:font-semibold overflow-x-scroll">
+                                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex items-center">
+                                                <img className="w-8 h-8 rounded-full mr-1" src={e.createdBy.Image} alt="profile" />
+                                                <span>{e.Visitor_Name}</span>
+                                            </td>
+                                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Phone}</td>
+                                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate text-center">
+                                                {new Date(e.Date).toLocaleDateString("en-US", {
+                                                    month: "2-digit",
+                                                    day: "2-digit",
+                                                    year: "numeric",
+                                                })}
+                                            </td>
+                                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate text-center">
+                                                <samp className=' px-2 py-1 text-[#5678e9] bg-[#f6f8fb] mr-2 rounded-full'>{e.Wing}</samp>
+                                                {e.Unit}
+                                            </td>
+                                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate text-center">
+                                                {(() => {
+                                                    const time24 = e.Time; 
+                                                    const [hours, minutes] = time24.split(":");
+                                                    let hour = parseInt(hours, 10);
+                                                    const ampm = hour >= 12 ? "PM" : "AM";
+                                                    hour = hour % 12;
+                                                    hour = hour ? hour : 12; 
+                                                    return `${hour}:${minutes} ${ampm}`;
+                                                })()}
+                                            </td>
+
+                                        </tr>
+                                    )
+                                })}
                             </tbody>
                         </table>
                     </div>
