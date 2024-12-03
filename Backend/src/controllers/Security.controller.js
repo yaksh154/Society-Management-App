@@ -31,8 +31,9 @@ const register = async (req, res) => {
         }
         console.log("🚀 ~ register ~ photo.secure_url:", photo.secure_url)
         console.log("🚀 ~ register ~ Aadhar_Card.secure_url,:", Aadhar_Card.secure_url,)
-        // assuming auth middleware adds user info
+        console.log("🚀 ~ register ~ body:", body)
         const security = await securityService.register(body);
+        console.log("🚀 ~ register ~ security:", security)
         res.status(201).json({ message: "Security personnel registered", data: security });
     } catch (error) {
         res.status(500).json({ message: error.message });
