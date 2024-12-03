@@ -21,7 +21,7 @@ const securitySchema = new mongoose.Schema(
         },
         Shift: {
             type: String,
-            enum: ["Night ", "Day"],
+            enum: ["Night", "Day"],
             require: true
         },
         Shift_Data: {
