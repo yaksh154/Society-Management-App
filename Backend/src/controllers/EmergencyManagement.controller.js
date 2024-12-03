@@ -45,26 +45,6 @@ const getAlert = async (req, res) => {
     }
 }
 
-// Update an alert
-const updateAlert = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const alert = await Alert_servise.getById(id);
-        if (!alert) {
-            return res.status(404).json({ message: "Not found" });
-        }
-        const updetbody = {}
-        if (req.body) {
-            updetbody.Alert_Type = req.body.Alert_Type,
-            updetbody.Description = req.body.Description
-        }
-        const updatedAlert = await Alert_servise.update(id, updetbody);
-        res.status(200).json(updatedAlert);
-    }catch(err) {
-        res.status(500).json({ message: err.message})
-    }
-}
-
 // Delete an alert
 const deleteAlert = async (req, res) => {
     try {
@@ -83,6 +63,5 @@ module.exports = {
     createAlert,
     getAllAlerts,
     getAlert,
-    updateAlert,
     deleteAlert,
 };

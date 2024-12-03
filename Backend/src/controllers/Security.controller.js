@@ -134,10 +134,127 @@ const login = async (req, res) => {
 const getgetallsecurity = async (req, res) => {
     try {
         const societyid = req.user.societyid
-        const security = await securityService.getAll(societyid);
+        const security = await securityService.getAllSecurity(societyid);
         return res.status(200).json(security);
     } catch (error) {
         return res.status(500).json({ message: error.message });
+    }
+}
+
+
+//   Visitor
+
+const createVisitor = async (req, res) => {
+    try {
+        const reqbody = req.body;
+        if (!reqbody) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+        const body = {
+            Visitor_Name: reqbody.Visitor_Name,
+            Wing: reqbody.Wing,
+            Unit: reqbody.Unit,
+            Date: reqbody.Date,
+            Time: reqbody.Time,
+            Phone: reqbody.Phone,
+            createdBy: req.user._id,
+            Society: req.user.societyid
+        };
+        const visitor = await securityService.create(body);
+        res.status(201).json(visitor);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+}
+
+const getAllVisitors = async (req, res) => {
+    try {
+        const societyid = req.user.societyid
+        const visitors = await securityService.getAllVisitors(societyid);
+        res.status(200).json(visitors);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+}
+
+
+
+// Securityprotocol
+
+const createSecurityProtocol = async (req, res) => {
+    try {
+        const reqbody = req.body;
+        if (!reqbody) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+        const body = {
+            Title: reqbody.Title,
+            Description: reqbody.Description,
+            Time: reqbody.Time,
+            createdBy: req.user._id,
+            Society: req.user.societyid
+        };
+        const securityProtocol = await securityService.createSecurityProtocol(body);
+        res.status(201).json(securityProtocol);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+}
+
+const getAllSecurityProtocols = async (req, res) => {
+    try {
+        const societyid = req.user.societyid
+        const securityProtocols = await securityService.getAllSecurityProtocols(societyid);
+        res.status(200).json(securityProtocols);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+}
+
+const getSecurityProtocol = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const securityProtocol = await securityService.findByIdSecurityProtocol(id);
+        if (!securityProtocol) {
+            return res.status(404).json({ message: 'Security protocol not found' });
+        }
+        res.status(200).json(securityProtocol);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
+}
+
+const updateSecurityProtocol = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const reqbody = req.body;
+        if (!reqbody) {
+            return res.status(400).json({ message: 'No data to update' });
+        }
+        const body = {}
+        if(req.body){
+            Title = reqbody.Title,
+            Description = reqbody.Description,
+            Time = reqbody.Time
+        }
+        const updatedSecurityProtocol = await securityService.updateSecurityProtocol(id, body);
+        res.status(200).json(updatedSecurityProtocol);
+    }catch(err){
+        return res.status(500).json({ error: err.message} )
+    }
+}
+
+const deleteSecurityProtocol = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const securityProtocol = await securityService.findByIdSecurityProtocol(id);
+        if (!securityProtocol) {
+            return res.status(404).json({ message: 'Security protocol not found' });
+        }
+        const deleted = await securityService.deleteSecurityProtocol(id);
+        res.status(200).json({ message: 'Security protocol deleted' });
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
     }
 }
 
@@ -147,5 +264,12 @@ module.exports = {
     getSecurity,
     deleteSecurity,
     login,
-    getgetallsecurity
+    getgetallsecurity,
+    createVisitor,
+    getAllVisitors,
+    createSecurityProtocol,
+    getAllSecurityProtocols,
+    getSecurityProtocol,
+    updateSecurityProtocol,
+    deleteSecurityProtocol,
 };

@@ -12,4 +12,14 @@ router.get("/getallsecurity", authUser, securityController.getgetallsecurity)
 router.delete("/deletesecurity/:id", authUser, securityController.deleteSecurity);
 router.post("/login", securityController.login);
 
+
+router.post('/createVisitor', authUser, securityController.createVisitor);
+router.get('/getallVisitors', authUser, securityController.getAllVisitors);
+
+router.post("/createprotocol", authUser, securityController.createSecurityProtocol)
+router.get('/getallprotocols', authUser, securityController.getAllSecurityProtocols)
+router.get("/getprotocol/:id", authUser, securityController.getSecurityProtocol)
+router.put("/updateprotocol/:id", authUser, securityController.updateSecurityProtocol)
+router.delete("/deleteprotocol", authUser, securityController.deleteSecurityProtocol)
+
 module.exports = router;

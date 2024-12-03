@@ -2,37 +2,20 @@ const mongoose = require("mongoose");
 
 const securityprotocolSchema = new mongoose.Schema(
     {
-        photo: {
+        Title: {
             type: String,
             require: true
         },
-        Full_Name: {
+        Description: {
             type: String,
             require: true
         },
-        phone_Number: {
+        Date: {
             type: Date,
+            default: Date.now,
             require: true
         },
-        Gender: {
-            type: String,
-            enum: ["Male", "Female", "Other"],
-            require: true
-        },
-        Shift: {
-            type: String,
-            enum: ["night ", "day"],
-            require: true
-        },
-        Shift_Data: {
-            type: date,
-            require: true
-        },
-        Shift_Time: {
-            type: String,
-            require: true
-        },
-        Aadhar_Card: {
+        Time: {
             type: String,
             require: true
         },
