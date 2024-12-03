@@ -34,42 +34,42 @@ const Security_Guard = () => {
     GetGuard_Details(setGuard_Details)
   }
 
-  const [AddSecurity,setAddSecurity]=useState(false)
-  const [ViewSecurity,setViewSecurity]=useState(false)
-  const [ViewId,setViewId]=useState(null)
-  const [EditSecurity,setEditSecurity]=useState(false)
-  const [EditId,setEditId]=useState(null)
-  const [DeleteSecurity,setDeleteSecurity]=useState(false)
-  const [DeleteId,setDeleteId]=useState(null)
+  const [AddSecurity, setAddSecurity] = useState(false)
+  const [ViewSecurity, setViewSecurity] = useState(false)
+  const [ViewId, setViewId] = useState(null)
+  const [EditSecurity, setEditSecurity] = useState(false)
+  const [EditId, setEditId] = useState(null)
+  const [DeleteSecurity, setDeleteSecurity] = useState(false)
+  const [DeleteId, setDeleteId] = useState(null)
 
-  const OpneAddSecurity = () =>{
+  const OpneAddSecurity = () => {
     setAddSecurity(true)
   }
-  const CloseAddSecurity = () =>{
+  const CloseAddSecurity = () => {
     setAddSecurity(false)
   }
 
-  const OpneEditSecurity = (_id) =>{
+  const OpneEditSecurity = (_id) => {
     setEditSecurity(true)
     setEditId(_id)
   }
-  const CloseEditSecurity = () =>{
+  const CloseEditSecurity = () => {
     setEditSecurity(false)
   }
 
-  const OpneViewSecurity = (_id) =>{
+  const OpneViewSecurity = (_id) => {
     setViewSecurity(true)
     setViewId(_id)
   }
-  const CloseViewSecurity = () =>{
+  const CloseViewSecurity = () => {
     setViewSecurity(false)
   }
 
-  const OpneDeleteSecurity = (_id) =>{
+  const OpneDeleteSecurity = (_id) => {
     setDeleteSecurity(true)
     setDeleteId(_id)
   }
-  const CloseDeleteSecurity = () =>{
+  const CloseDeleteSecurity = () => {
     setDeleteSecurity(false)
   }
 
@@ -94,7 +94,7 @@ const Security_Guard = () => {
                 <table className="min-w-full bg-[#eef1fd] rounded-lg">
                   <thead>
                     <tr>
-                      <th className="px-6 py-3 border-b font-medium ">
+                      <th className="px-6 py-3 border-b font-medium text-left">
                         Security Guard Name
                       </th>
                       <th className="px-6 py-3 border-b font-medium ">
@@ -123,20 +123,26 @@ const Security_Guard = () => {
                         <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium text-center md:font-semibold overflow-x-scroll">
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex items-center">
                             <img className="w-8 h-8 rounded-full mr-1" src="https://via.placeholder.com/40" alt="profile" />
-                            <span>{e.Security_Guard_Name}</span>
+                            <span>{e.Full_Name}</span>
                           </td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Phone_Number}</td>
+                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.phone_Number}</td>
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
-                            <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center items-center ${e.Select_Shift === "High" ? "bg-[#e74c3c] text-white" :
-                              e.Select_Shift === "Day" ? "bg-[#f4f4f4] text-[#ff9300]" :
-                                e.Select_Shift === "Night" ? "bg-[#4f4f4f] text-white" : ""
+                            <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center items-center ${e.Shift === "High" ? "bg-[#e74c3c] text-white" :
+                              e.Shift === "day" ? "bg-[#f4f4f4] text-[#ff9300]" :
+                                e.Shift === "Night" ? "bg-[#4f4f4f] text-white" : ""
                               }`}>
-                              {e.Select_Shift === "Day" && <IoSunnySharp className='mr-1' />}
-                              {e.Select_Shift === "Night" && <PiMoonFill className='mr-1' />}
-                              {` ${e.Select_Shift}`}
+                              {e.Shift === "day" && <IoSunnySharp className='mr-1' />}
+                              {e.Shift === "night" && <PiMoonFill className='mr-1' />}
+                              {` ${e.Shift}`}
                             </span>
                           </td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Shift_Date}</td>
+                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">
+                            {new Date(e.Shift_Date).toLocaleDateString("en-US", {
+                              month: "2-digit",
+                              day: "2-digit",
+                              year: "numeric",
+                            })}
+                          </td>
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Shift_Time}</td>
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
                             <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center items-center ${e.Gender === "High" ? "bg-[#e74c3c] text-white" :
@@ -151,15 +157,15 @@ const Security_Guard = () => {
 
 
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-2 md:space-x-2">
-                            <button onClick={()=>OpneEditSecurity(e._id)} className="text-green-500 p-1">
+                            <button onClick={() => OpneEditSecurity(e._id)} className="text-green-500 p-1">
                               <FaEdit />
                             </button>
 
-                            <button onClick={()=>OpneViewSecurity(e._id)} className="text-blue-500 text-2xl rounded">
+                            <button onClick={() => OpneViewSecurity(e._id)} className="text-blue-500 text-2xl rounded">
                               <GrFormView />
                             </button>
 
-                            <button onClick={()=>OpneDeleteSecurity(e._id)} className="text-red-500 p-1">
+                            <button onClick={() => OpneDeleteSecurity(e._id)} className="text-red-500 p-1">
                               <FaTrashAlt />
                             </button>
                           </td>
@@ -168,8 +174,8 @@ const Security_Guard = () => {
                     })}
                   </tbody>
                 </table>
-                {EditSecurity && (<EditSecurityModal _id={EditId} CloseEdit={CloseEditSecurity}/>)}
-                {ViewSecurity && (<ViewSecurityModal _id={ViewId} CloseView={CloseViewSecurity}/>)}
+                {EditSecurity && (<EditSecurityModal _id={EditId} CloseEdit={CloseEditSecurity} />)}
+                {ViewSecurity && (<ViewSecurityModal _id={ViewId} CloseView={CloseViewSecurity} />)}
                 {DeleteSecurity && (<DeleteSecurityModal _id={DeleteId} CloseDelete={CloseDeleteSecurity} />)}
               </div>
             </div>

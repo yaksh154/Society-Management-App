@@ -425,6 +425,7 @@ export const Delete_Security_Protocols = (_id, Fdata) => {
 
 export const GetGuard_Details = (setGuard_Details) => {
     axios.get(`${url}/security/getallsecurity`).then((res) => {
+        console.log(res.data);
         setGuard_Details(res.data)
     })
 }
