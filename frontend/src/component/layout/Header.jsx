@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import OpneNotificationModal from "../Modals/OpneNotificationModal";
 import { Profile_img } from "../services/Api/api";
 
-const Header = ({openNav}) => {
+const Header = ({ openNav }) => {
   const [FormData, setFormData] = useState('')
 
   useEffect(() => {
@@ -50,11 +50,13 @@ const Header = ({openNav}) => {
                 <div className="profile-text">
                   <p className="font-medium">{FormData.Firstname || "User"} {FormData.Lastname || ""}</p>
                   <p className="text-gray-400">{FormData.Role
-                   || "Role"}</p>
+                    || "Role"}</p>
                 </div>
               </div>
             ) : (
-              <p>Loading...</p>
+              <div>
+                <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+              </div>
             )}
           </Link>
         </div>

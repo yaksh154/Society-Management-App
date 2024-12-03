@@ -30,7 +30,7 @@ const Request_Tracking = () => {
   const [getComplaint, setgetComplaint] = useState([]);
   const [loadingRequest, setloadingRequest] = useState(true)
   const getComplaintdata = () => {
-    GetRequest(setgetComplaint,setloadingRequest)
+    GetRequest(setgetComplaint, setloadingRequest)
   }
 
   const [createComplint, setcreateComplint] = useState(false);
@@ -91,7 +91,9 @@ const Request_Tracking = () => {
               </div>
               <div className="overflow-auto">
                 {loadingRequest ? (
-                  <div className="text-center text-gray-500">Loading...</div>
+                  <div className='flex justify-center'>
+                    <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+                  </div>
                 ) : (
                   <table className="min-w-full bg-[#eef1fd] rounded-lg">
                     <thead>

@@ -40,7 +40,7 @@ const Facility_Management = () => {
   }, [])
 
   const Fdata = () => {
-    Facility_Management_Get(setincomeData,setloadingFacility)
+    Facility_Management_Get(setincomeData, setloadingFacility)
   }
 
   const toggleDropdown = (index) => {
@@ -94,7 +94,9 @@ const Facility_Management = () => {
                 {create_facility && (<Create_facility_model Fdata={Fdata} setClosecreate_facility={Closecreate_facility} />)}
               </div>
               {loadingFacility ? (
-                <div className="text-center text-gray-500">Loading...</div>
+                <div className='flex justify-center'>
+                  <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+                </div>
               ) : (
                 <div className="grid gap-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4">
                   {incomeData.map((item, index) => (

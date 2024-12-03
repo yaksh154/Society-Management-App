@@ -111,7 +111,9 @@ const Expanse = () => {
             {error}
             <div className="p-4 bg-white rounded-lg shadow-lg">
               {loadingExpenses ? (
-                <div className="text-center text-gray-500 text-lg">Loading...</div>
+                <div className='flex justify-center'>
+                  <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+                </div>
               ) : (
                 <table className="min-w-full bg-white rounded-lg">
                   <thead className="bg-slate-100 font-extrabold rounded-t-lg">
@@ -125,45 +127,45 @@ const Expanse = () => {
                     </tr>
                   </thead>
                   <tbody>
-                      {expenses.map((expense, index) => (
-                        <tr key={index} className="border-b hover:bg-gray-50 font-medium md:font-semibold">
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{expense.Title}</td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{expense.Description}</td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 text-center">{new Date(expense.Date).toLocaleDateString("en-US", {
-                            month: "2-digit",
-                            day: "2-digit",
-                            year: "numeric",
-                          })}</td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-green-500 text-center">₹ {expense.Amount}</td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
-                            {expense.format === 'PDF' ? (
-                              <span className="flex items-center space-x-1 justify-center">
-                                <FaFilePdf className="text-red-500 bg-slate-200 w-4 md:w-6 h-4 md:h-6 py-1 rounded-sm" />
-                                <span>PDF</span>
-                              </span>
-                            ) : (
-                              <span className="flex items-center space-x-1 justify-center">
-                                <FaFileImage className="text-blue-500 bg-slate-200 w-4 md:w-6 h-4 md:h-6 py-1 rounded-sm" />
-                                <span>JPG</span>
-                              </span>
-                            )}
-                          </td>
-                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-2 md:space-x-2 justify-center">
-                            <button aria-label="Edit" onClick={() => EditOpen(expense._id)} className="text-green-500 p-1">
-                              <FaEdit />
-                            </button>
+                    {expenses.map((expense, index) => (
+                      <tr key={index} className="border-b hover:bg-gray-50 font-medium md:font-semibold">
+                        <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{expense.Title}</td>
+                        <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{expense.Description}</td>
+                        <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 text-center">{new Date(expense.Date).toLocaleDateString("en-US", {
+                          month: "2-digit",
+                          day: "2-digit",
+                          year: "numeric",
+                        })}</td>
+                        <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-green-500 text-center">₹ {expense.Amount}</td>
+                        <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
+                          {expense.format === 'PDF' ? (
+                            <span className="flex items-center space-x-1 justify-center">
+                              <FaFilePdf className="text-red-500 bg-slate-200 w-4 md:w-6 h-4 md:h-6 py-1 rounded-sm" />
+                              <span>PDF</span>
+                            </span>
+                          ) : (
+                            <span className="flex items-center space-x-1 justify-center">
+                              <FaFileImage className="text-blue-500 bg-slate-200 w-4 md:w-6 h-4 md:h-6 py-1 rounded-sm" />
+                              <span>JPG</span>
+                            </span>
+                          )}
+                        </td>
+                        <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-2 md:space-x-2 justify-center">
+                          <button aria-label="Edit" onClick={() => EditOpen(expense._id)} className="text-green-500 p-1">
+                            <FaEdit />
+                          </button>
 
-                            <button aria-label="View" onClick={() => ViewOpen(expense._id)} className="text-blue-500 text-2xl rounded">
-                              <GrFormView />
-                            </button>
+                          <button aria-label="View" onClick={() => ViewOpen(expense._id)} className="text-blue-500 text-2xl rounded">
+                            <GrFormView />
+                          </button>
 
-                            <button aria-label="Delete" onClick={() => RemoveOpen(expense._id)} className="text-red-500 p-1">
-                              <FaTrashAlt />
-                            </button>
-                          </td>
-                        </tr>
-                      ))
-                      }
+                          <button aria-label="Delete" onClick={() => RemoveOpen(expense._id)} className="text-red-500 p-1">
+                            <FaTrashAlt />
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                    }
                   </tbody>
                 </table>
               )}

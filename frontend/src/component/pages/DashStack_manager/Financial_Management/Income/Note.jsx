@@ -23,6 +23,7 @@ const Note = () => {
 
   // get
   const [Notes, setNotes] = useState([])
+  const [lodingData, setlodingData] = useState(true)
   // post
   const [create, setcreate] = useState(false);
   // delete
@@ -39,7 +40,7 @@ const Note = () => {
   }, [0])
 
   const Fdata = () => {
-    GetNotes(setNotes)
+    GetNotes(setNotes, setlodingData)
   }
 
   //Add ..
@@ -56,7 +57,7 @@ const Note = () => {
   const editsowcreate = (_id) => {
     seteditcreate(true);
     setEditId(_id);
-    
+
   };
   const editClosecreate = () => {
     seteditcreate(false);
@@ -95,43 +96,51 @@ const Note = () => {
                 <Button onClick={sowcreate} Btn_Name="Create Note" />
                 {create && (<CreateNote Fdata={Fdata} setcreate={Closecreate} />)}
               </div>
-              <div className="grid gap-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4">
-                {Notes.map((item, index) => (
-                  <div key={index} className="bg-white shadow-md rounded-md relative">
-                    <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-[#5678e9]">
-                      <h2 className="text-lg font-semibold text-white">{item.Title}</h2>
-                      <div className="relative">
-                        <button
-                          onClick={() => toggleDropdown(index)}
-                          className="text-blue-500  bg-white   rounded-md  pb-1 focus:outline-none"
-                        >
-                          <BsThreeDotsVertical className="h-5 w-5 mt-1" />
-                        </button>
-                        {dropdownOpenIndex === index && (
-                          <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-10">
-                            <ul className="py-1 text-gray-700">
-                              <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={()=>editsowcreate(item._id)}>
-                                Edit
-                              </li>
-                              <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => DeleteOpen(item._id)}>
-                                Delete
-                              </li>
-                            </ul>
-                          </div>
-                        )}
+              {lodingData ? (
+                <div className='flex justify-center'>
+                  <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+                </div>
+              ) : (
+                <div className="grid gap-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4">
+                  {Notes.map((item, index) => (
+                    <div key={index} className="bg-white shadow-md rounded-md relative">
+                      <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-[#5678e9]">
+                        <h2 className="text-lg font-semibold text-white">{item.Title}</h2>
+                        <div className="relative">
+                          <button
+                            onClick={() => toggleDropdown(index)}
+                            className="text-blue-500  bg-white   rounded-md  pb-1 focus:outline-none"
+                          >
+                            <BsThreeDotsVertical className="h-5 w-5 mt-1" />
+                          </button>
+                          {dropdownOpenIndex === index && (
+                            <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-10">
+                              <ul className="py-1 text-gray-700">
+                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => editsowcreate(item._id)}>
+                                  Edit
+                                </li>
+                                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={() => DeleteOpen(item._id)}>
+                                  Delete
+                                </li>
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex flex-col gap-2 mb-4 p-2">
+                        <div className="text-sm text-gray-500">
+                          Description
+                          <p className="text-black text-sm">{item.Description}</p>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-2 mb-4 p-2">
-                      <div className="text-sm text-gray-500">
-                        Description
-                        <p className="text-black text-sm">{item.Description}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                {editcreate && (<EditNote _id={EditId} seteditcreate={editClosecreate} />)}
-                {DeleteBox && (< DeleteLoding DeleteClick={DeleteClick} loading={loading} close={DeleteClose} />)}
-              </div>
+                  ))}
+                  {editcreate && (<EditNote _id={EditId} seteditcreate={editClosecreate} />)}
+                  {DeleteBox && (< DeleteLoding DeleteClick={DeleteClick} loading={loading} close={DeleteClose} />)}
+                </div>
+
+              )}
+
             </div>
           </div>
         </div>

@@ -666,9 +666,10 @@ export const PostVisiter = (data, Fdata, setAddVisiterbox) => {
 
 //Notes
 
-export const GetNotes = (setNotes) => {
+export const GetNotes = (setNotes,setlodingData) => {
     axios.get(`${url}/note/getAllNotes`).then((res) => {
         setNotes(res.data)
+        setlodingData(false)
     })
 }
 

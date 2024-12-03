@@ -31,7 +31,7 @@ const Create_Complaint = () => {
   const [getComplaint, setgetComplaint] = useState([]);
   const [loadingcomplaint, setloadingcomplaint] = useState(true)
   const getComplaintdata = () => {
-    GetComplainy(setgetComplaint,setloadingcomplaint)
+    GetComplainy(setgetComplaint, setloadingcomplaint)
   }
 
   const [createComplint, setcreateComplint] = useState(false);
@@ -93,7 +93,9 @@ const Create_Complaint = () => {
               </div>
               <div className="overflow-auto">
                 {loadingcomplaint ? (
-                  <div className="text-center text-gray-500">Loading...</div>
+                  <div className='flex justify-center'>
+                    <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+                  </div>
                 ) : (
                   <table className="min-w-full bg-[#eef1fd] rounded-lg">
                     <thead>
@@ -168,7 +170,7 @@ const Create_Complaint = () => {
                   </table>
                 )}
 
-                {EditComplint && <OpenEditComplintModel _id={a_id} closeEditComplint={closeEditComplint} LodData={getComplaintdata}/>}
+                {EditComplint && <OpenEditComplintModel _id={a_id} closeEditComplint={closeEditComplint} LodData={getComplaintdata} />}
                 {ViewComplint && <ViewComplintModel _id={b_id} closeViewComplint={closeViewComplint} />}
                 {DeleteComplint && <LodingDelete loading={loadingcomplint} DeleteClick={Deletecomplint} close={CloseDeleteComplint} getComplaint={getComplaint} />}
               </div>

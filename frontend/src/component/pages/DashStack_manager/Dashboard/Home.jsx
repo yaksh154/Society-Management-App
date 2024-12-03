@@ -210,7 +210,9 @@ const Home = () => {
                   </div>
                   <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
                     {loading ? (
-                      <div className="text-center text-gray-500">Loading...</div>
+                      <div className='flex justify-center'>
+                        <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+                      </div>
                     ) : (
                       <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
                         {contacts.map(contact => (
@@ -371,7 +373,9 @@ const Home = () => {
                   </div>
                   <div className="overflow-x-auto h-32 px-2">
                     {loadingcomplaint ? (
-                      <div className="text-center text-gray-500">Loading...</div>
+                      <div className='flex justify-center'>
+                        <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+                      </div>
                     ) : (
                       <table className="min-w-full text-left">
                         <thead>
