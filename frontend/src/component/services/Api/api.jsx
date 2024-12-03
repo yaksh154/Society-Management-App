@@ -169,11 +169,20 @@ axios.interceptors.request.use(
     }
 );
 
-// Profile 
+// Profile Get 
 export const Profile_img = (setFormData) => {
     axios.get(`${url}/manager/profile`).then((res) => {
-        // console.log(res.data);  
         setFormData(res.data);
+    })
+}
+
+// Profile Post 
+export const EditProfile = async (form, Fdata) => {
+    axios.put(`${url}/manager/updatemanger`, form, { headers: { 'Content-Type': 'multipart/form-data' } }).then((res) => {
+        console.log(res);
+        Fdata()
+    }).catch((error) => {
+        console.error('Error submitting form:', error);
     })
 }
 
@@ -255,13 +264,31 @@ export const updateImportantNumber = (_id, editNumber, Fdata, closeEditModal, se
         });
 };
 
+// Resident Management page
+
+export const PostSumdata = (data) => {
+    // const formData = new FormData();
+    // formData.append('title', data.Title);
+    // formData.append('description', data.Description);
+    // formData.append('date', data.Date);
+    // formData.append('amount', data.Amount);
+    // if (data.Bill && data.Bill.length > 0) {
+    //     formData.append('Bill', data.Bill[0]);
+    // }
+    // console.log(formData);
+
+    // axios.post(`${url}/residentroute/create`,formData, { headers: { 'Content-Type': 'multipart/form-data' }}).then((res)=>[
+    //     console.log(res)
+    // ])
+}
+
 // Complaint Tracking page
 
 // === Complaint get
 
 export const GetComplainy = (setgetComplaint, setloadingcomplaint) => {
     axios.get(`${url}/complaint/getAllComplaints`).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setgetComplaint(res.data);
         setloadingcomplaint(false)
     })
@@ -297,12 +324,15 @@ export const DeleteComplaint = async (_id, setloadingcomplint, CloseDeleteCompli
 
 // === Complaint Edit
 
-export const EditComplaint = async (closeEditComplint, _id, editComplaint, setloading) => {
+export const EditComplaint = async (closeEditComplint, _id, editComplaint, setloading, LodData) => {
+    console.log(editComplaint);
+
     setloading(true)
     try {
         const res = await axios.put(`${url}/complaint/updateComplaint/${_id}`, editComplaint);
         console.log(res.data);
         closeEditComplint();
+        LodData()
         setloading(false)
     } catch (error) {
         console.error('Error saving complaint:', error);
@@ -314,8 +344,9 @@ export const EditComplaint = async (closeEditComplint, _id, editComplaint, setlo
 
 // Get Request
 
-export const GetRequest = (setgetComplaint,setloadingRequest) => {
+export const GetRequest = (setgetComplaint, setloadingRequest) => {
     axios.get(`${url}/request/getAllRequests`).then((res) => {
+        console.log(res.data);
         setgetComplaint(res.data);
         setloadingRequest(false)
     })
@@ -347,13 +378,14 @@ export const DeleteRequest = (_id, setloadingDelete, CloseDeleteComplint, getCom
 
 // Edit Request
 
-export const EditRequest = async (_id, editComplaint, closeEditComplint, setloading) => {
+export const EditRequest = async (_id, editComplaint, closeEditComplint, setloading, Lodata) => {
     setloading(true)
     try {
         const res = await axios.put(`${url}/request/updateRequest/${_id}`, editComplaint);
         console.log(res.data);
         setloading(false)
         closeEditComplint();
+        Lodata()
     } catch (error) {
         console.error('Error saving complaint:', error);
         setloading(false)
@@ -365,7 +397,7 @@ export const EditRequest = async (_id, editComplaint, closeEditComplint, setload
 // Get Security Protocols
 
 export const Get_Security_Protocols = (setSecurity) => {
-    axios.get("http://localhost:3030/Security_Protocols").then((res) => {
+    axios.get(`${url}/security/getallsecurity`).then((res) => {
         setSecurity(res.data)
     })
 }
@@ -373,7 +405,7 @@ export const Get_Security_Protocols = (setSecurity) => {
 // Post Security Protocols
 
 export const Post_Security_Protocols = (data, Fdata, CloseAddProtocols) => {
-    axios.post("http://localhost:3030/Security_Protocols", data).then((res) => {
+    axios.post(`${url}/security/createsecurity`, data, {headers: { 'Content-Type': 'multipart/form-data' }}).then((res) => {
         CloseAddProtocols()
         Fdata()
     })
@@ -392,8 +424,16 @@ export const Delete_Security_Protocols = (_id, Fdata) => {
 // Get Security Guard Details
 
 export const GetGuard_Details = (setGuard_Details) => {
-    axios.get('http://localhost:3030/Guard_Details').then((res) => {
+    axios.get(`${url}/security/getallsecurity`).then((res) => {
         setGuard_Details(res.data)
+    })
+}
+
+// post Security Guard Details
+
+export const PostGuard_Details = (data) =>{
+    axios.post(`${url}/security/createsecurity`,data, {headers: { 'Content-Type': 'multipart/form-data' }}).then((res)=>{
+        console.log(res.data);
     })
 }
 
@@ -401,16 +441,19 @@ export const GetGuard_Details = (setGuard_Details) => {
 
 // Get Announcement
 
-export const GetAnnouncement = (setgetAnnouncement) => {
-    axios.get('http://localhost:3030/incomeData').then((res) => {
+export const GetAnnouncement = (setgetAnnouncement, setLoding) => {
+    axios.get(`${url}/announcement/getAllAnnouncements`).then((res) => {
         setgetAnnouncement(res.data)
+        setLoding(false)
     })
 }
 
 // Post Announcement
 
-export const PostAnnouncement = (data, Fdata, ClaseAddAnnouncement) => {
-    axios.post(`http://localhost:3030/incomeData`, data).then((res) => {
+export const PostAnnouncement = (data, Fdata, ClaseAddAnnouncement, setloading) => {
+    setloading(true)
+    axios.post(`${url}/announcement/createAnnouncement`, data).then((res) => {
+        setloading(false)
         ClaseAddAnnouncement(false)
         Fdata()
     })
@@ -418,11 +461,34 @@ export const PostAnnouncement = (data, Fdata, ClaseAddAnnouncement) => {
 
 // Delete Announcement
 
-export const DeleteAnnouncement = (_id, Fdata, ClaseDeleteAnnouncement) => {
-    axios.delete(`http://localhost:3030/incomeData/${_id}`).then((res) => {
+export const DeleteAnnouncementDele = (_id, Fdata, ClaseDeleteAnnouncement, setloadingDelete) => {
+    setloadingDelete(true)
+    console.log(_id);
+    axios.delete(`${url}/announcement/deleteAnnouncement/${_id}`).then((res) => {
+        console.log(res);
         Fdata()
         ClaseDeleteAnnouncement(false)
-    })
+        setloadingDelete(false)
+    }).catch((err) => {
+        console.error('Error fetching important numbers:', err);
+        setloadingDelete(false)
+    });
+}
+
+// Edit Announcement
+
+export const EditAnnouncement = (_id, formData, ClaseEditAnnouncement, setloading, LodaData) => {
+    console.log(_id);
+    setloading(true)
+    axios.put(`${url}/announcement/updateAnnouncement/${_id}`, formData).then((res) => {
+        console.log(res);
+        ClaseEditAnnouncement()
+        setloading(false)
+        LodaData()
+    }).catch((err) => {
+        console.error('Error fetching important numbers:', err);
+        setloading(false)
+    });
 }
 
 // Facility Management page
@@ -531,7 +597,9 @@ export const GetExpanse = (setAddExpense) => {
 
 
 export const PostExpanse = async (data, Fdata, setAddExpense, setPreviewImage, reset, handleCancel, setLoading) => {
-    const formData = new FormData();
+    console.log(data.Bill);
+
+    let formData = new FormData();
     formData.append('title', data.title);
     formData.append('description', data.description);
     formData.append('date', new Date(data.date).toISOString());
@@ -540,10 +608,12 @@ export const PostExpanse = async (data, Fdata, setAddExpense, setPreviewImage, r
         formData.append('Bill', data.Bill[0]);
     }
     try {
-        await axios.post('https://society-management-app-server.onrender.com/expenses/createexpenses', formData, {
+        const res = await axios.post('https://society-management-app-server.onrender.com/expenses/createexpenses', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
         });
         Fdata();
+        console.log(res);
+
         setAddExpense(false);
         reset();
         setPreviewImage(null);
@@ -556,16 +626,8 @@ export const PostExpanse = async (data, Fdata, setAddExpense, setPreviewImage, r
 }
 
 export const PutExpense = async (_id, data, lodData, setPreviewImage, Close, setLoading) => {
-    const formData = new FormData();
-    formData.append('title', data.Title);
-    formData.append('description', data.Description);
-    formData.append('date', data.Date);
-    formData.append('amount', data.Amount);
-    if (data.Bill && data.Bill.length > 0) {
-        formData.append('Bill', data.Bill[0]);
-    }
     try {
-        await axios.put(`https://society-management-app-server.onrender.com/expenses/updateexpenses/${_id}`, formData,
+        await axios.put(`https://society-management-app-server.onrender.com/expenses/updateexpenses/${_id}`, data,
             { headers: { 'Content-Type': 'multipart/form-data' } }
         );
         lodData();
@@ -589,9 +651,7 @@ export const DeleteExpense = (RemoveId, Fdata, RemoveView, setLoading) => {
 ///Visiter Data
 
 export const GetVisiter = (setVisitorLogs) => {
-    axios.get('http://localhost:3030/Visitors').then((res) => {
-        // console.log(res.data);
-
+    axios.get(`${url}/Visitor/getallVisitors`).then((res) => {
         setVisitorLogs(res.data)
     })
 }

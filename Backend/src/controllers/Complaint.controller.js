@@ -52,19 +52,21 @@ const getComplaint = async (req, res) => {
 const updateComplaint = async (req, res) => {
     try {
         const { id } = req.params;
+        console.log("🚀 ~ updateComplaint ~ req.body:", req.body)
         const complaint = await complaintService.getById(id);
+        console.log("🚀 ~ updateComplaint ~ complaint:", complaint)
         if (!complaint) {
             return res.status(404).json({ message: "Not found" });
         }
         const body = {}
         if (req.body) {
-            body.Complainer_Name = req.body.complainername,
-            body.Complaint_Name = req.body.complaintname,
-            body.Description = req.body.description,
-            body.Wing = req.body.wing,
-            body.Unit = req.body.unit,
-            body.Priority = req.body.priority,
-            body.Status = req.body.status
+            body.Complainer_Name = req.body.Complainer_Name,
+            body.Complaint_Name = req.body.Complaint_Name,
+            body.Description = req.body.Description,
+            body.Wing = req.body.Wing,
+            body.Unit = req.body.Unit,
+            body.Priority = req.body.Priority,
+            body.Status = req.body.Status
         }
         console.log("🚀 ~ updateComplaint ~ body:", body)
         const updatedComplaint = await complaintService.update(id, body);

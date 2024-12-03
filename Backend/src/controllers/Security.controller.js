@@ -1,15 +1,37 @@
 const securityService = require("../services/security.service");
+const { uploadFile } = require("../middleware/upload")
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken"); 
+const jwt = require("jsonwebtoken");
 
 // Register a new security personnel
 const register = async (req, res) => {
     try {
-        const body = req.body;
-        if (req.file) {
-            body.photo = req.file.path;
+        const registersecurity = req.body;
+        console.log("🚀 ~ register ~ registersecurity:", registersecurity)
+
+        console.log("🚀 ~ register ~ req.file:", req.files)
+        const photopath = req.files.photo[0].path;
+        const aadharcardpath = req.files.Aadhar_Card[0].path;
+
+        const photo = await uploadFile(photopath);
+        console.log("🚀 ~ register ~ photo:", photo)
+        const Aadhar_Card = await uploadFile(aadharcardpath);
+        console.log("🚀 ~ register ~ Aadhar_Card:", Aadhar_Card)
+        const body = {
+            photo: photo.secure_url,
+            Full_Name: registersecurity.Full_Name,
+            phone_Number: registersecurity.phone_Number,
+            Gender: registersecurity.Gender,
+            Shift: registersecurity.Shift,
+            Shift_Data: registersecurity.Shift_Data,
+            Shift_Time: registersecurity.Shift_Time,
+            Aadhar_Card: Aadhar_Card.secure_url,
+            createdBy: req.user._id,
+            Society: req.user.societyid
         }
-        body.createdBy = req.user._id; // assuming auth middleware adds user info
+        console.log("🚀 ~ register ~ body.photo.secure_url:", body.photo.secure_url)
+        console.log("🚀 ~ register ~ body.Aadhar_Card.secure_url,:", body.Aadhar_Card.secure_url,)
+        // assuming auth middleware adds user info
         const security = await securityService.register(body);
         res.status(201).json({ message: "Security personnel registered", data: security });
     } catch (error) {
@@ -21,9 +43,29 @@ const register = async (req, res) => {
 const update = async (req, res) => {
     try {
         const id = req.params.id;
-        const body = req.body;
-        if (req.file) {
-            body.photo = req.file.path;
+        const updatesecurity = req.body;
+
+        const body = {}
+        if (req.body) {
+            body.Full_Name = updatesecurity.Full_Name,
+                body.phone_Number = updatesecurity.phone_Number,
+                body.Gender = updatesecurity.Gender,
+                body.Shift = updatesecurity.Shift,
+                body.Shift_Data = updatesecurity.Shift_Data,
+                body.Shift_Time = updatesecurity.Shift_Time
+
+        }
+        if (req.files) {
+            if (req.files.residentphoto) {
+                const photopath = req.files.photo[0].path;
+                const photo = await uploadFile(photopath);
+                body.photo = photo.secure_url;
+            }
+            if (req.files.AadharCard_FrontSide) {
+                const aadharcardpath = req.files.Aadhar_Card[0].path;
+                const Aadhar_Card = await uploadFile(aadharcardpath);
+                body.Aadhar_Card = Aadhar_Card.secure_url;
+            }
         }
         const updatedSecurity = await securityService.update(id, body);
         if (!updatedSecurity) {
@@ -75,18 +117,34 @@ const login = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).json({ message: "Invalid credentials" });
         }
-
-        const token = jwt.sign({ id: security._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+        const payload = {
+            _id: security._id,
+            email: security.Email,
+            role: security.Role,
+            societyid: security.Society
+        };
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1d" });
         res.status(200).json({ message: "Login successful", token });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
+const getgetallsecurity = async (req, res) => {
+    try {
+        const societyid = req.user.societyid
+        const security = await securityService.getAll(societyid);
+        return res.status(200).json(security);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
+
 module.exports = {
     register,
     update,
     getSecurity,
     deleteSecurity,
-    login
+    login,
+    getgetallsecurity
 };

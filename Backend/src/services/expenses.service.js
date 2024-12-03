@@ -7,12 +7,12 @@ const create = async (data) => {
 
 
 const getAll = async (id) => {
-  return await Expenses.find({ Society: id });
+  return await Expenses.find({ Society: id }).populate("createdBy");;
 };
 
 
 const getById = async (id) => {
-  return await Expenses.findById(id);
+  return await Expenses.findById(id).populate("createdBy");;
 };
 
 

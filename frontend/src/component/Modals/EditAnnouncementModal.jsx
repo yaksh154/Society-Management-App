@@ -1,29 +1,33 @@
 import axios from 'axios';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { format } from 'date-fns';
+import CloseButton from '../layout/CloseButton'
+import LodingButton from '../layout/Loding_Button'
+import { EditAnnouncement } from '../services/Api/api';
 
-const EditAnnouncementModal = ({ ClaseEditAnnouncement, _id }) => {
+const EditAnnouncementModal = ({ ClaseEditAnnouncement, _id, LodaData }) => {
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+  const [loading, setloading] = useState(false)
 
   useEffect(() => {
     Fdata()
   }, [])
 
   const Fdata = () => {
-    axios.put(`http://localhost:3030/incomeData/${_id}`).then((res) => {
-      setValue('Announcement_Title', res.data.Announcement_Title);
+    axios.get(`https://society-management-app-server.onrender.com/announcement/getAnnouncement/${_id}`).then((res) => {
+      setValue('title', res.data.title);
       setValue('description', res.data.description);
-      setValue('announcementDate', res.data.announcementDate);
-      setValue('announcementTime', res.data.announcementTime);
+      setValue('date', format(new Date(res.data.date), 'yyyy-MM-dd'));
+      setValue('time', res.data.time);
+      console.log(res);
     })
+    
   }
 
   const onSubmit = (formData) => {
-    console.log(formData);
-    axios.put("url", formData).then((res) => {
-      console.log();
-    })
+    EditAnnouncement(_id,formData,ClaseEditAnnouncement,setloading,LodaData)
   };
 
   const handleChange = (e) => {
@@ -49,8 +53,8 @@ const EditAnnouncementModal = ({ ClaseEditAnnouncement, _id }) => {
               type="text"
               placeholder="Enter Name"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-              {...register('Announcement_Title', { required: "Title is required" })}
-              onChange={handleChange} // Handle change event
+              {...register('title', { required: "Title is required" })}
+              onChange={handleChange} 
             />
             {errors.Announcement_Title && <p className="text-red-500 text-sm">{errors.Announcement_Title.message}</p>}
           </div>
@@ -76,7 +80,7 @@ const EditAnnouncementModal = ({ ClaseEditAnnouncement, _id }) => {
               <input
                 type="date"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-                {...register('announcementDate', { required: "Date is required" })}
+                {...register('date', { required: "Date is required" })}
                 onChange={handleChange} // Handle change event
               />
               {errors.announcementDate && <p className="text-red-500 text-sm">{errors.announcementDate.message}</p>}
@@ -89,27 +93,16 @@ const EditAnnouncementModal = ({ ClaseEditAnnouncement, _id }) => {
               <input
                 type="time"
                 className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-600"
-                {...register('announcementTime', { required: "Time is required" })}
-                onChange={handleChange} // Handle change event
+                {...register('time', { required: "Time is required" })}
+                onChange={handleChange} 
               />
               {errors.announcementTime && <p className="text-red-500 text-sm">{errors.announcementTime.message}</p>}
             </div>
           </div>
 
           <div className="flex justify-end mt-4">
-            <button
-              type="button"
-              className="bg-gray-100 transition-all duration-500 px-4 py-2 w-1/2 font-semibold text-gray-700 mr-2"
-              onClick={() => ClaseEditAnnouncement(false)}
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="bg-gray-100 px-4 py-2 w-1/2 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold py-1 rounded text-sm"
-            >
-              Save
-            </button>
+            <CloseButton Addclass="w-1/2" type="button" CloseName="Cancel" onClick={() => ClaseEditAnnouncement(false)}/>
+            <LodingButton loading={loading} type="submit" Btn_Name="Save" Addclass="w-1/2"/>
           </div>
         </form>
       </div>

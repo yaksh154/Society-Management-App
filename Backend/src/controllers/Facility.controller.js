@@ -52,10 +52,10 @@ const updateFacility = async (req, res) => {
         }
         const body = {}
         if (req.body) {
-            body.Facility_Name = req.body.facilityname,
-                body.Description = req.body.description,
-                body.Schedule_Service_Date = req.body.scheduleservicedate,
-                body.Remind_Before = req.body.remindbefore
+            body.Facility_Name = req.body.Facility_Name,
+                body.Description = req.body.Description,
+                body.Schedule_Service_Date = req.body.Schedule_Service_Date,
+                body.Remind_Before = req.body.Remind_Before
         }
         const updatedFacility = await facilityService.update(id, body);
         return res.status(200).json(updatedFacility);

@@ -1,45 +1,30 @@
 const mongoose = require("mongoose");
 
-const securitySchema = new mongoose.Schema(
+const visitorSchema = new mongoose.Schema(
     {
-        photo: {
+        Visitor_Name: {
             type: String,
             require: true
         },
-        Full_Name: {
+        Wing: {
             type: String,
             require: true
         },
-        phone_Number: {
-            type: Number,
-            require: true
-        },
-        Gender: {
+        Unit: {
             type: String,
-            enum: ["Male", "Female", "Other"],
             require: true
         },
-        Shift: {
-            type: String,
-            enum: ["night ", "day"],
-            require: true
-        },
-        Shift_Data: {
+        Date: {
             type: Date,
             require: true
         },
-        Shift_Time: {
-            type: String,
+        Phone: {
+            type: Number,
             require: true
         },
-        Aadhar_Card: {
+        Time: {
             type: String,
             require: true
-        },
-        Role:{
-            type:String,
-            default:"security",
-            require:true
         },
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
@@ -57,6 +42,6 @@ const securitySchema = new mongoose.Schema(
 
 
 
-const Security = mongoose.model("Security", securitySchema);
+const Visitor = mongoose.model("Visitor", visitorSchema);
 
-module.exports = Security;
+module.exports = Visitor;

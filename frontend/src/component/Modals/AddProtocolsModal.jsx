@@ -5,7 +5,7 @@ import { Post_Security_Protocols } from '../services/Api/api';
 const AddProtocolsModal = ({ CloseAddProtocols, Fdata }) => {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm({
         defaultValues: {
-            Title: '',
+            Titl: '',
             Description: '',
             Date: '',
             Time: ''

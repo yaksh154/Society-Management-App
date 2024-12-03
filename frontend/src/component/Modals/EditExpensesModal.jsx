@@ -20,8 +20,9 @@ const EditExpensesModal = ({ Close, _id, lodData }) => {
         Description: "",
         Date: "",
         Amount: "",
-        Bill: null,
+        Bill: "",
     });
+    
 
     useEffect(() => {
         Fdata();
@@ -36,8 +37,9 @@ const EditExpensesModal = ({ Close, _id, lodData }) => {
                 Description: data.Description || "",
                 Date: data.Date || "",
                 Amount: data.Amount || "",
-                Bill: data.Bill || null,
+                Bill: data.Bill,
             });
+            
         } catch (error) {
             console.error("Error fetching expense data:", error);
         }
@@ -50,9 +52,8 @@ const EditExpensesModal = ({ Close, _id, lodData }) => {
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
-            setValue("Bill", [file]);
-            const fileURL = URL.createObjectURL(file);
-            setPreviewImage(fileURL);
+            setValue("Bill", expenses.Bill || [file]);
+            setPreviewImage(file);
         }
     };
 
@@ -72,7 +73,7 @@ const EditExpensesModal = ({ Close, _id, lodData }) => {
     // Handle form submission
     const onSubmit = async (data) => {
         setLoading(true)
-        PutExpense(_id,data, lodData, setPreviewImage, Close, setLoading)
+        PutExpense(_id, data, lodData, setPreviewImage, Close, setLoading)
     };
 
     return (
@@ -213,7 +214,7 @@ const EditExpensesModal = ({ Close, _id, lodData }) => {
                                 <div>
                                     {previewImage ? (
 
-                                        <img src={previewImage} alt="Preview" className="mx-auto h-32 w-32 object-cover rounded-md mb-2" />
+                                        <img src={URL.createObjectURL(previewImage)} alt="Preview" className="mx-auto h-32 w-32 object-cover rounded-md mb-2" />
 
                                     ) : expenses.Bill ? (
 

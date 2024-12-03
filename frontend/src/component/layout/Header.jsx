@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import OpneNotificationModal from "../Modals/OpneNotificationModal";
 import { Profile_img } from "../services/Api/api";
 
-const Header = (props) => {
+const Header = ({openNav}) => {
   const [FormData, setFormData] = useState('')
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Header = (props) => {
           <span
             className="flex items-center mr-5"
             style={{ fontSize: 30, cursor: "pointer" }}
-            onClick={props.openNav}
+            onClick={openNav}
           >
             <GiHamburgerMenu />
           </span>
@@ -42,14 +42,15 @@ const Header = (props) => {
               <div className="flex items-center">
                 <div className="Profie-img mr-3">
                   <img
-                    src={FormData.image || "/images/user.png"}
+                    src={FormData.Image || "/images/user.png"}
                     alt="Profile"
                     className="w-8 h-8 rounded-full"
                   />
                 </div>
                 <div className="profile-text">
                   <p className="font-medium">{FormData.Firstname || "User"} {FormData.Lastname || ""}</p>
-                  <p className="text-gray-400">{FormData.Rol || "Role"}</p>
+                  <p className="text-gray-400">{FormData.Role
+                   || "Role"}</p>
                 </div>
               </div>
             ) : (

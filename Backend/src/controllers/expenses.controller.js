@@ -63,14 +63,13 @@ const updateexpenses = async (req, res) => {
 
         const updetbody = {};
         if (req.body) {
-            updetbody.Title = req.body.title;
-            updetbody.Description = req.body.description;
-            updetbody.Date = req.body.date;
-            updetbody.Amount = req.body.amount;
+            updetbody.Title = req.body.Title;
+            updetbody.Description = req.body.Description;
+            updetbody.Date = req.body.Date;
+            updetbody.Amount = req.body.Amount;
         }
         console.log("🚀 ~ updateexpenses ~ updetbody:", updetbody);
 
-        
         if (req.files) {
             const Bill = req.files.Bill[0].path;
             const upload = await uploadFile(Bill);

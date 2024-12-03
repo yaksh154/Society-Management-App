@@ -19,11 +19,15 @@ const deleteSecurity = async (id) => {
 const findByEmail = async (email) => {
     return await Security.findOne({ email });
 };
+const getAll = async (societyid) =>{
+    return await Security.find({ Society: societyid }).populate("createdBy").populate("Society");
+}
 
 module.exports = {
     register,
     update,
     findById,
     deleteSecurity,
-    findByEmail
+    findByEmail,
+    getAll
 };

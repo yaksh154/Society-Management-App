@@ -7,12 +7,12 @@ const create = async (data) => {
 
 
 const getAll = async (id) => {
-  return await Importantnumber.find({Society: id});
+  return await Importantnumber.find({Society: id}).populate("createdBy");;
 };
 
 
 const getById = async (id) => {
-  return await Importantnumber.findById(id);
+  return await Importantnumber.findById(id).populate("createdBy");;
 };
 
 
