@@ -11,7 +11,7 @@ const securitySchema = new mongoose.Schema(
             require: true
         },
         phone_Number: {
-            type: Date,
+            type: Number,
             require: true
         },
         Gender: {
