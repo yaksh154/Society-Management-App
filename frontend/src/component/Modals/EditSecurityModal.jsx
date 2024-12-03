@@ -1,66 +1,71 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import { EditGuard_Details } from '../services/Api/api';
 
 const EditSecurityModal = ({ _id, CloseEdit }) => {
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
   const [photoPreview, setPhotoPreview] = useState(null);
   const [aadharCard, setAadharCard] = useState(null);
+  const [AadharCardsize, setAadharCardsize] = useState([])
 
   // Fetch data on component mount
   useEffect(() => {
     if (_id) {
-      fetch(`/api/security/${_id}`)
-        .then(response => response.json())
-        .then(data => {
-          // Set form values with fetched data
-          setValue('fullName', data.fullName);
-          setValue('phoneNumber', data.phoneNumber);
-          setValue('gender', data.gender);
-          setValue('shift', data.shift);
-          setValue('shiftDate', data.shiftDate);
-          setValue('shiftTime', data.shiftTime);
-          setPhotoPreview(data.photoUrl); // Assuming URL is stored for preview
-          setAadharCard(data.aadharCard);
-        })
-        .catch(error => console.error('Error fetching security data:', error));
+      fetchSecurityData();
     }
-  }, [_id, setValue]);
+  }, [_id]);
 
-  // Submit handler
-  const onSubmit = (data) => {
+  const fetchSecurityData = async () => {
+    try {
+      const res = await axios.get(`https://society-management-app-server.onrender.com/security/security/${_id}`);
+      const data = res.data;
+
+      if (data) {
+        setValue('photo', data.photo || '');
+        setValue('Full_Name', data.Full_Name || '');
+        setValue('phone_Number', data.phone_Number || '');
+        setValue('Gender', data.Gender || '');
+        setValue('Shift', data.Shift || '');
+        const formattedDate = data.Shift_Data ? new Date(data.Shift_Data).toISOString().split('T')[0] : '';
+        setValue('Shift_Data', formattedDate);
+        setValue('Shift_Time', data.Shift_Time || '');
+        setValue('Aadhar_Card', data.Aadhar_Card || '');
+        if (data.photo) setPhotoPreview(data.photo);
+        if (data.Aadhar_Card) setAadharCard(data.Aadhar_Card);
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+
+  const onSubmit = async (data) => {
     const formData = new FormData();
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       formData.append(key, data[key]);
     });
 
-    if (aadharCard) formData.append('aadharCard', aadharCard);
+    if (aadharCard) formData.append('Aadhar_Card', aadharCard);
+    console.log(formData);
     
-    fetch(`/api/security/${_id}`, {
-      method: 'PUT',
-      body: formData,
-    })
-    .then(response => response.json())
-    .then(updatedData => {
-      console.log('Updated data:', updatedData);
-      CloseEdit();
-    })
-    .catch(error => console.error('Error updating security data:', error));
+    EditGuard_Details(_id)
   };
 
-  // File change handlers
-  const handlePhotoChange = (e) => {
+  const handleFileChange = (e, setFileState, fieldName) => {
     const file = e.target.files[0];
     if (file) {
-      setPhotoPreview(URL.createObjectURL(file));
-      setValue('photo', file);
-    }
-  };
+      setFileState(file);
+      setValue(fieldName, file);
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setAadharCard(file);
-      setValue('aadharCard', file);
+      if (fieldName === 'photo') {
+        setPhotoPreview(file);
+      } else if (fieldName === 'aadharCard') {
+        setAadharCard(file);
+        const fileSizeInBytes = file.size;
+        const fileSizeInMB = (fileSizeInBytes / (1024 * 1024)).toFixed(2);
+        setAadharCardsize(`${fileSizeInMB} MB`);
+      }
     }
   };
 
@@ -70,8 +75,14 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
   };
 
   return (
-    <div className='fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50'>
-      <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4">
+    <div
+      className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50"
+      onKeyDown={(e) => e.key === 'Escape' && CloseEdit()}
+    >
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4"
+      >
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">Edit Security</h2>
 
         {/* Photo Upload Section */}
@@ -80,13 +91,16 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
             <input
               type="file"
               accept="image/*"
-              onChange={handlePhotoChange}
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-              {...register('photo')}
+              onChange={(e) => handleFileChange(e, setPhotoPreview, 'photo')}
             />
             <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden">
               {photoPreview ? (
-                <img src={photoPreview} alt="Preview" className="object-cover w-full h-full" />
+                <img
+                  src={typeof photoPreview === 'string' ? photoPreview : URL.createObjectURL(photoPreview)}
+                  alt="Preview"
+                  className="object-cover w-full h-full"
+                />
               ) : (
                 <span className="text-gray-500">Add Photo</span>
               )}
@@ -102,9 +116,9 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
             type="text"
             placeholder="Enter Full Name"
             className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            {...register('fullName', { required: 'Full name is required' })}
+            {...register('Full_Name', { required: 'Full name is required' })}
           />
-          {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName.message}</p>}
+          {errors.Full_Name && <p className="text-red-500 text-sm">{errors.Full_Name.message}</p>}
         </div>
 
         {/* Phone Number */}
@@ -114,12 +128,12 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
             type="tel"
             placeholder="+91"
             className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            {...register('phoneNumber', {
+            {...register('phone_Number', {
               required: 'Phone number is required',
               pattern: { value: /^[0-9]{10}$/, message: 'Invalid phone number format' },
             })}
           />
-          {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber.message}</p>}
+          {errors.phone_Number && <p className="text-red-500 text-sm">{errors.phone_Number.message}</p>}
         </div>
 
         {/* Gender & Shift */}
@@ -128,27 +142,27 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
             <label className="block text-gray-700">Gender</label>
             <select
               className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              {...register('gender', { required: 'Gender is required' })}
+              {...register('Gender', { required: 'Gender is required' })}
             >
               <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
             </select>
-            {errors.gender && <p className="text-red-500 text-sm">{errors.gender.message}</p>}
+            {errors.Gender && <p className="text-red-500 text-sm">{errors.Gender.message}</p>}
           </div>
 
           <div className="w-1/2">
             <label className="block text-gray-700">Shift</label>
             <select
               className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              {...register('shift', { required: 'Shift is required' })}
+              {...register('Shift', { required: 'Shift is required' })}
             >
               <option value="">Select Shift</option>
-              <option value="day">Day</option>
-              <option value="night">Night</option>
+              <option value="Day">Day</option>
+              <option value="Night">Night</option>
             </select>
-            {errors.shift && <p className="text-red-500 text-sm">{errors.shift.message}</p>}
+            {errors.Shift && <p className="text-red-500 text-sm">{errors.Shift.message}</p>}
           </div>
         </div>
 
@@ -159,9 +173,9 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
             <input
               type="date"
               className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              {...register('shiftDate', { required: 'Shift date is required' })}
+              {...register('Shift_Data', { required: 'Shift date is required' })}
             />
-            {errors.shiftDate && <p className="text-red-500 text-sm">{errors.shiftDate.message}</p>}
+            {errors.Shift_Data && <p className="text-red-500 text-sm">{errors.Shift_Data.message}</p>}
           </div>
 
           <div className="w-1/2">
@@ -169,9 +183,9 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
             <input
               type="time"
               className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              {...register('shiftTime', { required: 'Shift time is required' })}
+              {...register('Shift_Time', { required: 'Shift time is required' })}
             />
-            {errors.shiftTime && <p className="text-red-500 text-sm">{errors.shiftTime.message}</p>}
+            {errors.Shift_Time && <p className="text-red-500 text-sm">{errors.Shift_Time.message}</p>}
           </div>
         </div>
 
@@ -186,13 +200,23 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
                   type="file"
                   accept=".png, .jpg, .jpeg"
                   className="hidden"
-                  onChange={handleFileChange}
+                  onChange={(e) => handleFileChange(e, setAadharCard, 'aadharCard')}
                 />
               </label>
             ) : (
-              <div className="flex flex-col items-center mt-4">
-                <img src={URL.createObjectURL(aadharCard)} alt="Aadhar Preview" className="w-12 h-12 mb-2" />
-                <span className="text-gray-600 text-sm">{aadharCard.name}</span>
+
+              <div className="flex justify-between items-center">
+                <div className="flex items-center">
+                  <img
+                    src={typeof aadharCard === 'string' ? aadharCard : URL.createObjectURL(aadharCard)}
+                    alt="Aadhar Preview"
+                    className="w-12 h-12 mb-2"
+                  />
+                  <div>
+                    <p className="text-gray-600 text-sm text-left">{aadharCard.name}</p>
+                    <p className="text-gray-600 text-sm">{AadharCardsize}</p>
+                  </div>
+                </div>
                 <button onClick={handleRemoveFile} className="text-red-500 text-sm">Delete</button>
               </div>
             )}

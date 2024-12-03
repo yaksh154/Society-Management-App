@@ -405,7 +405,7 @@ export const Get_Security_Protocols = (setSecurity) => {
 // Post Security Protocols
 
 export const Post_Security_Protocols = (data, Fdata, CloseAddProtocols) => {
-    axios.post(`${url}/security/createsecurity`, data, {headers: { 'Content-Type': 'multipart/form-data' }}).then((res) => {
+    axios.post(`${url}/security/createsecurity`, data, { headers: { 'Content-Type': 'multipart/form-data' } }).then((res) => {
         CloseAddProtocols()
         Fdata()
     })
@@ -432,10 +432,31 @@ export const GetGuard_Details = (setGuard_Details) => {
 
 // post Security Guard Details
 
-export const PostGuard_Details = (data) =>{
-    axios.post(`${url}/security/createsecurity`,data, {headers: { 'Content-Type': 'multipart/form-data' }}).then((res)=>{
-        console.log(res.data);
+export const PostGuard_Details = (data, CloseAddSecurity, Fdata,setloading) => {
+    setloading(true)
+    axios.post(`${url}/security/createsecurity`, data, { headers: { 'Content-Type': 'multipart/form-data' } }).then((res) => {
+        CloseAddSecurity()
+        setloading(false)
+        Fdata()
     })
+}
+
+// Delete Security Guard Details
+
+export const DeleteGuard_Details = (_id, setloadingDelete, Guard_Details, setGuard_Details,CloseDeleteSecurity) => {
+    setloadingDelete(true)
+    axios.delete(`${url}/security/deletesecurity/${_id}`).then((res) => {
+        setloadingDelete(false)
+        const deletData = Guard_Details.filter((e) => e._id !== _id)
+        setGuard_Details(deletData)
+        CloseDeleteSecurity()
+    })
+}
+
+// Edit Security Guard Details
+
+export const EditGuard_Details = (_id) =>{
+    axios.put(`${url}/security/updatesecurity/${_id}`,)
 }
 
 // Announcement page
@@ -653,6 +674,7 @@ export const DeleteExpense = (RemoveId, Fdata, RemoveView, setLoading) => {
 
 export const GetVisiter = (setVisitorLogs) => {
     axios.get(`${url}/Visitor/getallVisitors`).then((res) => {
+        console.log(res.data)
         setVisitorLogs(res.data)
     })
 }
@@ -666,7 +688,7 @@ export const PostVisiter = (data, Fdata, setAddVisiterbox) => {
 
 //Notes
 
-export const GetNotes = (setNotes,setlodingData) => {
+export const GetNotes = (setNotes, setlodingData) => {
     axios.get(`${url}/note/getAllNotes`).then((res) => {
         setNotes(res.data)
         setlodingData(false)

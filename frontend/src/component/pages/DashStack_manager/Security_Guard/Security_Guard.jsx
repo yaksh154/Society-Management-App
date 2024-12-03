@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from '../../../layout/Sidebar'
 import Header from '../../../layout/Header'
-import { GetGuard_Details } from '../../../services/Api/api';
+import { DeleteGuard_Details, GetGuard_Details } from '../../../services/Api/api';
 import { FaEdit, FaFemale, FaMale, FaTrashAlt } from 'react-icons/fa';
 import { GrFormView } from 'react-icons/gr';
 import { PiMoonFill } from "react-icons/pi";
 import { IoSunnySharp } from "react-icons/io5";
 import AddSecurityModal from '../../../Modals/AddSecurityModal';
-import DeleteSecurityModal from '../../../Modals/DeleteSecurityModal';
 import ViewSecurityModal from '../../../Modals/ViewSecurityModal';
 import EditSecurityModal from '../../../Modals/EditSecurityModal';
+import DeleteLoding from '../../../layout/DeleteLoding'
 
 const Security_Guard = () => {
   let [data, setdata] = useState(280);
@@ -41,6 +41,7 @@ const Security_Guard = () => {
   const [EditId, setEditId] = useState(null)
   const [DeleteSecurity, setDeleteSecurity] = useState(false)
   const [DeleteId, setDeleteId] = useState(null)
+  const [loadingDelete, setloadingDelete] = useState(false)
 
   const OpneAddSecurity = () => {
     setAddSecurity(true)
@@ -72,6 +73,10 @@ const Security_Guard = () => {
   const CloseDeleteSecurity = () => {
     setDeleteSecurity(false)
   }
+  const DeleteCliced = () =>{
+    const _id = DeleteId;
+    DeleteGuard_Details(_id,setloadingDelete,Guard_Details, setGuard_Details,CloseDeleteSecurity)
+  }
 
   return (
     <div>
@@ -88,7 +93,7 @@ const Security_Guard = () => {
                 <button onClick={OpneAddSecurity} className="px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200">
                   Add Security
                 </button>
-                {AddSecurity && (<AddSecurityModal CloseAddSecurity={CloseAddSecurity} />)}
+                {AddSecurity && (<AddSecurityModal CloseAddSecurity={CloseAddSecurity} Fdata={Fdata} />)}
               </div>
               <div className="overflow-auto h-svh">
                 <table className="min-w-full bg-[#eef1fd] rounded-lg">
@@ -122,17 +127,17 @@ const Security_Guard = () => {
                       return (
                         <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium text-center md:font-semibold overflow-x-scroll">
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex items-center">
-                            <img className="w-8 h-8 rounded-full mr-1" src="https://via.placeholder.com/40" alt="profile" />
+                            <img className="w-8 h-8 rounded-full mr-1" src={e.photo} alt="profile" />
                             <span>{e.Full_Name}</span>
                           </td>
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.phone_Number}</td>
                           <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
                             <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center items-center ${e.Shift === "High" ? "bg-[#e74c3c] text-white" :
-                              e.Shift === "day" ? "bg-[#f4f4f4] text-[#ff9300]" :
+                              e.Shift === "Day" ? "bg-[#f4f4f4] text-[#ff9300]" :
                                 e.Shift === "Night" ? "bg-[#4f4f4f] text-white" : ""
                               }`}>
-                              {e.Shift === "day" && <IoSunnySharp className='mr-1' />}
-                              {e.Shift === "night" && <PiMoonFill className='mr-1' />}
+                              {e.Shift === "Day" && <IoSunnySharp className='mr-1' />}
+                              {e.Shift === "Night" && <PiMoonFill className='mr-1' />}
                               {` ${e.Shift}`}
                             </span>
                           </td>
@@ -186,7 +191,7 @@ const Security_Guard = () => {
                 </table>
                 {EditSecurity && (<EditSecurityModal _id={EditId} CloseEdit={CloseEditSecurity} />)}
                 {ViewSecurity && (<ViewSecurityModal _id={ViewId} CloseView={CloseViewSecurity} />)}
-                {DeleteSecurity && (<DeleteSecurityModal _id={DeleteId} CloseDelete={CloseDeleteSecurity} />)}
+                {DeleteSecurity && (<DeleteLoding loading={loadingDelete} DeleteClick={DeleteCliced} close={CloseDeleteSecurity} />)}
               </div>
             </div>
           </div>
