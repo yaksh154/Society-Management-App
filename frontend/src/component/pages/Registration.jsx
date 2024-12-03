@@ -42,9 +42,9 @@ const Registration = () => {
             alert("Passwords do not match!");
             return;
         }
-        
+
         const { confirmPassword, ...registrationData } = data;
-        UserDataRegistration(registrationData, setRegistrationError,reset,navigate)
+        UserDataRegistration(registrationData, setRegistrationError, reset, navigate)
 
     };
     return (
@@ -56,7 +56,7 @@ const Registration = () => {
             <div className="flex flex-col w-full lg:w-1/2 items-center justify-center p-6">
 
                 <h1 className="text-5xl font-bold text-orange-600 lg:hidden mb-3">Dash<span className="text-black">Stack</span></h1>
-                <div className="w-full max-w-lg bg-white shadow-lg rounded-lg p-6">
+                <div className="w-full max-w-lg bg-white shadow-lg rounded-lg p-6 ">
                     <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Registration</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {/* Name Fields */}
@@ -104,7 +104,7 @@ const Registration = () => {
                                             message: "Please enter a valid phone number with 10 to 15 digits"
                                         }
                                     })}
-                                    
+
                                     className="w-full p-1 text-sm border border-gray-300 rounded"
                                     placeholder="Enter Phone Number"
                                 />
@@ -178,7 +178,7 @@ const Registration = () => {
                                         {...register("Password", { required: true })}
                                         className="w-full p-1 text-sm border border-gray-300 rounded"
                                         placeholder="Enter Password"
-                                        autoComplete="new-password" 
+                                        autoComplete="new-password"
                                     />
                                     <button
                                         type="button"

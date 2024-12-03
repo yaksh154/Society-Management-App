@@ -36,7 +36,7 @@ const Login = () => {
                     <div className="flex items-center justify-center"><img className="mt-16 h-72" src={Loginimg} alt="Login" /></div>
                 </div>
                 {/* Login Form 0 */}
-                <div className="flex flex-col w-full lg:w-1/2 items-center justify-center px-8 py-12 lg:py-0">
+                <div className="flex flex-col w-full lg:w-1/2 items-center justify-center px-8 py-12 lg:py-0 ">
                     <h1 className="text-5xl max-[425px]:text-4xl font-bold text-orange-600 lg:hidden">Dash<span className="text-black">Stack</span></h1>
                     <form className="bg-white w-full max-w-md shadow-lg rounded-lg p-8 mt-8" onSubmit={handleSubmit(onSubmit)}>
                         <div className="hidden max-[1023px]:flex items-center justify-center"><img className="h-44 max-[375px]:h-36 max-[320px]:h-28" src={m_Loginimg} alt="Login" /></div>

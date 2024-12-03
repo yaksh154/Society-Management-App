@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { LuImagePlus } from "react-icons/lu";
 import { Link } from 'react-router-dom';
+import { PostSumdata } from '../../../../services/Api/api';
 
 const Resident_Owner = () => {
     
@@ -29,7 +30,7 @@ const Resident_Owner = () => {
     const handleImageChange = (e) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
-            setImage(URL.createObjectURL(file));
+            setImage(file);
         }
     };
 
@@ -85,18 +86,6 @@ const Resident_Owner = () => {
         });
     };
 
-    // Function to handle create button click
-    const handleCreate = () => {
-        const data = {
-            formValues,
-            members,
-            vehicles,
-            files,
-            image, // Include the image here
-        };
-        console.log("Form Submission Data:", data);
-    };
-
 
     const [files, setFiles] = useState({
         frontAadhar: null,
@@ -117,6 +106,19 @@ const Resident_Owner = () => {
             ...files,
             [fileType]: null,
         });
+    };
+
+    // Function to handle create button click
+    const handleCreate = () => {
+        const data = {
+            formValues,
+            members,
+            vehicles,
+            files,
+            image,
+        };
+        console.log("Form Submission Data:", data);
+        // PostSumdata(data)
     };
 
     const uploadCard = (label, fileType) => (
@@ -169,7 +171,7 @@ const Resident_Owner = () => {
                 <div className="text-center pr-5">
                     <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center relative">
                         {image ? (
-                            <img src={image} alt="Profile" className="w-full h-full object-cover" />
+                            <img src={URL.createObjectURL(image)} alt="Profile" className="w-full h-full object-cover" />||<img src={image} alt="Profile" className="w-full h-full object-cover" />
                         ) : (
                             <span className="text-gray-400 text-xl">+</span>
                         )}

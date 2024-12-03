@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { PostAnnouncement } from '../services/Api/api';
+import CloseButton from '../layout/CloseButton'
+import LodingButton from '../layout/Loding_Button'
 
 const AddAnnouncementModal = ({ ClaseAddAnnouncement, Fdata }) => {
 
@@ -11,9 +13,11 @@ const AddAnnouncementModal = ({ ClaseAddAnnouncement, Fdata }) => {
         formState: { errors },
     } = useForm();
 
+    const [loading, setloading] = useState(false)
+
     // Submit handler
     const onSubmit = (data) => {
-        PostAnnouncement(data,Fdata,ClaseAddAnnouncement)
+        PostAnnouncement(data,Fdata,ClaseAddAnnouncement,setloading)
         reset()
     };
 
@@ -34,7 +38,7 @@ const AddAnnouncementModal = ({ ClaseAddAnnouncement, Fdata }) => {
                         <input
                             type="text"
                             placeholder="Enter Name"
-                            {...register('Announcement_Title', { required: 'Title is required' })}
+                            {...register('title', { required: 'Title is required' })}
                             className="w-full px-4 py-2 border rounded-md focus:black"
                         />
                         {errors.Announcement_Title && (
@@ -63,7 +67,7 @@ const AddAnnouncementModal = ({ ClaseAddAnnouncement, Fdata }) => {
                             </label>
                             <input
                                 type="date"
-                                {...register('AnnouncementDate', { required: 'Date is required' })}
+                                {...register('date', { required: 'Date is required' })}
                                 className="w-full px-4 py-2 border rounded-md focus:black"
                             />
                             {errors.AnnouncementDate && (
@@ -77,7 +81,7 @@ const AddAnnouncementModal = ({ ClaseAddAnnouncement, Fdata }) => {
                             </label>
                             <input
                                 type="time"
-                                {...register('Announcement_Time', { required: 'Time is required' })}
+                                {...register('time', { required: 'Time is required' })}
                                 className="w-full px-4 py-2 border rounded-md focus:black"
                             />
                             {errors.Announcement_Time && (
@@ -87,19 +91,8 @@ const AddAnnouncementModal = ({ ClaseAddAnnouncement, Fdata }) => {
                     </div>
 
                     <div className="flex justify-end mt-4">
-                        <button
-                            type="button"
-                            className="bg-gray-100 transition-all duration-500 px-4 py-2 w-1/2 font-semibold text-gray-700 mr-2"
-                            onClick={ClaseAddAnnouncement}
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            type="submit"
-                            className="bg-gray-100 px-4  w-1/2 hover:bg-gradient-to-r hover:from-orange-600 hover:to-yellow-500 hover:text-white text-black font-semibold py-1 rounded text-sm"
-                        >
-                            Save
-                        </button>
+                        <CloseButton type="button" Addclass="w-1/2" CloseName="Cancel" onClick={ClaseAddAnnouncement} />
+                        <LodingButton loading={loading} Addclass="w-1/2" type="submit" Btn_Name="Save"/>
                     </div>
                 </form>
             </div>

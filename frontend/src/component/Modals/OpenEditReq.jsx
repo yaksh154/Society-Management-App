@@ -7,7 +7,7 @@ import CloseButton from '../layout/CloseButton';
 import LodingButton from '../layout/Loding_Button'
 import { EditRequest } from '../services/Api/api';
 
-const OpenEditReq = ({ _id, closeEditComplint }) => {
+const OpenEditReq = ({ _id, closeEditComplint, Lodata }) => {
 
     const [editComplaint, seteditComplaint] = useState({
         Requester_Name: '',
@@ -50,7 +50,7 @@ const OpenEditReq = ({ _id, closeEditComplint }) => {
     };
 
     const handleSave = () => {
-        EditRequest(_id,editComplaint,closeEditComplint,setloading)
+        EditRequest(_id,editComplaint,closeEditComplint,setloading,Lodata)
     };
 
     return (

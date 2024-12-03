@@ -4,7 +4,7 @@ import { EditComplaint } from '../services/Api/api';
 import CloseButton from '../layout/CloseButton';
 import LodingButton from '../layout/Loding_Button'
 
-const OpenEditComplintModel = ({ _id, closeEditComplint }) => {
+const OpenEditComplintModel = ({ _id, closeEditComplint,LodData }) => {
 
     const [editComplaint, seteditComplaint] = useState({
         Complainer_Name: '',
@@ -45,7 +45,7 @@ const OpenEditComplintModel = ({ _id, closeEditComplint }) => {
     };
 
     const handleSave = async () => {
-        EditComplaint(closeEditComplint,_id,editComplaint,setloading)
+        EditComplaint(closeEditComplint,_id,editComplaint,setloading,LodData)
     };
 
     return (
