@@ -16,7 +16,7 @@ const securitySchema = new mongoose.Schema(
         },
         Gender: {
             type: String,
-            enum: ["Male", "Female", "Other"],
+            enum: ["male", "female", "other"],
             require: true
         },
         Shift: {
