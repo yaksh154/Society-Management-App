@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const register = async (req, res) => {
     try {
         const registersecurity = req.body;
+        console.log("🚀 ~ register ~ registersecurity:", registersecurity)
 
         console.log("🚀 ~ register ~ req.file:", req.files)
         const photopath = req.files.photo[0].path;
