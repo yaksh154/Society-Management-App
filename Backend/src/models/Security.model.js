@@ -16,12 +16,12 @@ const securitySchema = new mongoose.Schema(
         },
         Gender: {
             type: String,
-            enum: ["male", "female", "other"],
+            enum: ["Male", "Female", "Other"],
             require: true
         },
         Shift: {
             type: String,
-            enum: ["night ", "day"],
+            enum: ["Night ", "Day"],
             require: true
         },
         Shift_Data: {
