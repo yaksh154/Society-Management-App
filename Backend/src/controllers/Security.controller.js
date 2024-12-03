@@ -49,25 +49,28 @@ const update = async (req, res) => {
         const body = {}
         if (req.body) {
             body.Full_Name = updatesecurity.Full_Name,
-                body.phone_Number = updatesecurity.phone_Number,
-                body.Gender = updatesecurity.Gender,
-                body.Shift = updatesecurity.Shift,
-                body.Shift_Data = updatesecurity.Shift_Data,
-                body.Shift_Time = updatesecurity.Shift_Time
-
+            body.phone_Number = updatesecurity.phone_Number,
+            body.Gender = updatesecurity.Gender,
+            body.Shift = updatesecurity.Shift,
+            body.Shift_Data = updatesecurity.Shift_Data,
+            body.Shift_Time = updatesecurity.Shift_Time
+            
         }
         if (req.files) {
-            if (req.files.residentphoto) {
+            if (req.files.photo) {
                 const photopath = req.files.photo[0].path;
+                console.log("🚀 ~ update ~ photopath:", photopath)
                 const photo = await uploadFile(photopath);
+                console.log("🚀 ~ update ~ photo:", photo)
                 body.photo = photo.secure_url;
             }
-            if (req.files.AadharCard_FrontSide) {
+            if (req.files.Aadhar_Card) {
                 const aadharcardpath = req.files.Aadhar_Card[0].path;
                 const Aadhar_Card = await uploadFile(aadharcardpath);
                 body.Aadhar_Card = Aadhar_Card.secure_url;
             }
         }
+        console.log("🚀 ~ update ~ body:", body)
         const updatedSecurity = await securityService.update(id, body);
         if (!updatedSecurity) {
             return res.status(404).json({ message: "Security personnel not found" });
