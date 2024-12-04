@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { FaCalendarAlt, FaClock } from "react-icons/fa";
-import { PostVisiter } from "../../../../services/Api/api";
+import { PostVisiter } from "../../Api/Api";
+
 
 const AddVisiter = ({ setAddVisiterbox, Fdata }) => {
   const {

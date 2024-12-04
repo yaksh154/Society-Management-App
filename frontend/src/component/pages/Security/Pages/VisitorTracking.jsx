@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
 import Sidenav from "../layout/Sidenav";
 import Header from "../layout/Header";
-import { GetVisiter } from "../../../services/Api/api";
 import { AiOutlinePlus } from "react-icons/ai";
 import AddVisiter from "./Models/AddVisiter";
+import { GetVisiter } from "../Api/Api";
 
 const VisitorTracking = () => {
   const [data, setData] = useState(280);
@@ -17,7 +17,7 @@ const VisitorTracking = () => {
   useEffect(() => {
     const fetchVisitorLogs = async () => {
       try {
-        const data = await GetVisiter(); // Assuming GetVisiter returns a promise
+        const data = await GetVisiter(); 
         if (data && Array.isArray(data)) {
           setVisitorLogs(data);
         } else {

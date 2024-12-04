@@ -22,7 +22,7 @@ const AddMaintenanceDetail = ({ setShowAddDetail , Fdata }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
-        <form onSubmit={handleSubmit(addData)}>
+        <form onSubmit={handleSubmit(addData)} method='post'>
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">Add Maintenance Detail</h2>
 
           <div className="grid grid-cols-2 gap-6 mb-6">
@@ -34,7 +34,7 @@ const AddMaintenanceDetail = ({ setShowAddDetail , Fdata }) => {
                   type="number"
                   placeholder="1,000"
                   className="w-full p-2 border-none focus:outline-none text-gray-700"
-                  {...register("maintenanceAmount", { required: true })}
+                  {...register("Maintenance_Amount", { required: true })}
                 />
               </div>
               {errors.maintenanceAmount && <span className="text-red-500">This field is required</span>}
@@ -48,7 +48,7 @@ const AddMaintenanceDetail = ({ setShowAddDetail , Fdata }) => {
                   type="number"
                   placeholder="250"
                   className="w-full p-2 border-none focus:outline-none text-gray-700"
-                  {...register("penaltyAmount", { required: true })}
+                  {...register("Penalty_Amount", { required: true })}
                 />
               </div>
               {errors.penaltyAmount && <span className="text-red-500">This field is required</span>}
@@ -62,7 +62,7 @@ const AddMaintenanceDetail = ({ setShowAddDetail , Fdata }) => {
                 type="date"
                 className="w-full p-2 border-none focus:outline-none text-gray-700"
                 min={today} // Disable past dates
-                {...register("dueDate", { required: true })}
+                {...register("Maintenance_Due_Date", { required: true })}
               />
             </div>
             {errors.dueDate && <span className="text-red-500">This field is required</span>}
@@ -72,7 +72,7 @@ const AddMaintenanceDetail = ({ setShowAddDetail , Fdata }) => {
             <label className="block text-gray-700 mb-2 font-semibold">Penalty Applied After Day Selection</label>
             <select
               className="w-full p-2 border rounded focus:outline-none text-gray-700"
-              {...register("penaltyDaySelection", { required: true })}
+              {...register("Penalty_Applied_After_Day_Selection", { required: true })}
             >
               <option value="" disabled>Select Penalty Applied After Day Selection</option>
               <option value="1">1 Day</option>

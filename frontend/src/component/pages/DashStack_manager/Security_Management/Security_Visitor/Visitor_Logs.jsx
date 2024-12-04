@@ -4,8 +4,9 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../../../../layout/Sidebar';
 import Header from '../../../../layout/Header';
-import { FaUser } from 'react-icons/fa';
-import { GetVisiter } from '../../../../services/Api/api';
+import { GetVisiter } from '../../../Security/Api/Api';
+
+
 
 const Visitor_Logs = () => {
     const [data, setData] = useState(280);
