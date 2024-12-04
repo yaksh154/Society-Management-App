@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from '../../layout/Sidebar'
 import Header from '../../layout/Header'
-import Button from '../../../../layout/Button_gradient'
 import Home_totle_card from '../../../../layout/Home_totle_card';
 import { TiThMenu } from 'react-icons/ti';
 import { MdOutlineAttachMoney } from 'react-icons/md';
-import GetPassModal from './Modal/GetPassModal';
 import TotalBalanceChart from '../../../../layout/TotalBalanceChart';
 import { GetComplainy, ImportantNumbersGet } from '../../../../services/Api/api';
-import axios from 'axios';
 import { Get_Pending_Maintenances } from '../../Api/api';
 
 const Home = () => {
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleNav = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  React.useEffect(() => {
+    if (isOpen) {
+      openNav();
+    } else {
+      closeNav();
+    }
+  }, [isOpen]);
+
   let [data, setdata] = useState(280);
   let [getdata, setget] = useState(280);
 
@@ -22,12 +34,6 @@ const Home = () => {
   function closeNav() {
     setdata(0);
     setget(0);
-  }
-
-  const [GetPass, setGetPass] = useState(false)
-
-  const closeGetPass = () => {
-    setGetPass(false)
   }
 
   const [loading, setLoading] = useState(true);
@@ -67,10 +73,10 @@ const Home = () => {
 
   return (
     <div className='bg-[#f0f5fb] h-full'>
-      <Sidebar closeNav={closeNav} data={data} />
+      <Sidebar toggleNav={toggleNav} data={data} />
       <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
         <div className="open_he">
-          <Header openNav={openNav} />
+          <Header toggleNav={toggleNav} />
         </div>
         <div className="flex-1 space-y-6 p-6">
           <div className="grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-2 max-[425px]:grid-cols-2 gap-4">
@@ -120,9 +126,11 @@ const Home = () => {
                 <div className="flex justify-between items-center mb-5">
                   <h2 className="text-lg font-semibold text-gray-800">Important Numbers</h2>
                 </div>
-                <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
+                <div className="space-y-4 h-80 overflow-y-auto pr-2">
                   {loading ? (
-                    <div className="text-center text-gray-500">Loading...</div>
+                    <div className='flex justify-center h-full items-center'>
+                      <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+                    </div>
                   ) : (
                     <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
                       {contacts.map(contact => (
@@ -178,7 +186,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="grid xl:grid-cols-4 grid-cols-1 gap-4 p-6">
+        <div className="grid xl:grid-cols-4 grid-cols-1 gap-4 p-6 pt-0">
           <div className="bg-white xl:col-span-3 rounded-lg shadow">
             <div className="bg-white rounded-lg p-4">
               <div className="flex justify-between items-center mb-4">
@@ -191,7 +199,9 @@ const Home = () => {
               </div>
               <div className="overflow-x-auto h-32 px-2">
                 {loadingcomplaint ? (
-                  <div className="text-center">Loding...</div>
+                  <div className='flex justify-center h-full items-center pb-10'>
+                    <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+                  </div>
                 ) : (
                   <table className="min-w-full text-left">
                     <thead>
@@ -207,31 +217,31 @@ const Home = () => {
                       {getComplaint.map((e, index) => {
                         return (
                           <tr key={index} className="border-b hover:bg-gray-50">
-                                <td className="px-4 py-2 flex items-center space-x-2">
-                                  <img className="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
-                                  <span>{e.Complainer_Name}</span>
-                                </td>
-                                <td className="px-4 py-2">{e.Complaint_Name}</td>
-                                <td className="px-4 py-2 text-center">
-                                  {new Date(e.createdAt).toLocaleDateString("en-US", {
-                                    month: "2-digit",
-                                    day: "2-digit",
-                                    year: "numeric",
-                                  })}
-                                </td>
-                                <td className="px-4 py-2 text-center">
-                                  <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
-                                    e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
-                                      e.Priority === "Low" ? "bg-[#39973d] text-white" : null
-                                    }`}>{e.Priority}</span>
-                                </td>
-                                <td className="px-4 py-2 text-center">
-                                  <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
-                                    e.Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
-                                      e.Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
-                                    }`}>{e.Status}</span>
-                                </td>
-                              </tr>
+                            <td className="px-4 py-2 flex items-center space-x-2">
+                              <img className="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
+                              <span>{e.Complainer_Name}</span>
+                            </td>
+                            <td className="px-4 py-2">{e.Complaint_Name}</td>
+                            <td className="px-4 py-2 text-center">
+                              {new Date(e.createdAt).toLocaleDateString("en-US", {
+                                month: "2-digit",
+                                day: "2-digit",
+                                year: "numeric",
+                              })}
+                            </td>
+                            <td className="px-4 py-2 text-center">
+                              <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
+                                e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
+                                  e.Priority === "Low" ? "bg-[#39973d] text-white" : null
+                                }`}>{e.Priority}</span>
+                            </td>
+                            <td className="px-4 py-2 text-center">
+                              <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
+                                e.Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
+                                  e.Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
+                                }`}>{e.Status}</span>
+                            </td>
+                          </tr>
                         )
                       })}
                     </tbody>

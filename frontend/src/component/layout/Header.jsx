@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import OpneNotificationModal from "../Modals/OpneNotificationModal";
 import { Profile_img } from "../services/Api/api";
 
-const Header = ({ openNav }) => {
+const Header = ({ toggleNav }) => {
   const [FormData, setFormData] = useState('')
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Header = ({ openNav }) => {
           <span
             className="flex items-center mr-5"
             style={{ fontSize: 30, cursor: "pointer" }}
-            onClick={openNav}
+            onClick={toggleNav}
           >
             <GiHamburgerMenu />
           </span>

@@ -7,6 +7,21 @@ import Header from '../../../../layout/Header';
 import { GetVisiter } from '../../../Security/Api/Api';
 
 const Visitor_Logs = () => {
+
+    const [isOpen, setIsOpen] = useState(true);
+
+    const toggleNav = () => {
+        setIsOpen((prevState) => !prevState);
+    };
+
+    React.useEffect(() => {
+        if (isOpen) {
+            openNav();
+        } else {
+            closeNav();
+        }
+    }, [isOpen]);
+
     const [data, setData] = useState(280);
     const [getData, setGetData] = useState(280);
 
@@ -32,10 +47,10 @@ const Visitor_Logs = () => {
 
     return (
         <div>
-            <Sidebar closeNav={closeNav} data={data} />
+            <Sidebar toggleNav={toggleNav} data={data} />
             <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getData }}>
                 <div className="open_he">
-                    <Header openNav={openNav} />
+                    <Header toggleNav={toggleNav} />
                 </div>
                 <div className="p-6 bg-gray-100 rounded-lg shadow-lg">
                     <div className="overflow-x-auto bg-white p-4 rounded-xl">
@@ -82,12 +97,12 @@ const Visitor_Logs = () => {
                                             </td>
                                             <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate text-center">
                                                 {(() => {
-                                                    const time24 = e.Time; 
+                                                    const time24 = e.Time;
                                                     const [hours, minutes] = time24.split(":");
                                                     let hour = parseInt(hours, 10);
                                                     const ampm = hour >= 12 ? "PM" : "AM";
                                                     hour = hour % 12;
-                                                    hour = hour ? hour : 12; 
+                                                    hour = hour ? hour : 12;
                                                     return `${hour}:${minutes} ${ampm}`;
                                                 })()}
                                             </td>

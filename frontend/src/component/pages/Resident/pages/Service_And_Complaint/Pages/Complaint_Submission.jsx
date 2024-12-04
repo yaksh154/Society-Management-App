@@ -61,7 +61,9 @@ const Complaint_Submission = () => {
                     {Complaint && (<ComplaintModal close={closeComplaint} Fdata={Fdata} />)}
                 </div>
                 {loadingcomplaint ? (
-                    <div className="text-center text-lg">Loding...</div>
+                    <div className='flex justify-center h-full items-center'>
+                    <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+                  </div>
                 ) : (
                     <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
                         {data.length > 0 ? (

@@ -5,6 +5,21 @@ import { FaUser } from 'react-icons/fa';
 import { Get_Security_Protocols } from '../../../../services/Api/api';
 
 const Security_Protocols = () => {
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleNav = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  React.useEffect(() => {
+    if (isOpen) {
+      openNav();
+    } else {
+      closeNav();
+    }
+  }, [isOpen]);
+
     let [data, setdata] = useState(280);
     let [getdata, setget] = useState(280);
 
@@ -29,10 +44,10 @@ const Security_Protocols = () => {
   }
     return (
         <div className='bg-[#f0f5fb] h-screen'>
-            <Sidebar closeNav={closeNav} data={data} />
+            <Sidebar toggleNav={toggleNav} data={data} />
             <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
                 <div className="open_he">
-                    <Header openNav={openNav} />
+                    <Header toggleNav={toggleNav} />
                 </div>
                 <div className="p-6 rounded-lg ">
           <div className="overflow-x-auto bg-white p-4 rounded-xl">

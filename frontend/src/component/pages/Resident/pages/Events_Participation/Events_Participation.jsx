@@ -6,6 +6,21 @@ import Activity from "./Activity";
 import { GetEventData } from "../../Api/api"; // Ensure API is properly defined
 
 const Events_Participation = () => {
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleNav = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  React.useEffect(() => {
+    if (isOpen) {
+      openNav();
+    } else {
+      closeNav();
+    }
+  }, [isOpen]);
+
   const [data, setData] = useState(280);
   const [getData, setGet] = useState(280);
   const [activeTab, setActiveTab] = useState("Events");
@@ -38,14 +53,14 @@ const Events_Participation = () => {
 
   return (
     <div className="bg-[#f0f5fb] min-h-screen">
-      <Sidebar closeNav={closeNav} data={data} />
+      <Sidebar toggleNav={toggleNav} data={data} />
       <div
         id="main"
         className="max-[425px]:ml-0 transition-all"
         style={{ marginLeft: getData }}
       >
         <div className="open_he">
-          <Header openNav={openNav} />
+          <Header toggleNav={toggleNav} />
         </div>
         <div className="p-6 bg-gray-100">
           <div className="flex flex-wrap">

@@ -6,6 +6,21 @@ import { EditProfile, GetCreateSocirty, Profile_img } from '../../../services/Ap
 import axios from 'axios';
 
 const Profile = () => {
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleNav = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  React.useEffect(() => {
+    if (isOpen) {
+      openNav();
+    } else {
+      closeNav();
+    }
+  }, [isOpen]);
+
   const [data, setData] = useState(280);
   const [getData, setGetData] = useState(280);
   const [Image, setImage] = useState('');
@@ -106,10 +121,10 @@ const Profile = () => {
 
   return (
     <div>
-      <Sidebar closeNav={closeNav} data={data} />
+      <Sidebar toggleNav={toggleNav} data={data} />
       <div id="main" className="max-[425px]:ml-0" style={{ marginLeft: getData }}>
         <div className="open_he">
-          <Header openNav={openNav} />
+          <Header toggleNav={toggleNav} />
         </div>
         <div
           className="flex justify-center items-center h-80 bg-cover bg-center relative bg-no-repeat p-4"

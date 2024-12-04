@@ -4,6 +4,21 @@ import Header from '../../../../layout/Header';
 import { FaVideo, FaPhone, FaEllipsisV, FaSmile, FaPaperclip, FaMicrophone } from 'react-icons/fa';
 
 const Access_Forums = () => {
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleNav = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  React.useEffect(() => {
+    if (isOpen) {
+      openNav();
+    } else {
+      closeNav();
+    }
+  }, [isOpen]);
+
   const [data, setdata] = useState(280);
   const [getdata, setget] = useState(280);
 
@@ -36,11 +51,11 @@ const Access_Forums = () => {
   return (
     <div className="bg-[#f0f5fb] h-screen flex">
       {/* Sidebar */}
-      <Sidebar closeNav={closeNav} data={data} />
+      <Sidebar toggleNav={toggleNav} data={data} />
       
       <div id="main" className="flex-1 flex flex-col" style={{ marginLeft: getdata }}>
         <div className="open_he">
-          <Header openNav={openNav} />
+          <Header toggleNav={toggleNav} />
         </div>
 
         <div className="flex flex-1 p-4 bg-gray-100 rounded-lg border-spacing-2">

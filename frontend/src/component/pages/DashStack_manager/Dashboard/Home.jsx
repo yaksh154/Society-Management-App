@@ -22,13 +22,19 @@ import { DeleteComplaint } from '../../../services/Api/api';
 
 const Home = () => {
 
-  // const [data, setdata] = useState(window.innerWidth > 425 ? 280 : 0);
+  const [isOpen, setIsOpen] = useState(true);
 
-  // useEffect(() => {
-  //   const updateData = () => setData(window.innerWidth > 425 ? 280 : 0);
-  //   window.addEventListener('resize', updateData);
-  //   return () => window.removeEventListener('resize', updateData);
-  // }, []);
+  const toggleNav = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  React.useEffect(() => {
+    if (isOpen) {
+      openNav();
+    } else {
+      closeNav();
+    }
+  }, [isOpen]);
 
   let [data, setdata] = useState(280);
   let [getdata, setget] = useState(280);
@@ -144,10 +150,10 @@ const Home = () => {
 
   return (
     <div>
-      <Sidebar closeNav={closeNav} data={data} />
+      <Sidebar toggleNav={toggleNav} data={data} />
       <div id='main' className='max-[425px]:ml-0 ' style={{ marginLeft: getdata }} >
         <div className="open_he">
-          <Header openNav={openNav} />
+          <Header toggleNav={toggleNav}/>
         </div>
         <main className="flex-1 space-y-6 ">
           <div className="p-6 space-y-4 bg-[#f0f5fb]">
@@ -208,9 +214,9 @@ const Home = () => {
                     </button>
                     {showModal && (<CreateImportantNumbers Fdata={Fdata} setShowModal={closeModal} />)}
                   </div>
-                  <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
+                  <div className="space-y-4 h-80 overflow-y-auto pr-2">
                     {loading ? (
-                      <div className='flex justify-center'>
+                      <div className='flex justify-center h-full items-center'>
                         <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
                       </div>
                     ) : (
@@ -373,7 +379,7 @@ const Home = () => {
                   </div>
                   <div className="overflow-x-auto h-32 px-2">
                     {loadingcomplaint ? (
-                      <div className='flex justify-center'>
+                      <div className='flex justify-center h-full items-center'>
                         <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
                       </div>
                     ) : (

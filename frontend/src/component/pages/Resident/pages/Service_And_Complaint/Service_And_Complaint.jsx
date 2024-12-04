@@ -5,6 +5,21 @@ import Complaint_Submission from './Pages/Complaint_Submission';
 import Request_Submission from './Pages/Request_Submission';
 
 const Service_And_Complaint = () => {
+
+    const [isOpen, setIsOpen] = useState(true);
+
+    const toggleNav = () => {
+        setIsOpen((prevState) => !prevState);
+    };
+
+    React.useEffect(() => {
+        if (isOpen) {
+            openNav();
+        } else {
+            closeNav();
+        }
+    }, [isOpen]);
+
     let [data, setdata] = useState(280);
     let [getdata, setget] = useState(280);
 
@@ -21,10 +36,10 @@ const Service_And_Complaint = () => {
 
     return (
         <div className='bg-[#f0f5fb]'>
-            <Sidebar closeNav={closeNav} data={data} />
+            <Sidebar toggleNav={toggleNav} data={data} />
             <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
                 <div className="open_he">
-                    <Header openNav={openNav} />
+                    <Header toggleNav={toggleNav} />
                 </div>
                 <div className="flex p-5 pb-0">
                     <button
@@ -48,12 +63,12 @@ const Service_And_Complaint = () => {
                 </div>
                 {activeTab === "Complaint_Submission" && (
                     <div className='p-5 pt-0'>
-                        <Complaint_Submission/>
+                        <Complaint_Submission />
                     </div>
                 )}
                 {activeTab === "Request_Submission" && (
                     <div className='p-5 pt-0'>
-                        <Request_Submission/>
+                        <Request_Submission />
                     </div>
                 )}
             </div>

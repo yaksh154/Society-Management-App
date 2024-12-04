@@ -28,7 +28,7 @@ const Request_Submission = () => {
     const [data, setdata] = useState('')
 
     const Fdata = () => {
-        GetRequest_Submission(setdata,setloadingData)
+        GetRequest_Submission(setdata, setloadingData)
     }
 
     // Delete
@@ -61,7 +61,9 @@ const Request_Submission = () => {
                     {Complaint && (<RequestModal Fdata={Fdata} close={closeComplaint} />)}
                 </div>
                 {loadingData ? (
-                    <div className="text-center">Loding...</div>
+                    <div className='flex justify-center h-full items-center'>
+                        <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+                    </div>
                 ) : (
                     <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
                         {data.length > 0 ? (

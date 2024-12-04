@@ -13,6 +13,21 @@ import { GetMaintenance } from '../../../services/Api/api';
 import { GrFormView } from 'react-icons/gr';
 
 const Financial_Management = () => {
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleNav = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  React.useEffect(() => {
+    if (isOpen) {
+      openNav();
+    } else {
+      closeNav();
+    }
+  }, [isOpen]);
+
   const [data, setData] = useState(280);
   const [getdata, setGetdata] = useState(280);
 
@@ -60,9 +75,9 @@ const Financial_Management = () => {
 
   return (
     <div >
-      <Sidebar closeNav={closeNav} data={data} />
+      <Sidebar toggleNav={toggleNav} data={data} />
       <div id='main' className='ml-[250px] max-lg:ml-0' style={{ marginLeft: getdata }}>
-        <Header openNav={openNav} />
+        <Header toggleNav={toggleNav} />
 
         {/* Main Content */}
         <main className='flex-1  bg-[#f0f5fb] p-6'>

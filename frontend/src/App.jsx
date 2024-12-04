@@ -59,9 +59,7 @@ function App() {
         {/* ...Income & OtherIncome....*/}
         <Route path='/financial_management/otherincome' element={<Otherincome />} />
         <Route path='/financial_management/ViewParticipation' element={<ParticipantTable />} />
-        {/* Expenses */}
         <Route path='/financial_management/Expanse' element={<Expanse />} />
-        {/* Note */}
         <Route path='/financial_management/Note' element={<Note />} />
         {/* facility_management */}
         <Route path='/facility_management' element={<Facility_Management />} />

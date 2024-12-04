@@ -9,6 +9,21 @@ import { Facility_Management_Delete, Facility_Management_Get } from '../../../se
 import Button from '../../../layout/Button_gradient'
 
 const Facility_Management = () => {
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleNav = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  React.useEffect(() => {
+    if (isOpen) {
+      openNav();
+    } else {
+      closeNav();
+    }
+  }, [isOpen]);
+
   let [data, setdata] = useState(280);
   let [getdata, setget] = useState(280);
 
@@ -80,10 +95,10 @@ const Facility_Management = () => {
 
   return (
     <div>
-      <Sidebar closeNav={closeNav} data={data} />
+      <Sidebar toggleNav={toggleNav} data={data} />
       <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
         <div className="open_he">
-          <Header openNav={openNav} />
+          <Header toggleNav={toggleNav} />
         </div>
         <div className="flex-1 bg-[#f0f5fb] h-dvh">
           <div className="p-6">

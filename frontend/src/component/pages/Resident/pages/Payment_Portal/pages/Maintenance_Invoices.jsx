@@ -9,6 +9,21 @@ import { useNavigate } from 'react-router-dom';
 import { Get_Pending_Maintanance } from '../../../Api/api';
 
 const Maintenance_Invoices = () => {
+
+    const [isOpen, setIsOpen] = useState(true);
+
+    const toggleNav = () => {
+        setIsOpen((prevState) => !prevState);
+    };
+
+    React.useEffect(() => {
+        if (isOpen) {
+            openNav();
+        } else {
+            closeNav();
+        }
+    }, [isOpen]);
+
     let [data, setdata] = useState(280);
     let [getdata, setget] = useState(280);
 
@@ -37,16 +52,16 @@ const Maintenance_Invoices = () => {
         Get_Pending_Maintanance(setMaintanance)
     };
 
-    const OpneData = () =>{
+    const OpneData = () => {
         navigate("/resident/payment_portal/maintenance_invoices_data");
     }
 
     return (
         <div className="bg-[#f0f5fb]">
-            <Sidebar closeNav={closeNav} data={data} />
+            <Sidebar toggleNav={toggleNav} data={data} />
             <div id="main" className="max-[425px]:ml-0" style={{ marginLeft: getdata }}>
                 <div className="open_he">
-                    <Header openNav={openNav} />
+                    <Header toggleNav={toggleNav} />
                 </div>
                 <div className="p-6">
                     <div className="bg-white shadow-md rounded-lg p-6 mb-6">
@@ -107,7 +122,7 @@ const Maintenance_Invoices = () => {
                                                     <span className="text-green-600 font-semibold">₹{e.grand_total || '0.00'}</span>
                                                 </div>
                                             </div>
-                                            <Button onClick={()=>setPaymentMethod(true)} Addclass='w-full mt-2' Btn_Name="Pay Now" />
+                                            <Button onClick={() => setPaymentMethod(true)} Addclass='w-full mt-2' Btn_Name="Pay Now" />
                                         </div>
 
                                     </div>

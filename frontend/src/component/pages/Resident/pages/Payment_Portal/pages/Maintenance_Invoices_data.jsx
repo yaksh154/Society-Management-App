@@ -7,6 +7,21 @@ import ViewData_invoices_to from '../Modal/ViewData_invoices_to';
 import { Get_Maintenance_Invoices_data } from '../../../Api/api';
 
 const Maintenance_Invoices_data = () => {
+
+    const [isOpen, setIsOpen] = useState(true);
+
+    const toggleNav = () => {
+        setIsOpen((prevState) => !prevState);
+    };
+
+    React.useEffect(() => {
+        if (isOpen) {
+            openNav();
+        } else {
+            closeNav();
+        }
+    }, [isOpen]);
+
     let [data, setdata] = useState(280);
     let [getdata, setget] = useState(280);
 
@@ -27,7 +42,7 @@ const Maintenance_Invoices_data = () => {
     const [getInvoices, setgetInvoices] = useState([]);
 
     // State for View data 
-    
+
     const [View, setView] = useState(false)
     const [ViewID, setViewID] = useState("")
 
@@ -58,10 +73,10 @@ const Maintenance_Invoices_data = () => {
 
     return (
         <div className="bg-[#f0f5fb]">
-            <Sidebar closeNav={closeNav} data={data} />
+            <Sidebar toggleNav={toggleNav} data={data} />
             <div id="main" className="max-[425px]:ml-0" style={{ marginLeft: getdata }}>
                 <div className="open_he">
-                    <Header openNav={openNav} />
+                    <Header toggleNav={toggleNav} />
                 </div>
                 <div className="p-6">
                     <div className="bg-white shadow-md rounded-lg p-6">
@@ -133,7 +148,7 @@ const Maintenance_Invoices_data = () => {
                                     })}
                                 </tbody>
                             </table>
-                            {View && <ViewData_invoices_to Close={CloseView} id={ViewID}/>}
+                            {View && <ViewData_invoices_to Close={CloseView} id={ViewID} />}
                         </div>
                     </div>
                 </div>

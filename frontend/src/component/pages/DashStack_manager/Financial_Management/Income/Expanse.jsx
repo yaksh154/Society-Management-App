@@ -12,6 +12,21 @@ import ViewExpenseModal from '../../../../Modals/ViewExpenseModal';
 import DeleteModal from '../../../../layout/DeleteLoding';
 
 const Expanse = () => {
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleNav = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  React.useEffect(() => {
+    if (isOpen) {
+      openNav();
+    } else {
+      closeNav();
+    }
+  }, [isOpen]);
+
   const [sidebarWidth, setSidebarWidth] = useState(280);
   const [expenses, setExpenses] = useState([]);
   const [error, setError] = useState(null);
@@ -93,9 +108,9 @@ const Expanse = () => {
 
   return (
     <div className="flex">
-      <Sidebar closeNav={closeNav} data={sidebarWidth} />
+      <Sidebar toggleNav={toggleNav} data={sidebarWidth} />
       <div id="main" className="flex-1 transition-all duration-300" style={{ marginLeft: sidebarWidth }}>
-        <Header openNav={openNav} />
+        <Header toggleNav={toggleNav} />
         <div className="p-4 md:p-8 bg-slate-100">
           <div className="bg-white rounded-lg shadow-md">
             <div className="flex justify-between items-center mb-4 md:mb-6 p-4">

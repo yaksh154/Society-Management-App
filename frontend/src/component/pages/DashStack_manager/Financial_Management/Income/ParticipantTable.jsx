@@ -16,6 +16,21 @@ const participants = [
 ];
 
 const ParticipantTable = () => {
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleNav = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  React.useEffect(() => {
+    if (isOpen) {
+      openNav();
+    } else {
+      closeNav();
+    }
+  }, [isOpen]);
+
   let [data, setdata] = useState(280);
   let [getdata, setget] = useState(280);
 
@@ -30,10 +45,10 @@ const ParticipantTable = () => {
 
   return (
     <div>
-      <Sidebar closeNav={closeNav} data={data} />
+      <Sidebar toggleNav={toggleNav} data={data} />
       <div id='main' className='max-w-full' style={{ marginLeft: getdata }}>
         <div className="open_he">
-          <Header openNav={openNav} />
+          <Header toggleNav={toggleNav} />
         </div>
 
         {/* Main Content */}
