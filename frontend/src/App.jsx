@@ -33,7 +33,6 @@ import Resident_Security_Protocols from './component/pages/Resident/pages/Securi
 import VisitorTracking from './component/pages/Security/Pages/VisitorTracking.jsx'
 import Emergency from './component/pages/Security/Pages/Emergency.jsx'
 import Maintenance_Invoices_data from './component/pages/Resident/pages/Payment_Portal/pages/Maintenance_Invoices_data.jsx'
-import AddVisiter from './component/pages/Security/Pages/Models/AddVisiter.jsx'
 
 
 
@@ -97,7 +96,7 @@ function App() {
         <Route path='/resident/security_protocols' element={<Resident_Security_Protocols />} />
 
 
-        <Route path='/security' element={<VisitorTracking />} />
+        <Route path='/security/visitor' element={<VisitorTracking />} />
         <Route path='/security/Emergency' element={<Emergency />} />
 
 

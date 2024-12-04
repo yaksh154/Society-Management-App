@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from 'react-router-dom';
 import OpneNotificationModal from '../layout/OpneNotification';
+import { Profile_img } from '../../../services/Api/api';
 
 
 const Header = (props) => {
+  const [FormData, setFormData] = useState('')
+
+  useEffect(() => {
+    Fdata();
+  }, []);
+
+  const Fdata = () => {
+    Profile_img(setFormData);
+  };
+
   return (
     <div>
       <header className="flex justify-between p-4 bg-white items-center">
@@ -17,11 +28,28 @@ const Header = (props) => {
         <div className="flex items-center space-x-4">
 
           <OpneNotificationModal />
-          <div className="flex items-center space-x-4" >
-            <div className="Profie-img"><img src="../../../../../../public/images/Profile.png" alt="Profile" className="w-8 h-8 rounded-full" /> </div>
-            <div className="profile-text">  <p className="font-medium">Arlene McCoy</p>
-              <p className='text-gray-400'>Resident</p></div>
-          </div>
+          <Link className="flex items-center space-x-4" to="/profile">
+            {FormData ? (
+              <div className="flex items-center">
+                <div className="Profie-img mr-3">
+                  <img
+                    src={FormData.Image || "/images/user.png"}
+                    alt="Profile"
+                    className="w-8 h-8 rounded-full"
+                  />
+                </div>
+                <div className="profile-text">
+                  <p className="font-medium">{FormData.Firstname || "User"} {FormData.Lastname || ""}</p>
+                  <p className="text-gray-400">{FormData.Role
+                    || "Role"}</p>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+              </div>
+            )}
+          </Link>
         </div>
       </header>
     </div>

@@ -597,15 +597,18 @@ export const Facility_Management_Edit = (_id, data, setloading, seteditcreate_fa
 //  Maintenance
 
 export const GetMaintenance = (setudata) => {
-    axios.get('http://localhost:3030/Maintenance').then((res) => {
+    axios.get(`${url}/maintenance/getAllaintenances`).then((res) => {
         setudata(res.data)
+        console.log(req.data);
+        console.log(res.data)
     })
 }
 
 //   Income page
 export const PostIncome = (data, Fdata, setShowAddDetail) => {
-    axios.post(`http://localhost:3030/Income`, data).then((res) => {
+    axios.post(`${url}/maintenance/createMaintenance`, data).then((res) => {
         Fdata()
+        console.log(res.data);
         setShowAddDetail(false)
     })
 }
@@ -640,7 +643,7 @@ export const DeleteOtherIncome = (data, Fdata, setCreateIncome) => {
     })
 }
 
-///Expanse 
+///Expanse
 
 export const GetExpanse = (setAddExpense) => {
     axios.get(`${url}/expenses/getAllexpensess`).then((res) => {
@@ -648,7 +651,6 @@ export const GetExpanse = (setAddExpense) => {
         setAddExpense(res.data)
     })
 }
-
 
 export const PostExpanse = async (data, Fdata, setAddExpense, setPreviewImage, reset, handleCancel, setLoading) => {
     console.log(data.Bill);
@@ -661,27 +663,29 @@ export const PostExpanse = async (data, Fdata, setAddExpense, setPreviewImage, r
     if (data.Bill && data.Bill.length > 0) {
         formData.append('Bill', data.Bill[0]);
     }
+
     try {
-        const res = await axios.post('https://society-management-app-server.onrender.com/expenses/createexpenses', formData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
+        const res = await axios.post(`${url}/expenses/createexpenses`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
         });
-        Fdata();
+
+        Fdata(); // Invoke the callback to fetch data (if applicable)
         console.log(res);
 
         setAddExpense(false);
         reset();
         setPreviewImage(null);
-        handleCancel()
-        setLoading(false)
+        handleCancel();
     } catch (error) {
         console.error('Error submitting expense:', error);
-        setLoading(false)
+    } finally {
+        setLoading(false);
     }
-}
+};
 
 export const PutExpense = async (_id, data, lodData, setPreviewImage, Close, setLoading) => {
     try {
-        await axios.put(`https://society-management-app-server.onrender.com/expenses/updateexpenses/${_id}`, data,
+        await axios.put(`${url}/expenses/updateexpenses/${_id}`, formData,
             { headers: { 'Content-Type': 'multipart/form-data' } }
         );
         lodData();
@@ -718,6 +722,7 @@ export const PostVisiter = (data, Fdata, setAddVisiterbox) => {
     })
 }
 
+
 //Notes
 
 export const GetNotes = (setNotes, setlodingData) => {
@@ -749,7 +754,7 @@ export const EditNotes = async (_id, formData, setloading, seteditcreate) => {
     console.log("Submitted Data:", formData);
     setloading(true)
     try {
-        const response = await axios.put(`https://society-management-app-server.onrender.com/note/updateNote/${_id}`, formData);
+        const response = await axios.put(`${url}/note/updateNote/${_id}`, formData);
         console.log(response.data);
 
         seteditcreate(false);

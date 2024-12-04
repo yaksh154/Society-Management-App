@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../../../../layout/Sidebar';
 import Header from '../../../../layout/Header';
+import { GetVisiter } from '../../../Security/Api/Api';
 import { GetVisiter } from '../../../../services/Api/api';
 
 const Visitor_Logs = () => {
