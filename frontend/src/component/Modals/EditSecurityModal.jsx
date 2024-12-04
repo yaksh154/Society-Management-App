@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { EditGuard_Details } from '../services/Api/api';
+import CloseButton from '../layout/CloseButton'
+import LodindButton from '../layout/Loding_Button'
 
-const EditSecurityModal = ({ _id, CloseEdit }) => {
+const EditSecurityModal = ({ _id, CloseEdit,Fdata }) => {
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
   const [photoPreview, setPhotoPreview] = useState(null);
-  const [aadharCard, setAadharCard] = useState(null);
+  const [AadharCard, setAadharCard] = useState(null);
   const [AadharCardsize, setAadharCardsize] = useState([])
+  const [loading, setloading] = useState(false)
 
-  // Fetch data on component mount
   useEffect(() => {
     if (_id) {
       fetchSecurityData();
@@ -27,8 +29,11 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
         setValue('phone_Number', data.phone_Number || '');
         setValue('Gender', data.Gender || '');
         setValue('Shift', data.Shift || '');
-        const formattedDate = data.Shift_Data ? new Date(data.Shift_Data).toISOString().split('T')[0] : '';
+        const formattedDate = data.Shift_Data && !isNaN(new Date(data.Shift_Data).getTime())
+          ? new Date(data.Shift_Data).toISOString().split('T')[0]
+          : '';
         setValue('Shift_Data', formattedDate);
+
         setValue('Shift_Time', data.Shift_Time || '');
         setValue('Aadhar_Card', data.Aadhar_Card || '');
         if (data.photo) setPhotoPreview(data.photo);
@@ -39,28 +44,26 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
     }
   };
 
-
   const onSubmit = async (data) => {
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
       formData.append(key, data[key]);
     });
-
-    if (aadharCard) formData.append('Aadhar_Card', aadharCard);
-    console.log(formData);
-    
-    EditGuard_Details(_id)
+    if (photoPreview) formData.append('photo', photoPreview);
+    if (AadharCard) formData.append('Aadhar_Card', AadharCard);
+    EditGuard_Details(_id, formData, CloseEdit,Fdata,setloading);
   };
+
 
   const handleFileChange = (e, setFileState, fieldName) => {
     const file = e.target.files[0];
     if (file) {
       setFileState(file);
       setValue(fieldName, file);
-
+      console.log(`Selected file for ${fieldName}:`, file);
       if (fieldName === 'photo') {
         setPhotoPreview(file);
-      } else if (fieldName === 'aadharCard') {
+      } else if (fieldName === 'AadharCard') {
         setAadharCard(file);
         const fileSizeInBytes = file.size;
         const fileSizeInMB = (fileSizeInBytes / (1024 * 1024)).toFixed(2);
@@ -71,7 +74,7 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
 
   const handleRemoveFile = () => {
     setAadharCard(null);
-    setValue('aadharCard', null);
+    setValue('AadharCard', null);
   };
 
   return (
@@ -85,7 +88,6 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
       >
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">Edit Security</h2>
 
-        {/* Photo Upload Section */}
         <div className="flex items-center space-x-4">
           <div className="relative">
             <input
@@ -108,8 +110,6 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
           </div>
           <span className="text-blue-500">Edit Photo</span>
         </div>
-
-        {/* Full Name */}
         <div>
           <label className="block text-gray-700">Full Name</label>
           <input
@@ -121,7 +121,6 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
           {errors.Full_Name && <p className="text-red-500 text-sm">{errors.Full_Name.message}</p>}
         </div>
 
-        {/* Phone Number */}
         <div>
           <label className="block text-gray-700">Phone Number</label>
           <input
@@ -136,7 +135,6 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
           {errors.phone_Number && <p className="text-red-500 text-sm">{errors.phone_Number.message}</p>}
         </div>
 
-        {/* Gender & Shift */}
         <div className="flex space-x-4">
           <div className="w-1/2">
             <label className="block text-gray-700">Gender</label>
@@ -166,7 +164,6 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
           </div>
         </div>
 
-        {/* Shift Date & Time */}
         <div className="flex space-x-4">
           <div className="w-1/2">
             <label className="block text-gray-700">Shift Date</label>
@@ -189,18 +186,17 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
           </div>
         </div>
 
-        {/* Aadhar Card Upload */}
         <div>
           <label className="block text-gray-700">Upload Aadhar Card</label>
           <div className="border-2 border-dashed border-gray-300 rounded-md p-4 text-center">
-            {!aadharCard ? (
+            {!AadharCard ? (
               <label className="cursor-pointer">
                 <p className="text-blue-500 underline">Upload a file</p>
                 <input
                   type="file"
                   accept=".png, .jpg, .jpeg"
                   className="hidden"
-                  onChange={(e) => handleFileChange(e, setAadharCard, 'aadharCard')}
+                  onChange={(e) => handleFileChange(e, setAadharCard, 'AadharCard')}
                 />
               </label>
             ) : (
@@ -208,12 +204,12 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
                   <img
-                    src={typeof aadharCard === 'string' ? aadharCard : URL.createObjectURL(aadharCard)}
+                    src={typeof AadharCard === 'string' ? AadharCard : URL.createObjectURL(AadharCard)}
                     alt="Aadhar Preview"
                     className="w-12 h-12 mb-2"
                   />
                   <div>
-                    <p className="text-gray-600 text-sm text-left">{aadharCard.name}</p>
+                    <p className="text-gray-600 text-sm text-left">{AadharCard.name}</p>
                     <p className="text-gray-600 text-sm">{AadharCardsize}</p>
                   </div>
                 </div>
@@ -223,21 +219,9 @@ const EditSecurityModal = ({ _id, CloseEdit }) => {
           </div>
         </div>
 
-        {/* Buttons */}
         <div className="flex justify-between mt-4">
-          <button
-            type="button"
-            className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300"
-            onClick={CloseEdit}
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="px-4 py-2 text-white bg-orange-500 rounded-md hover:bg-orange-600"
-          >
-            Update
-          </button>
+          <CloseButton CloseName="Cancel" type="button" onClick={CloseEdit} Addclass="w-1/2"/>
+          <LodindButton loading={loading} Addclass="w-1/2" type="submit" Btn_Name="Save"/>
         </div>
       </form>
     </div>

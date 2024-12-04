@@ -44,7 +44,7 @@ const AddSecurityModal = ({ CloseAddSecurity, Fdata }) => {
     return (
         <div className='fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50'>
             <form onSubmit={handleSubmit(onSubmit)} method='post' className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-3 border-b pb-2">Add Security</h2>
+                <h2 className="text-xl font-semibold text-gray-800 mb-3 border-b pb-2">Add Security</h2>
 
                 {/* Photo Upload Section */}
                 <div className="flex items-center space-x-4">

@@ -26,7 +26,7 @@ const Visitor_Logs = () => {
         fetchVisitorLogs();
     }, []);
 
-    const fetchVisitorLogs = async () => {
+    const fetchVisitorLogs = () => {
         GetVisiter(setVisitorLogs);
     };
 

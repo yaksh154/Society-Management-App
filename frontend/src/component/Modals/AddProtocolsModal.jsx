@@ -1,16 +1,19 @@
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form'; // Import useForm from react-hook-form
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Post_Security_Protocols } from '../services/Api/api';
+import CloseButton from '../layout/CloseButton'
+import LodingButton from '../layout/Loding_Button'
 
 const AddProtocolsModal = ({ CloseAddProtocols, Fdata }) => {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm({
         defaultValues: {
-            Titl: '',
+            Title: '',
             Description: '',
             Date: '',
             Time: ''
         }
     });
+    const [loding, setloding] = useState(false)
 
     useEffect(() => {
         const updateDateTime = () => {
@@ -26,7 +29,7 @@ const AddProtocolsModal = ({ CloseAddProtocols, Fdata }) => {
     }, [setValue]);
 
     const onSubmit = (data) => {
-        Post_Security_Protocols(data, CloseAddProtocols, Fdata);
+        Post_Security_Protocols(data, CloseAddProtocols, Fdata,setloding);
     };
 
     return (
@@ -58,19 +61,8 @@ const AddProtocolsModal = ({ CloseAddProtocols, Fdata }) => {
                         {errors.Description && <p className="text-red-500 text-sm">{errors.Description.message}</p>}
                     </div>
                     <div className="flex justify-between mt-4">
-                        <button
-                            type="button"
-                            onClick={CloseAddProtocols}
-                            className="bg-white border w-full py-2 mr-2 text-gray-700 font-semibold rounded"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            type="submit"
-                            className="py-2 w-full bg-[#f6f8fb] hover:bg-gradient-to-r from-orange-500 to-yellow-500 hover:text-white rounded-lg font-semibold hover:from-orange-600 hover:to-yellow-600 transition duration-200"
-                        >
-                            Save
-                        </button>
+                        <CloseButton CloseName="Cancel" type="button" onClick={CloseAddProtocols} Addclass="w-1/2"/>
+                        <LodingButton loading={loding} type="submit" Btn_Name="Save" Addclass="w-1/2" />
                     </div>
                 </form>
             </div>

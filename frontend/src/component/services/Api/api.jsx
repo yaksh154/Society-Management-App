@@ -282,6 +282,8 @@ export const PostSumdata = (data) => {
     // ])
 }
 
+// Resident Management page
+
 // Complaint Tracking page
 
 // === Complaint get
@@ -396,37 +398,57 @@ export const EditRequest = async (_id, editComplaint, closeEditComplint, setload
 
 // Get Security Protocols
 
-export const Get_Security_Protocols = (setSecurity) => {
-    axios.get(`${url}/security/getallsecurity`).then((res) => {
+export const Get_Security_Protocols = (setSecurity,setloding) => {
+    axios.get(`${url}/security/getallprotocols`).then((res) => {
+        console.log(res.data)
         setSecurity(res.data)
+        setloding(false)
     })
 }
 
 // Post Security Protocols
 
-export const Post_Security_Protocols = (data, Fdata, CloseAddProtocols) => {
-    axios.post(`${url}/security/createsecurity`, data, { headers: { 'Content-Type': 'multipart/form-data' } }).then((res) => {
+export const Post_Security_Protocols = (data, Fdata, CloseAddProtocols,setloding) => {
+    setloding(true)
+    axios.post(`${url}/security/createprotocol`, data).then((res) => {
         CloseAddProtocols()
         Fdata()
+        setloding(false)
     })
 }
 
 // Delete Security Protocols
 
-export const Delete_Security_Protocols = (_id, Fdata) => {
-    axios.delete(`http://localhost:3030/Security_Protocols/${_id}`).then((res) => {
-        Fdata()
+export const Delete_Security_Protocols = (_id,setdeleteloding,CloseDeleteProtocols,Security, setSecurity) => {
+    setdeleteloding(true)
+    axios.delete(`${url}/security/deleteprotocol/${_id}`).then((res) => {
+        const Deletedata = Security.filter((e) => e._id !== _id)
+        setSecurity(Deletedata)
+        setdeleteloding(false)
+        CloseDeleteProtocols()
     })
 }
+
+// Edit Security Protocols
+
+export const Edit_Delete_Security_Protocols = (_id,data,setloding,CloseEditProtocols) =>{
+    setloding(true)
+    axios.put(`${url}/security/updateprotocol/${_id}`,data).then((res)=>{
+        console.log(res.data); 
+        setloding(false)
+        CloseEditProtocols()
+    })
+}
+
 
 // Security Guard page
 
 // Get Security Guard Details
 
-export const GetGuard_Details = (setGuard_Details) => {
+export const GetGuard_Details = (setGuard_Details,setlodingData) => {
     axios.get(`${url}/security/getallsecurity`).then((res) => {
-        console.log(res.data);
         setGuard_Details(res.data)
+        setlodingData(false)
     })
 }
 
@@ -455,9 +477,19 @@ export const DeleteGuard_Details = (_id, setloadingDelete, Guard_Details, setGua
 
 // Edit Security Guard Details
 
-export const EditGuard_Details = (_id) =>{
-    axios.put(`${url}/security/updatesecurity/${_id}`,)
-}
+export const EditGuard_Details = (_id, formData, CloseEdit,Fdata,setloading) => {
+    setloading(true)
+    axios
+      .put(`${url}/security/updatesecurity/${_id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' }}).then((res) => {
+        CloseEdit();
+        Fdata()
+        setloading(false)
+      })
+      .catch((err) => {
+        console.error('Error updating data:', err);
+      });
+  };
+  
 
 // Announcement page
 
@@ -673,7 +705,7 @@ export const DeleteExpense = (RemoveId, Fdata, RemoveView, setLoading) => {
 ///Visiter Data
 
 export const GetVisiter = (setVisitorLogs) => {
-    axios.get(`${url}/Visitor/getallVisitors`).then((res) => {
+    axios.get(`${url}/security/getallVisitors`).then((res) => {
         console.log(res.data)
         setVisitorLogs(res.data)
     })

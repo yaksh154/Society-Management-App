@@ -1,39 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Get_Security_Protocols } from '../services/Api/api';
+import { Edit_Delete_Security_Protocols } from '../services/Api/api';
+import axios from 'axios';
+import CloseButton from '../layout/CloseButton'
+import Loding_Button from '../layout/Loding_Button';
 
 const EditProtocolsModal = ({ _id, CloseEditProtocols }) => {
-    const [Security, setSecurity] = useState([]);
-    const [Edata, setEdata] = useState({ Title: '', Description: '', Date: '', Time: '' });
 
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+    const [loding, setloding] = useState(false)
 
     useEffect(() => {
+        // Fetch data and set form values
+        const Fdata = async () => {
+            try {
+                const res = await axios.get(`https://society-management-app-server.onrender.com/security/getprotocol/${_id}`);
+                const { Title, Description, Date: apiDate, Time: apiTime } = res.data;
+    
+                // Format the Date to yyyy-MM-dd
+                const formattedDate = apiDate ? new Date(apiDate).toISOString().split('T')[0] : '';
+    
+                // Format the Time to HH:mm
+                const formattedTime = apiTime
+                    ? new Date(`1970-01-01T${apiTime}`).toLocaleTimeString('en-GB', {
+                          hour: '2-digit',
+                          minute: '2-digit',
+                      })
+                    : '';
+    
+                // Set values in react-hook-form
+                setValue("Title", Title || '');
+                setValue("Description", Description || '');
+                setValue("Date", formattedDate);
+                setValue("Time", formattedTime);
+            } catch (error) {
+                console.error("Error fetching protocol data:", error);
+            }
+        };
+    
         Fdata();
-    }, []);
-
-    useEffect(() => {
-        Editdata();
-    }, [Security]);
-
-    const Fdata = () => {
-        Get_Security_Protocols(setSecurity);
-    };
-
-    const Editdata = () => {
-        if (Security[_id]) {
-            setEdata(Security[_id]);
-            // Set default values for react-hook-form fields
-            setValue("Title", Security[_id].Title);
-            setValue("Description", Security[_id].Description);
-            setValue("Date", Security[_id].Date);
-            setValue("Time", Security[_id].Time);
-        }
-    };
+    }, [_id, setValue]);
 
     const onSubmit = (data) => {
         console.log("Submitted data:", data);
-        // Handle form submission here
+        Edit_Delete_Security_Protocols(_id,data,setloding,CloseEditProtocols)
     };
 
     return (
@@ -87,19 +97,8 @@ const EditProtocolsModal = ({ _id, CloseEditProtocols }) => {
                         {errors.Time && <p className="text-red-500 text-sm">{errors.Time.message}</p>}
                     </div>
                     <div className="flex justify-between mt-4">
-                        <button
-                            type="button"
-                            onClick={CloseEditProtocols}
-                            className="bg-white border w-full py-2 mr-2 text-gray-700 font-semibold rounded"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            type="submit"
-                            className="py-2 w-full bg-[#f6f8fb] hover:bg-gradient-to-r from-orange-500 to-yellow-500 hover:text-white rounded-lg font-semibold hover:from-orange-600 hover:to-yellow-600 transition duration-200"
-                        >
-                            Save
-                        </button>
+                        <CloseButton CloseName="Cancel" type="button" onClick={CloseEditProtocols} Addclass="w-1/2" />
+                        <Loding_Button loading={loding} type="submit" Addclass="w-1/2" Btn_Name="Save"/>
                     </div>
                 </form>
             </div>
