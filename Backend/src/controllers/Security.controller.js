@@ -236,9 +236,9 @@ const updateSecurityProtocol = async (req, res) => {
         }
         const body = {}
         if(req.body){
-            Title = reqbody.Title,
-            Description = reqbody.Description,
-            Time = reqbody.Time
+            body.Title = reqbody.Title,
+            body.Description = reqbody.Description,
+            body.Time = reqbody.Time
         }
         const updatedSecurityProtocol = await securityService.updateSecurityProtocol(id, body);
         res.status(200).json(updatedSecurityProtocol);
