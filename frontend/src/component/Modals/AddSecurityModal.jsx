@@ -5,23 +5,19 @@ import { MdOutlineAddPhotoAlternate } from 'react-icons/md';
 import CloseButton from '../layout/CloseButton'
 import LodingButton from '../layout/Loding_Button'
 
-const AddSecurityModal = ({ CloseAddSecurity }) => {
+const AddSecurityModal = ({ CloseAddSecurity, Fdata }) => {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
     const [photoPreview, setPhotoPreview] = useState(null);
     const [Aadhar_Card, setAadharCard] = useState(null);
-    console.log(photoPreview);
+    const [Aadhar_Cardsize, setAadharCardsize] = useState([]);
+    const [loading, setloading] = useState(false)
 
-
-    // Submit handler
     const onSubmit = (data) => {
-        console.log(data);
-        PostGuard_Details(data)
+        PostGuard_Details(data, CloseAddSecurity, Fdata,setloading)
     };
 
-    // File change handlers
     const handlePhotoChange = (e) => {
         const file = e.target.files[0];
-        // console.log("File selected:", file);
         if (file) {
             setPhotoPreview(file);
             setValue('photo', file);
@@ -33,7 +29,11 @@ const AddSecurityModal = ({ CloseAddSecurity }) => {
         if (file) {
             setAadharCard(file);
             setValue('Aadhar_Card', file);
+            const fileSizeInBytes = file.size;
+            const fileSizeInMB = (fileSizeInBytes / (1024 * 1024)).toFixed(2);
+            setAadharCardsize(`${fileSizeInMB} MB`);
         }
+
     };
 
     const handleRemoveFile = () => {
@@ -43,7 +43,7 @@ const AddSecurityModal = ({ CloseAddSecurity }) => {
 
     return (
         <div className='fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50'>
-            <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4">
+            <form onSubmit={handleSubmit(onSubmit)} method='post' className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-3 border-b pb-2">Add Security</h2>
 
                 {/* Photo Upload Section */}
@@ -105,9 +105,9 @@ const AddSecurityModal = ({ CloseAddSecurity }) => {
                             {...register('Gender', { required: 'Gender is required' })}
                         >
                             <option value="">Select Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
                         </select>
                         {errors.gender && <p className="text-red-500 text-sm">{errors.gender.message}</p>}
                     </div>
@@ -119,8 +119,8 @@ const AddSecurityModal = ({ CloseAddSecurity }) => {
                             {...register('Shift', { required: 'Shift is required' })}
                         >
                             <option value="">Select Shift</option>
-                            <option value="day">Day</option>
-                            <option value="night">Night</option>
+                            <option value="Day">Day</option>
+                            <option value="Night">Night</option>
                         </select>
                         {errors.shift && <p className="text-red-500 text-sm">{errors.shift.message}</p>}
                     </div>
@@ -168,9 +168,14 @@ const AddSecurityModal = ({ CloseAddSecurity }) => {
                                 />
                             </label>
                         ) : (
-                            <div className="flex flex-col items-center mt-4">
-                                <img src={URL.createObjectURL(Aadhar_Card)} alt="Aadhar Preview" className="w-12 h-12 mb-2" />
-                                <span className="text-gray-600 text-sm">{Aadhar_Card.name}</span>
+                            <div className="flex justify-between items-center">
+                                <div className="flex items-center">
+                                    <img src={URL.createObjectURL(Aadhar_Card)} alt="Aadhar Preview" className="w-12 h-12 mr-3 " />
+                                    <div>
+                                        <p className="text-gray-600 text-sm text-left">{Aadhar_Card.name}</p>
+                                        <p className="text-gray-600 text-sm">{Aadhar_Cardsize}</p>
+                                    </div>
+                                </div>
                                 <button onClick={handleRemoveFile} className="text-red-500 text-sm">Delete</button>
                             </div>
                         )}
@@ -180,7 +185,7 @@ const AddSecurityModal = ({ CloseAddSecurity }) => {
                 {/* Buttons */}
                 <div className="flex justify-between mt-4">
                     <CloseButton CloseName="Cancel" Addclass="w-1/2" type="button" onClick={CloseAddSecurity} />
-                    <LodingButton Addclass="w-1/2" Btn_Name="Create" type="submit"/>
+                    <LodingButton loading={loading} Addclass="w-1/2" Btn_Name="Create" type="submit" />
                 </div>
             </form>
         </div>

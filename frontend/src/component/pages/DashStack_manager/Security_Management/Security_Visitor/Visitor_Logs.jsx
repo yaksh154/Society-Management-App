@@ -5,8 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from '../../../../layout/Sidebar';
 import Header from '../../../../layout/Header';
 import { GetVisiter } from '../../../Security/Api/Api';
-
-
+import { GetVisiter } from '../../../../services/Api/api';
 
 const Visitor_Logs = () => {
     const [data, setData] = useState(280);
@@ -70,7 +69,7 @@ const Visitor_Logs = () => {
                                                 <img className="w-8 h-8 rounded-full mr-1" src={e.createdBy.Image} alt="profile" />
                                                 <span>{e.Visitor_Name}</span>
                                             </td>
-                                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Phone}</td>
+                                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate text-center">{e.Phone}</td>
                                             <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate text-center">
                                                 {new Date(e.Date).toLocaleDateString("en-US", {
                                                     month: "2-digit",

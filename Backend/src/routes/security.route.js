@@ -20,6 +20,6 @@ router.post("/createprotocol", authUser, securityController.createSecurityProtoc
 router.get('/getallprotocols', authUser, securityController.getAllSecurityProtocols)
 router.get("/getprotocol/:id", authUser, securityController.getSecurityProtocol)
 router.put("/updateprotocol/:id", authUser, securityController.updateSecurityProtocol)
-router.delete("/deleteprotocol", authUser, securityController.deleteSecurityProtocol)
+router.delete("/deleteprotocol/:id", authUser, securityController.deleteSecurityProtocol)
 
 module.exports = router;
