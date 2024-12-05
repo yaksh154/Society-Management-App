@@ -11,7 +11,7 @@ router.post("/create", authUser, upload.fields([
     { name: "VeraBill_OR_LightBill", maxCount: 1 },
     { name: "Rent_Agreement", maxCount: 1 },
 ]), resident_controller.createResident)
-router.get("/getall/:id", authUser, resident_controller.getResident)
+router.get("/profile/:id", authUser, resident_controller.getResident)
 router.put("/update/:id", authUser, upload.fields([
     { name: "residentphoto", maxCount: 1 },
     { name: "AadharCard_FrontSide", maxCount: 1 },
