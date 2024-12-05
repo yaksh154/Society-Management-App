@@ -104,6 +104,18 @@ const getResident = async (req, res) => {
     }
 };
 
+const getAllResident = async (req, res) => {
+    try {
+        const societyId = req.user.societyid
+        console.log("🚀 ~ getAllResident ~ societyId:", societyId)
+        const residents = await resident_service.getall(societyId);
+        return res.status(200).json(residents);
+    } catch (error) {
+        console.log("��� ~ getAllResident ~ error:", error);
+        return res.status(500).json({ error: error.message });
+    }
+}
+
 // Update Resident
 const updateResident = async (req, res) => {
     try {
@@ -214,6 +226,7 @@ const login = async (req, res) => {
 module.exports = {
     createResident,
     getResident,
+    getAllResident,
     updateResident,
     deleteResident,
     login
