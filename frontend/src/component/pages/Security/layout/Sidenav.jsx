@@ -11,16 +11,10 @@ import { IoLogOut } from "react-icons/io5";
 export default function Sidenav({ closeNav, data }) {
   const { pathname } = useLocation();
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(true);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const [isComplaintTrackingDropdown, setIsComplaintTrackingDropdown] = useState(false);
-
-  const toggleComplaintTrackingDropdown = () => {
-    setIsComplaintTrackingDropdown(!isComplaintTrackingDropdown);
   };
 
   return (
@@ -37,14 +31,14 @@ export default function Sidenav({ closeNav, data }) {
 
           <Link
             onClick={toggleDropdown}
-            aria-current={pathname.startsWith("/resident/community") ? "page" : undefined}
-            className={`text-nowrap relative p-3 ms-4 m-2 rounded-lg text-lg transition-colors duration-300 flex items-center bg-gradient-to-r  text-white from-orange-600 to-yellow-500   ${pathname.startsWith("/resident/community")
+            aria-current={pathname.startsWith("/security") ? "page" : undefined}
+            className={`text-nowrap relative p-3 ms-4 m-2 rounded-lg text-lg transition-colors duration-300 flex items-center bg-gradient-to-r  text-white from-orange-600 to-yellow-500   ${pathname.startsWith("/security")
               ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
               : "hover:bg-gray-100 text-black"
               }`}
           >
             {/* Active Indicator */}
-            {pathname.startsWith("/Security") && (
+            {pathname.startsWith("/security") && (
               <div className="absolute -left-4 top-0 bottom-0 w-2 bg-orange-600 rounded-r-lg"></div>
             )}
             <MdSecurity  className="inline mr-2" />
@@ -60,16 +54,16 @@ export default function Sidenav({ closeNav, data }) {
               <ul className="w-full">
                 <li className="ml-6">
                   <Link
-                    to="/Security/visitor"
-                    className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/Security/visitor") ? "border-black font-semibold" : ""}`}
+                    to="/security/visitor"
+                    className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/security/visitor") ? "border-black font-semibold" : ""}`}
                   >
                   Visitor Tracking
                   </Link>
                 </li>
                 <li className="ml-6">
                   <Link
-                    to="/Security/Emergency"
-                    className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/Security/Emergency") ? "border-black font-semibold" : ""}`}
+                    to="/security/emergency"
+                    className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/security/emergency") ? "border-black font-semibold" : ""}`}
                   >
                     Emergency Management
                   </Link>

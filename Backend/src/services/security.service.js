@@ -29,7 +29,7 @@ const create = async (data) => {
     return await Visitor.create(data);
 };
 
-const getAllVisitor = async (id) => {
+const getAllVisitors = async (id) => {
     return await Visitor.find({ Society: id }).populate("createdBy");
 };
 
@@ -64,7 +64,7 @@ module.exports = {
     getAllSecurity,
 
     create,
-    getAllVisitor,
+    getAllVisitors,
 
     createSecurityProtocol,
     getAllSecurityProtocols,

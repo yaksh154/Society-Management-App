@@ -1,36 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
-import Sidenav from "../layout/Sidenav";
+import Sidebar from "../layout/Sidenav";
 import Header from "../layout/Header";
 import { AiOutlinePlus } from "react-icons/ai";
 import AddVisiter from "./Models/AddVisiter";
 import { GetVisiter } from "../Api/Api";
+import Button from '../../../layout/Button_gradient'
 
 const VisitorTracking = () => {
+
+  const [isOpen, setIsOpen] = useState(true);
   const [data, setData] = useState(280);
   const [getData, setGetData] = useState(280);
-  const [visitorLogs, setVisitorLogs] = useState([]);
-  const [error, setError] = useState(null);
-  const [AddVisiterbox, setAddVisiterbox] = useState(false);
 
-  // Fetch visitor logs
-  useEffect(() => {
-    const fetchVisitorLogs = async () => {
-      try {
-        const data = await GetVisiter(); 
-        if (data && Array.isArray(data)) {
-          setVisitorLogs(data);
-        } else {
-          throw new Error("Failed to load data or data is invalid.");
-        }
-      } catch (err) {
-        console.error(err.message);
-        setError(err.message);
-      }
-    };
+  const toggleNav = () => {
+    setIsOpen((prevState) => !prevState);
+  };
 
-    fetchVisitorLogs();
-  }, []);
+  React.useEffect(() => {
+    if (isOpen) {
+      openNav();
+    } else {
+      closeNav();
+    }
+  }, [isOpen]);
 
   const openNav = () => {
     setData(280);
@@ -42,6 +35,19 @@ const VisitorTracking = () => {
     setGetData(0);
   };
 
+  const [visitorLogs, setVisitorLogs] = useState([]);
+  const [AddVisiterbox, setAddVisiterbox] = useState(false);
+  const [loding, setloding] = useState(true)
+
+  // Fetch visitor logs
+  useEffect(() => {
+    fetchVisitorLogs();
+  }, []);
+
+  const fetchVisitorLogs = async () => {
+    GetVisiter(setVisitorLogs, setloding);
+  };
+
   const OpenVisiterBox = () => {
     setAddVisiterbox(true);
   };
@@ -50,77 +56,90 @@ const VisitorTracking = () => {
     setAddVisiterbox(false);
   };
 
-  const formatDate = (date) => {
-    const d = new Date(date);
-    return d.toLocaleDateString("en-GB"); // Outputs as dd-mm-yyyy
-  };
-
-  const formatTime = (time) => {
-    const [hour, minute] = time.split(":");
-    const period = hour >= 12 ? "PM" : "AM";
-    const formattedHour = hour % 12 || 12; // Convert 0 to 12 for 12 AM
-    return `${formattedHour}:${minute} ${period}`;
-  };
-
   return (
     <div>
-      <Sidenav closeNav={closeNav} data={data} />
-      <div id="main" className="max-[425px]:ml-0" style={{ marginLeft: getData }}>
+      <Sidebar toggleNav={toggleNav} data={data} />
+      <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getData }}>
         <div className="open_he">
-          <Header openNav={openNav} />
+          <Header toggleNav={toggleNav} />
         </div>
         <div className="p-6 bg-gray-100 rounded-lg shadow-lg">
           <div className="overflow-x-auto bg-white p-4 rounded-xl">
-            <div className="flex justify-between items-center mb-4">
-              <h1 className="text-2xl font-semibold text-gray-700">Visitor Tracking</h1>
-              <button
+            <div className="flex justify-between items-center mb-5">
+              <h2 className="text-2xl font-bold">Visitor Logs</h2>
+              <Button
                 onClick={OpenVisiterBox}
-                className="flex items-center bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition"
-              >
-                <AiOutlinePlus className="mr-2" size={20} />
-                Add Visitor Details
-              </button>
+                Btn_Name={<div className="flex items-center"><AiOutlinePlus className="mr-2" size={20} />Add Visitor Details</div>} />
             </div>
+            <div className="overflow-auto max-h-screen">
+              {loding ? (
+                <div className='flex justify-center'>
+                  <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+                </div>
+              ) : (
+                <table className="min-w-full bg-[#eef1fd] rounded-lg ">
+                  <thead>
+                    <tr>
+                      <th className="px-6 py-3 border-b font-medium text-left">
+                        Visitor Name
+                      </th>
+                      <th className="px-6 py-3 border-b font-medium ">
+                        Phone Number
+                      </th>
+                      <th className="px-6 py-3 border-b font-medium ">
+                        Date
+                      </th>
+                      <th className="px-6 py-3 border-b font-medium ">
+                        Unit Number
+                      </th>
+                      <th className="px-6 py-3 border-b font-medium ">
+                        Time
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {visitorLogs.map((e, index) => {
+                      return (
+                        <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium md:font-semibold overflow-x-scroll">
+                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex items-center">
+                            <img className="w-8 h-8 rounded-full mr-1" src={e.createdBy.Image} alt="profile" />
+                            <span>{e.Visitor_Name}</span>
+                          </td>
+                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate text-center">{e.Phone}</td>
+                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate text-center">
+                            {new Date(e.Date).toLocaleDateString("en-US", {
+                              month: "2-digit",
+                              day: "2-digit",
+                              year: "numeric",
+                            })}
+                          </td>
+                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate text-center">
+                            <samp className=' px-2 py-1 text-[#5678e9] bg-[#f6f8fb] mr-2 rounded-full'>{e.Wing}</samp>
+                            {e.Unit}
+                          </td>
+                          <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate text-center">
+                            {e.Time ? (() => {
+                              const time24 = e.Time;
+                              const [hours, minutes] = time24.split(":");
+                              let hour = parseInt(hours, 10);
+                              const ampm = hour >= 12 ? "PM" : "AM";
+                              hour = hour % 12;
+                              hour = hour ? hour : 12;
+                              return `${hour}:${minutes} ${ampm}`;
+                            })() : "N/A"}
+                          </td>
 
-            {error && (
-              <div className="mb-4 text-red-500">
-                <p>Error: {error}</p>
-              </div>
-            )}
-
-            <table className="w-full table-auto">
-              <thead className="bg-blue-100 text-gray-700">
-                <tr>
-                  <th className="px-4 py-2 text-left">Name</th>
-                  <th className="px-4 py-2 text-left">Phone Number</th>
-                  <th className="px-4 py-2 text-left">Date</th>
-                  <th className="px-4 py-2 text-left">Unit Number</th>
-                  <th className="px-4 py-2 text-left">Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                {visitorLogs.map((item, index) => (
-                  <tr key={index} className="border-b">
-                    <td className="px-4 py-3 flex items-center space-x-2">
-                      <FaUser className="w-8 h-8 rounded-full border border-gray-400" />
-                      <span>{item.name}</span>
-                    </td>
-                    <td className="px-4 py-3">{item.phone}</td>
-                    <td className="px-4 py-3">{formatDate(item.date)}</td>
-                    <td className="px-4 py-3">
-                      <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-600">{item.unit}</span>
-                    </td>
-                    <td className="px-4 py-3">
-                      <span className="px-2 py-1 rounded-full bg-gray-200 text-black">{formatTime(item.time)}</span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              )}
+              {AddVisiterbox && (<AddVisiter close={CloseVisiterBox} Fdata={fetchVisitorLogs}/>)}
+            </div>
           </div>
         </div>
       </div>
-      {AddVisiterbox && <AddVisiter setAddVisiterbox={setAddVisiterbox} Fdata={visitorLogs} />}
     </div>
   );
 };

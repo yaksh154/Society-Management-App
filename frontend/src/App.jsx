@@ -34,8 +34,6 @@ import VisitorTracking from './component/pages/Security/Pages/VisitorTracking.js
 import Emergency from './component/pages/Security/Pages/Emergency.jsx'
 import Maintenance_Invoices_data from './component/pages/Resident/pages/Payment_Portal/pages/Maintenance_Invoices_data.jsx'
 
-
-
 function App() {
 
   return (
@@ -95,7 +93,7 @@ function App() {
 
 
         <Route path='/security/visitor' element={<VisitorTracking />} />
-        <Route path='/security/Emergency' element={<Emergency />} />
+        <Route path='/security/emergency' element={<Emergency />} />
 
 
       </Routes>
