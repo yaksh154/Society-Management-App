@@ -3,13 +3,13 @@ const Alert_servise = require("../services/EmergencyManagement.service")
 // Create a new alert
 const createAlert = async(req,res)=>{
     try{
-        const alertData = req.body;
-        if(!alertData){
+        const {Alert_Type , Description} = req.body;
+        if(!Alert_Type || !Description){
             return res.status(400).json({ message: "all required" })
         }
         const body = {
-            Alert_Type: alertData.Alert_Type,
-            Description: alertData.Description,
+            Alert_Type: Alert_Type,
+            Description: Description,
             createdBy: req.user._id,
             Society: req.user.societyid
         }

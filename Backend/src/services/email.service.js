@@ -7,12 +7,15 @@ let transporter = nodemailer.createTransport({
     secure: false,
     auth: {
         user: 'vraj.patel@swiftrut.com',
-        pass: 'nkadygehthqyopkd'
+        pass: 'yaomkdxrwohrnkef'
     }
 });
 
 // send mail with defined transport object
 const send_maile = async (email, password, Fullname) => {
+    console.log("🚀 ~ constsend_maile= ~ Fullname:", Fullname)
+    console.log("🚀 ~ constsend_maile= ~ password:", password)
+    console.log("🚀 ~ constsend_maile= ~ email:", email)
     try {
         return transporter.sendMail({
             from: 'vraj.patel@swiftrut.com',
