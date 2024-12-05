@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Sidebar from '../../../../layout/Sidebar';
 import Header from '../../../../layout/Header';
 import { FaUserCircle, FaCheck ,FaThumbsUp, FaRegEye, FaCommentAlt } from 'react-icons/fa';
-import { RiCheckDoubleFill } from 'react-icons/ri';
+import { RiCheckDoubleFill, RiCheckFill } from 'react-icons/ri';
 
 
 const Communities_Discussion = () => {
@@ -77,7 +77,7 @@ const Communities_Discussion = () => {
                   <div
                     key={index}
                     className={`flex items-center p-3 mb-2 rounded-lg hover:bg-gray-200 cursor-pointer ${
-                      chat.status === 'typing' ? 'bg-green-100' : ''
+                      chat.status === 'typing text-green-200' ? 'bg-white ' : ''
                     }`}
                   >
                     <FaUserCircle size={40} className="mr-3 text-gray-500" />
@@ -98,7 +98,7 @@ const Communities_Discussion = () => {
                     <div className="ml-auto text-right">
                       <p className="text-xs text-gray-400">{chat.time}</p>
                       {chat.status === 'read' && <RiCheckDoubleFill className="text-blue-500 inline-block" />}
-                      {chat.status === 'unread' && <FaCheck className="text-gray-500 inline-block" />}
+                      {chat.status === 'unread' && <RiCheckFill  className="text-gray-500 inline-block" />}
                     </div>
                   </div>
                 ))}
