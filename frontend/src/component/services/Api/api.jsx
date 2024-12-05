@@ -290,7 +290,7 @@ export const PostSumdata = (data) => {
 
 export const GetComplainy = (setgetComplaint, setloadingcomplaint) => {
     axios.get(`${url}/complaint/getAllComplaints`).then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setgetComplaint(res.data);
         setloadingcomplaint(false)
     })

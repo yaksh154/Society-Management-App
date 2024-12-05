@@ -4,15 +4,23 @@ import Sidebar from '../../../../layout/Sidebar';
 import Header from '../../../../layout/Header';
 import { GetNewPoll, GetOwnPoll, GetPreviousPoll } from '../../../../Api/api';
 import CreatePoll from '../../Modal/CreatePoll';
+import useSidbarTogal from '../../../../../../layout/useSidbarTogal';
 
 const Polls = () => {
-  const [data, setData] = useState(280); // Sidebar width state
+  
+  const [isOpen, setIsOpen] = useState(true);
+  const [data, setdata] = useState(280);
+  const [getdata, setget] = useState(280);
+  const toggleNav = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  useSidbarTogal({setdata, setget, isOpen})
+  
   const [pollType, setPollType] = useState('Own'); // Poll type selection state
   const [pollsData, setPollsData] = useState([]); // Data for displaying polls
   const [Create, setCreate] = useState(false); // Create poll modal state
 
-  const openNav = () => setData(280);
-  const closeNav = () => setData(0);
   const openCreatePoll = () => setCreate(true);
   const closeCreatePoll = () => setCreate(false);
 
@@ -89,9 +97,9 @@ const Polls = () => {
 
   return (
     <div className="bg-[#f0f5fb] h-screen">
-      <Sidebar closeNav={closeNav} data={data} />
-      <div id="main" style={{ marginLeft: data }}>
-        <Header openNav={openNav} />
+      <Sidebar toggleNav={toggleNav} data={data} />
+      <div id="main" style={{ marginLeft: getdata }}>
+        <Header toggleNav={toggleNav} />
         <div className="p-6 bg-gray-100">
           <div className="flex space-x">
             {['Own', 'New', 'Previous'].map((type) => (

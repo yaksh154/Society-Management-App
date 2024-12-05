@@ -4,34 +4,18 @@ import Header from '../../../layout/Header'
 import Button from '../../../../../layout/Button_gradient';
 import axios from 'axios';
 import PaymentmethodModal from '../../Dashboard/Modal/PaymentmethodModal';
+import useSidbarTogal from '../../../../../layout/useSidbarTogal';
 
 const Other_Income_Invoice = () => {
 
     const [isOpen, setIsOpen] = useState(true);
-
+    let [data, setdata] = useState(280);
+    let [getdata, setget] = useState(280);
     const toggleNav = () => {
         setIsOpen((prevState) => !prevState);
     };
 
-    React.useEffect(() => {
-        if (isOpen) {
-            openNav();
-        } else {
-            closeNav();
-        }
-    }, [isOpen]);
-
-    let [data, setdata] = useState(280);
-    let [getdata, setget] = useState(280);
-
-    function openNav() {
-        setdata(280);
-        setget(280);
-    }
-    function closeNav() {
-        setdata(0);
-        setget(0);
-    }
+    useSidbarTogal({setdata, setget, isOpen})
 
     const [Maintanance, setMaintanance] = useState([]);
     const [PaymentMethod, setPaymentMethod] = useState(false)

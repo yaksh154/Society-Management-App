@@ -3,34 +3,19 @@ import Header from "../../../layout/Header";
 import Sidebar from "../../../layout/Sidebar";
 import Resident_Owner from "../Resident_Owner/Resident_Owner_component/Resident_Owner";
 import Resident_Tenant from "../Resident_Owner/Resident_Owner_component/Resident_Tenant";
+import useSidbarTogal from "../../../layout/useSidbarTogal";
 
 const Resident_Owner_Form = () => {
 
   const [isOpen, setIsOpen] = useState(true);
+  let [data, setdata] = useState(280);
+  let [getdata, setget] = useState(280);
 
   const toggleNav = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  React.useEffect(() => {
-    if (isOpen) {
-      openNav();
-    } else {
-      closeNav();
-    }
-  }, [isOpen]);
-
-  let [data, setdata] = useState(280);
-  let [getdata, setget] = useState(280);
-
-  function openNav() {
-    setdata(280);
-    setget(280);
-  }
-  function closeNav() {
-    setdata(0);
-    setget(0);
-  }
+  useSidbarTogal({setdata, setget, isOpen})
 
   const [activeTab, setActiveTab] = useState("Owner");
   

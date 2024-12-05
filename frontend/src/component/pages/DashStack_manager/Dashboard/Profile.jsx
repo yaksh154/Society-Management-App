@@ -4,25 +4,20 @@ import Header from '../../../layout/Header';
 // import userImg from '../../../../../public/images/userImg'
 import { EditProfile, GetCreateSocirty, Profile_img } from '../../../services/Api/api';
 import axios from 'axios';
+import useSidbarTogal from '../../../layout/useSidbarTogal';
 
 const Profile = () => {
 
   const [isOpen, setIsOpen] = useState(true);
+  const [data, setdata] = useState(280);
+  const [getData, setget] = useState(280);
 
   const toggleNav = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  React.useEffect(() => {
-    if (isOpen) {
-      openNav();
-    } else {
-      closeNav();
-    }
-  }, [isOpen]);
-
-  const [data, setData] = useState(280);
-  const [getData, setGetData] = useState(280);
+  useSidbarTogal({setdata, setget, isOpen})
+  
   const [Image, setImage] = useState('');
   const [isEditable, setIsEditable] = useState(false);
   const [error, setError] = useState('');
@@ -55,16 +50,6 @@ const Profile = () => {
 
   const Fdata = () => {
     Profile_img(setFormData);
-  };
-
-  const openNav = () => {
-    setData(280);
-    setGetData(280);
-  };
-
-  const closeNav = () => {
-    setData(0);
-    setGetData(0);
   };
 
   const handleChange = (e) => {
@@ -142,7 +127,7 @@ const Profile = () => {
                   {isEditable && (
                     <label
                       htmlFor="imageUpload"
-                      className="absolute bottom-0 right-0 bg-white p-1 rounded-full border cursor-pointer"
+                      className="absolute bottom-0 right-0 bg-white p-1 rounded-full border cursor-pointer "
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

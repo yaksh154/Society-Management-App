@@ -3,34 +3,18 @@ import Sidebar from '../../layout/Sidebar'
 import Header from '../../layout/Header'
 import Complaint_Submission from './Pages/Complaint_Submission';
 import Request_Submission from './Pages/Request_Submission';
+import useSidbarTogal from '../../../../layout/useSidbarTogal';
 
 const Service_And_Complaint = () => {
 
     const [isOpen, setIsOpen] = useState(true);
-
+    let [data, setdata] = useState(280);
+    let [getdata, setget] = useState(280);
     const toggleNav = () => {
         setIsOpen((prevState) => !prevState);
     };
 
-    React.useEffect(() => {
-        if (isOpen) {
-            openNav();
-        } else {
-            closeNav();
-        }
-    }, [isOpen]);
-
-    let [data, setdata] = useState(280);
-    let [getdata, setget] = useState(280);
-
-    function openNav() {
-        setdata(280);
-        setget(280);
-    }
-    function closeNav() {
-        setdata(0);
-        setget(0);
-    }
+    useSidbarTogal({setdata, setget, isOpen})
 
     const [activeTab, setActiveTab] = useState("Complaint_Submission");
 

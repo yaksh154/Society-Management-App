@@ -18,35 +18,20 @@ import ViewComplintModel from '../../../Modals/ViewComplintModel';
 import DeleteImportantNumbersModal from '../../../Modals/DeleteImportantNumbersModal';
 import LodingDelete from '../../../layout/DeleteLoding'
 import { DeleteComplaint } from '../../../services/Api/api';
+import useSidbarTogal from '../../../layout/useSidbarTogal';
 
 
 const Home = () => {
 
   const [isOpen, setIsOpen] = useState(true);
+  let [data, setdata] = useState(280);
+  let [getdata, setget] = useState(280);
 
   const toggleNav = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  React.useEffect(() => {
-    if (isOpen) {
-      openNav();
-    } else {
-      closeNav();
-    }
-  }, [isOpen]);
-
-  let [data, setdata] = useState(280);
-  let [getdata, setget] = useState(280);
-
-  function openNav() {
-    setdata(280);
-    setget(280);
-  }
-  function closeNav() {
-    setdata(0);
-    setget(0);
-  }
+  useSidbarTogal({setdata, setget, isOpen})
 
   const [contacts, setContacts] = useState('');
   const [loading, setLoading] = useState(true);
@@ -153,7 +138,7 @@ const Home = () => {
       <Sidebar toggleNav={toggleNav} data={data} />
       <div id='main' className='max-[425px]:ml-0 ' style={{ marginLeft: getdata }} >
         <div className="open_he">
-          <Header toggleNav={toggleNav}/>
+          <Header toggleNav={toggleNav} />
         </div>
         <main className="flex-1 space-y-6 ">
           <div className="p-6 space-y-4 bg-[#f0f5fb]">
@@ -399,7 +384,7 @@ const Home = () => {
                             return (
                               <tr key={index} className="border-b hover:bg-gray-50">
                                 <td className="px-4 py-2 flex items-center space-x-2">
-                                  <img className="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
+                                  <img className="w-8 h-8 rounded-full" src={e.createdBy.Image} alt="profile" />
                                   <span>{e.Complainer_Name}</span>
                                 </td>
                                 <td className="px-4 py-2">{e.Complaint_Name}</td>

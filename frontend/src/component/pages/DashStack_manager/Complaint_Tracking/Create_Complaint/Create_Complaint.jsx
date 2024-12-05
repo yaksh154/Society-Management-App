@@ -10,34 +10,19 @@ import Create_Complint_model from '../../../../Modals/Create_Complint_model';
 import { DeleteComplaint, GetComplainy } from '../../../../services/Api/api';
 import LodingDelete from '../../../../layout/DeleteLoding'
 import Button from '../../../../layout/Button_gradient'
+import useSidbarTogal from '../../../../layout/useSidbarTogal';
 
 const Create_Complaint = () => {
 
   const [isOpen, setIsOpen] = useState(true);
+  let [data, setdata] = useState(280);
+  let [getdata, setget] = useState(280);
 
   const toggleNav = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  React.useEffect(() => {
-    if (isOpen) {
-      openNav();
-    } else {
-      closeNav();
-    }
-  }, [isOpen]);
-
-  let [data, setdata] = useState(280);
-  let [getdata, setget] = useState(280);
-
-  function openNav() {
-    setdata(280);
-    setget(280);
-  }
-  function closeNav() {
-    setdata(0);
-    setget(0);
-  }
+  useSidbarTogal({setdata, setget, isOpen})
 
   useEffect(() => {
     getComplaintdata()

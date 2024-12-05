@@ -10,34 +10,23 @@ import { GrFormView } from 'react-icons/gr';
 import EditExpensesModal from '../../../../Modals/EditExpensesModal';
 import ViewExpenseModal from '../../../../Modals/ViewExpenseModal';
 import DeleteModal from '../../../../layout/DeleteLoding';
+import useSidbarTogal from '../../../../layout/useSidbarTogal';
 
 const Expanse = () => {
 
   const [isOpen, setIsOpen] = useState(true);
+  let [data, setdata] = useState(280);
+  let [getdata, setget] = useState(280);
 
   const toggleNav = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  React.useEffect(() => {
-    if (isOpen) {
-      openNav();
-    } else {
-      closeNav();
-    }
-  }, [isOpen]);
+  useSidbarTogal({setdata, setget, isOpen})
 
-  const [sidebarWidth, setSidebarWidth] = useState(280);
   const [expenses, setExpenses] = useState([]);
   const [error, setError] = useState(null);
 
-  const openNav = () => {
-    setSidebarWidth(280);
-  };
-
-  const closeNav = () => {
-    setSidebarWidth(0);
-  };
 
   // Add
   const [AddExpense, setAddExpense] = useState(false);
@@ -108,8 +97,8 @@ const Expanse = () => {
 
   return (
     <div className="flex">
-      <Sidebar toggleNav={toggleNav} data={sidebarWidth} />
-      <div id="main" className="flex-1 transition-all duration-300" style={{ marginLeft: sidebarWidth }}>
+      <Sidebar toggleNav={toggleNav} data={data} />
+      <div id="main" className="flex-1 transition-all duration-300" style={{ marginLeft: getdata }}>
         <Header toggleNav={toggleNav} />
         <div className="p-4 md:p-8 bg-slate-100">
           <div className="bg-white rounded-lg shadow-md">

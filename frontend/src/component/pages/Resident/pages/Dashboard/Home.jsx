@@ -7,34 +7,18 @@ import { MdOutlineAttachMoney } from 'react-icons/md';
 import TotalBalanceChart from '../../../../layout/TotalBalanceChart';
 import { GetComplainy, ImportantNumbersGet } from '../../../../services/Api/api';
 import { Get_Pending_Maintenances } from '../../Api/api';
+import useSidbarTogal from '../../../../layout/useSidbarTogal';
 
 const Home = () => {
 
   const [isOpen, setIsOpen] = useState(true);
-
+  let [data, setdata] = useState(280);
+  let [getdata, setget] = useState(280);
   const toggleNav = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  React.useEffect(() => {
-    if (isOpen) {
-      openNav();
-    } else {
-      closeNav();
-    }
-  }, [isOpen]);
-
-  let [data, setdata] = useState(280);
-  let [getdata, setget] = useState(280);
-
-  function openNav() {
-    setdata(280);
-    setget(280);
-  }
-  function closeNav() {
-    setdata(0);
-    setget(0);
-  }
+  useSidbarTogal({setdata, setget, isOpen})
 
   const [loading, setLoading] = useState(true);
   const [contacts, setContacts] = useState('');

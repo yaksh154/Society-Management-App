@@ -5,7 +5,7 @@ import OpneNotificationModal from '../layout/OpneNotification';
 import { Profile_img } from '../../../services/Api/api';
 
 
-const Header = (props) => {
+const Header = ({toggleNav}) => {
   const [FormData, setFormData] = useState('')
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Header = (props) => {
     <div>
       <header className="flex justify-between p-4 bg-white items-center">
         <div className='flex'>
-          <span className='flex items-center mr-5' style={{ fontSize: 30, cursor: "pointer" }} onClick={props.openNav}>
+          <span className='flex items-center mr-5' style={{ fontSize: 30, cursor: "pointer" }} onClick={toggleNav}>
             <GiHamburgerMenu />
           </span>
           <input type="text" placeholder="Search Here" className="w-full max-w-md px-4 py-2 border rounded-lg" />

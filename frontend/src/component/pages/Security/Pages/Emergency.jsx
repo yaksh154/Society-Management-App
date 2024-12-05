@@ -4,11 +4,18 @@ import Sidenav from '../layout/Sidenav';
 import Header from '../layout/Header';
 import { IoSend } from 'react-icons/io5';
 import { PostAlert } from '../Api/Api'; // Import PostAlert function
+import useSidbarTogal from '../../../layout/useSidbarTogal';
 
 const Emergency = ({ Fdata }) => {
-  const [navWidth, setNavWidth] = useState(280); // Sidenav state
-  const openNav = useCallback(() => setNavWidth(280), []);
-  const closeNav = useCallback(() => setNavWidth(0), []);
+  const [isOpen, setIsOpen] = useState(true);
+  const [data, setdata] = useState(280);
+  const [getData, setget] = useState(280);
+
+  const toggleNav = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  useSidbarTogal({setdata, setget, isOpen})
 
   const {
     register,
@@ -35,10 +42,10 @@ const Emergency = ({ Fdata }) => {
 
   return (
     <div className="bg-[#f0f5fb] h-screen">
-      <Sidenav closeNav={closeNav} data={navWidth} />
-      <div id="main" className="max-[425px]:ml-0" style={{ marginLeft: navWidth }}>
+      <Sidenav toggleNav={toggleNav} data={data} />
+      <div id="main" className="max-[425px]:ml-0" style={{ marginLeft: getData }}>
         <div className="open_he">
-          <Header openNav={openNav} />
+          <Header toggleNav={toggleNav} />
         </div>
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-6 flex items-center justify-center">
           <div className="w-full max-w-md">
@@ -57,9 +64,8 @@ const Emergency = ({ Fdata }) => {
                 </label>
                 <select
                   {...register('Alert_Type', { required: 'Please select an alert type' })}
-                  className={`block w-full px-4 py-3 rounded-lg border ${
-                    errors.Alert_Type ? 'border-red-500' : 'border-gray-200'
-                  } focus:ring-1 focus:ring-slate-400`}
+                  className={`block w-full px-4 py-3 rounded-lg border ${errors.Alert_Type ? 'border-red-500' : 'border-gray-200'
+                    } focus:ring-1 focus:ring-slate-400`}
                 >
                   <option value="">Select Alert</option>
                   {alertTypes.map((type) => (
@@ -81,9 +87,8 @@ const Emergency = ({ Fdata }) => {
                 <textarea
                   {...register('Description', { required: 'Please enter a description' })}
                   placeholder="Enter the details of the emergency"
-                  className={`block w-full px-4 py-3 rounded-lg border ${
-                    errors.Description ? 'border-red-500' : 'border-gray-200'
-                  } focus:ring-1 focus:ring-slate-400 min-h-[120px] resize-none`}
+                  className={`block w-full px-4 py-3 rounded-lg border ${errors.Description ? 'border-red-500' : 'border-gray-200'
+                    } focus:ring-1 focus:ring-slate-400 min-h-[120px] resize-none`}
                 />
                 {errors.Description && (
                   <p className="text-red-500 text-sm">{errors.Description.message}</p>

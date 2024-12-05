@@ -5,49 +5,32 @@ import { FaUserCircle, FaCheck ,FaThumbsUp, FaRegEye, FaCommentAlt } from 'react
 import { RiCheckDoubleFill, RiCheckFill } from 'react-icons/ri';
 
 
-const Communities_Discussion = () => {
-  const [data, setdata] = useState(280);
-  const [getdata, setget] = useState(280);
+import React, { useState } from 'react'
+import Sidebar from '../../../../layout/Sidebar'
+import Header from '../../../../layout/Header'
 
-  function openNav() {
-    setdata(280);
-    setget(280);
-  }
-  function closeNav() {
-    setdata(0);
-    setget(0);
-  }
-  const questions = [
-    {
-      id: 1,
-      votes: 0,
-      answers: 1,
-      views: 20,
-      question: "What is the capital of France?",
-      dummyText: "Feel free to let me know if you need more examples or if there's anything specific you'd like to include in your dummy content! Feel free to let me know if you need more examples or if there's anything specific you'd like to include in your."
-    },
-    {
-      id: 2,
-      votes: 3,
-      answers: 0,
-      views: 20,
-      question: "What is the capital of France?",
-      dummyText: "Feel free to let me know if you need more examples or if there's anything specific you'd like to include in your dummy content! Feel free to let me know if you need more examples or if there's anything specific you'd like to include in your."
-    },{
-      id: 1,
-      votes: 0,
-      answers: 1,
-      views: 20,
-      question: "What is the capital of France?",
-      dummyText: "Feel free to let me know if you need more examples or if there's anything specific you'd like to include in your dummy content! Feel free to let me know if you need more examples or if there's anything specific you'd like to include in your."
-    },
-    {
-      id: 2,
-      votes: 3,
-      answers: 0,
-      views: 20,
-      question: "What is the capital of France?",
-      dummyText: "Feel free to let me know if you need more examples or if there's anything specific you'd like to include in your dummy content! Feel free to let me know if you need more examples or if there's anything specific you'd like to include in your."
+
+const Communities_Discussion = () => {
+    let [data, setdata] = useState(280);
+    let [getdata, setget] = useState(280);
+
+    const [isOpen, setIsOpen] = useState(true);
+
+    const toggleNav = () => {
+        setIsOpen((prevState) => !prevState);
+    };
+
+    React.useEffect(() => {
+        if (isOpen) {
+            openNav();
+        } else {
+            closeNav();
+        }
+    }, [isOpen]);
+
+    function openNav() {
+        setdata(280);
+        setget(280);
     }
   ];
   const chats = [
@@ -135,6 +118,18 @@ const Communities_Discussion = () => {
             </div>
             <div className="flex items-center bg-white p-2 rounded-full">
                   <FaRegEye className="mr-1" /> {q.views} 
+=======
+    function closeNav() {
+        setdata(0);
+        setget(0);
+    }
+    return (
+        <div className='bg-[#f0f5fb] h-screen'>
+            <Sidebar toggleNav={toggleNav} data={data} />
+            <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
+                <div className="open_he">
+                    <Header toggleNav={toggleNav} />
+>>>>>>> ccc7a76117dc362bfa0cdedef7490a043cb9acac
                 </div>
           </div>
         ))}

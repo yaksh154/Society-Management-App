@@ -10,34 +10,18 @@ import AddSecurityModal from '../../../Modals/AddSecurityModal';
 import ViewSecurityModal from '../../../Modals/ViewSecurityModal';
 import EditSecurityModal from '../../../Modals/EditSecurityModal';
 import DeleteLoding from '../../../layout/DeleteLoding'
+import useSidbarTogal from '../../../layout/useSidbarTogal';
 
 const Security_Guard = () => {
 
   const [isOpen, setIsOpen] = useState(true);
-
+  let [data, setdata] = useState(280);
+  let [getdata, setget] = useState(280);
   const toggleNav = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  React.useEffect(() => {
-    if (isOpen) {
-      openNav();
-    } else {
-      closeNav();
-    }
-  }, [isOpen]);
-
-  let [data, setdata] = useState(280);
-  let [getdata, setget] = useState(280);
-
-  function openNav() {
-    setdata(280);
-    setget(280);
-  }
-  function closeNav() {
-    setdata(0);
-    setget(0);
-  }
+  useSidbarTogal({setdata, setget, isOpen})
 
   const [Guard_Details, setGuard_Details] = useState([]);
   const [lodingData, setlodingData] = useState(true)

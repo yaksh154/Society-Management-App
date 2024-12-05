@@ -6,34 +6,19 @@ import { FaEdit } from "react-icons/fa";
 import { GrFormView } from "react-icons/gr";
 import axios from "axios";
 import View_Owner_Details_Modal from "../../../Modals/View_Owner_Details_Modal";
+import useSidbarTogal from "../../../layout/useSidbarTogal";
 
 const Resident_Management = () => {
 
   const [isOpen, setIsOpen] = useState(true);
+  let [data, setdata] = useState(280);
+  let [getdata, setget] = useState(280);
 
   const toggleNav = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  React.useEffect(() => {
-    if (isOpen) {
-      openNav();
-    } else {
-      closeNav();
-    }
-  }, [isOpen]);
-
-  let [data, setdata] = useState(280);
-  let [getdata, setget] = useState(280);
-
-  function openNav() {
-    setdata(280);
-    setget(280);
-  }
-  function closeNav() {
-    setdata(0);
-    setget(0);
-  }
+  useSidbarTogal({setdata, setget, isOpen})
 
   const [Sumdata, setSumdata] = useState([])
 

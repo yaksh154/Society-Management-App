@@ -9,34 +9,18 @@ import { Delete_Security_Protocols, Get_Security_Protocols } from '../../../../s
 import AddProtocolsModal from '../../../../Modals/AddProtocolsModal';
 import EditProtocolsModal from '../../../../Modals/EditProtocolsModal';
 import DeleteLoding from '../../../../layout/DeleteLoding'
+import useSidbarTogal from '../../../../layout/useSidbarTogal';
 
 const Security_Protocols = () => {
 
     const [isOpen, setIsOpen] = useState(true);
-
+    let [data, setdata] = useState(280);
+    let [getdata, setget] = useState(280);
     const toggleNav = () => {
         setIsOpen((prevState) => !prevState);
     };
 
-    React.useEffect(() => {
-        if (isOpen) {
-            openNav();
-        } else {
-            closeNav();
-        }
-    }, [isOpen]);
-
-    let [data, setdata] = useState(280);
-    let [getdata, setget] = useState(280);
-
-    function openNav() {
-        setdata(280);
-        setget(280);
-    }
-    function closeNav() {
-        setdata(0);
-        setget(0);
-    }
+    useSidbarTogal({setdata, setget, isOpen})
 
     const [Security, setSecurity] = useState([])
     const [loding, setloding] = useState(true)
