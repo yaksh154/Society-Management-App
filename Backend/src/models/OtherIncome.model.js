@@ -24,7 +24,7 @@ const otherincomeSchema = new mongoose.Schema(
         },
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'otherincome'
+            ref: 'Manager'
         },
         Society: {
             type: mongoose.Schema.Types.ObjectId,
