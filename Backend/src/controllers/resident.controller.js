@@ -1,5 +1,6 @@
 const resident_service = require("../services/resident.service")
 const Society = require("../services/society.service")
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { uploadFile } = require("../middleware/upload")
 const { send_maile } = require("../services/email.service")
@@ -103,6 +104,18 @@ const getResident = async (req, res) => {
     }
 };
 
+const getAllResident = async (req, res) => {
+    try {
+        const societyId = req.user.societyid
+        console.log("🚀 ~ getAllResident ~ societyId:", societyId)
+        const residents = await resident_service.getall(societyId);
+        return res.status(200).json(residents);
+    } catch (error) {
+        console.log("��� ~ getAllResident ~ error:", error);
+        return res.status(500).json({ error: error.message });
+    }
+}
+
 // Update Resident
 const updateResident = async (req, res) => {
     try {
@@ -195,11 +208,12 @@ const login = async (req, res) => {
         if (!bcryptpass) {
             return res.status(404).json({ message: "Incorrect Password" })
         }
+        console.log("🚀 ~ login ~ payload.resident.society:", resident.Society)
         const payload = {
             _id: resident._id,
             email: resident.Email,
             role: resident.Role,
-            societyid: resident.society
+            societyid: resident.Society
         };
         const token = jwt.sign(payload, process.env.SECRET_key, { expiresIn: "1d" });
         return res.status(200).json({ message: "resident Login Successful", token: token });
@@ -212,6 +226,7 @@ const login = async (req, res) => {
 module.exports = {
     createResident,
     getResident,
+    getAllResident,
     updateResident,
     deleteResident,
     login

@@ -8,6 +8,10 @@ const findemail = async (email) => {
     return await Resident.findOne({ Email: email })
 }
 
+const getall = async (id)=>{
+    return await Resident.find({ Society: id });
+}
+
 const getById = async (id) => {
     return await Resident.findById(id).populate("Society");
 };
@@ -22,6 +26,7 @@ const deleteResident = async (id) => {
 module.exports = {
     create,
     findemail,
+    getall,
     getById,
     update,
     deleteResident,
