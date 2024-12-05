@@ -11,35 +11,19 @@ import SetMaintenancePwd from '../../../Modals/SetMaintenancePwd';
 import Viewmaintenance from '../../../Modals/Viewmaintenance ';
 import { GetMaintenance } from '../../../services/Api/api';
 import { GrFormView } from 'react-icons/gr';
+import useSidbarTogal from '../../../layout/useSidbarTogal';
 
 const Financial_Management = () => {
 
   const [isOpen, setIsOpen] = useState(true);
+  let [data, setdata] = useState(280);
+  let [getdata, setget] = useState(280);
 
   const toggleNav = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  React.useEffect(() => {
-    if (isOpen) {
-      openNav();
-    } else {
-      closeNav();
-    }
-  }, [isOpen]);
-
-  const [data, setData] = useState(280);
-  const [getdata, setGetdata] = useState(280);
-
-  function openNav() {
-    setData(280);
-    setGetdata(280);
-  }
-
-  function closeNav() {
-    setData(0);
-    setGetdata(0);
-  }
+  useSidbarTogal({setdata, setget, isOpen})
 
   const [activeTab, setActiveTab] = useState("Maintenance");
 

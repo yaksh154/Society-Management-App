@@ -5,35 +5,18 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from '../../../../layout/Sidebar';
 import Header from '../../../../layout/Header';
 import { GetVisiter } from '../../../../services/Api/api';
+import useSidbarTogal from '../../../../layout/useSidbarTogal';
 
 const Visitor_Logs = () => {
 
     const [isOpen, setIsOpen] = useState(true);
-
+    const [data, setdata] = useState(280);
+    const [getData, setget] = useState(280);
     const toggleNav = () => {
         setIsOpen((prevState) => !prevState);
     };
 
-    React.useEffect(() => {
-        if (isOpen) {
-            openNav();
-        } else {
-            closeNav();
-        }
-    }, [isOpen]);
-
-    const [data, setData] = useState(280);
-    const [getData, setGetData] = useState(280);
-
-    function openNav() {
-        setData(280);
-        setGetData(280);
-    }
-
-    function closeNav() {
-        setData(0);
-        setGetData(0);
-    }
+    useSidbarTogal({setdata, setget, isOpen})
 
     const [visitorLogs, setVisitorLogs] = useState([]);
     const [loding, setloding] = useState(true)

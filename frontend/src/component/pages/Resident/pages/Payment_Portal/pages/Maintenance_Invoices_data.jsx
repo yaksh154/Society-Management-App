@@ -5,35 +5,18 @@ import { GrFormView } from 'react-icons/gr';
 import axios from 'axios';
 import ViewData_invoices_to from '../Modal/ViewData_invoices_to';
 import { Get_Maintenance_Invoices_data } from '../../../Api/api';
+import useSidbarTogal from '../../../../../layout/useSidbarTogal';
 
 const Maintenance_Invoices_data = () => {
 
     const [isOpen, setIsOpen] = useState(true);
-
+    let [data, setdata] = useState(280);
+    let [getdata, setget] = useState(280);
     const toggleNav = () => {
         setIsOpen((prevState) => !prevState);
     };
 
-    React.useEffect(() => {
-        if (isOpen) {
-            openNav();
-        } else {
-            closeNav();
-        }
-    }, [isOpen]);
-
-    let [data, setdata] = useState(280);
-    let [getdata, setget] = useState(280);
-
-    function openNav() {
-        setdata(280);
-        setget(280);
-    }
-
-    function closeNav() {
-        setdata(0);
-        setget(0);
-    }
+    useSidbarTogal({setdata, setget, isOpen})
 
     // State for selected month
     const [selectedMonth, setSelectedMonth] = useState('');

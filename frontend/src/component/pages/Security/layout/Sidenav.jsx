@@ -2,13 +2,9 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import {  MdSecurity } from "react-icons/md";
-import { RiCommunityFill } from "react-icons/ri";
-import { BiSolidUserDetail } from "react-icons/bi";
-import { BsFillBoxSeamFill } from "react-icons/bs";
-import { FaCcAmazonPay } from "react-icons/fa";
 import { IoLogOut } from "react-icons/io5";
 
-export default function Sidenav({ closeNav, data }) {
+export default function Sidenav({ toggleNav, data }) {
   const { pathname } = useLocation();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(true);
@@ -22,10 +18,10 @@ export default function Sidenav({ closeNav, data }) {
       <div className="flex flex-col justify-between h-screen">
         <div>
           <div className="flex justify-center my-4">
-            <h1 className="text-4xl font-bold text-orange-600 mt-10 mb-5">Dash<span className="text-black">Stack</span></h1>
+            <h1 className="text-4xl font-bold text-orange-600 mt-3 max-[425px]:mt-10 mb-5">Dash<span className="text-black">Stack</span></h1>
           </div>
 
-          <button onClick={closeNav} className="absolute text-black top-0 right-6 text-3xl">
+          <button onClick={toggleNav} className="absolute text-black top-0 right-6 text-3xl hidden max-[425px]:flex">
             ×
           </button>
 
@@ -55,7 +51,7 @@ export default function Sidenav({ closeNav, data }) {
                 <li className="ml-6">
                   <Link
                     to="/security/visitor"
-                    className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/security/visitor") ? "border-black font-semibold" : ""}`}
+                    className={`text-nowrap block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/security/visitor") ? "border-black font-semibold" : ""}`}
                   >
                   Visitor Tracking
                   </Link>
@@ -63,7 +59,7 @@ export default function Sidenav({ closeNav, data }) {
                 <li className="ml-6">
                   <Link
                     to="/security/emergency"
-                    className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/security/emergency") ? "border-black font-semibold" : ""}`}
+                    className={`text-nowrap block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/security/emergency") ? "border-black font-semibold" : ""}`}
                   >
                     Emergency Management
                   </Link>

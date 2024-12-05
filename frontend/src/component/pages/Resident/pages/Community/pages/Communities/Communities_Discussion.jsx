@@ -1,33 +1,19 @@
 import React, { useState } from 'react'
 import Sidebar from '../../../../layout/Sidebar'
 import Header from '../../../../layout/Header'
+import useSidbarTogal from '../../../../../../layout/useSidbarTogal';
 
 const Communities_Discussion = () => {
-    let [data, setdata] = useState(280);
-    let [getdata, setget] = useState(280);
-
     const [isOpen, setIsOpen] = useState(true);
-
+    const [data, setdata] = useState(280);
+    const [getdata, setget] = useState(280);
+    
     const toggleNav = () => {
-        setIsOpen((prevState) => !prevState);
+      setIsOpen((prevState) => !prevState);
     };
 
-    React.useEffect(() => {
-        if (isOpen) {
-            openNav();
-        } else {
-            closeNav();
-        }
-    }, [isOpen]);
+    useSidbarTogal({setdata, setget, isOpen})
 
-    function openNav() {
-        setdata(280);
-        setget(280);
-    }
-    function closeNav() {
-        setdata(0);
-        setget(0);
-    }
     return (
         <div className='bg-[#f0f5fb] h-screen'>
             <Sidebar toggleNav={toggleNav} data={data} />

@@ -3,36 +3,22 @@ import Sidebar from '../../layout/Sidebar'
 import Header from '../../layout/Header'
 import { FaFileAlt } from "react-icons/fa";
 import Tenant from './Tenant';
+import useSidbarTogal from '../../../../layout/useSidbarTogal';
 
 
 const Personal_Detail = () => {
 
   const [isOpen, setIsOpen] = useState(true);
-
+  let [data, setdata] = useState(280);
+  let [getdata, setget] = useState(280);
   const toggleNav = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  React.useEffect(() => {
-    if (isOpen) {
-      openNav();
-    } else {
-      closeNav();
-    }
-  }, [isOpen]);
+  useSidbarTogal({setdata, setget, isOpen})
 
-  let [data, setdata] = useState(280);
-  let [getdata, setget] = useState(280);
   const [activeTab, setActiveTab] = useState("Owner");
 
-  function openNav() {
-    setdata(280);
-    setget(280);
-  }
-  function closeNav() {
-    setdata(0);
-    setget(0);
-  }
   const [members] = useState([
     {
       name: 'Arlene McCoy',

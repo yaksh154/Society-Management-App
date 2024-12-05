@@ -6,34 +6,19 @@ import { AiOutlinePlus } from "react-icons/ai";
 import AddVisiter from "./Models/AddVisiter";
 import { GetVisiter } from "../Api/Api";
 import Button from '../../../layout/Button_gradient'
+import useSidbarTogal from "../../../layout/useSidbarTogal";
 
 const VisitorTracking = () => {
 
   const [isOpen, setIsOpen] = useState(true);
-  const [data, setData] = useState(280);
-  const [getData, setGetData] = useState(280);
+  const [data, setdata] = useState(280);
+  const [getData, setget] = useState(280);
 
   const toggleNav = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  React.useEffect(() => {
-    if (isOpen) {
-      openNav();
-    } else {
-      closeNav();
-    }
-  }, [isOpen]);
-
-  const openNav = () => {
-    setData(280);
-    setGetData(280);
-  };
-
-  const closeNav = () => {
-    setData(0);
-    setGetData(0);
-  };
+  useSidbarTogal({setdata, setget, isOpen})
 
   const [visitorLogs, setVisitorLogs] = useState([]);
   const [AddVisiterbox, setAddVisiterbox] = useState(false);

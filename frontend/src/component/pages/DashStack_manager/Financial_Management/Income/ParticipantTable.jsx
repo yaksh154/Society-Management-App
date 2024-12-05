@@ -5,6 +5,7 @@ import { BsPersonBoundingBox } from 'react-icons/bs';
 import { FaUser } from 'react-icons/fa';
 import { HiOutlineCash } from 'react-icons/hi';
 import { IoMdWallet } from 'react-icons/io';
+import useSidbarTogal from '../../../../layout/useSidbarTogal';
 
 const participants = [
   { unit: 'A 1001', date: '10/07/2024', status: 'Owner', phone: '92524 12365', amount: '₹ 1000', payment: 'Cash' },
@@ -18,30 +19,14 @@ const participants = [
 const ParticipantTable = () => {
 
   const [isOpen, setIsOpen] = useState(true);
+  let [data, setdata] = useState(280);
+  let [getdata, setget] = useState(280);
 
   const toggleNav = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  React.useEffect(() => {
-    if (isOpen) {
-      openNav();
-    } else {
-      closeNav();
-    }
-  }, [isOpen]);
-
-  let [data, setdata] = useState(280);
-  let [getdata, setget] = useState(280);
-
-  function openNav() {
-    setdata(280);
-    setget(280);
-  }
-  function closeNav() {
-    setdata(0);
-    setget(0);
-  }
+  useSidbarTogal({setdata, setget, isOpen})
 
   return (
     <div>

@@ -43,9 +43,9 @@ const ViewComplintModel = ({ _id, closeViewComplint }) => {
                         <div key={index} className="p-4">
                             <div className="flex items-center mb-4">
                                 <img
-                                    src="profile-image-url.jpg"
+                                    src={e.createdBy.Image}
                                     alt="Profile"
-                                    className="w-18 h-18 mr-5 rounded-full"
+                                    className="w-10 h-10 mr-5 rounded-full"
                                 />
                                 <div>
                                     <p className="font-semibold">
@@ -72,7 +72,7 @@ const ViewComplintModel = ({ _id, closeViewComplint }) => {
                             </div>
 
                             <div className="mb-3 grid grid-cols-4 gap-2">
-                                <div className="text-center">
+                                <div className="text-left">
                                     <label className="block text-sm font-medium pb-2 text-[#a7a7a7]">
                                         Wing
                                     </label>
@@ -80,7 +80,7 @@ const ViewComplintModel = ({ _id, closeViewComplint }) => {
                                         {e.Wing || "N/A"}
                                     </span>
                                 </div>
-                                <div className="text-center">
+                                <div>
                                     <label className="block text-sm font-medium pb-2 text-[#a7a7a7]">
                                         Unit
                                     </label>

@@ -2,34 +2,18 @@ import React, { useState } from 'react';
 import Sidebar from '../../../../layout/Sidebar';
 import Header from '../../../../layout/Header';
 import { FaVideo, FaPhone, FaEllipsisV, FaSmile, FaPaperclip, FaMicrophone } from 'react-icons/fa';
+import useSidbarTogal from '../../../../../../layout/useSidbarTogal';
 
 const Access_Forums = () => {
 
   const [isOpen, setIsOpen] = useState(true);
-
+  const [data, setdata] = useState(280);
+  const [getdata, setget] = useState(280);
   const toggleNav = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  React.useEffect(() => {
-    if (isOpen) {
-      openNav();
-    } else {
-      closeNav();
-    }
-  }, [isOpen]);
-
-  const [data, setdata] = useState(280);
-  const [getdata, setget] = useState(280);
-
-  function openNav() {
-    setdata(280);
-    setget(280);
-  }
-  function closeNav() {
-    setdata(0);
-    setget(0);
-  }
+  useSidbarTogal({setdata, setget, isOpen})
 
   const chats = [
     { name: 'Michael John', message: 'Hi, John! How are you?', time: '10:27', unread: 0 ,imgur: ''},
