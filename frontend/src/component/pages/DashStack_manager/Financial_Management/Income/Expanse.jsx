@@ -124,7 +124,7 @@ const Expanse = () => {
               {AddExpense && <AddExpenseForm Fdata={Fdata} setAddExpense={Close} />}
             </div>
             {error}
-            <div className="p-4 bg-white rounded-lg shadow-lg">
+            <div className="p-4 bg-white rounded-lg shadow-lg overflow-auto max-h-svh">
               {loadingExpenses ? (
                 <div className='flex justify-center'>
                   <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />

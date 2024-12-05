@@ -708,10 +708,10 @@ export const DeleteExpense = (RemoveId, Fdata, RemoveView, setLoading) => {
 
 ///Visiter Data
 
-export const GetVisiter = (setVisitorLogs) => {
+export const GetVisiter = (setVisitorLogs,setloding) => {
     axios.get(`${url}/security/getallVisitors`).then((res) => {
-        console.log(res.data)
         setVisitorLogs(res.data)
+        setloding(false)
     })
 }
 

@@ -98,7 +98,7 @@ const Resident_Management = () => {
                   />
                 )}
               </div>
-              <div className="overflow-auto h-svh">
+              <div className="overflow-auto max-h-svh">
                 <table className="min-w-full bg-[#eef1fd] rounded-lg">
                   <thead>
                     <tr>
