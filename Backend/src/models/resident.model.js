@@ -61,6 +61,11 @@ const residentSchema = new mongoose.Schema(
       default:"Rent_Agreement"
       // require: true
     },
+    UnitStatus: {
+      type: String,
+      enum: ["Occupied", "Vacate"],
+      require: true
+    },
     ResidentStatus: {
       type: String,
       enum: ["Owner", "Tenant"],

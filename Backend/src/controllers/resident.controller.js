@@ -34,11 +34,12 @@ const createResident = async (req, res) => {
             Wing: residentData.wing,
             Unit: residentData.unit,
             Relation: residentData.relation,
+            UnitStatus: residentData.UnitStatus,
             // AadharCard_FrontSide: AadharCard_FrontSide.secure_url,
             // AadharCard_BackSide: AadharCard_BackSide.secure_url,
             // VeraBill_OR_LightBill: VeraBill_OR_LightBill.secure_url,
             // Rent_Agreement: Rent_Agreement.secure_url,
-            ResidentStatus: residentData.status,
+            ResidentStatus: residentData.ResidentStatus,
             Ownername: residentData.ownername,
             Ownerphone: residentData.ownerphone,
             OwnerAddress: residentData.owneraddress,
@@ -80,7 +81,7 @@ const createResident = async (req, res) => {
             return res.status(500).json({ error: "Failed to update society" });
         }
         console.log("🚀 ~ createResident ~ newResident.Email, pass, newResident.Fullname:", newResident.Email, pass, newResident.Fullname)
-        await send_maile(newResident.Email, pass, newResident.Fullname)
+        // await send_maile(newResident.Email, pass, newResident.Fullname)
 
         return res.status(201).json({ message: "create Successful", data: newResident });
     } catch (error) {
