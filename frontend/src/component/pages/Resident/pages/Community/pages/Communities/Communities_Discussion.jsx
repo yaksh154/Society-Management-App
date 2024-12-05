@@ -106,7 +106,12 @@ const Communities_Discussion = () => {
           <div className="flex flex-col md:flex-row max-w-full mx-auto bg-white shadow-lg rounded-lg h-[80vh]">
             {/* Scrollable Sidebar */}
             <div className="w-full md:w-1/4 p-4 border-b md:border-r overflow-y-auto h-full">
-              <h2 className="text-xl font-semibold mb-4">Chat</h2>
+              <h2 className="text-xl font-bold mb-4">Chat</h2>
+              <input
+              type="text"
+              placeholder="Search Here"
+              className="w-full p-2 mb-4 border rounded-lg"
+            />
               {chats.map((chat, index) => (
                 <div
                   key={index}
@@ -114,9 +119,13 @@ const Communities_Discussion = () => {
                     chat.status === 'typing' ? 'bg-white' : ''
                   }`}
                 >
-                  <FaUserCircle size={40} className="mr-3 text-gray-500" />
-                  <div>
-                    <p className="text-lg font-semibold flex items-center">
+                  <img
+                  src="../../../../../../public/images/Profile.png"
+                  alt="Profile"
+                  className="w-10 h-10 my-3 rounded-full"
+                />
+                  <div className="ml-3">
+                    <p className="text-lg font-semibold  flex items-center">
                       {chat.name}
                       <span
                         className={`ml-2 w-3 h-3 rounded-full ${
@@ -126,7 +135,7 @@ const Communities_Discussion = () => {
                       />
                     </p>
                     <p
-                      className={`text-sm ${
+                      className={`text-sm  ${
                         chat.status === 'unread' ? 'text-gray-700 font-bold' : 'text-gray-500'
                       }`}
                     >
@@ -148,7 +157,7 @@ const Communities_Discussion = () => {
 
       <div className="flex items-center">
         <FaRegUserCircle size={40} className="text-gray-400" />
-        <div className="ml-3">
+        <div className="ml-2">
           <p className="text-sm font-medium">Community</p>
           <p className="text-xs text-gray-500">9:00 PM</p>
         </div>

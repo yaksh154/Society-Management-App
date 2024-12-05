@@ -58,13 +58,13 @@ const Access_Forums = () => {
                   className="flex items-center justify-between p-3 hover:bg-gray-100 rounded-lg cursor-pointer"
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
+                    <div className="w-10 h-10 bg-gray-100 rounded-full"></div>
                     <div>
                       <h3 className="font-bold text-sm md:text-base">{chat.name}</h3>
-                      <p className="text-xs md:text-sm text-gray-200 truncate">{chat.message}</p>
+                      <p className="text-xs md:text-sm text-gray-500 truncate">{chat.message}</p>
                     </div>
                   </div>
-                  <span className="text-xs text-gray-200 ">{chat.time}</span>
+                  <span className="text-xs text-gray-500 ">{chat.time}</span>
                 </div>
               ))}
             </div>
