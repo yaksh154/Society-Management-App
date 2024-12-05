@@ -1,38 +1,56 @@
+
 import React, { useState } from 'react';
 import Sidebar from '../../../../layout/Sidebar';
 import Header from '../../../../layout/Header';
-import { FaUserCircle, FaCheck ,FaThumbsUp, FaRegEye, FaCommentAlt } from 'react-icons/fa';
-import { RiCheckDoubleFill, RiCheckFill } from 'react-icons/ri';
-
-
-import React, { useState } from 'react'
-import Sidebar from '../../../../layout/Sidebar'
-import Header from '../../../../layout/Header'
-
+import { FaUserCircle, FaCheck, FaThumbsUp, FaRegEye, FaCommentAlt } from 'react-icons/fa';
+import { RiCheckDoubleFill } from 'react-icons/ri';
+import useSidbarTogal from '../../../../../../layout/useSidbarTogal';
 
 const Communities_Discussion = () => {
-    let [data, setdata] = useState(280);
-    let [getdata, setget] = useState(280);
+  const [isOpen, setIsOpen] = useState(true);
+  const [data, setdata] = useState(280);
+  const [getdata, setget] = useState(280);
 
-    const [isOpen, setIsOpen] = useState(true);
+  const toggleNav = () => {
+    setIsOpen((prevState) => !prevState);
+  };
 
-    const toggleNav = () => {
-        setIsOpen((prevState) => !prevState);
-    };
-
-    React.useEffect(() => {
-        if (isOpen) {
-            openNav();
-        } else {
-            closeNav();
-        }
-    }, [isOpen]);
-
-    function openNav() {
-        setdata(280);
-        setget(280);
-    }
+  useSidbarTogal({ setdata, setget, isOpen })
+  const questions = [
+    {
+      id: 1,
+      votes: 0,
+      answers: 1,
+      views: 20,
+      question: "What is the capital of France?",
+      dummyText: "Feel free to let me know if you need more examples or if there's anything specific you'd like to include in your dummy content!",
+    },
+    {
+      id: 2,
+      votes: 3,
+      answers: 0,
+      views: 20,
+      question: "What is the capital of Germany?",
+      dummyText: "Let me know if there's anything specific you'd like to include in your dummy content!",
+    },
+    {
+      id: 3,
+      votes: 1,
+      answers: 2,
+      views: 15,
+      question: "What is the capital of Italy?",
+      dummyText: "Here’s an example of dummy content that can be expanded!",
+    },
+    {
+      id: 4,
+      votes: 2,
+      answers: 1,
+      views: 30,
+      question: "What is the capital of Spain?",
+      dummyText: "This is an example of a frequently asked question!",
+    },
   ];
+  
   const chats = [
     { name: 'Michael John', message: 'Hi, John! How are you doing?', time: '10:27', status: 'read', online: true },
     { name: 'Jenny Wilson', message: 'Hello, Jenny', time: '7:00', status: 'unread', online: false },
@@ -43,10 +61,10 @@ const Communities_Discussion = () => {
 
   return (
     <div className="bg-[#f0f5fb] min-h-screen flex">
-      <Sidebar closeNav={closeNav} data={data} />
+      <Sidebar toggleNav={toggleNav} data={data} />
       <div id="main" className="ml-[280px] md:ml-0 flex-grow" style={{ marginLeft: getdata }}>
         <div className="open_he">
-          <Header openNav={openNav} />
+          <Header toggleNav={toggleNav} />
         </div>
 
         <div className="bg-gray-100 p-10">
@@ -59,18 +77,16 @@ const Communities_Discussion = () => {
                 {chats.map((chat, index) => (
                   <div
                     key={index}
-                    className={`flex items-center p-3 mb-2 rounded-lg hover:bg-gray-200 cursor-pointer ${
-                      chat.status === 'typing text-green-200' ? 'bg-white ' : ''
-                    }`}
+                    className={`flex items-center p-3 mb-2 rounded-lg hover:bg-gray-200 cursor-pointer ${chat.status === 'typing' ? 'bg-green-100' : ''
+                      }`}
                   >
                     <FaUserCircle size={40} className="mr-3 text-gray-500" />
                     <div>
                       <p className="text-lg font-semibold flex items-center">
                         {chat.name}
                         <span
-                          className={`ml-2 w-3 h-3 rounded-full ${
-                            chat.online ? 'bg-green-500' : 'bg-gray-400'
-                          }`}
+                          className={`ml-2 w-3 h-3 rounded-full ${chat.online ? 'bg-green-500' : 'bg-gray-400'
+                            }`}
                           title={chat.online ? 'Online' : 'Offline'}
                         />
                       </p>
@@ -81,7 +97,7 @@ const Communities_Discussion = () => {
                     <div className="ml-auto text-right">
                       <p className="text-xs text-gray-400">{chat.time}</p>
                       {chat.status === 'read' && <RiCheckDoubleFill className="text-blue-500 inline-block" />}
-                      {chat.status === 'unread' && <RiCheckFill  className="text-gray-500 inline-block" />}
+                      {chat.status === 'unread' && <FaCheck className="text-gray-500 inline-block" />}
                     </div>
                   </div>
                 ))}
@@ -91,49 +107,37 @@ const Communities_Discussion = () => {
             {/* Scrollable Chat Window */}
             <div className="w-full md:w-3/4 p-4 overflow-y-auto h-full ">
               <h2 className="text-xl font-semibold mb-2 ">Community</h2>
-              <hr  className=' border-b-0 mb-2'/>
+              <hr className=' border-b-0 mb-2' />
 
-      <div className=" mx-auto bg-slate-100 shadow-lg rounded-lg p-5">
-        {questions.map((q) => (
-          <div
-            key={q.id}
-            className="border-b border-gray-300 p-4 flex items-start gap-4"
-          >
-            {/* Vote Section */}
-            <div className="Vote">
-            <div className="flex flex-col items-center mt-2">
-              <span className="text-sm text-gray-600">{q.votes} Votes</span>
-            </div>
-            <div className="flex flex-col items-center mt-2">
-              <span className="text-sm text-gray-600">{q.votes} Answers</span>
-            </div> </div>
+              <div className=" mx-auto bg-slate-100 shadow-lg rounded-lg p-5">
+                {questions.map((q) => (
+                  <div
+                    key={q.id}
+                    className="border-b border-gray-300 p-4 flex items-start gap-4"
+                  >
+                    {/* Vote Section */}
+                    <div className="Vote">
+                      <div className="flex flex-col items-center mt-2">
+                        <span className="text-sm text-gray-600">{q.votes} Votes</span>
+                      </div>
+                      <div className="flex flex-col items-center mt-2">
+                        <span className="text-sm text-gray-600">{q.votes} Answers</span>
+                      </div> </div>
 
-            {/* Content Section */}
-            <div className="flex-1">
-              <h3 className="text-lg font-semibold">{q.question}</h3>
-              <p className="text-sm text-gray-600">{q.dummyText}</p>
-              <div className="flex items-center space-x-4 text-gray-500 text-xs mt-2">
-               
+                    {/* Content Section */}
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold">{q.question}</h3>
+                      <p className="text-sm text-gray-600">{q.dummyText}</p>
+                      <div className="flex items-center space-x-4 text-gray-500 text-xs mt-2">
+
+                      </div>
+                    </div>
+                    <div className="flex items-center bg-white p-2 rounded-full">
+                      <FaRegEye className="mr-1" /> {q.views}
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-            <div className="flex items-center bg-white p-2 rounded-full">
-                  <FaRegEye className="mr-1" /> {q.views} 
-=======
-    function closeNav() {
-        setdata(0);
-        setget(0);
-    }
-    return (
-        <div className='bg-[#f0f5fb] h-screen'>
-            <Sidebar toggleNav={toggleNav} data={data} />
-            <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
-                <div className="open_he">
-                    <Header toggleNav={toggleNav} />
->>>>>>> ccc7a76117dc362bfa0cdedef7490a043cb9acac
-                </div>
-          </div>
-        ))}
-      </div>
 
 
               <div className="mt-4 flex items-center">
