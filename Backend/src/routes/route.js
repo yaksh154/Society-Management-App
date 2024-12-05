@@ -13,6 +13,7 @@ const announcementroute = require("./announcement.route")
 const requestroute = require("./request.route")
 const securityroute = require("./security.route")
 const EmergencyManagementroute = require("./EmergencyManagement.route")
+const OtherIncomeroute = require("./OtherIncome.route")
 
 routes.use("/manager",managerroute)
 routes.use("/society",societyroute)
@@ -27,5 +28,6 @@ routes.use("/announcement",announcementroute)
 routes.use("/request",requestroute)
 routes.use("/security",securityroute)
 routes.use("/alert",EmergencyManagementroute)
+routes.use("/otherincome",OtherIncomeroute)
 
 module.exports = routes;
