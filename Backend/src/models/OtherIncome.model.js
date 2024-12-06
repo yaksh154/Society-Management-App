@@ -22,6 +22,10 @@ const otherincomeSchema = new mongoose.Schema(
         type: Number,
         require: true
     },
+    TotalMember:{
+        type: Number,
+        default: 0
+    },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Manager'
