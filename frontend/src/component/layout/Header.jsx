@@ -37,7 +37,7 @@ const Header = ({ toggleNav }) => {
         {/* Right Section */}
         <div className="flex items-center space-x-4">
           <OpneNotificationModal />
-          <Link className="flex items-center space-x-4" to="/profile">
+          <Link className="flex items-center space-x-4" to="/manager/home/profile">
             {FormData ? (
               <div className="flex items-center">
                 <div className="Profie-img mr-3">

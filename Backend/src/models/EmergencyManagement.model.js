@@ -12,7 +12,7 @@ const emergencymanagementSchema = new mongoose.Schema(
         },
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Manager'
+            ref: 'Security'
         },
         Society: {
             type: mongoose.Schema.Types.ObjectId,

@@ -109,31 +109,6 @@ const deleteSecurity = async (req, res) => {
     }
 };
 
-const login = async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        const security = await securityService.findByEmail(email);
-        if (!security) {
-            return res.status(404).json({ message: "Security personnel not found" });
-        }
-
-        const isPasswordValid = await bcrypt.compare(password, security.password);
-        if (!isPasswordValid) {
-            return res.status(401).json({ message: "Invalid credentials" });
-        }
-        const payload = {
-            _id: security._id,
-            email: security.Email,
-            role: security.Role,
-            societyid: security.Society
-        };
-        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1d" });
-        res.status(200).json({ message: "Login successful", token });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
-
 const getgetallsecurity = async (req, res) => {
     try {
         const societyid = req.user.societyid
@@ -266,7 +241,6 @@ module.exports = {
     update,
     getSecurity,
     deleteSecurity,
-    login,
     getgetallsecurity,
     createVisitor,
     getAllVisitors,

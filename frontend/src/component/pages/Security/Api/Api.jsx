@@ -45,13 +45,13 @@ export const PostVisiter = (payload, Fdata, setloding, close) => {
 export const PostAlert = async (data, callback) => {
   try {
     const response = await axios.post(`${url}/alert/createAlert`, data);
-    console.log('Response:', response.data); // Log the response
+    console.log('Response:', response.data); 
     if (callback) callback(response.data);
   } catch (error) {
     if (error.response) {
-      console.error('Server Response:', error.response.data); // Server's error response
+      console.error('Server Response:', error.response.data); 
     } else {
-      console.error('Error:', error.message); // Other errors
+      console.error('Error:', error.message); 
     }
   }
 };

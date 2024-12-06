@@ -1,31 +1,56 @@
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const url = 'https://society-management-app-server.onrender.com'
 
 // login Manger
 
-export const ManagerLogin = (data, setLoginError, navigate, storetokenInLs, setLoading, reset) => {
-    axios.post(`${url}/manager/login`, {
+export const ManagerLogin = async (
+    data,
+    setLoginError,
+    navigate,
+    storetokenInLs,
+    setLoading,
+    reset
+  ) => {
+    try {
+      setLoading(true);
+      const { data: resData } = await axios.post(`${url}/manager/login`, {
         Email: data.Email,
         Password: data.Password,
-    })
-        .then((res) => {
-            if (res.data) {
-                setLoading(false);
-                storetokenInLs(res.data.token)
-                navigate('/');
-                reset()
-            } else {
-                setLoading(false);
-                setLoginError('Incorrect email/phone or password');
-            }
-        })
-        .catch((error) => {
-            setLoading(false);
-            console.error('Login error:', error);
-            setLoginError('Login failed. Please try again later.');
-        })
-}
+      });
+
+      console.log(resData);
+      
+  
+      if (resData?.token) {
+        const { role } = jwtDecode(resData.token);
+        const paths = {
+          Manager: "/manager/home",
+          Resident: "/resident/home",
+          Security: "/security/visitor",
+        };
+  
+        if (paths[role]) {
+          storetokenInLs(resData.token);
+          reset();
+          navigate(paths[role]);
+        } else {
+          throw new Error("Unauthorized role.");
+        }
+      } else {
+        throw new Error("Invalid credentials.");
+      }
+    } catch (error) {
+      setLoginError(
+        error.response?.status === 401
+          ? "Invalid email or password."
+          : error.message || "Login failed."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
 // Forgot password Manger
 
@@ -264,23 +289,51 @@ export const updateImportantNumber = (_id, editNumber, Fdata, closeEditModal, se
         });
 };
 
-// Resident Management page
+// Resident Management page Get
 
-export const PostSumdata = (data) => {
-    // const formData = new FormData();
-    // formData.append('title', data.Title);
-    // formData.append('description', data.Description);
-    // formData.append('date', data.Date);
-    // formData.append('amount', data.Amount);
-    // if (data.Bill && data.Bill.length > 0) {
-    //     formData.append('Bill', data.Bill[0]);
-    // }
-    // console.log(formData);
-
-    // axios.post(`${url}/residentroute/create`,formData, { headers: { 'Content-Type': 'multipart/form-data' }}).then((res)=>[
-    //     console.log(res)
-    // ])
+export const GetResident = (setSumdata) => {
+    axios.get(`${url}/resident/getall`).then((res) => {
+        setSumdata(res.data)
+    })
 }
+
+// Resident Management page Post
+
+export const PostSumdata = async (data) => {
+    const formData = new FormData();
+
+    // Append image and form values
+    formData.append('residentphoto', data.image);
+    formData.append('Fullname', data.formValues.fullName);
+    formData.append('Phone', data.formValues.phoneNumber);
+    formData.append('Email', data.formValues.email);
+    formData.append('Age', data.formValues.age);
+    formData.append('Gender', data.formValues.gender);
+    formData.append('Wing', data.formValues.wing);
+    formData.append('Unit', data.formValues.unit);
+    formData.append('Relation', data.formValues.relation);
+    formData.append('AadharCard_FrontSide', data.files.frontAadhar);
+    formData.append('AadharCard_BackSide', data.files.backAadhar);
+    formData.append('VeraBill_OR_LightBill', data.files.addressProof);
+    formData.append('Rent_Agreement', data.files.rentAgreement);
+    formData.append('Member_Counting', data.members.length);
+    formData.append('Vehicle_Counting', data.vehicles.length);
+
+    // Debugging: Log form data
+    for (let [key, value] of formData.entries()) {
+        console.log(key, value);
+    }
+
+    try {
+        // POST the form data
+        const response = await axios.post(`${url}/resident/create`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        console.log('Response:', response.data);
+    } catch (error) {
+        console.error('Error:', error.response ? error.response.data : error.message);
+    }
+};
 
 // Resident Management page
 
@@ -290,7 +343,7 @@ export const PostSumdata = (data) => {
 
 export const GetComplainy = (setgetComplaint, setloadingcomplaint) => {
     axios.get(`${url}/complaint/getAllComplaints`).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setgetComplaint(res.data);
         setloadingcomplaint(false)
     })
@@ -398,7 +451,7 @@ export const EditRequest = async (_id, editComplaint, closeEditComplint, setload
 
 // Get Security Protocols
 
-export const Get_Security_Protocols = (setSecurity,setloding) => {
+export const Get_Security_Protocols = (setSecurity, setloding) => {
     axios.get(`${url}/security/getallprotocols`).then((res) => {
         console.log(res.data)
         setSecurity(res.data)
@@ -408,7 +461,7 @@ export const Get_Security_Protocols = (setSecurity,setloding) => {
 
 // Post Security Protocols
 
-export const Post_Security_Protocols = (data, Fdata, CloseAddProtocols,setloding) => {
+export const Post_Security_Protocols = (data, Fdata, CloseAddProtocols, setloding) => {
     setloding(true)
     axios.post(`${url}/security/createprotocol`, data).then((res) => {
         CloseAddProtocols()
@@ -419,7 +472,7 @@ export const Post_Security_Protocols = (data, Fdata, CloseAddProtocols,setloding
 
 // Delete Security Protocols
 
-export const Delete_Security_Protocols = (_id,setdeleteloding,CloseDeleteProtocols,Security, setSecurity) => {
+export const Delete_Security_Protocols = (_id, setdeleteloding, CloseDeleteProtocols, Security, setSecurity) => {
     setdeleteloding(true)
     axios.delete(`${url}/security/deleteprotocol/${_id}`).then((res) => {
         const Deletedata = Security.filter((e) => e._id !== _id)
@@ -431,10 +484,10 @@ export const Delete_Security_Protocols = (_id,setdeleteloding,CloseDeleteProtoco
 
 // Edit Security Protocols
 
-export const Edit_Delete_Security_Protocols = (_id,data,setloding,CloseEditProtocols) =>{
+export const Edit_Delete_Security_Protocols = (_id, data, setloding, CloseEditProtocols) => {
     setloding(true)
-    axios.put(`${url}/security/updateprotocol/${_id}`,data).then((res)=>{
-        console.log(res.data); 
+    axios.put(`${url}/security/updateprotocol/${_id}`, data).then((res) => {
+        console.log(res.data);
         setloding(false)
         CloseEditProtocols()
     })
@@ -445,7 +498,7 @@ export const Edit_Delete_Security_Protocols = (_id,data,setloding,CloseEditProto
 
 // Get Security Guard Details
 
-export const GetGuard_Details = (setGuard_Details,setlodingData) => {
+export const GetGuard_Details = (setGuard_Details, setlodingData) => {
     axios.get(`${url}/security/getallsecurity`).then((res) => {
         setGuard_Details(res.data)
         setlodingData(false)
@@ -454,7 +507,7 @@ export const GetGuard_Details = (setGuard_Details,setlodingData) => {
 
 // post Security Guard Details
 
-export const PostGuard_Details = (data, CloseAddSecurity, Fdata,setloading) => {
+export const PostGuard_Details = (data, CloseAddSecurity, Fdata, setloading) => {
     setloading(true)
     axios.post(`${url}/security/createsecurity`, data, { headers: { 'Content-Type': 'multipart/form-data' } }).then((res) => {
         CloseAddSecurity()
@@ -465,7 +518,7 @@ export const PostGuard_Details = (data, CloseAddSecurity, Fdata,setloading) => {
 
 // Delete Security Guard Details
 
-export const DeleteGuard_Details = (_id, setloadingDelete, Guard_Details, setGuard_Details,CloseDeleteSecurity) => {
+export const DeleteGuard_Details = (_id, setloadingDelete, Guard_Details, setGuard_Details, CloseDeleteSecurity) => {
     setloadingDelete(true)
     axios.delete(`${url}/security/deletesecurity/${_id}`).then((res) => {
         setloadingDelete(false)
@@ -477,19 +530,19 @@ export const DeleteGuard_Details = (_id, setloadingDelete, Guard_Details, setGua
 
 // Edit Security Guard Details
 
-export const EditGuard_Details = (_id, formData, CloseEdit,Fdata,setloading) => {
+export const EditGuard_Details = (_id, formData, CloseEdit, Fdata, setloading) => {
     setloading(true)
     axios
-      .put(`${url}/security/updatesecurity/${_id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' }}).then((res) => {
-        CloseEdit();
-        Fdata()
-        setloading(false)
-      })
-      .catch((err) => {
-        console.error('Error updating data:', err);
-      });
-  };
-  
+        .put(`${url}/security/updatesecurity/${_id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then((res) => {
+            CloseEdit();
+            Fdata()
+            setloading(false)
+        })
+        .catch((err) => {
+            console.error('Error updating data:', err);
+        });
+};
+
 
 // Announcement page
 
@@ -725,7 +778,7 @@ export const DeleteExpense = (RemoveId, Fdata, RemoveView, setLoading) => {
 
 ///Visiter Data
 
-export const GetVisiter = (setVisitorLogs,setloding) => {
+export const GetVisiter = (setVisitorLogs, setloding) => {
     axios.get(`${url}/security/getallVisitors`).then((res) => {
         setVisitorLogs(res.data)
         setloding(false)

@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../../../layout/Sidebar";
 import Header from "../../../layout/Header";
 import OpenResidenceStatusModal from "../../../Modals/OpenResidenceStatusModal";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaUser } from "react-icons/fa";
 import { GrFormView } from "react-icons/gr";
-import axios from "axios";
 import View_Owner_Details_Modal from "../../../Modals/View_Owner_Details_Modal";
 import useSidbarTogal from "../../../layout/useSidbarTogal";
+import { GetResident } from "../../../services/Api/api";
+import { RiShieldUserFill } from "react-icons/ri";
+import Occupied from '../../../../../public/images/Occupied.png'
+import Vacate from '../../../../../public/images/Vacate.png'
 
 const Resident_Management = () => {
 
@@ -18,7 +21,7 @@ const Resident_Management = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  useSidbarTogal({setdata, setget, isOpen})
+  useSidbarTogal({ setdata, setget, isOpen })
 
   const [Sumdata, setSumdata] = useState([])
 
@@ -27,9 +30,7 @@ const Resident_Management = () => {
   }, [])
 
   const Fdata = () => {
-    axios.get("http://localhost:3030/Sumdata").then((res) => {
-      setSumdata(res.data)
-    })
+    GetResident(setSumdata)
   }
 
   const [showResidenceStatus, setShowResidenceStatus] = useState(false);
@@ -47,6 +48,7 @@ const Resident_Management = () => {
   const OpneView_Owner_Details = (_id) => {
     setView_Owner_Details(true);
     setOwner_DetailsId(_id);
+
   }
   const closeModal = () => {
     setView_Owner_Details(false);
@@ -119,33 +121,41 @@ const Resident_Management = () => {
                         {/* <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{e.name}</td> */}
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex items-center">
                           <img className="w-8 h-8 rounded-full mr-1" src="https://via.placeholder.com/40" alt="profile" />
-                          <span>{e.name}</span>
+                          <span>{e.Fullname}</span>
                         </td>
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">
-                          <samp className=' px-2 py-1 text-[#5678e9] bg-[#f6f8fb] mr-2 rounded-full'>{e.wing}</samp>
-                          {e.unit}
+                          <samp className=' px-2 py-1 text-[#5678e9] bg-[#f6f8fb] mr-2 rounded-full'>{e.Wing}</samp>
+                          {e.Unit}
                         </td>
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700"><span
-                          className={`px-2 py-1 rounded-lg text-sm flex justify-center ${e.status === "Occupied"
+                          className={`px-2 py-1 rounded-lg text-sm flex justify-center ${e.UnitStatus === "Occupied"
                             ? "bg-green-100 text-green-600"
-                            : "bg-purple-100 text-purple-600"
+                            : e.UnitStatus === "Vacate" ? " bg-[#fff6ff] text-[#9333ea" : ""
                             }`}
                         >
-                          {e.status}
+                          {e.UnitStatus === "Occupied" && <img src={Occupied} className="mr-1" />}
+                          {e.UnitStatus === "Vacate" && <img src={Vacate} className="mr-1" />}
+                          {e.UnitStatus}
                         </span></td>
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700"><span
-                          className={`px-2 py-1 rounded-lg text-sm flex justify-center ${e.resident === "Tenant"
-                            ? "bg-pink-100 text-pink-600"
-                            : e.resident === "Owner"
-                              ? "bg-blue-100 text-blue-600"
+                          className={`px-2 py-1 rounded-lg text-sm flex justify-center items-center font-semibold ${e.ResidentStatus === "Tenant"
+                            ? "bg-[#fff1f8] text-[#ec4899]"
+                            : e.ResidentStatus === "Owner"
+                              ? "bg-[#f1f0ff] text-[#4f46e5]"
                               : ""
                             }`}
                         >
-                          {e.resident}
+                          {e.ResidentStatus === "Tenant" && <FaUser className='mr-1 text-lg' />}
+                          {e.ResidentStatus === "Owner" && <RiShieldUserFill className='mr-1 text-lg' />}
+                          {e.ResidentStatus}
                         </span></td>
-                        <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{e.phone}</td>
-                        <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{e.members}</td>
-                        <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{e.vehicles}</td>
+                        <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{e.Phone}</td>
+                        <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
+                          {e?.Member_Counting?.length > 0 ? e.Member_Counting : "0"}
+                        </td>
+                        <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
+                          {e?.Vehicle_Counting?.length > 0 ? e.Vehicle_Counting : "0"}
+                        </td>
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-1 md:space-x-2 justify-evenly">
                           <button onClick={() => OpneEdit_Owner_Details(e._id)} className="bg-[#f6f8fb] text-[#39973d] px-3 py-1 rounded-lg mr-2">
                             <FaEdit />

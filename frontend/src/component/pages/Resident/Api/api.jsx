@@ -1,4 +1,5 @@
 import axios from "axios";
+import {jwtDecode} from "jwt-decode";
 
 const url = 'https://society-management-app-server.onrender.com'
 
@@ -14,6 +15,14 @@ axios.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+export const Get_Profile_img = (setFormData) =>{
+  const token = localStorage.getItem("token");
+  const decodedToken = jwtDecode(token);
+  axios.get(`${url}/resident/profile/${decodedToken._id}`).then((res) => {
+    setFormData(res.data)
+  })
+}
 
 // Home page 
 // Pending Maintenances
