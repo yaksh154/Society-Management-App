@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import { useForm } from 'react-hook-form';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { PostOtherIncome } from '../services/Api/api';
@@ -6,17 +6,11 @@ import { PostOtherIncome } from '../services/Api/api';
 const CreateOincome = ({ setCreateIncome ,Fdata }) => { // Correctly destructure `setCreateIncome`
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
+
 
   const handleCancel = () => {
     if (setCreateIncome) {
-      setCreateIncome(false); // Close the modal if `setCreateIncome` is available
+      setCreateIncome(false); 
     }
   };
   function DataAdd(data){
@@ -40,7 +34,7 @@ reset();
               type="text"
               id="title"
               name="title"
-              {...register("title", { required: true })}
+              {...register("Title", { required: true })}
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
               placeholder="Enter Title"
               required
@@ -56,8 +50,8 @@ reset();
                 <input
                   type="date"
                   id="date"
-                  name="date"
-                  {...register("date", { required: true })}
+                  name="Date"
+                  {...register("Date", { required: true })}
                   className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                   required
                 />
@@ -73,8 +67,8 @@ reset();
                 <input
                   type="date"
                   id="dueDate"
-                  name="dueDate"
-                  {...register("dueDate", { required: true })}
+                  name="Due_Date"
+                  {...register("Due_Date", { required: true })}
                   className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                   required
                 />
@@ -90,7 +84,7 @@ reset();
             <textarea
               id="description"
               name="description"
-              {...register("description", { required: true })}
+              {...register("Description", { required: true })}
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
               placeholder="Enter Description"
               required
@@ -105,9 +99,9 @@ reset();
               <span className="absolute left-2 top-2.5 text-gray-500">₹</span>
               <input
                 type="number"
-                id="amount"
-                name="amount"
-                {...register("amount", { required: true })}
+                id="Amount"
+                name="Amount"
+                {...register("Amount", { required: true })}
                 className="w-full pl-8 pr-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
                 placeholder="0000"
                 required

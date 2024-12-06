@@ -599,8 +599,8 @@ export const Facility_Management_Edit = (_id, data, setloading, seteditcreate_fa
 export const GetMaintenance = (setudata) => {
     axios.get(`${url}/maintenance/getAllaintenances`).then((res) => {
         setudata(res.data)
-        console.log(req.data);
-        console.log(res.data)
+        // console.log(req.data);
+        // console.log(res.data)
     })
 }
 
@@ -614,30 +614,47 @@ export const PostIncome = (data, Fdata, setShowAddDetail) => {
 }
 
 //Other Income
-export const GetOtherIncome = (setIncomeData) => {
-    axios.get('http://localhost:3030/OtherIncome').then((res) => {
-        // console.log(res.data);
-        setIncomeData(res.data)
+
+// /createOtherincome
+// /getAllOtherincome
+// /getOtherincome/:id
+// /updateOtherincome/:id
+// /deleteOtherincome/:id
+
+export const GetOtherIncome = (setCreateIncome) => {
+    axios.get(`${url}/otherincome/getAllOtherincome`).then((res) => {
+        console.log(res.data);
+        setCreateIncome(res.data)
     })
 }
 
 export const PostOtherIncome = (data, Fdata, setCreateIncome) => {
-    axios.post(`http://localhost:3030/OtherIncome`, data).then((res) => {
+    axios.post(`${url}/otherincome/createOtherincome`, data).then((res) => {
         Fdata()
         setCreateIncome(false)
     })
 }
+// export const UpdateOtherIncome = async (id, data) => {
+//     try {
+//         const response = await axios.put(`${url}/otherincome/updateOtherincome/${id}`, data);
+//         return response.data; // Backend should return `{ success: true, data: updatedItem }`
+//     } catch (error) {
+//         console.error('Error in UpdateOtherIncome API:', error);
+//         throw error;
+//     }
+// };
+
 export const UpdateOtherIncome = async (id, data) => {
     try {
-        const response = await axios.put(`http://localhost:3030/OtherIncome/${id}`, data);
-        return response.data; // Backend should return `{ success: true, data: updatedItem }`
+      const response = await axios.put(`${url}/otherincome/updateOtherincome/${id}`, data);
+      return response.data; // Ensure backend returns `{ success: true, data: updatedData }`
     } catch (error) {
-        console.error('Error in UpdateOtherIncome API:', error);
-        throw error;
+      console.error('Error in UpdateOtherIncome API:', error);
+      throw error;
     }
-};
+  };
 export const DeleteOtherIncome = (data, Fdata, setCreateIncome) => {
-    axios.delete(`http://localhost:3030/OtherIncome/:id`, data).then((res) => {
+    axios.delete(`${url}/OtherIncome/deleteOtherincome/:id`, data).then((res) => {
         Fdata()
         setCreateIncome(false)
     })

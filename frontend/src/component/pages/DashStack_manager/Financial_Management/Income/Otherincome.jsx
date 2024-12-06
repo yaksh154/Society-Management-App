@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { BsThreeDotsVertical } from 'react-icons/bs';
-import { FaRupeeSign } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-
-import CreateOincome from '../../../../Modals/CreateOincome';
-import EditOIncome from '../../../../Modals/EditOIncome';
-import { GetOtherIncome } from '../../../../services/Api/api';
+import { useEffect, useState } from "react";
+import { GetOtherIncome } from "../../../../services/Api/api";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { FaRupeeSign } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import CreateOincome from "../../../../Modals/CreateOincome";
+import EditOIncome from "../../../../Modals/EditOIncome";
+import DeleteImportantNumbersModal from "../../../../Modals/DeleteImportantNumbersModal";
 
 const Otherincome = () => {
   const [incomeData, setIncomeData] = useState([]);
-  const [selectedIncome, setSelectedIncome] = useState(null); // For editing
+  const [selectedIncome, setSelectedIncome] = useState(null);
   const [dropdownOpenIndex, setDropdownOpenIndex] = useState(null);
   const [DeleteBox, setDeleteBox] = useState(false);
   const [DeleteId, setDeleteId] = useState(null);
@@ -25,9 +25,8 @@ const Otherincome = () => {
       if (data && Array.isArray(data)) {
         setIncomeData(data);
       } else {
-        console.error('Failed to load data or data is invalid.');
+        console.error("Failed to load data or data is invalid.");
       }
-  ;
     });
   };
 
@@ -44,18 +43,20 @@ const Otherincome = () => {
   };
 
   const handleEditForm = (income) => {
-    setSelectedIncome(income); // Set the selected income for editing
-    setEditIncome(true); // Open the edit modal
+    setSelectedIncome(income);
+    setEditIncome(true);
+    setDropdownOpenIndex(null);
   };
 
   const closeEditForm = () => {
     setEditIncome(false);
-    setSelectedIncome(null); // Clear the selected income
+    setSelectedIncome(null);
   };
 
   const handleDelete = (id) => {
     setDeleteId(id);
     setDeleteBox(true);
+    setDropdownOpenIndex(null);
   };
 
   const closeDeleteBox = () => {
@@ -80,25 +81,30 @@ const Otherincome = () => {
         </div>
         <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           {incomeData.length > 0 ? (
-            incomeData.map((item, index) => (
-              <div key={index} className="bg-white shadow-md rounded-md relative">
+            incomeData.map((item) => (
+              <div key={item._id} className="bg-white shadow-md rounded-md relative">
                 <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-blue-600">
-                  <h2 className="text-lg font-semibold text-white">{item.title}</h2>
+                  <h2 className="text-lg font-semibold text-white">{item.Title}</h2>
                   <div className="relative">
                     <button
-                      onClick={() => toggleDropdown(index)}
+                      onClick={() => toggleDropdown(item._id)}
                       className="text-blue-500 bg-white rounded-md pb-1 focus:outline-none"
                     >
                       <BsThreeDotsVertical className="h-5 w-5 mt-1" />
                     </button>
-                    {dropdownOpenIndex === index && (
+                    {dropdownOpenIndex === item._id && (
                       <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-10">
                         <ul className="py-1 text-gray-700">
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={handleEditForm}>
-                            Edit 
+                          <li
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => handleEditForm(item)}
+                          >
+                            Edit
                           </li>
-                          {EditIncome && <EditOIncome setEditIncome={closeEditForm} />}
-                          <Link className="px-4 py-2 hover:bg-gray-100 cursor-pointer" to="/financial_management/ViewParticipation">
+                          <Link
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            to="/financial_management/ViewParticipation"
+                          >
                             View
                           </Link>
                           <li
@@ -117,22 +123,22 @@ const Otherincome = () => {
                     Amount Per Member:
                     <span className="ml-2 flex items-center text-lg font-semibold text-blue-500 bg-blue-100 px-2 py-1 rounded-md">
                       <FaRupeeSign className="mr-1" />
-                      {item.amountPerMember}
+                      {item.Amount}
                     </span>
                   </div>
                   <div className="text-sm text-gray-500">
                     Total Member:
-                    <span className="ml-2 text-base font-semibold text-gray-700">{item.totalMember}</span>
+                    <span className="ml-2 text-base font-semibold text-gray-700">{item.TotalMember}</span>
                   </div>
                   <div className="text-sm text-gray-500">
                     Date:
-                    <span className="ml-2 text-base font-semibold text-gray-700">{item.date}</span>
+                    <span className="ml-2 text-base font-semibold text-gray-700">{item.Date}</span>
                   </div>
                   <div className="text-sm text-gray-500">
                     Due Date:
-                    <span className="ml-2 text-base font-semibold text-gray-700">{item.dueDate}</span>
+                    <span className="ml-2 text-base font-semibold text-gray-700">{item.Due_Date}</span>
                   </div>
-                  <p className="text-gray-500 text-sm font-bold">{item.description}</p>
+                  <p className="text-gray-500 text-sm font-bold">{item.Description}</p>
                 </div>
               </div>
             ))
@@ -144,13 +150,19 @@ const Otherincome = () => {
       {EditIncome && (
         <EditOIncome
           setEditIncome={closeEditForm}
-          initialData={selectedIncome} // Pass the selected income for editing
-          onUpdate={fetchData} // Refresh data after update
+          initialData={selectedIncome}
+          onUpdate={fetchData}
         />
       )}
-      {/* {DeleteBox && <DeleteModal setDeleteBox={closeDeleteBox} />} */}
-    </div>
-  );
+     
+{DeleteBox && (
+  <DeleteImportantNumbersModal
+    setDeleteBox={closeDeleteBox}
+    deleteId={DeleteId}
+  />
+)}
+</div>
+);
 };
 
 export default Otherincome;

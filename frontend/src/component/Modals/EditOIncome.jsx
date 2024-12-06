@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { FaCalendarAlt } from 'react-icons/fa';
 import { UpdateOtherIncome } from '../services/Api/api';
 
 const EditOIncome = ({ setEditIncome, initialData, onUpdate }) => {
   const [formData, setFormData] = useState({
-    title: '',
-    date: '',
-    dueDate: '',
-    description: '',
-
+    Title: '',
+    Amount: '',
+    Date: '',
+    Due_Date: '',
+    Description: '',
   });
+  const [loading, setLoading] = useState(false);
 
   const formatDate = (dateString) => {
     if (!dateString) return '';
@@ -20,11 +20,11 @@ const EditOIncome = ({ setEditIncome, initialData, onUpdate }) => {
   useEffect(() => {
     if (initialData) {
       setFormData({
-        title: initialData.title || '',
-        date: formatDate(initialData.date),
-        dueDate: formatDate(initialData.dueDate),
-        description: initialData.description || '',
-  
+        Title: initialData.Title || "",
+        Amount: initialData.Amount || "",
+        Date: formatDate(initialData.Date),
+        Due_Date: formatDate(initialData.Due_Date),
+        Description: initialData.Description || "",
       });
     }
   }, [initialData]);
@@ -42,42 +42,51 @@ const EditOIncome = ({ setEditIncome, initialData, onUpdate }) => {
   };
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
+    setLoading(true);
+
     try {
-      const response = await UpdateOtherIncome(initialData._id, formData);
-      console.log(initialData._id);
-      
-      if (response.success) {
-        onUpdate(); // Callback to refresh data
-        setEditIncome(false); // Close the edit form
-      } else {
-        alert('Failed to update income.');
+      const updatedFields = {};
+      for (const key in formData) {
+        if (formData[key] !== initialData[key]) {
+          updatedFields[key] = formData[key];
+        }
       }
+
+      const response = await UpdateOtherIncome(initialData._id, updatedFields);
+
+      // alert("Income updated successfully!");
+      onUpdate(); // Trigger parent component's data refresh
+      setEditIncome(false); // Close the modal
     } catch (error) {
-      alert('An error occurred while updating income.');
+      console.error("Error updating income:", error);
+      alert("An error occurred while updating income.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
       <div className="max-w-md mx-auto p-6 bg-white rounded-md shadow-md">
-        <h2 className="text-xl font-semibold mb-4">Edit Income</h2>
+        <h2 className="text-xl font-semibold mb-4">Edit {formData.Title} </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1" htmlFor="title">
-              Title <span className="text-red-500">*</span>
+              Amount <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
-              id="title"
-              name="title"
-              value={formData.title}
+              id="Amount"
+              name="Amount"
+              value={formData.Amount}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-md"
-              placeholder="Enter Title"
+              placeholder="Enter Amount"
               required
             />
           </div>
+
           {/* Other Fields */}
           <div className="mb-4 grid grid-cols-2 gap-4">
             <div>
@@ -86,37 +95,39 @@ const EditOIncome = ({ setEditIncome, initialData, onUpdate }) => {
               </label>
               <input
                 type="date"
-                id="date"
-                name="date"
-                value={formData.date}
+                id="Date"
+                name="Date"
+                value={formData.Date}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded-md"
                 required
               />
             </div>
+
             <div>
               <label className="block text-sm font-medium mb-1" htmlFor="dueDate">
                 Due Date <span className="text-red-500">*</span>
               </label>
               <input
                 type="date"
-                id="dueDate"
-                name="dueDate"
-                value={formData.dueDate}
+                id="Due_Date"
+                name="Due_Date"
+                value={formData.Due_Date}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded-md"
                 required
               />
             </div>
           </div>
+
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1" htmlFor="description">
               Description <span className="text-red-500">*</span>
             </label>
             <textarea
-              id="description"
-              name="description"
-              value={formData.description}
+              id="Description"
+              name="Description"
+              value={formData.Description}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-md"
               placeholder="Enter Description"
@@ -124,19 +135,21 @@ const EditOIncome = ({ setEditIncome, initialData, onUpdate }) => {
             ></textarea>
           </div>
 
-          <div className="flex justify-between mt-4">
+          <div className="flex justify-evenly mt-6">
             <button
               type="button"
-              className="px-4 py-2 bg-gray-300 rounded-md"
+              className="px-8 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
               onClick={handleCancel}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-md"
+              className={`px-8 py-2 text-white rounded-md 
+                ${loading ? 'bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 cursor-not-allowed' : 'bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600'}`}
+              disabled={loading}
             >
-              Save
+              {loading ? 'Edit...' : 'Continue'}
             </button>
           </div>
         </form>
