@@ -17,8 +17,7 @@ const residentSchema = new mongoose.Schema(
     },
     residentphoto: {
       type: String,
-      default:"photo"
-      // require: true
+      require: true
     },
     Age: {
       type: String,
@@ -43,23 +42,19 @@ const residentSchema = new mongoose.Schema(
     },
     AadharCard_FrontSide: {
       type: String,
-      default:"aadhar"
-      // require: true
+      require: true
     },
     AadharCard_BackSide: {
       type: String,
-      default:"aadhar"
-      // require: true
+      require: true
     },
     VeraBill_OR_LightBill: {
       type: String,
-      default:"VeraBill_OR_LightBill"
-      // require: true
+      require: true
     },
     Rent_Agreement: {
       type: String,
-      default:"Rent_Agreement"
-      // require: true
+      require: true
     },
     UnitStatus: {
       type: String,

@@ -13,32 +13,32 @@ const createResident = async (req, res) => {
         console.log("🚀 ~ req.files:", req.files);
         const pass = Math.floor(1000 + Math.random() * 9000);
         const bcrpass = await bcrypt.hash(pass.toString(), 10);
-        // const photoPath = req.files.residentphoto[0].path;
-        // const aadharFrontPath = req.files.AadharCard_FrontSide[0].path;
-        // const AadharBackPath = req.files.AadharCard_BackSide[0].path;
-        // const Vera_OR_LightBillPath = req.files.VeraBill_OR_LightBill[0].path;
-        // const Rent_AgreementPath = req.files.Rent_Agreement[0].path;
+        const photoPath = req.files.residentphoto[0].path;
+        const aadharFrontPath = req.files.AadharCard_FrontSide[0].path;
+        const AadharBackPath = req.files.AadharCard_BackSide[0].path;
+        const Vera_OR_LightBillPath = req.files.VeraBill_OR_LightBill[0].path;
+        const Rent_AgreementPath = req.files.Rent_Agreement[0].path;
 
-        // const residentphoto = await uploadFile(photoPath);
-        // const AadharCard_FrontSide = await uploadFile(aadharFrontPath);
-        // const AadharCard_BackSide = await uploadFile(AadharBackPath);
-        // const VeraBill_OR_LightBill = await uploadFile(Vera_OR_LightBillPath);
-        // const Rent_Agreement = await uploadFile(Rent_AgreementPath);
+        const residentphoto = await uploadFile(photoPath);
+        const AadharCard_FrontSide = await uploadFile(aadharFrontPath);
+        const AadharCard_BackSide = await uploadFile(AadharBackPath);
+        const VeraBill_OR_LightBill = await uploadFile(Vera_OR_LightBillPath);
+        const Rent_Agreement = await uploadFile(Rent_AgreementPath);
         const body = {
             Fullname: residentData.fullname,
             Phone: residentData.phone,
             Email: residentData.email,
-            // residentphoto: residentphoto.secure_url,
+            residentphoto: residentphoto.secure_url,
             Age: residentData.age,
             Gender: residentData.gender,
             Wing: residentData.wing,
             Unit: residentData.unit,
             Relation: residentData.relation,
             UnitStatus: residentData.UnitStatus,
-            // AadharCard_FrontSide: AadharCard_FrontSide.secure_url,
-            // AadharCard_BackSide: AadharCard_BackSide.secure_url,
-            // VeraBill_OR_LightBill: VeraBill_OR_LightBill.secure_url,
-            // Rent_Agreement: Rent_Agreement.secure_url,
+            AadharCard_FrontSide: AadharCard_FrontSide.secure_url,
+            AadharCard_BackSide: AadharCard_BackSide.secure_url,
+            VeraBill_OR_LightBill: VeraBill_OR_LightBill.secure_url,
+            Rent_Agreement: Rent_Agreement.secure_url,
             ResidentStatus: residentData.ResidentStatus,
             Ownername: residentData.ownername,
             Ownerphone: residentData.ownerphone,
@@ -49,6 +49,7 @@ const createResident = async (req, res) => {
             createdBy: req.user._id,
             Society: req.user.societyid
         }
+        console.log("🚀 ~ createResident ~ body:", body)
         const newResident = await resident_service.create(body);
         // console.log("🚀 ~ createResident ~ newResident:", newResident)
         // console.log("🚀 ~ createResident ~ req.user.societyid:", req.user.societyid)
