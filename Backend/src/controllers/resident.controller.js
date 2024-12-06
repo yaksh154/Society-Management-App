@@ -82,7 +82,7 @@ const createResident = async (req, res) => {
             return res.status(500).json({ error: "Failed to update society" });
         }
         console.log("🚀 ~ createResident ~ newResident.Email, pass, newResident.Fullname:", newResident.Email, pass, newResident.Fullname)
-        // await send_maile(newResident.Email, pass, newResident.Fullname)
+        await send_maile(newResident.Email, pass, newResident.Fullname)
 
         return res.status(201).json({ message: "create Successful", data: newResident });
     } catch (error) {
