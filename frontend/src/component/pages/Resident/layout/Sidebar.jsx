@@ -197,14 +197,14 @@ export default function Sidenav({ toggleNav, data }) {
         </div>
 
         <div className="border-t">
-          <Link to="/login"
+          <Link to="/"
           onClick={AdminLogout}
-            className={`text-nowrap relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black text-red-600 items-center ${pathname === "/login"
+            className={`text-nowrap relative p-3 ms-4 m-2 rounded-lg text-lg block transition-colors duration-300 flex text-black text-red-600 items-center ${pathname === "/"
               ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold"
               : "hover:bg-gray-100"
               }`}
           >
-            {pathname.startsWith("/login") && (
+            {pathname.startsWith("/") && (
               <div className="absolute -left-4 top-0 bottom-0 w-2 bg-orange-600 rounded-r-lg"></div>
             )}
             <IoLogOut className="inline text-red-600 mr-2" />
