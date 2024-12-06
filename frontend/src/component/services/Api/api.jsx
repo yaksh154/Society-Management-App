@@ -293,7 +293,6 @@ export const updateImportantNumber = (_id, editNumber, Fdata, closeEditModal, se
 
 export const GetResident = (setSumdata) => {
     axios.get(`${url}/resident/getall`).then((res) => {
-        console.log(res.data);
         setSumdata(res.data)
     })
 }

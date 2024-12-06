@@ -57,7 +57,7 @@ function App() {
             <PrivateRoute allowedRoles={["Manager"]}>
               <Routes>
                 <Route path="home" element={<Home />} />
-                <Route path="profile" element={<Profile />} />
+                <Route path="home/profile" element={<Profile />} />
                 <Route
                   path="resident_management"
                   element={<Resident_Management />}

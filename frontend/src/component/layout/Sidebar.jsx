@@ -56,7 +56,7 @@ export default function Sidenav({ toggleNav, data }) {
 
           <Link
             to="/manager/home"
-            className={`text-nowrap relative p-3 ms-4 m-2 rounded-lg text-lg transition-colors duration-300 flex text-black items-center ${pathname === "/manager/home" ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold" : "hover:bg-gray-100"
+            className={`text-nowrap relative p-3 ms-4 m-2 rounded-lg text-lg transition-colors duration-300 flex text-black items-center ${pathname.startsWith("/manager/home") ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white font-semibold" : "hover:bg-gray-100"
               }`}
           >
             {pathname === "/manager/home" && (
