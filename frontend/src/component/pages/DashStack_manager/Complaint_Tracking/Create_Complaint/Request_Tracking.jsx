@@ -104,9 +104,6 @@ const Request_Tracking = () => {
                           Request Name
                         </th>
                         <th className="px-6 py-3 border-b font-medium ">
-                          Description
-                        </th>
-                        <th className="px-6 py-3 border-b font-medium ">
                           Request Date
                         </th>
                         <th className="px-6 py-3 border-b font-medium ">
@@ -132,7 +129,6 @@ const Request_Tracking = () => {
                               <span>{e.Requester_Name}</span>
                             </td>
                             <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Request_Name}</td>
-                            <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Description}</td>
                             <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">
                               {new Date(e.Request_Date).toLocaleDateString("en-US", {
                                 month: "2-digit",

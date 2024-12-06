@@ -30,13 +30,12 @@ const Emergency = ({ Fdata }) => {
     console.log('Form Data:', data);
 
     const payload = {
-      alertType: data.Alert_Type,
-      description: data.Description
+      Alert_Type: data.Alert_Type,
+      Description: data.Description
     };
 
     PostAlert(payload, () => {
-      console.log('Alert sent successfully');
-      reset(); // Reset form fields
+      reset();
     });
   };
 

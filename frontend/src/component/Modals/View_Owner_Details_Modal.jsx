@@ -21,7 +21,7 @@ const View_Owner_Details_Modal = ({ _id, View_Owner_Details, closeModal }) => {
   }, []);
 
   const Fdata = () => {
-    axios.get("http://localhost:3030/Sumdata").then((res) => {
+    axios.get(`https://society-management-app-server.onrender.com/resident/getall`).then((res) => {
       setData(res.data);
     });
   };

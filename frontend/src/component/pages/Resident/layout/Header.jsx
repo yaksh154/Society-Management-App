@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Link } from 'react-router-dom';
 import OpneNotificationModal from '../layout/OpneNotification';
-import { Profile_img } from '../../../services/Api/api';
+import { Get_Profile_img } from '../Api/api';
 
 
 const Header = ({toggleNav}) => {
@@ -13,7 +12,7 @@ const Header = ({toggleNav}) => {
   }, []);
 
   const Fdata = () => {
-    Profile_img(setFormData);
+    Get_Profile_img(setFormData);
   };
 
   return (
@@ -28,7 +27,7 @@ const Header = ({toggleNav}) => {
         <div className="flex items-center space-x-4">
 
           <OpneNotificationModal />
-          <Link className="flex items-center space-x-4" to="/profile">
+          <div className="flex items-center space-x-4">
             {FormData ? (
               <div className="flex items-center">
                 <div className="Profie-img mr-3">
@@ -39,7 +38,7 @@ const Header = ({toggleNav}) => {
                   />
                 </div>
                 <div className="profile-text">
-                  <p className="font-medium">{FormData.Firstname || "User"} {FormData.Lastname || ""}</p>
+                  <p className="font-medium">{FormData.Fullname || "User"}</p>
                   <p className="text-gray-400">{FormData.Role
                     || "Role"}</p>
                 </div>
@@ -49,7 +48,7 @@ const Header = ({toggleNav}) => {
                 <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
               </div>
             )}
-          </Link>
+          </div>
         </div>
       </header>
     </div>

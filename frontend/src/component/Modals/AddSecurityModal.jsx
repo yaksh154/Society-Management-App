@@ -162,7 +162,7 @@ const AddSecurityModal = ({ CloseAddSecurity, Fdata }) => {
                                 </div>
                                 <input
                                     type="file"
-                                    accept=".png, .jpg, .jpeg"
+                                    accept=".png, .jpg, .jpeg,.pdf"
                                     className="hidden"
                                     onChange={handleFileChange}
                                 />
