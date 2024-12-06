@@ -1,4 +1,6 @@
 const manager_service = require("../services/manager.service");
+const securityService = require("../services/security.service");
+const resident_service = require("../services/resident.service")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { send_maile } = require("../services/email.service")
@@ -85,34 +87,68 @@ const login = async (req, res) => {
   try {
     const body = req.body;
     const { Password, Email } = body;
-    console.log("🚀 ~ login ~ Password:", Password)
-    const manager = await manager_service.findemail(Email)
-    if (!manager) {
-      return res.status(403).json({ message: "manager Not Found" })
-    }
-    const bcryptpass = await bcrypt.compare(Password, manager.Password)
-    console.log("🚀 ~ login ~ bcryptpass:", bcryptpass)
-    if (!bcryptpass) {
-      return res.status(404).json({ message: "Incorrect Password" })
-    }
-    const payload = {
-      _id: manager._id,
-      email: manager.Email,
-      role: manager.Role,
-      societyid: manager.society
-    };
+    console.log("🚀 ~ login ~ Password:", Password);
 
-    const token = jwt.sign(payload, process.env.SECRET_key, { expiresIn: "1d" });
-    // res.cookie("token", token);
-    // res.WriteHeader('Authorization', `Bearer ${token}`);
-    // console.log('Authorization Header:', req.headers);
-    console.log("🚀 ~ login ~ token generated:", token);
-    return res.status(200).json({ message: "manager Login Successful", token: token });
+    const manager = await manager_service.findemail(Email);
+    const resident = await resident_service.findemail(Email);
+    const security = await securityService.findByEmail(Email);
+
+    if (manager) {
+      const bcryptpass = await bcrypt.compare(Password, manager.Password);
+      console.log("🚀 ~ login ~ bcryptpass:", bcryptpass);
+      if (!bcryptpass) {
+        return res.status(404).json({ message: "Incorrect Password" });
+      }
+      const payload = {
+        _id: manager._id,
+        email: manager.Email,
+        role: manager.Role,
+        societyid: manager.society,
+      };
+      const token = jwt.sign(payload, process.env.SECRET_key, { expiresIn: "1d" });
+      console.log("🚀 ~ login ~ token generated:", token);
+      return res.status(200).json({ message: "Manager Login Successful", token });
+    }
+
+    if (resident) {
+      const bcryptpass = await bcrypt.compare(Password, resident.Password);
+      console.log("🚀 ~ login ~ bcryptpass:", bcryptpass);
+      if (!bcryptpass) {
+        return res.status(404).json({ message: "Incorrect Password" });
+      }
+      const payload = {
+        _id: resident._id,
+        email: resident.Email,
+        role: resident.Role,
+        societyid: resident.Society,
+      };
+      const token = jwt.sign(payload, process.env.SECRET_key, { expiresIn: "1d" });
+      return res.status(200).json({ message: "Resident Login Successful", token });
+    }
+
+    if (security) {
+      const bcryptpass = await bcrypt.compare(Password, security.password); // Fixed variable name
+      console.log("🚀 ~ login ~ bcryptpass:", bcryptpass);
+      if (!bcryptpass) {
+        return res.status(401).json({ message: "Invalid Credentials" });
+      }
+      const payload = {
+        _id: security._id,
+        email: security.Email,
+        role: security.Role,
+        societyid: security.Society,
+      };
+      const token = jwt.sign(payload, process.env.SECRET_key, { expiresIn: "1d" });
+      return res.status(200).json({ message: "Security Login Successful", token });
+    }
+
+    return res.status(403).json({ message: "Invalid Credentials" });
   } catch (error) {
     console.error("🚀 ~ login ~ error:", error.message);
     return res.status(500).json({ message: error.message });
   }
-}
+};
+
 
 const sed_otp = async (req, res) => {
   try {

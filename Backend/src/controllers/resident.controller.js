@@ -195,41 +195,12 @@ const deleteResident = async (req, res) => {
 };
 
 
-const login = async (req, res) => {
-    console.log("============login============");
-    try {
-        const body = req.body;
-        const { Password, Email } = body;
-        console.log("🚀 ~ login ~ Password:", Password)
-        const resident = await resident_service.findemail(Email)
-        if (!resident) {
-            return res.status(403).json({ message: "resident Not Found" })
-        }
-        const bcryptpass = await bcrypt.compare(Password, resident.Password)
-        console.log("🚀 ~ login ~ bcryptpass:", bcryptpass)
-        if (!bcryptpass) {
-            return res.status(404).json({ message: "Incorrect Password" })
-        }
-        console.log("🚀 ~ login ~ payload.resident.society:", resident.Society)
-        const payload = {
-            _id: resident._id,
-            email: resident.Email,
-            role: resident.Role,
-            societyid: resident.Society
-        };
-        const token = jwt.sign(payload, process.env.SECRET_key, { expiresIn: "1d" });
-        return res.status(200).json({ message: "resident Login Successful", token: token });
-    } catch (error) {
-        console.error("🚀 ~ login ~ error:", error.message);
-        return res.status(500).json({ message: error.message });
-    }
-}
+
 
 module.exports = {
     createResident,
     getResident,
     getAllResident,
     updateResident,
-    deleteResident,
-    login
+    deleteResident
 };

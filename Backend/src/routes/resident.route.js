@@ -22,6 +22,4 @@ router.put("/update/:id", authUser, upload.fields([
 ]), resident_controller.updateResident)
 router.delete("/delete/:id", authUser, resident_controller.deleteResident)
 
-router.post("/login", resident_controller.login)
-
 module.exports = router;
