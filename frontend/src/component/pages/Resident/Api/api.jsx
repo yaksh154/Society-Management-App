@@ -158,8 +158,6 @@ export const PostOwnpoll = (data, Fdata, closeCreatePoll) => {
 
 
 
-
-
 export const GetNewPoll = async () => {
   const res = await axios.get('http://localhost:3030/OwnPoll');
   return res.data;

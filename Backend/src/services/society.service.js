@@ -9,7 +9,6 @@ const byid = async (id) => {
 }
 
 const updateunit = async (id, Residentid) => {
-  try {
     return await Society.findByIdAndUpdate(id,
       {
         $inc: { unit: 1 },
@@ -17,10 +16,6 @@ const updateunit = async (id, Residentid) => {
       },
       { new: true }
     )
-  } catch (error) {
-    console.error("🚀 ~ updateunitRemove ~ error:", error);
-    throw new Error("Failed to update society");
-  }
 }
 
 const getSociety = async () => {

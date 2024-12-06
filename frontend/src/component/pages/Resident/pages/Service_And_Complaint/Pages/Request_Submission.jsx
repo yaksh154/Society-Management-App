@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Button from '../../../../../layout/Button_gradient';
-import axios from 'axios';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import RequestModal from '../Modal/RequestModal';
 import DeleteLoding from '../../../../../layout/DeleteLoding';
@@ -92,11 +91,11 @@ const Request_Submission = () => {
                                     <div className="flex flex-col gap-2 mb-4 p-2">
                                         <div className="text-sm text-gray-500 flex justify-between">
                                             Request Date:
-                                            <span className="ml-2 text-base font-semibold text-gray-700">{new Date(item.Request_Date).toLocaleDateString("en-US", {
-                                                month: "2-digit",
-                                                day: "2-digit",
-                                                year: "numeric",
-                                            })}</span>
+                                            <span className="ml-2 text-base font-semibold text-gray-700">{new Date(item.Request_Date).toLocaleDateString('en-GB', {
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: 'numeric',
+                                                })}</span>
                                         </div>
                                         <div className="text-sm text-gray-500 flex justify-between">
                                             Status:
@@ -105,10 +104,13 @@ const Request_Submission = () => {
                                                     item.Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
                                                 }`}>{item.Status}</span>
                                         </div>
-                                        <div className="text-sm text-gray-500">
-                                            Description:
-                                        </div>
-                                        <p className="text-gray-500 text-sm font-bold">{item.Description}</p>
+                                        <div className="text-sm text-gray-500 flex justify-between">
+                                        Priority:
+                                        
+                                        <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${item.Priority ==="High" ? "bg-[#d32727] text-[#ffffff]" :
+                                                item.Priority === "Medium" ? "bg-[#daad29] text-[#ffffff]" :
+                                                    item.Priority === "Low" ? "bg-[#1d9729] text-[#ffffff]" : null
+                                                }`}>{item.Priority}</span> </div>
                                     </div>
                                 </div>
                             ))

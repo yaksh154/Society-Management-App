@@ -1,5 +1,6 @@
 const resident_service = require("../services/resident.service")
 const Society = require("../services/society.service")
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { uploadFile } = require("../middleware/upload")
 const { send_maile } = require("../services/email.service")
@@ -12,32 +13,33 @@ const createResident = async (req, res) => {
         console.log("🚀 ~ req.files:", req.files);
         const pass = Math.floor(1000 + Math.random() * 9000);
         const bcrpass = await bcrypt.hash(pass.toString(), 10);
-        // const photoPath = req.files.residentphoto[0].path;
-        // const aadharFrontPath = req.files.AadharCard_FrontSide[0].path;
-        // const AadharBackPath = req.files.AadharCard_BackSide[0].path;
-        // const Vera_OR_LightBillPath = req.files.VeraBill_OR_LightBill[0].path;
-        // const Rent_AgreementPath = req.files.Rent_Agreement[0].path;
+        const photoPath = req.files.residentphoto[0].path;
+        const aadharFrontPath = req.files.AadharCard_FrontSide[0].path;
+        const AadharBackPath = req.files.AadharCard_BackSide[0].path;
+        const Vera_OR_LightBillPath = req.files.VeraBill_OR_LightBill[0].path;
+        const Rent_AgreementPath = req.files.Rent_Agreement[0].path;
 
-        // const residentphoto = await uploadFile(photoPath);
-        // const AadharCard_FrontSide = await uploadFile(aadharFrontPath);
-        // const AadharCard_BackSide = await uploadFile(AadharBackPath);
-        // const VeraBill_OR_LightBill = await uploadFile(Vera_OR_LightBillPath);
-        // const Rent_Agreement = await uploadFile(Rent_AgreementPath);
+        const residentphoto = await uploadFile(photoPath);
+        const AadharCard_FrontSide = await uploadFile(aadharFrontPath);
+        const AadharCard_BackSide = await uploadFile(AadharBackPath);
+        const VeraBill_OR_LightBill = await uploadFile(Vera_OR_LightBillPath);
+        const Rent_Agreement = await uploadFile(Rent_AgreementPath);
         const body = {
             Fullname: residentData.fullname,
             Phone: residentData.phone,
             Email: residentData.email,
-            // residentphoto: residentphoto.secure_url,
+            residentphoto: residentphoto.secure_url,
             Age: residentData.age,
             Gender: residentData.gender,
             Wing: residentData.wing,
             Unit: residentData.unit,
             Relation: residentData.relation,
-            // AadharCard_FrontSide: AadharCard_FrontSide.secure_url,
-            // AadharCard_BackSide: AadharCard_BackSide.secure_url,
-            // VeraBill_OR_LightBill: VeraBill_OR_LightBill.secure_url,
-            // Rent_Agreement: Rent_Agreement.secure_url,
-            ResidentStatus: residentData.status,
+            UnitStatus: residentData.UnitStatus,
+            AadharCard_FrontSide: AadharCard_FrontSide.secure_url,
+            AadharCard_BackSide: AadharCard_BackSide.secure_url,
+            VeraBill_OR_LightBill: VeraBill_OR_LightBill.secure_url,
+            Rent_Agreement: Rent_Agreement.secure_url,
+            ResidentStatus: residentData.ResidentStatus,
             Ownername: residentData.ownername,
             Ownerphone: residentData.ownerphone,
             OwnerAddress: residentData.owneraddress,
@@ -47,6 +49,7 @@ const createResident = async (req, res) => {
             createdBy: req.user._id,
             Society: req.user.societyid
         }
+        console.log("🚀 ~ createResident ~ body:", body)
         const newResident = await resident_service.create(body);
         // console.log("🚀 ~ createResident ~ newResident:", newResident)
         // console.log("🚀 ~ createResident ~ req.user.societyid:", req.user.societyid)
@@ -102,6 +105,18 @@ const getResident = async (req, res) => {
         return res.status(500).json({ error: error.message });
     }
 };
+
+const getAllResident = async (req, res) => {
+    try {
+        const societyId = req.user.societyid
+        console.log("🚀 ~ getAllResident ~ societyId:", societyId)
+        const residents = await resident_service.getall(societyId);
+        return res.status(200).json(residents);
+    } catch (error) {
+        console.log("��� ~ getAllResident ~ error:", error);
+        return res.status(500).json({ error: error.message });
+    }
+}
 
 // Update Resident
 const updateResident = async (req, res) => {
@@ -180,39 +195,12 @@ const deleteResident = async (req, res) => {
 };
 
 
-const login = async (req, res) => {
-    console.log("============login============");
-    try {
-        const body = req.body;
-        const { Password, Email } = body;
-        console.log("🚀 ~ login ~ Password:", Password)
-        const resident = await resident_service.findemail(Email)
-        if (!resident) {
-            return res.status(403).json({ message: "resident Not Found" })
-        }
-        const bcryptpass = await bcrypt.compare(Password, resident.Password)
-        console.log("🚀 ~ login ~ bcryptpass:", bcryptpass)
-        if (!bcryptpass) {
-            return res.status(404).json({ message: "Incorrect Password" })
-        }
-        const payload = {
-            _id: resident._id,
-            email: resident.Email,
-            role: resident.Role,
-            societyid: resident.society
-        };
-        const token = jwt.sign(payload, process.env.SECRET_key, { expiresIn: "1d" });
-        return res.status(200).json({ message: "resident Login Successful", token: token });
-    } catch (error) {
-        console.error("🚀 ~ login ~ error:", error.message);
-        return res.status(500).json({ message: error.message });
-    }
-}
+
 
 module.exports = {
     createResident,
     getResident,
+    getAllResident,
     updateResident,
-    deleteResident,
-    login
+    deleteResident
 };

@@ -92,11 +92,11 @@ const Complaint_Submission = () => {
                                     <div className="flex flex-col gap-2 mb-4 p-2">
                                         <div className="text-sm text-gray-500 flex justify-between">
                                             Request Date:
-                                            <span className="ml-2 text-base font-semibold text-gray-700">{new Date(item.createdAt).toLocaleDateString("en-US", {
-                                                month: "2-digit",
-                                                day: "2-digit",
-                                                year: "numeric",
-                                            })}</span>
+                                            <span className="ml-2 text-base font-semibold text-gray-700">{new Date(item.createdAt).toLocaleDateString('en-GB', {
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: 'numeric',
+                                                })}</span>
                                         </div>
                                         <div className="text-sm text-gray-500 flex justify-between">
                                             Status:
@@ -108,7 +108,7 @@ const Complaint_Submission = () => {
                                         <div className="text-sm text-gray-500">
                                             Description:
                                         </div>
-                                        <p className="text-gray-500 text-sm font-bold">{item.Description}</p>
+                                        <p className="text-gray-500 text-base font-semibold">{item.Description}</p>
                                     </div>
                                 </div>
                             ))

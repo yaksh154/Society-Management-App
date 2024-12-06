@@ -10,7 +10,6 @@ router.put("/updatesecurity/:id", authUser,upload.fields([{ name: "photo", maxCo
 router.get("/security/:id", authUser, securityController.getSecurity);
 router.get("/getallsecurity", authUser, securityController.getgetallsecurity)
 router.delete("/deletesecurity/:id", authUser, securityController.deleteSecurity);
-router.post("/login", securityController.login);
 
 
 router.post('/createVisitor', authUser, securityController.createVisitor);
