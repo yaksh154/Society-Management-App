@@ -41,7 +41,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Public Pages */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/forgot_password" element={<Forgot_password />} />
         <Route path="/forgot_password/opt" element={<Forgot_password_opt />} />

@@ -219,7 +219,7 @@ const Registration = () => {
                         </div>
                     </form>
                     <p className="text-center text-sm text-gray-600 mt-4">
-                        Already have an account? <Link to="/login" className="text-orange-600 font-semibold">Login</Link>
+                        Already have an account? <Link to="/" className="text-orange-600 font-semibold">Login</Link>
                     </p>
                 </div>
             </div>
