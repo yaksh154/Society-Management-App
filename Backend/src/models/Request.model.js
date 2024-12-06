@@ -34,7 +34,7 @@ const requestSchema = new mongoose.Schema(
         },
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Manager'
+            ref: 'Resident'
         },
         Society: {
             type: mongoose.Schema.Types.ObjectId,
