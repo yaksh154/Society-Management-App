@@ -687,15 +687,7 @@ export const PostOtherIncome = (data, Fdata, setCreateIncome) => {
         setCreateIncome(false)
     })
 }
-// export const UpdateOtherIncome = async (id, data) => {
-//     try {
-//         const response = await axios.put(`${url}/otherincome/updateOtherincome/${id}`, data);
-//         return response.data; // Backend should return `{ success: true, data: updatedItem }`
-//     } catch (error) {
-//         console.error('Error in UpdateOtherIncome API:', error);
-//         throw error;
-//     }
-// };
+
 
 export const UpdateOtherIncome = async (id, data) => {
     try {
@@ -713,7 +705,7 @@ export const DeleteOtherIncome = (data, Fdata, setCreateIncome) => {
     })
 }
 
-///Expense
+///Expanse
 
 export const GetExpanse = (setAddExpense) => {
     axios.get(`${url}/expenses/getAllexpensess`).then((res) => {

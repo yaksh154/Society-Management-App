@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { GetOtherIncome } from "../../../../services/Api/api";
+import { DeleteOtherIncome, GetOtherIncome } from "../../../../services/Api/api";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaRupeeSign } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import CreateOincome from "../../../../Modals/CreateOincome";
 import EditOIncome from "../../../../Modals/EditOIncome";
-import DeleteImportantNumbersModal from "../../../../Modals/DeleteImportantNumbersModal";
+import DeleteModal from "../../../../layout/DeleteModal";
 
 const Otherincome = () => {
   const [incomeData, setIncomeData] = useState([]);
@@ -13,6 +13,7 @@ const Otherincome = () => {
   const [dropdownOpenIndex, setDropdownOpenIndex] = useState(null);
   const [DeleteBox, setDeleteBox] = useState(false);
   const [DeleteId, setDeleteId] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [CreateIncome, setCreateIncome] = useState(false);
   const [EditIncome, setEditIncome] = useState(false);
 
@@ -53,16 +54,38 @@ const Otherincome = () => {
     setSelectedIncome(null);
   };
 
-  const handleDelete = (id) => {
-    setDeleteId(id);
-    setDeleteBox(true);
-    setDropdownOpenIndex(null);
+  const handleDelete = (_id) => {
+    console.log(_id);
+    
+    setDeleteId(_id); // Set the ID of the item to delete
+    setDeleteBox(true); // Open the delete confirmation modal
+    setDropdownOpenIndex(null); // Close the dropdown
   };
+
+  const confirmDelete = () => {
+    if (DeleteId) {
+      setLoading(true); // Start loading
+      DeleteOtherIncome(DeleteId, (success) => {
+        setLoading(false); // Stop loading
+        if (success) {
+          fetchData(); // Refresh the data list
+          closeDeleteBox(); // Close the modal
+        } else {
+          console.error("Failed to delete the data.");
+        }
+      });
+    }
+  };
+  
 
   const closeDeleteBox = () => {
     setDeleteBox(false);
     setDeleteId(null);
   };
+
+  const Deletedata = () =>{
+    DeleteOtherIncome(DeleteId,incomeData, setIncomeData,closeDeleteBox)
+  }
 
   return (
     <div>
@@ -109,7 +132,7 @@ const Otherincome = () => {
                           </Link>
                           <li
                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={() => handleDelete(item._id)}
+                            onClick={() => handleDelete(item._id)} 
                           >
                             Delete
                           </li>
@@ -143,7 +166,9 @@ const Otherincome = () => {
               </div>
             ))
           ) : (
-            <div className="col-span-4 text-gray-500">No data available.</div>
+            <div className='flex justify-center'>
+                  <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 text-center border-[#F09619]" />
+                </div>
           )}
         </div>
       </div>
@@ -154,15 +179,16 @@ const Otherincome = () => {
           onUpdate={fetchData}
         />
       )}
-     
-{DeleteBox && (
-  <DeleteImportantNumbersModal
-    setDeleteBox={closeDeleteBox}
-    deleteId={DeleteId}
+     {DeleteBox && (
+  <DeleteModal
+    loading={loading}       
+    close={closeDeleteBox}   
+    DeleteClick={Deletedata} 
   />
 )}
-</div>
-);
+
+    </div>
+  );
 };
 
 export default Otherincome;

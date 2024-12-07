@@ -76,9 +76,6 @@ export default function Sidenav({ toggleNav, data }) {
               : "hover:bg-gray-100"
               }`}
           >
-            {pathname.startsWith("/") && (
-              <div className="absolute -left-4 top-0 bottom-0 w-2 bg-orange-600 rounded-r-lg"></div>
-            )}
             <IoLogOut className="inline text-red-600 mr-2" />
             Logout
           </Link>
