@@ -698,13 +698,21 @@ export const UpdateOtherIncome = async (id, data) => {
       throw error;
     }
   };
-export const DeleteOtherIncome = (data, Fdata, setCreateIncome) => {
-    axios.delete(`${url}/OtherIncome/deleteOtherincome/:id`, data).then((res) => {
-        Fdata()
-        setCreateIncome(false)
-    })
-}
-
+  export const DeleteOtherIncome = (DeleteId,incomeData, setIncomeData,closeDeleteBox) => {
+    const _id = DeleteId
+    axios
+      .delete(`${url}/OtherIncome/deleteOtherincome/${_id}`)
+      .then((res) => {
+        console.log(res);
+        const Deletedata = incomeData.filter((e) => e._id !== _id)
+        setIncomeData(Deletedata)
+        closeDeleteBox()
+      })
+      .catch((err) => {
+        console.error("Error deleting income:", err);
+        closeDeleteBox()
+      });
+  };
 ///Expanse
 
 export const GetExpanse = (setAddExpense) => {
