@@ -113,10 +113,10 @@ export default function Sidenav({ toggleNav, data }) {
                 </li>
                 <li className="ml-6">
                   <Link
-                    to="/manager/financial_management/Expanse"
-                    className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/manager/financial_management/Expanse") ? "border-black font-semibold" : ""}`}
+                    to="/manager/financial_management/expense"
+                    className={`block px-4 py-2 hover:bg-gray-100 text-black border-l-4 ${pathname.startsWith("/manager/financial_management/expense") ? "border-black font-semibold" : ""}`}
                   >
-                    Expanse
+                    Expense
                   </Link>
                 </li>
                 <li className="ml-6">

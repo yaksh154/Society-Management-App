@@ -12,7 +12,7 @@ import ViewExpenseModal from '../../../../Modals/ViewExpenseModal';
 import DeleteModal from '../../../../layout/DeleteLoding';
 import useSidbarTogal from '../../../../layout/useSidbarTogal';
 
-const Expanse = () => {
+const Expense = () => {
 
   const [isOpen, setIsOpen] = useState(true);
   let [data, setdata] = useState(280);
@@ -185,4 +185,4 @@ const Expanse = () => {
   );
 };
 
-export default Expanse;
+export default Expense;

@@ -713,7 +713,7 @@ export const DeleteOtherIncome = (data, Fdata, setCreateIncome) => {
     })
 }
 
-///Expanse
+///Expense
 
 export const GetExpanse = (setAddExpense) => {
     axios.get(`${url}/expenses/getAllexpensess`).then((res) => {

@@ -103,7 +103,7 @@ const Otherincome = () => {
                           </li>
                           <Link
                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            to="/financial_management/ViewParticipation"
+                            to="/manager/financial_management/participant_table"
                           >
                             View
                           </Link>
