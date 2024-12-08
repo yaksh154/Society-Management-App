@@ -97,7 +97,7 @@ function TotalBalanceChart() {
         <h2 className="text-lg font-semibold text-gray-800">Total Balance</h2>
         <div className="relative">
           <select
-            className="bg-gray-100 text-gray-800 p-2 rounded-lg outline-none"
+            className="border-2 border-gray-100 text-gray-800 p-1 rounded-lg outline-none"
             onChange={(e) => setSelectedRange(e.target.value)}
             value={selectedRange}
           >

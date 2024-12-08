@@ -20,7 +20,6 @@ export const Get_Profile_img = (setFormData) =>{
   const token = localStorage.getItem("token");
   const decodedToken = jwtDecode(token);
   axios.get(`${url}/resident/profile/${decodedToken._id}`).then((res) => {
-    console.log(res.data)
     setFormData(res.data)
   })
 }

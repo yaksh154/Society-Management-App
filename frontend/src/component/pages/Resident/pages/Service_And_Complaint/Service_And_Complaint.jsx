@@ -21,7 +21,7 @@ const Service_And_Complaint = () => {
     return (
         <div className='bg-[#f0f5fb]'>
             <Sidebar toggleNav={toggleNav} data={data} />
-            <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
+            <div id='main' className={`ml-[${getdata}px] max-[426px]:ml-0`} >
                 <div className="open_he">
                     <Header toggleNav={toggleNav} />
                 </div>

@@ -22,10 +22,8 @@ const Resident_Owner_Form = () => {
   return (
     <div>
       <Sidebar toggleNav={toggleNav} data={data} />
-      <div id="main" className="max-[425px]:ml-0" style={{ marginLeft: getdata }}>
-        <div className="open_he">
-          <Header toggleNav={toggleNav} />
-        </div>
+      <div id="main" className={`ml-[${getdata}px] max-[425px]:ml-0`}>
+        <Header toggleNav={toggleNav} />
         <main className="flex-1">
           <div className="p-6 h-full bg-[#f0f5fb]">
             <div className="flex">

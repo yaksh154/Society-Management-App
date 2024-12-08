@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../../layout/Sidebar'
 import Header from '../../layout/Header'
 import { FaFileAlt } from "react-icons/fa";
 import Tenant from './Tenant';
 import useSidbarTogal from '../../../../layout/useSidbarTogal';
+import { Get_Profile_img } from '../../Api/api';
 
 
 const Personal_Detail = () => {
@@ -123,10 +124,21 @@ const Personal_Detail = () => {
       Description: "All vehicles should be checked and serviced annually.",
     }
   ]
+
+  const [FormData, setFormData] = useState([])
+
+  useEffect(() => {
+    Fdata();
+  }, []);
+
+  const Fdata = () => {
+    Get_Profile_img(setFormData);
+  };
+
   return (
     <div className='bg-[#f0f5fb] h-screen'>
       <Sidebar toggleNav={toggleNav} data={data} />
-      <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
+      <div id='main' className={`ml-[${getdata}px] max-[425px]:ml-0`} >
         <div className="open_he">
           <Header toggleNav={toggleNav} />
         </div>
@@ -167,18 +179,18 @@ const Personal_Detail = () => {
                     <div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-gray-700">
                         {[
-                          ["Full Name", "Arlene McCoy"],
-                          ["Phone Number", "+91 99130 44537"],
-                          ["Email Address", "arlenemccoy@gmail.com"],
-                          ["Gender", "Male"],
-                          ["Wing", "A"],
-                          ["Age", "20"],
-                          ["Unit", "1001"],
-                          ["Relation", "Father"],
+                          ["Full Name", `${FormData.Fullname || ''}`],
+                          ["Phone Number", `${FormData.Phone || ''}`],
+                          ["Email Address", `${FormData.Email || ''}`],
+                          ["Gender", `${FormData.Gender || ''}`],
+                          ["Wing", `${FormData.Wing || ''}`],
+                          ["Age", `${FormData.Age || ''}`],
+                          ["Unit", `${FormData.Unit || ''}`],
+                          ["Relation", `${FormData.Relation || ''}`],
                         ].map(([label, value]) => (
                           <p key={label}>
                             <span className="font-medium">{label}:</span> <br />
-                            <span>{value}</span>
+                            <span className='text-[#a7a7a7]'>{value}</span>
                           </p>
                         ))}
                       </div>

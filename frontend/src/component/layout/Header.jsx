@@ -27,11 +27,7 @@ const Header = ({ toggleNav }) => {
           >
             <GiHamburgerMenu />
           </span>
-          <input
-            type="text"
-            placeholder="Search Here"
-            className="w-full max-w-md px-4 py-2 border rounded-lg"
-          />
+          <input type="text" placeholder="Search Here" className="w-full max-w-md px-4 py-2 border rounded-lg max-[426px]:hidden"/>
         </div>
 
         {/* Right Section */}

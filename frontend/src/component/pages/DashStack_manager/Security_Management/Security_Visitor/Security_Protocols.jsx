@@ -79,7 +79,7 @@ const Security_Protocols = () => {
     return (
         <div>
             <Sidebar toggleNav={toggleNav} data={data} />
-            <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
+            <div id='main' className={`ml-[${getdata}px] max-[425px]:ml-0`}>
                 <div className="open_he">
                     <Header toggleNav={toggleNav} />
                 </div>
@@ -87,7 +87,7 @@ const Security_Protocols = () => {
                     <div className="p-6">
                         <div className="bg-white shadow-md rounded-lg p-6">
                             <div className="flex justify-between items-center mb-6">
-                                <h1 className='font-semibold md:text-2xl text-md'>Security Protocols</h1>
+                                <h1 className='font-semibold md:text-2xl text-lg'>Security Protocols</h1>
                                 <button onClick={OpneAddProtocols} className="px-4 py-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold shadow-lg hover:from-orange-600 hover:to-yellow-600 transition duration-200">
                                     Create Protocol
                                 </button>
@@ -102,19 +102,19 @@ const Security_Protocols = () => {
                                     <table className="min-w-full bg-[#eef1fd] rounded-lg">
                                         <thead>
                                             <tr>
-                                                <th className="px-6 py-3 border-b font-medium text-left">
+                                                <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md text-left">
                                                     Title
                                                 </th>
-                                                <th className="px-6 py-3 border-b font-medium text-left">
+                                                <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md text-left">
                                                     Description
                                                 </th>
-                                                <th className="px-6 py-3 border-b font-medium ">
+                                                <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                                                     Date
                                                 </th>
-                                                <th className="px-6 py-3 border-b font-medium ">
+                                                <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                                                     Time
                                                 </th>
-                                                <th className="px-6 py-3 border-b font-medium ">
+                                                <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                                                     Action
                                                 </th>
                                             </tr>

@@ -83,7 +83,7 @@ const Note = () => {
   return (
     <div>
       <Sidebar toggleNav={toggleNav} data={data} />
-      <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
+      <div id='main' className={`ml-[${getdata}px] max-[425px]:ml-0`}>
         <div className="open_he">
           <Header toggleNav={toggleNav} />
         </div>
@@ -91,7 +91,7 @@ const Note = () => {
           <div className="p-6">
             <div className="bg-white shadow-md rounded-lg p-6">
               <div className="flex justify-between items-center mb-6">
-                <h1 className='font-semibold md:text-2xl text-md'>Note</h1>
+                <h1 className='font-semibold md:text-2xl text-xl'>Note</h1>
                 <Button onClick={sowcreate} Btn_Name="Create Note" />
                 {create && (<CreateNote Fdata={Fdata} setcreate={Closecreate} />)}
               </div>
