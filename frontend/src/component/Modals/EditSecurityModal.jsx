@@ -26,6 +26,7 @@ const EditSecurityModal = ({ _id, CloseEdit,Fdata }) => {
       if (data) {
         setValue('photo', data.photo || '');
         setValue('Full_Name', data.Full_Name || '');
+        setValue('Email', data.Email || '');
         setValue('phone_Number', data.phone_Number || '');
         setValue('Gender', data.Gender || '');
         setValue('Shift', data.Shift || '');
@@ -84,7 +85,7 @@ const EditSecurityModal = ({ _id, CloseEdit,Fdata }) => {
     >
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4"
+        className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4 overflow-auto max-h-svh"
       >
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">Edit Security</h2>
 
@@ -119,6 +120,16 @@ const EditSecurityModal = ({ _id, CloseEdit,Fdata }) => {
             {...register('Full_Name', { required: 'Full name is required' })}
           />
           {errors.Full_Name && <p className="text-red-500 text-sm">{errors.Full_Name.message}</p>}
+        </div>
+        <div>
+          <label className="block text-gray-700">Email</label>
+          <input
+            type="email"
+            placeholder="Enter Email"
+            className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            {...register('Email', { required: 'Full name is required' })}
+          />
+          {errors.Email && <p className="text-red-500 text-sm">{errors.Email.message}</p>}
         </div>
 
         <div>

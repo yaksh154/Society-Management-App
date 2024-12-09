@@ -19,7 +19,7 @@ const Create_facility_model = ({ setClosecreate_facility, Fdata }) => {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
-            <div className="bg-white rounded-lg shadow-lg w-11/12 lg:w-1/4 md:w-1/2 p-6">
+            <div className="bg-white rounded-lg shadow-lg w-11/12 lg:w-1/4 md:w-1/2 p-6 overflow-auto max-h-svh">
                 <h2 className="text-xl font-semibold mb-4">Create Facility</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-4">
@@ -74,7 +74,7 @@ const Create_facility_model = ({ setClosecreate_facility, Fdata }) => {
                     </div>
 
                     <div className="flex justify-between mt-4">
-                        <CloseButton onClick={() => setClosecreate_facility(false)} Addclass="w-1/2" CloseName="Cancel" />
+                        <CloseButton type="button" onClick={() => setClosecreate_facility(false)} Addclass="w-1/2" CloseName="Cancel" />
                         <Loding_Button
                             loading={loading}
                             Addclass="w-1/2"

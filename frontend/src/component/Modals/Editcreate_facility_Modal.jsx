@@ -49,7 +49,7 @@ const EditcreateFacilityModal = ({ seteditcreate_facility, _id, lodData }) => {
     return (
         <div>
             <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
-                <div className="bg-white rounded-lg shadow-lg w-11/12 lg:w-1/4 md:w-1/2 p-6">
+                <div className="bg-white rounded-lg shadow-lg w-11/12 lg:w-1/4 md:w-1/2 p-6 overflow-auto max-h-svh">
                     <h2 className="text-xl font-semibold mb-4">Edit Facility</h2>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-medium mb-2">Facility Name</label>
