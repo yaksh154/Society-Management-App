@@ -42,91 +42,105 @@ const Access_Forums = () => {
           <Header toggleNav={toggleNav} />
         </div>
 
-        <div className="flex flex-1 p-4 bg-gray-100 rounded-lg border-spacing-2">
-          {/* Left Sidebar */}
-          <div className="w-full md:w-1/4 bg-white border-r p-4 rounded-lg overflow-y-auto">
-            <h2 className="text-xl md:text-2xl font-bold mb-4">Chat</h2>
-            <input
-              type="text"
-              placeholder="Search Here"
-              className="w-full p-2 mb-4 border rounded-full"
-            />
-            <div className="space-y-4 overflow-y-auto max-h-[65vh] md:max-h-full">
-              {chats.map((chat, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between p-3 hover:bg-gray-100 rounded-lg cursor-pointer"
-                >
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-gray-100 rounded-full"></div>
-                    <div>
-                      <h3 className="font-bold text-sm md:text-base">{chat.name}</h3>
-                      <p className="text-xs md:text-sm text-gray-500 truncate">{chat.message}</p>
-                    </div>
-                  </div>
-                  <span className="text-xs text-gray-500 ">{chat.time}</span>
-                </div>
-              ))}
+        <div className="flex flex-col md:flex-row flex-1 h-screen bg-gray-100 p-2 md:p-4 rounded-lg border-spacing-2">
+  {/* Left Sidebar */}
+  <div className="w-full md:w-1/4 bg-white border-r p-4 rounded-lg overflow-y-auto">
+    <h2 className="text-xl md:text-2xl font-bold mb-4">Chat</h2>
+    <input
+      type="text"
+      placeholder="Search Here"
+      className="w-full p-2 mb-4 border rounded-full focus:outline-none"
+    />
+    <div className="space-y-4 overflow-y-auto max-h-[65vh] md:max-h-[85vh]">
+      {chats.map((chat, index) => (
+        <div
+          key={index}
+          className="flex items-center justify-between p-3 hover:bg-gray-100 rounded-lg cursor-pointer"
+        >
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
+            <div>
+              <h3 className="font-bold text-sm md:text-base">{chat.name}</h3>
+              <p className="text-xs md:text-sm text-gray-500 truncate">
+                {chat.message}
+              </p>
             </div>
           </div>
-
-          {/* Right Chat Window */}
-          <div className="flex-1 flex flex-col p-6 bg-white rounded-lg">
-            {/* Header */}
-            <div className="flex items-center justify-between border-b pb-3 mb-4">
-              <div className="flex items-center space-x-3">
-                <img
-                  src="../../../../../../public/images/Profile.png"
-                  alt="Profile"
-                  className="w-10 h-10 rounded-full"
-                />
-                <h2 className="text-lg md:text-xl font-bold">Arlene McCoy (A/1001)</h2>
-              </div>
-              <div className="flex space-x-4">
-                <FaVideo className="text-gray-500 hover:text-blue-300 cursor-pointer rounded-lg" />
-                <FaPhone className="text-gray-500 hover:text-blue-300 cursor-pointer" />
-                <FaEllipsisV className="text-gray-500 hover:text-blue-300 cursor-pointer" />
-              </div>
-            </div>
-
-            {/* Chat Messages */}
-            <div className="flex-1 overflow-y-auto space-y-4">
-              {messages.map((msg, index) => (
-                <div key={index} className={`flex ${msg.self ? 'justify-end' : 'justify-start'}`}>
-                  <div
-                    className={`max-w-xs md:max-w-md lg:max-w-lg p-3 rounded-lg ${
-                      msg.self ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
-                    }`}
-                  >
-                    {msg.type === 'image' ? (
-                      <img src={msg.content} alt="chat-content" className="rounded-lg w-full" />
-                    ) : msg.type === 'file' ? (
-                      <div className="flex items-center space-x-2">
-                        <div className="bg-red-500 p-2 rounded text-white">PDF</div>
-                        <p>{msg.content}</p>
-                      </div>
-                    ) : (
-                      <p className="break-words">{msg.content}</p>
-                    )}
-                  </div>
-                    <div className="block text-xs mt-2 text-gray-300">{msg.time}</div>
-                </div>
-              ))}
-            </div>
-
-            {/* Message Input */}
-            <div className="flex items-center space-x-4 mt-4">
-              <FaSmile className="text-gray-300 hover:text-blue-500 cursor-pointer" />
-              <FaPaperclip className="text-gray-500 hover:text-blue-500 cursor-pointer" />
-              <input
-                type="text"
-                placeholder="Type a message..."
-                className="flex-1 p-2 border rounded-full focus:outline-none"
-              />
-              <FaMicrophone className="text-blue-500 cursor-pointer" />
-            </div>
-          </div>
+          <span className="text-xs text-gray-500">{chat.time}</span>
         </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Right Chat Window */}
+  <div className="flex-1 flex flex-col bg-white p-4 rounded-lg">
+    {/* Chat Header */}
+    <div className="flex items-center justify-between border-b pb-3 mb-4">
+      <div className="flex items-center space-x-3">
+        <img
+          src="../../../../../../public/images/Profile.png"
+          alt="Profile"
+          className="w-10 h-10 rounded-full"
+        />
+        <h2 className="text-lg md:text-xl font-bold">
+          Arlene McCoy (A/1001)
+        </h2>
+      </div>
+      <div className="flex space-x-4">
+        <FaVideo className="text-gray-500 hover:text-blue-500 cursor-pointer" />
+        <FaPhone className="text-gray-500 hover:text-blue-500 cursor-pointer" />
+        <FaEllipsisV className="text-gray-500 hover:text-blue-500 cursor-pointer" />
+      </div>
+    </div>
+
+    {/* Chat Messages */}
+    <div className="flex-1 overflow-y-auto space-y-4">
+      {messages.map((msg, index) => (
+        <div
+          key={index}
+          className={`flex ${msg.self ? "justify-end" : "justify-start"}`}
+        >
+          <div
+            className={`max-w-xs md:max-w-md lg:max-w-lg p-3 rounded-lg ${
+              msg.self
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200 text-black"
+            }`}
+          >
+            {msg.type === "image" ? (
+              <img
+                src={msg.content}
+                alt="chat-content"
+                className="rounded-lg w-full"
+              />
+            ) : msg.type === "file" ? (
+              <div className="flex items-center space-x-2">
+                <div className="bg-red-500 p-2 rounded text-white">PDF</div>
+                <p>{msg.content}</p>
+              </div>
+            ) : (
+              <p className="break-words">{msg.content}</p>
+            )}
+          </div>
+          <div className="block text-xs mt-2 text-gray-300">{msg.time}</div>
+        </div>
+      ))}
+    </div>
+
+    {/* Message Input */}
+    <div className="flex items-center space-x-4 mt-4">
+      <FaSmile className="text-gray-300 hover:text-blue-500 cursor-pointer" />
+      <FaPaperclip className="text-gray-500 hover:text-blue-500 cursor-pointer" />
+      <input
+        type="text"
+        placeholder="Type a message..."
+        className="flex-1 p-2 border rounded-full focus:outline-none"
+      />
+      <FaMicrophone className="text-blue-500 cursor-pointer" />
+    </div>
+  </div>
+</div>
+
       </div>
     </div>
   );
