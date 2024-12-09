@@ -20,12 +20,12 @@ const Forgot_password = () => {
     };
 
     return (
-        <div className="bg-cover bg-center h-screen" style={{ backgroundImage: "url('/images/Login_bg_img.png')" }}>
+        <div className="bg-cover bg-center h-screen" style={{ backgroundImage: "url(' https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770800/ho6otqwggsl3lqi7twed.png')" }}>
             <div className="flex w-full h-full">
                 {/* Login Image Side */}
                 <div className="hidden lg:flex w-1/2 bg-gray-100 flex-col justify-center">
                     <h1 className="text-5xl font-bold text-orange-600 ms-16">Dash<span className="text-black">Stack</span></h1>
-                    <div className="flex items-center justify-center"><img className="mt-16 h-96" src={forgot_password_img} alt="Login" /></div>
+                    <div className="flex items-center justify-center"><img className="mt-16 h-96" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/lyb7aulgi8pkat8rx5vs.png" alt="Login" /></div>
                 </div>
                 {/* Login Form Side */}
                 <div className="flex flex-col w-full lg:w-1/2 items-center justify-center px-8 py-12 lg:py-0">

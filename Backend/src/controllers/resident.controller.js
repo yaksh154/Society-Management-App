@@ -6,10 +6,10 @@ const { uploadFile } = require("../middleware/upload")
 const { send_maile } = require("../services/email.service")
 
 const createResident = async (req, res) => {
+    console.log("🚀 ~ req.body:", req.body);
     try {
         const residentData = req.body;
         console.log("🚀 ~ createResident ~ residentData:", residentData)
-        console.log("🚀 ~ req.body:", req.body);
         console.log("🚀 ~ req.files:", req.files);
         const pass = Math.floor(1000 + Math.random() * 9000);
         const bcrpass = await bcrypt.hash(pass.toString(), 10);

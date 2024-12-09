@@ -128,7 +128,7 @@ function App() {
           />
 
           {/* Fallback */}
-          <Route path="*" element={<div>404 Page Not Found</div>} />
+          <Route path="*" element={<Unauthorized />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

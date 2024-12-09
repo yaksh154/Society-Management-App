@@ -18,7 +18,7 @@ const deleteSecurity = async (id) => {
 };
 
 const findByEmail = async (email) => {
-    return await Security.findOne({ email });
+    return await Security.findOne({ Email: email });
 };
 const getAllSecurity = async (societyid) => {
     return await Security.find({ Society: societyid }).populate("createdBy").populate("Society");
@@ -46,7 +46,7 @@ const findByIdSecurityProtocol = async (id) => {
     return await Securityprotocol.findById(id).populate("createdBy");
 }
 
-const updateSecurityProtocol = async(id, data) => {
+const updateSecurityProtocol = async (id, data) => {
     return await Securityprotocol.findByIdAndUpdate(id, data, { new: true });
 }
 
@@ -71,5 +71,5 @@ module.exports = {
     findByIdSecurityProtocol,
     updateSecurityProtocol,
     deleteSecurityProtocol,
- 
+
 };

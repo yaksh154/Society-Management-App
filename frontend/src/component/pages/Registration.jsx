@@ -48,10 +48,10 @@ const Registration = () => {
 
     };
     return (
-        <div className="flex flex-col lg:flex-row min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/images/Login_bg_img.png')" }}>
+        <div className="flex flex-col lg:flex-row min-h-screen bg-cover bg-center" style={{ backgroundImage: "url(' https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770800/ho6otqwggsl3lqi7twed.png')" }}>
             <div className="hidden lg:flex flex-col w-1/2 bg-gray-100 justify-center">
                 <h1 className="text-5xl font-bold text-orange-500 ms-16">Dash<span className="text-black">Stack</span></h1>
-                <div className="flex items-center justify-center"><img src={registration} alt="Registration" className="mt-10 w-96 h-96 object-contain" /></div>
+                <div className="flex items-center justify-center"><img src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770801/akqawf0bldxgodu02y6u.png" alt="Registration" className="mt-10 w-96 h-96 object-contain" /></div>
             </div>
             <div className="flex flex-col w-full lg:w-1/2 items-center justify-center p-6">
 
