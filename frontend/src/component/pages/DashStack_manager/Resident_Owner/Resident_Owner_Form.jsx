@@ -51,7 +51,7 @@ const Resident_Owner_Form = () => {
               <Resident_Owner/>
             )}
             {activeTab === "Tenant" && (
-              <Resident_Tenant/>
+              <Resident_Tenant />
             )}
 
           </div>

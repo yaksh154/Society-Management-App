@@ -30,20 +30,23 @@ const OpenResidenceStatusModal = ({ setShowResidenceStatus }) => {
 
     const [showResidenceVacate, setshowResidenceVacate] = useState(false);
 
+    const [Occupied, setOccupied] = useState(false)
+
 const handleSave = async () => {
     try {
         if (editComplaint.Status === "Occupied") {
             navigate('/manager/resident_management/resident_owner_Form');
+            localStorage.setItem("UnitStatus", editComplaint.Status)
+            setOccupied(true)
             setShowResidenceStatus(false);
         }else if (editComplaint.Status === "Vacate") {
-            setshowResidenceVacate(true); // Trigger state change
+            setshowResidenceVacate(true);
         }
     } catch (error) {
         console.error('Error saving complaint:', error);
     }
 };
 
-// Effect to track changes to showResidenceVacate
 useEffect(() => {
     if (showResidenceVacate) {
         opnenew();
@@ -51,7 +54,6 @@ useEffect(() => {
 }, [showResidenceVacate]);
 
 const opnenew = () => {
-    // Additional logic for opening ResidenceVacate
     console.log("Opening ResidenceVacate...");
 };
 
