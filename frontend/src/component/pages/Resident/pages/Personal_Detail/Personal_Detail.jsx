@@ -110,16 +110,16 @@ const Personal_Detail = () => {
             <div>
               {/* Profile Section */}
               <div className="bg-white p-6 shadow rounded-md">
-                <div className="flex flex-wrap gap-6 items-center justify-between">
+                <div className="flex flex-wrap gap-6 items-center justify-between max-[425px]:flex-col">
                   {/* Left Section: Profile Picture and Info */}
-                  <div className="flex flex-wrap items-center gap-6">
+                  <div className="flex flex-wrap items-center gap-6 max-[425px]:flex-col">
                     <img
                       src="../../../../../../public/images/Profile.png"
                       alt="Profile"
                       className="rounded-full w-24 h-24 md:w-36 md:h-36 border border-gray-300"
                     />
                     <div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-gray-700">
+                      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-gray-700">
                         {[
                           ["Full Name", `${FormData.Fullname || ''}`],
                           ["Phone Number", `${FormData.Phone || ''}`],
@@ -140,15 +140,15 @@ const Personal_Detail = () => {
                   </div>
 
                   {/* Right Section: Documents */}
-                  <div className="space-y-3 flex-1 max-w-sm">
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 border rounded-md">
+                  <div className="space-y-3 flex-1 max-w-sm ">
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 border rounded-md max-[425px]:w-[14px]">
                       <FaFileAlt className="text-blue-500" />
                       <div>
                         <p>Front Side</p>
                         <p className="text-xs text-gray-500">img size</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 border rounded-md">
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 border rounded-md max-[425px]:w-[14px]">
                       <FaFileAlt className="text-blue-500" />
                       <div>
                         <p>Back Side</p>
@@ -161,7 +161,7 @@ const Personal_Detail = () => {
 
               <div className="bg-white p-4 rounded-lg mt-5">
                 <p className='mb-3 font-semibold text-lg'>Member : ({FormData?.members?.length ?? 0})</p>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
                   {FormData.members?.map((e, index) => (
                     <div className="bg-white shadow-md rounded-md relative" key={index}>
                       <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-[#5678e9]">
@@ -196,7 +196,7 @@ const Personal_Detail = () => {
 
               <div className="bg-white p-4 rounded-lg mt-5">
               <p className='mb-3 font-semibold text-lg'>Vehicle : ({FormData?.vehicles?.length ?? 0})</p>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
                   {FormData.vehicles?.map((e, index) => (
                     <div className="bg-white shadow-md rounded-md relative" key={index}>
                       <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-[#5678e9]">
