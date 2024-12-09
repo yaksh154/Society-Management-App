@@ -3,13 +3,14 @@ const razorpay = require('razorpay');
 const path = require('path');
 
 // Read configuration from a separate file
-const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+const config = JSON.parse(fs.path('../config/config.js', 'utf8'));
 
 // Initialize Razorpay with configuration
 const razorpayInstance = new razorpay({
   key_id: config.razorpay_key_id,
   key_secret: config.razorpay_key_secret,
 });
+  console.log("🚀 ~ key_id: ",  config.razorpay_key_id, config.razorpay_key_secret,)
 
 // Function to create a new dynamic order
 const payment = async (amount, currency = 'INR', receipt, paymentCapture = 1, notes = {}) => {

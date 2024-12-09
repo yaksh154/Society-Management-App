@@ -14,6 +14,7 @@ const requestroute = require("./request.route")
 const securityroute = require("./security.route")
 const EmergencyManagementroute = require("./EmergencyManagement.route")
 const OtherIncomeroute = require("./OtherIncome.route")
+// const paymentroute = require("./payment.route")
 
 routes.use("/manager",managerroute)
 routes.use("/society",societyroute)
@@ -29,5 +30,6 @@ routes.use("/request",requestroute)
 routes.use("/security",securityroute)
 routes.use("/alert",EmergencyManagementroute)
 routes.use("/otherincome",OtherIncomeroute)
+// routes.use("/payment",paymentroute)
 
 module.exports = routes;
