@@ -47,8 +47,7 @@ const Expense = () => {
         setloadingExpenses(false)
       } else {
         setError('Failed to load data or data is invalid.');
-      }
-      ;
+      };
     });
   };
 

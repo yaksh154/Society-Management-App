@@ -19,9 +19,6 @@ export const ManagerLogin = async (
         Email: data.Email,
         Password: data.Password,
       });
-
-      console.log(resData);
-      
   
       if (resData?.token) {
         const { role } = jwtDecode(resData.token);
@@ -299,37 +296,34 @@ export const GetResident = (setSumdata) => {
 
 // Resident Management page Post
 
-export const PostSumdata = async (data) => {
-    const formData = new FormData();
+export const PostSumdata = async (formData) => {
+    // const formData = new FormData();
+    // formData.append('residentphoto', data.image);
+    // formData.append('Fullname', data.formValues.fullName);
+    // formData.append('Phone', data.formValues.phoneNumber);
+    // formData.append('Email', data.formValues.email);
+    // formData.append('Age', data.formValues.age);
+    // formData.append('Gender', data.formValues.gender);
+    // formData.append('Wing', data.formValues.wing);
+    // formData.append('Unit', data.formValues.unit);
+    // formData.append('Relation', data.formValues.relation);
+    // formData.append('AadharCard_FrontSide', data.files.frontAadhar);
+    // formData.append('AadharCard_BackSide', data.files.backAadhar);
+    // formData.append('VeraBill_OR_LightBill', data.files.addressProof);
+    // formData.append('Rent_Agreement', data.files.rentAgreement);
+    // formData.append('Member_Counting', data.members.length);
+    // formData.append('Vehicle_Counting', data.vehicles.length);
 
-    // Append image and form values
-    formData.append('residentphoto', data.image);
-    formData.append('Fullname', data.formValues.fullName);
-    formData.append('Phone', data.formValues.phoneNumber);
-    formData.append('Email', data.formValues.email);
-    formData.append('Age', data.formValues.age);
-    formData.append('Gender', data.formValues.gender);
-    formData.append('Wing', data.formValues.wing);
-    formData.append('Unit', data.formValues.unit);
-    formData.append('Relation', data.formValues.relation);
-    formData.append('AadharCard_FrontSide', data.files.frontAadhar);
-    formData.append('AadharCard_BackSide', data.files.backAadhar);
-    formData.append('VeraBill_OR_LightBill', data.files.addressProof);
-    formData.append('Rent_Agreement', data.files.rentAgreement);
-    formData.append('Member_Counting', data.members.length);
-    formData.append('Vehicle_Counting', data.vehicles.length);
-
-    // Debugging: Log form data
-    for (let [key, value] of formData.entries()) {
-        console.log(key, value);
-    }
+    // for (let [key, value] of formData.entries()) {
+    //     console.log(key, value);
+    // }
 
     try {
-        // POST the form data
         const response = await axios.post(`${url}/resident/create`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
         });
         console.log('Response:', response.data);
+      localStorage.removeItem("UnitStatus");
     } catch (error) {
         console.error('Error:', error.response ? error.response.data : error.message);
     }
@@ -453,7 +447,7 @@ export const EditRequest = async (_id, editComplaint, closeEditComplint, setload
 
 export const Get_Security_Protocols = (setSecurity, setloding) => {
     axios.get(`${url}/security/getallprotocols`).then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         setSecurity(res.data)
         setloding(false)
     })
@@ -552,7 +546,10 @@ export const GetAnnouncement = (setgetAnnouncement, setLoding) => {
     axios.get(`${url}/announcement/getAllAnnouncements`).then((res) => {
         setgetAnnouncement(res.data)
         setLoding(false)
-    })
+    }).catch((err) => {
+        console.error('Error fetching important numbers:', err);
+        setLoding(false)
+    });
 }
 
 // Post Announcement

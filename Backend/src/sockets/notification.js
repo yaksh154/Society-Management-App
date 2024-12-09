@@ -21,6 +21,7 @@ const unregisterUser = (socketId) => {
 
 // Send a notification to a specific user or to all users in a society
 const sendNotification = async (io, type, recipientId, societyId, message) => {
+console.log("🚀 ~ sendNotification ~ io, type, recipientId, societyId, message:", io, type, recipientId, societyId, message)
 
     // Save the notification in the database
     try {
@@ -29,6 +30,7 @@ const sendNotification = async (io, type, recipientId, societyId, message) => {
             recipientId,
             message,
         });
+        console.log("🚀 ~ sendNotification ~ notification:", notification)
         console.log(`Notification saved to database: ${notification._id}`);
     } catch (error) {
         console.error("Failed to save notification to database:", error);

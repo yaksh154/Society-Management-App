@@ -20,6 +20,7 @@ const register = async (req, res) => {
         const body = {
             photo: photo.secure_url,
             Full_Name: registersecurity.Full_Name,
+            Email: registersecurity.email,
             phone_Number: registersecurity.phone_Number,
             Gender: registersecurity.Gender,
             Shift: registersecurity.Shift,
@@ -49,12 +50,12 @@ const update = async (req, res) => {
         const body = {}
         if (req.body) {
             body.Full_Name = updatesecurity.Full_Name,
+            body.Email = updatesecurity.email,
             body.phone_Number = updatesecurity.phone_Number,
             body.Gender = updatesecurity.Gender,
             body.Shift = updatesecurity.Shift,
             body.Shift_Data = updatesecurity.Shift_Data,
             body.Shift_Time = updatesecurity.Shift_Time
-            
         }
         if (req.files) {
             if (req.files.photo) {

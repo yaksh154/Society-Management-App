@@ -1,4 +1,6 @@
 const complaintService = require("../services/complaint.service");
+const Notification = require("../sockets/notification");
+// const notificationInstance = new Notification();
 
 const createComplaint = async (req, res) => {
     try {
@@ -18,6 +20,20 @@ const createComplaint = async (req, res) => {
             createdBy: req.user._id,
             Society: req.user.societyid,
         };
+
+        await Notification.sendNotification(
+            req.app.get("socketio"), // Get the Socket.IO instance from the app
+            "Complaint",
+            req.user._id, // Send the notification to the user who created the complaint
+            `You have a new complaint: ${body.Complaint_Name}`
+        )
+        console.log("🚀 ~ createComplaint ~  ",  await Notification.sendNotification(
+            req.app.get("socketio"), // Get the Socket.IO instance from the app
+            "Complaint",
+            req.user._id, // Send the notification to the user who created the complaint
+            `You have a new complaint: ${body.Complaint_Name}`
+        ))
+        console.log("🚀 ~ createComplaint ~ ", req.app)
         const complaint = await complaintService.create(body);
         return res.status(201).json(complaint);
     } catch (error) {
