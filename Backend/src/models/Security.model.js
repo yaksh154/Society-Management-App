@@ -46,7 +46,7 @@ const securitySchema = new mongoose.Schema(
         },
         Role: {
             type: String,
-            default: "security",
+            default: "Security",
             require: true
         },
         createdBy: {
