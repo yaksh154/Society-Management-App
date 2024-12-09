@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import forgot_password_img from '../../../public/images/forgot_password_img.png';
 import { ManagerForgot_password } from '../services/Api/api';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import registration from '../../../public/images/registration.png';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import CreateSociety from '../Modals/CreateSociety'
