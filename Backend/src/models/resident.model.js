@@ -4,57 +4,57 @@ const residentSchema = new mongoose.Schema(
   {
     Fullname: {
       type: String,
-      require: true
+      // require: true
     },
     Phone: {
       type: String,
-      require: true
+      // require: true
     },
     Email: {
       type: String,
       match: [/^\S+@\S+\.\S+$/],
-      require: true
+      // require: true
     },
     residentphoto: {
       type: String,
-      require: true
+      // require: true
     },
     Age: {
       type: String,
-      require: true
+      // require: true
     },
     Gender: {
       type: String,
       enum: ["Male", "Female", "Other"],
-      require: true
+      // require: true
     },
     Wing: {
       type: String,
-      require: true
+      // require: true
     },
     Unit: {
       type: String,
-      require: true
+      // require: true
     },
     Relation: {
       type: String,
-      require: true
+      // require: true
     },
     AadharCard_FrontSide: {
       type: String,
-      require: true
+      // require: true
     },
     AadharCard_BackSide: {
       type: String,
-      require: true
+      // require: true
     },
     VeraBill_OR_LightBill: {
       type: String,
-      require: true
+      // require: true
     },
     Rent_Agreement: {
       type: String,
-      require: true
+      // require: true
     },
     UnitStatus: {
       type: String,

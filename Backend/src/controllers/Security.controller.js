@@ -1,5 +1,6 @@
 const securityService = require("../services/security.service");
 const { uploadFile } = require("../middleware/upload")
+const { send_maile } = require("../services/email.service")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -9,6 +10,8 @@ const register = async (req, res) => {
         const registersecurity = req.body;
         console.log("🚀 ~ register ~ registersecurity:", registersecurity)
 
+        const pass = Math.floor(1000 + Math.random() * 9000);
+        const bcrpass = await bcrypt.hash(pass.toString(), 10);
         console.log("🚀 ~ register ~ req.files:", req.files)
         const photopath = req.files.photo[0].path;
         const aadharcardpath = req.files.Aadhar_Card[0].path;
@@ -27,6 +30,7 @@ const register = async (req, res) => {
             Shift_Data: registersecurity.Shift_Data,
             Shift_Time: registersecurity.Shift_Time,
             Aadhar_Card: Aadhar_Card.secure_url,
+            password: bcrpass,
             createdBy: req.user._id,
             Society: req.user.societyid
         }
@@ -34,6 +38,7 @@ const register = async (req, res) => {
         console.log("🚀 ~ register ~ Aadhar_Card.secure_url,:", Aadhar_Card.secure_url,)
         console.log("🚀 ~ register ~ body:", body)
         const security = await securityService.register(body);
+        await send_maile(security.Email, pass, security.Full_Name)
         console.log("🚀 ~ register ~ security:", security)
         res.status(201).json({ message: "Security personnel registered", data: security });
     } catch (error) {
