@@ -137,6 +137,7 @@ const Registration = () => {
                                     {...register("City", { required: true })}
                                     className="w-full p-1 text-sm border border-gray-300 rounded"
                                     placeholder="Enter City"
+                                    autoComplete="address-level2"
                                 />
                                 {errors.City && <p className="text-red-600 text-xs">City is required.</p>}
                             </div>
@@ -164,7 +165,7 @@ const Registration = () => {
                             </button>
 
                             {showModal && (
-                                <CreateSociety CloseCreatenewSociety={CloseCreatenewSociety} />
+                                <CreateSociety LodData={Fdata} CloseCreatenewSociety={CloseCreatenewSociety} />
                             )}
                         </div>
 

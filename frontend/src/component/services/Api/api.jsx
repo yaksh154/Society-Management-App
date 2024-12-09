@@ -129,11 +129,11 @@ export const ManagerResetPassword = (data, setLoginError, setLoading, reset, nav
 
 // Create User Registration
 
-export const UserDataRegistration = (registrationData, setRegistrationError, reset) => {
+export const UserDataRegistration = (registrationData, setRegistrationError, reset,navigate) => {
 
     axios.post(`${url}/manager/createmanager`, registrationData).then((res) => {
         if (res.data) {
-            console.log(res.data);
+            navigate('/')
             reset()
         } else {
             setRegistrationError('Incorrect email/phone or password');
@@ -155,7 +155,7 @@ export const GetCreateSocirty = (setSocieties) => {
 
 // Post Socirty
 
-export const UserCreateSociety = (newSociety, CloseCreatenewSociety) => {
+export const UserCreateSociety = (newSociety, CloseCreatenewSociety,LodData) => {
     axios.post(`${url}/society/createsocieties`, {
         societyname: newSociety.societyname,
         societyaddress: newSociety.societyaddress,
@@ -166,11 +166,10 @@ export const UserCreateSociety = (newSociety, CloseCreatenewSociety) => {
     })
         .then((res) => {
             if (res.data) {
-                console.log(res.data);
+                LodData()
                 CloseCreatenewSociety()
             } else {
                 console.log("Incorrect create society");
-
             }
         })
         .catch((error) => {
