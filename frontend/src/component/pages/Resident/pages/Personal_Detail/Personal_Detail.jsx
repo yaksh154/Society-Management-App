@@ -4,7 +4,7 @@ import Header from '../../layout/Header'
 import { FaFileAlt } from "react-icons/fa";
 import Tenant from './Tenant';
 import useSidbarTogal from '../../../../layout/useSidbarTogal';
-import { Get_Profile_img } from '../../Api/api';
+import { AnnouncementGet, Get_Profile_img } from '../../Api/api';
 
 
 const Personal_Detail = () => {
@@ -16,67 +16,10 @@ const Personal_Detail = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  useSidbarTogal({setdata, setget, isOpen})
+  useSidbarTogal({ setdata, setget, isOpen })
 
   const [activeTab, setActiveTab] = useState("Owner");
 
-  const [members] = useState([
-    {
-      name: 'Arlene McCoy',
-      email: 'Arlenemccoy@gmail.com',
-      phone: '+91 99130 52221',
-      age: 22,
-      gender: 'Male',
-      relation: 'Brother',
-    },
-    {
-      name: 'Arlene McCoy',
-      email: 'BrooklynSimmons@gmail.com',
-      phone: '+91 99233 66134',
-      age: 22,
-      gender: 'Male',
-      relation: 'Uncle',
-    },
-    {
-      name: 'Arlene McCoy',
-      email: 'JennyWilson@gmail.com',
-      phone: '+91 99130 52221',
-      age: 22,
-      gender: 'Male',
-      relation: 'Sister',
-    },
-    {
-      name: 'Arlene McCoy',
-      email: 'JaneCooper@gmail.com',
-      phone: '+91 99130 52221',
-      age: 22,
-      gender: 'Male',
-      relation: 'Mother',
-    },
-  ]);
-
-  const [vehicles] = useState([
-    {
-      type: 'Two Wheelers',
-      VehicleName: 'Splendor',
-      VehicleNumber: 'GJ-5216',
-    },
-    {
-      type: 'Four Wheelers',
-      VehicleName: 'Fortuner',
-      VehicleNumber: 'GJ-5216',
-    },
-    {
-      type: 'Two Wheelers',
-      VehicleName: 'Splendor',
-      VehicleNumber: 'GJ-5216',
-    },
-    {
-      type: 'Two Wheelers',
-      VehicleName: 'Splendor',
-      VehicleNumber: 'GJ-5216',
-    },
-  ]);
   const Pending = [
     {
       billDate: "11/01/2024",
@@ -111,29 +54,28 @@ const Personal_Detail = () => {
       dueAmount: 250,
     }
   ];
-  const Announcement = [
-    {
-      Date: "11/01/2024",
-      Time: "8:15 PM",
-      name: "Annual Maintenance",
-      Description: "All vehicles should be checked and serviced annually.",
-    }, {
-      Date: "11/01/2024",
-      Time: "9:55 AM",
-      name: "Annual Maintenance",
-      Description: "All vehicles should be checked and serviced annually.",
-    }
-  ]
 
-  const [FormData, setFormData] = useState([])
+  const [FormData, setFormData] = useState({ members: [], vehicles: [] })
 
   useEffect(() => {
     Fdata();
   }, []);
 
   const Fdata = () => {
-    Get_Profile_img(setFormData);
+    Get_Profile_img((data) => {
+      setFormData(data || { members: [], vehicles: [] });
+    });
   };
+  const [Announcement, setAnnouncement] = useState()
+
+  useEffect(() => {
+    AnnGET();
+  }, []);
+
+  const AnnGET = () => {
+    AnnouncementGet(setAnnouncement);
+  };
+
 
   return (
     <div className='bg-[#f0f5fb] h-screen'>
@@ -199,77 +141,82 @@ const Personal_Detail = () => {
 
                   {/* Right Section: Documents */}
                   <div className="space-y-3 flex-1 max-w-sm">
-                    {[
-                      ["Syncfusion Essential Adharcard Front Side.JPG", "3.5 MB"],
-                      ["Address Proof Front Side.PDF", "3.5 MB"],
-                    ].map(([fileName, size], index) => (
-                      <div
-                        key={index}
-                        className="flex items-center gap-3 p-3 bg-gray-50 border rounded-md"
-                      >
-                        <FaFileAlt className="text-blue-500" />
-                        <div>
-                          <p>{fileName}</p>
-                          <p className="text-xs text-gray-500">{size}</p>
-                        </div>
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 border rounded-md">
+                      <FaFileAlt className="text-blue-500" />
+                      <div>
+                        <p>Front Side</p>
+                        <p className="text-xs text-gray-500">img size</p>
                       </div>
-                    ))}
+                    </div>
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 border rounded-md">
+                      <FaFileAlt className="text-blue-500" />
+                      <div>
+                        <p>Back Side</p>
+                        <p className="text-xs text-gray-500">img size</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Sections: Members, Vehicles, etc. */}
-              {[{ title: "Member", items: members }, { title: "Vehicle", items: vehicles }].map(({ title, items }, sectionIndex) => (
-                <div key={sectionIndex} className="bg-white p-6 shadow rounded-md mt-8">
-                  <h2 className="text-lg font-semibold mb-4">
-                    {title}: ({items.length})
-                  </h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {items.map((item, index) => (
-                      <div key={index} className="bg-white shadow-md rounded-md">
-                        <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-[#5678e9]">
-                          <h2 className="text-lg font-semibold text-white">
-                            {item.name || item.type}
-                          </h2>
+              <div className="bg-white p-4 rounded-lg mt-5">
+                <p className='mb-3 font-semibold text-lg'>Member : ({FormData?.members?.length ?? 0})</p>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                  {FormData.members?.map((e, index) => (
+                    <div className="bg-white shadow-md rounded-md relative" key={index}>
+                      <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-[#5678e9]">
+                        <h2 className="text-lg font-semibold text-white">{e.fullName}</h2>
+                      </div>
+                      <div className="flex flex-col gap-2 mb-4 p-2">
+                        <div className="text-sm text-gray-500 flex justify-between">
+                          Email
+                          <span className="ml-2 text-base font-semibold text-gray-700">{e.email}</span>
                         </div>
-                        <div className="p-2">
-                          {Object.entries(item).map(
-                            ([key, value]) =>
-                              key !== "name" && key !== "type" && (
-                                <p key={key} className="text-sm text-gray-600 mb-1">
-                                  <strong>{key}:</strong> {value}
-                                </p>
-
-                              )
-                          )}
+                        <div className="text-gray-500 flex justify-between">
+                          Phone Number
+                          <span className="text-black">{e.phone}</span>
+                        </div>
+                        <div className="text-gray-500 flex justify-between">
+                          Age
+                          <span className="text-black">{e.age}</span>
+                        </div>
+                        <div className="text-gray-500 flex justify-between">
+                          Gender
+                          <span className="text-black">{e.gender}</span>
+                        </div>
+                        <div className="text-gray-500 flex justify-between">
+                          Relation
+                          <span className="text-black">{e.Relation}</span>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-
-              {/* Maintenance Details */}
-              <div className="flex flex-wrap lg:flex-nowrap items-center justify-between p-4 mb-4 bg-white rounded-lg space-y-4 lg:space-y-0 mt-6">
-                <h2 className="text-2xl font-semibold flex-grow lg:flex-grow-0">Show Maintenance Details</h2>
-                <div className="flex flex-wrap lg:flex-nowrap gap-4">
-                  {[
-                    ["Maintenance Amount", "₹ 1500", "border-green-500", "text-green-500", "bg-green-50", "mix-blend-multiply"],
-                    ["Penalty Amount", "₹ 500", "border-red-500", "text-red-500", "bg-red-50", "mix-blend-multiply"],
-                  ].map(([label, value, borderClass, textClass, bgClass]) => (
-                    <div
-                      key={label}
-                      className={`p-4 rounded-lg shadow-lg border-r-4  border-2-4 ${borderClass} w-full lg:w-60 flex-shrink-0 relative ${bgClass}`}
-                    >
-                      <div
-                        className={`h-10 w-2 absolute top-1/2 left-0 border-r-4 transform  -translate-y-1/2  bg-opacity-50 rounded-full`}
-                      ></div>
-                      <h3 className="text-gray-600 font-medium">{label}</h3>
-                      <p className={`font-bold text-2xl ${textClass}`}>{value}</p>
                     </div>
                   ))}
                 </div>
               </div>
+
+              <div className="bg-white p-4 rounded-lg mt-5">
+              <p className='mb-3 font-semibold text-lg'>Vehicle : ({FormData?.vehicles?.length ?? 0})</p>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                  {FormData.vehicles?.map((e, index) => (
+                    <div className="bg-white shadow-md rounded-md relative" key={index}>
+                      <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-[#5678e9]">
+                        <h2 className="text-lg font-semibold text-white">{e.type}</h2>
+                      </div>
+                      <div className="flex flex-col gap-2 mb-4 p-2">
+                        <div className="text-sm text-gray-500 flex justify-between">
+                          Vehicle Name
+                          <span className="ml-2 text-base font-semibold text-gray-700">{e.name}</span>
+                        </div>
+                        <div className="text-gray-500 flex justify-between">
+                          Vehicle Number
+                          <span className="text-black">{e.number}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* Pending and Due Maintenance */}
               {[{ title: "Pending Maintenance", data: Pending }, { title: "Due Maintenance", data: duePending }].map(({ title, data }, index) => (
                 <div key={index} className="bg-white p-4 rounded-lg mt-5">
@@ -305,30 +252,37 @@ const Personal_Detail = () => {
               <div className="bg-white p-6 shadow rounded-md mt-5">
                 <h2 className="text-xl md:text-2xl font-semibold mb-4">Announcements</h2>
                 <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                  {Announcement.map((Annou, index) => (
-                    <div
-                      key={index}
-                      className="bg-white shadow-md rounded-md relative border border-gray-200"
-                    >
+                  {Announcement?.map((e, index) => (
+                    <div key={index} className="bg-white shadow-md rounded-md relative border border-gray-200">
                       {/* Header Section */}
                       <div className="flex justify-between items-center rounded-t-lg p-2 bg-[#5678e9]">
-                        <h2 className="text-lg font-semibold text-white">{Annou.name}</h2>
+                        <h2 className="text-lg font-semibold text-white">{e.title}</h2>
                       </div>
 
                       {/* Content Section */}
                       <div className="p-4">
-                        <p className="text-sm text-gray-600 mb-2">
-                          <strong>Date:</strong> {Annou.Date}
+                        <p className="text-sm text-gray-600 mb-2 flex justify-between">
+                          <strong>Announcement Date</strong>
+                          <p className='text-black text-sm font-medium'>
+                            {new Date(e.date).toLocaleDateString("en-US", {
+                              month: "2-digit",
+                              day: "2-digit",
+                              year: "numeric",
+                            })}</p>
+
                         </p>
-                        <p className="text-sm text-gray-600 mb-2">
-                          <strong>Time:</strong> {Annou.Time}
+                        <p className="text-sm text-gray-600 mb-2 flex justify-between">
+                          <strong>Announcement Time</strong>
+                          <p className='text-black text-sm font-medium'>{e.time}</p>
                         </p>
                         <p className="text-sm text-gray-600">
-                          <strong>Description:</strong> <span>{Annou.Description}</span>
+                          <strong>Description</strong>
+                          <p className='text-black font-medium text-sm'>{e.description}</p>
                         </p>
                       </div>
                     </div>
-                  ))}
+                  )) || <p>No announcements available.</p>}
+
                 </div>
               </div>
 

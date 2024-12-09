@@ -40,6 +40,7 @@ const handleSave = async () => {
             setOccupied(true)
             setShowResidenceStatus(false);
         }else if (editComplaint.Status === "Vacate") {
+            localStorage.setItem("UnitStatus", editComplaint.Status)
             setshowResidenceVacate(true);
         }
     } catch (error) {

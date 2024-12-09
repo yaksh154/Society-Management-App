@@ -61,8 +61,6 @@ const Home = () => {
   // edit numbers pop_up
 
   const OpneeditModal = (_id) => {
-    console.log(_id);
-
     seteditModal(true)
     setImportant_id(_id)
   }

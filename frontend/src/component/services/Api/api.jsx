@@ -12,42 +12,42 @@ export const ManagerLogin = async (
     storetokenInLs,
     setLoading,
     reset
-  ) => {
+) => {
     try {
-      setLoading(true);
-      const { data: resData } = await axios.post(`${url}/manager/login`, {
-        Email: data.Email,
-        Password: data.Password,
-      });
-  
-      if (resData?.token) {
-        const { role } = jwtDecode(resData.token);
-        const paths = {
-          Manager: "/manager/home",
-          Resident: "/resident/home",
-          Security: "/security/visitor",
-        };
-  
-        if (paths[role]) {
-          storetokenInLs(resData.token);
-          reset();
-          navigate(paths[role]);
+        setLoading(true);
+        const { data: resData } = await axios.post(`${url}/manager/login`, {
+            Email: data.Email,
+            Password: data.Password,
+        });
+
+        if (resData?.token) {
+            const { role } = jwtDecode(resData.token);
+            const paths = {
+                Manager: "/manager/home",
+                Resident: "/resident/home",
+                Security: "/security/visitor",
+            };
+
+            if (paths[role]) {
+                storetokenInLs(resData.token);
+                reset();
+                navigate(paths[role]);
+            } else {
+                throw new Error("Unauthorized role.");
+            }
         } else {
-          throw new Error("Unauthorized role.");
+            throw new Error("Invalid credentials.");
         }
-      } else {
-        throw new Error("Invalid credentials.");
-      }
     } catch (error) {
-      setLoginError(
-        error.response?.status === 401
-          ? "Invalid email or password."
-          : error.message || "Login failed."
-      );
+        setLoginError(
+            error.response?.status === 401
+                ? "Invalid email or password."
+                : error.message || "Login failed."
+        );
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
 
 // Forgot password Manger
 
@@ -297,33 +297,34 @@ export const GetResident = (setSumdata) => {
 // Resident Management page Post
 
 export const PostSumdata = async (formData) => {
-    // const formData = new FormData();
-    // formData.append('residentphoto', data.image);
-    // formData.append('Fullname', data.formValues.fullName);
-    // formData.append('Phone', data.formValues.phoneNumber);
-    // formData.append('Email', data.formValues.email);
-    // formData.append('Age', data.formValues.age);
-    // formData.append('Gender', data.formValues.gender);
-    // formData.append('Wing', data.formValues.wing);
-    // formData.append('Unit', data.formValues.unit);
-    // formData.append('Relation', data.formValues.relation);
-    // formData.append('AadharCard_FrontSide', data.files.frontAadhar);
-    // formData.append('AadharCard_BackSide', data.files.backAadhar);
-    // formData.append('VeraBill_OR_LightBill', data.files.addressProof);
-    // formData.append('Rent_Agreement', data.files.rentAgreement);
-    // formData.append('Member_Counting', data.members.length);
-    // formData.append('Vehicle_Counting', data.vehicles.length);
+    const data = new FormData();
 
-    // for (let [key, value] of formData.entries()) {
-    //     console.log(key, value);
-    // }
+    // Append all text fields and other simple fields
+    Object.entries(formData).forEach(([key, value]) => {
+        if (key === 'members' || key === 'vehicles') {
+            // Stringify arrays
+            data.append(key, JSON.stringify(value));
+        } else if (key === 'photo' || key === 'aadhaarFront' || key === 'aadhaarBack' || key === 'addressProof' || key === 'rentAgreement') {
+            // Append files if they exist
+            if (value) {
+                data.append(key, value);
+            }
+        } else {
+            // Append other values directly
+            data.append(key, value);
+        }
+    });
 
     try {
-        const response = await axios.post(`${url}/resident/create`, formData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-        });
+        const response = await axios.post(
+            `https://society-management-app-server.onrender.com/resident/create`,
+            data,
+            {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            }
+        );
         console.log('Response:', response.data);
-      localStorage.removeItem("UnitStatus");
+        localStorage.removeItem('UnitStatus');
     } catch (error) {
         console.error('Error:', error.response ? error.response.data : error.message);
     }
@@ -481,7 +482,6 @@ export const Delete_Security_Protocols = (_id, setdeleteloding, CloseDeleteProto
 export const Edit_Delete_Security_Protocols = (_id, data, setloding, CloseEditProtocols) => {
     setloding(true)
     axios.put(`${url}/security/updateprotocol/${_id}`, data).then((res) => {
-        console.log(res.data);
         setloding(false)
         CloseEditProtocols()
     })
@@ -567,9 +567,7 @@ export const PostAnnouncement = (data, Fdata, ClaseAddAnnouncement, setloading) 
 
 export const DeleteAnnouncementDele = (_id, Fdata, ClaseDeleteAnnouncement, setloadingDelete) => {
     setloadingDelete(true)
-    console.log(_id);
     axios.delete(`${url}/announcement/deleteAnnouncement/${_id}`).then((res) => {
-        console.log(res);
         Fdata()
         ClaseDeleteAnnouncement(false)
         setloadingDelete(false)
@@ -582,10 +580,8 @@ export const DeleteAnnouncementDele = (_id, Fdata, ClaseDeleteAnnouncement, setl
 // Edit Announcement
 
 export const EditAnnouncement = (_id, formData, ClaseEditAnnouncement, setloading, LodaData) => {
-    console.log(_id);
     setloading(true)
     axios.put(`${url}/announcement/updateAnnouncement/${_id}`, formData).then((res) => {
-        console.log(res);
         ClaseEditAnnouncement()
         setloading(false)
         LodaData()
@@ -635,7 +631,6 @@ export const Facility_Management_Delete = (DeleteData, DeleteClose, setloading, 
 export const Facility_Management_Edit = (_id, data, setloading, seteditcreate_facility, lodData) => {
     setloading(true)
     axios.put(`${url}/facility/updateFacility/${_id}`, data).then((res) => {
-        console.log(res.data);
         lodData()
         seteditcreate_facility(false)
         setloading(false)
@@ -649,8 +644,6 @@ export const Facility_Management_Edit = (_id, data, setloading, seteditcreate_fa
 export const GetMaintenance = (setudata) => {
     axios.get(`${url}/maintenance/getAllaintenances`).then((res) => {
         setudata(res.data)
-        // console.log(req.data);
-        // console.log(res.data)
     })
 }
 
@@ -658,18 +651,11 @@ export const GetMaintenance = (setudata) => {
 export const PostIncome = (data, Fdata, setShowAddDetail) => {
     axios.post(`${url}/maintenance/createMaintenance`, data).then((res) => {
         Fdata()
-        console.log(res.data);
         setShowAddDetail(false)
     })
 }
 
 //Other Income
-
-// /createOtherincome
-// /getAllOtherincome
-// /getOtherincome/:id
-// /updateOtherincome/:id
-// /deleteOtherincome/:id
 
 export const GetOtherIncome = (setCreateIncome) => {
     axios.get(`${url}/otherincome/getAllOtherincome`).then((res) => {
@@ -688,33 +674,32 @@ export const PostOtherIncome = (data, Fdata, setCreateIncome) => {
 
 export const UpdateOtherIncome = async (id, data) => {
     try {
-      const response = await axios.put(`${url}/otherincome/updateOtherincome/${id}`, data);
-      return response.data; // Ensure backend returns `{ success: true, data: updatedData }`
+        const response = await axios.put(`${url}/otherincome/updateOtherincome/${id}`, data);
+        return response.data; // Ensure backend returns `{ success: true, data: updatedData }`
     } catch (error) {
-      console.error('Error in UpdateOtherIncome API:', error);
-      throw error;
+        console.error('Error in UpdateOtherIncome API:', error);
+        throw error;
     }
-  };
-  export const DeleteOtherIncome = (DeleteId,incomeData, setIncomeData,closeDeleteBox) => {
+};
+export const DeleteOtherIncome = (DeleteId, incomeData, setIncomeData, closeDeleteBox) => {
     const _id = DeleteId
     axios
-      .delete(`${url}/OtherIncome/deleteOtherincome/${_id}`)
-      .then((res) => {
-        console.log(res);
-        const Deletedata = incomeData.filter((e) => e._id !== _id)
-        setIncomeData(Deletedata)
-        closeDeleteBox()
-      })
-      .catch((err) => {
-        console.error("Error deleting income:", err);
-        closeDeleteBox()
-      });
-  };
+        .delete(`${url}/OtherIncome/deleteOtherincome/${_id}`)
+        .then((res) => {
+            console.log(res);
+            const Deletedata = incomeData.filter((e) => e._id !== _id)
+            setIncomeData(Deletedata)
+            closeDeleteBox()
+        })
+        .catch((err) => {
+            console.error("Error deleting income:", err);
+            closeDeleteBox()
+        });
+};
 ///Expanse
 
 export const GetExpanse = (setAddExpense) => {
     axios.get(`${url}/expenses/getAllexpensess`).then((res) => {
-        // console.log(res.data);
         setAddExpense(res.data)
     })
 }

@@ -23,6 +23,12 @@ export const Get_Profile_img = (setFormData) =>{
     setFormData(res.data)
   })
 }
+export const AnnouncementGet = (setAnnouncement) =>{
+  axios.get(`${url}/announcement/getAllAnnouncements`).then((res) => {
+    console.log(res.data)
+    setAnnouncement(res.data)
+  })
+}
 
 // Home page 
 // Pending Maintenances

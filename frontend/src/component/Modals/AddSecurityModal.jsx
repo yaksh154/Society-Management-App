@@ -42,8 +42,8 @@ const AddSecurityModal = ({ CloseAddSecurity, Fdata }) => {
     };
 
     return (
-        <div className='fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50'>
-            <form onSubmit={handleSubmit(onSubmit)} method='post' className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4">
+        <div className='fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50 '>
+            <form onSubmit={handleSubmit(onSubmit)} method='post' className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md space-y-4 max-h-full overflow-auto">
                 <h2 className="text-xl font-semibold text-gray-800 mb-3 border-b pb-2">Add Security</h2>
 
                 {/* Photo Upload Section */}
@@ -74,6 +74,18 @@ const AddSecurityModal = ({ CloseAddSecurity, Fdata }) => {
                         placeholder="Enter Full Name"
                         className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         {...register('Full_Name', { required: 'Full name is required' })}
+                    />
+                    {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName.message}</p>}
+                </div>
+
+                {/* Email Name */}
+                <div>
+                    <label className="block text-gray-700">Email</label>
+                    <input
+                        type="email"
+                        placeholder="Enter Email"
+                        className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        {...register('email', { required: 'Full name is required' })}
                     />
                     {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName.message}</p>}
                 </div>

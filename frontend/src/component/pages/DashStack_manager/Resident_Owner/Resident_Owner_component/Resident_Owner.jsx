@@ -91,16 +91,7 @@ const Resident_Owner = () => {
 
     const handleSubmit = async () => {
         console.log('Form Submission Data:', formData);
-        // PostSumdata(formData);
-        try {
-            const response = await axios.post(`https://society-management-app-server.onrender.com/resident/create`, formData, {
-                headers: { 'Content-Type': 'multipart/form-data' },
-            });
-            console.log('Response:', response.data);
-          localStorage.removeItem("UnitStatus");
-        } catch (error) {
-            console.error('Error:', error.response ? error.response.data : error.message);
-        }
+        PostSumdata(formData);
     };
 
     return (
@@ -323,7 +314,7 @@ const Resident_Owner = () => {
             </div>
 
             <div className="mt-4 flex justify-end">
-                <Link to={"/resident_management"} className="px-4 py-2 rounded-lg border-2 bg-white mr-3">Cancel</Link>
+                <Link to={"/manager/resident_management"} className="px-4 py-2 rounded-lg border-2 bg-white mr-3">Cancel</Link>
                 <button onClick={handleSubmit} className="px-4 py-2 bg-orange-500 text-white rounded-lg">Create</button>
             </div>
         </div>

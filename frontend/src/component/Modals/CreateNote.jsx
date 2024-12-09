@@ -19,7 +19,7 @@ const CreateNote = ({ Fdata, setcreate }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
-      <div className="bg-white rounded-lg shadow-lg w-11/12 lg:w-1/4 md:w-1/2 p-6">
+      <div className="bg-white rounded-lg shadow-lg w-11/12 lg:w-1/4 md:w-1/2 p-6 overflow-auto max-h-svh">
         <h2 className="text-xl font-semibold mb-4">Create Note</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Title Field */}
