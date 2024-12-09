@@ -1,5 +1,26 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
+
+// Register Chart.js components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function TotalBalanceChart() {
   const [selectedRange, setSelectedRange] = useState('Last month');
@@ -11,7 +32,7 @@ function TotalBalanceChart() {
       datasets: [
         {
           label: 'Balance',
-          data: [5, 10, 12, 15, 20, 25, 30], // Example data for last week
+          data: [5, 10, 12, 15, 20, 25, 30],
           fill: false,
           backgroundColor: '#6B75FF',
           borderColor: '#6B75FF',
@@ -26,7 +47,7 @@ function TotalBalanceChart() {
       datasets: [
         {
           label: 'Balance',
-          data: [10, 15, 25, 20, 30, 35, 30, 40, 45, 30, 35, 50], // Example data for last month
+          data: [10, 15, 25, 20, 30, 35, 30, 40, 45, 30, 35, 50],
           fill: false,
           backgroundColor: '#6B75FF',
           borderColor: '#6B75FF',
@@ -41,7 +62,7 @@ function TotalBalanceChart() {
       datasets: [
         {
           label: 'Balance',
-          data: [100, 120, 150, 200], // Example data for last year
+          data: [100, 120, 150, 200],
           fill: false,
           backgroundColor: '#6B75FF',
           borderColor: '#6B75FF',
@@ -53,7 +74,6 @@ function TotalBalanceChart() {
     },
   };
 
-  // Set the data based on the selected range
   const data = dataByRange[selectedRange];
 
   const options = {
@@ -77,7 +97,7 @@ function TotalBalanceChart() {
         <h2 className="text-lg font-semibold text-gray-800">Total Balance</h2>
         <div className="relative">
           <select
-            className="bg-gray-100 text-gray-800 p-2 rounded-lg outline-none"
+            className="border-2 border-gray-100 text-gray-800 p-1 rounded-lg outline-none"
             onChange={(e) => setSelectedRange(e.target.value)}
             value={selectedRange}
           >
@@ -87,13 +107,8 @@ function TotalBalanceChart() {
           </select>
         </div>
       </div>
-      <div className="">
-        <Line style={{
-          boxSizing: 'border-box',
-          display: 'block',
-          height: '100%',
-          width: '100%',
-        }} data={data} options={options} />
+      <div>
+        <Line data={data} options={options} />
       </div>
     </div>
   );

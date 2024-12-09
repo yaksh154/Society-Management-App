@@ -60,7 +60,7 @@ const Financial_Management = () => {
   return (
     <div >
       <Sidebar toggleNav={toggleNav} data={data} />
-      <div id='main' className='ml-[250px] max-lg:ml-0' style={{ marginLeft: getdata }}>
+      <div id='main' className={`ml-[${getdata}px] max-[425px]:ml-0`}>
         <Header toggleNav={toggleNav} />
 
         {/* Main Content */}

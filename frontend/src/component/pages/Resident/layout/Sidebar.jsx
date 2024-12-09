@@ -35,7 +35,7 @@ export default function Sidenav({ toggleNav, data }) {
             <h1 className="text-4xl font-bold text-orange-600 mt-3 max-[425px]:mt-10 mb-5">Dash<span className="text-black">Stack</span></h1>
           </div>
 
-          <button onClick={toggleNav} className="absolute text-black top-0 right-6 text-3xl hidden max-[425px]:flex">
+          <button onClick={toggleNav} className="absolute text-black top-0 right-6 text-3xl hidden max-[426px]:flex">
             ×
           </button>
 

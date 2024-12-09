@@ -80,7 +80,7 @@ const Facility_Management = () => {
   return (
     <div>
       <Sidebar toggleNav={toggleNav} data={data} />
-      <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
+      <div id='main' className={`ml-[${getdata}px] max-[425px]:ml-0`} >
         <div className="open_he">
           <Header toggleNav={toggleNav} />
         </div>
@@ -88,7 +88,7 @@ const Facility_Management = () => {
           <div className="p-6">
             <div className="bg-white shadow-md rounded-lg p-6">
               <div className="flex justify-between items-center mb-6">
-                <h1 className='font-semibold md:text-2xl text-md'>Facility Management</h1>
+                <h1 className='font-semibold md:text-2xl text-lg'>Facility Management</h1>
                 <Button onClick={sowcreate_facility} Btn_Name='Create Facility' />
                 {create_facility && (<Create_facility_model Fdata={Fdata} setClosecreate_facility={Closecreate_facility} />)}
               </div>

@@ -43,21 +43,21 @@ const Maintenance_Invoices = () => {
     return (
         <div className="bg-[#f0f5fb]">
             <Sidebar toggleNav={toggleNav} data={data} />
-            <div id="main" className="max-[425px]:ml-0" style={{ marginLeft: getdata }}>
+            <div id="main" className={`ml-[${getdata}px] max-[426px]:ml-0`}>
                 <div className="open_he">
                     <Header toggleNav={toggleNav} />
                 </div>
                 <div className="p-6">
                     <div className="bg-white shadow-md rounded-lg p-6 mb-6">
                         <div className="flex justify-between items-center max-[768px]:flex-col max-[768px]:items-start">
-                            <h1 className="font-semibold md:text-2xl text-md">Due Event Payment</h1>
-                            <div className="flex max-[768px]:flex-col">
+                            <h1 className="font-semibold md:text-2xl text-xl">Due Event Payment</h1>
+                            <div className="flex max-[768px]:flex-col max-[768px]:w-full">
                                 <ShowMaintenanceDetails
                                     total_title="Maintenance Amount"
                                     total_price="2,22,520"
                                     totle_color="text-white"
                                     totle_Noch="bg-[#9ccb9e]"
-                                    Addclass='mr-4 max-[768px]:mb-4'
+                                    Addclass='max-[768px]:my-4'
                                     textclass='text-semibold text-[#39973d]'
                                 />
                                 <ShowMaintenanceDetails
@@ -72,7 +72,7 @@ const Maintenance_Invoices = () => {
                     </div>
                     <div className="bg-white shadow-md rounded-lg p-6">
                         <div className="flex justify-between items-center mb-4">
-                            <h1 className="font-semibold md:text-2xl text-md">Pending Maintanance</h1>
+                            <h1 className="font-semibold md:text-2xl text-xl max-[375px]:text-lg">Pending Maintanance</h1>
                             <Button onClick={OpneData} Btn_Name="View Invoice" />
                         </div>
                         <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

@@ -37,7 +37,7 @@ const Communities_Discussion = () => {
       question: 'What is the capital of France?',
       dummyText:
         'Feel free to let me know if you need more examples or if there\'s anything specific you\'d like to include in your dummy content!',
-    },{
+    }, {
       id: 1,
       votes: 0,
       answers: 1,
@@ -54,7 +54,7 @@ const Communities_Discussion = () => {
       question: 'What is the capital of France?',
       dummyText:
         'Feel free to let me know if you need more examples or if there\'s anything specific you\'d like to include in your dummy content!',
-    },{
+    }, {
       id: 1,
       votes: 0,
       answers: 1,
@@ -88,9 +88,8 @@ const Communities_Discussion = () => {
     <div className="bg-[#f0f5fb] min-h-screen flex flex-col md:flex-row">
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full transition-all duration-300 bg-white shadow-lg ${
-          data === 280 ? 'w-64' : 'w-0'
-        } md:w-64`}
+        className={`fixed top-0 left-0 h-full transition-all duration-300 bg-white shadow-lg ${data === 280 ? 'w-64' : 'w-0'
+          } md:w-64`}
       >
         <Sidebar closeNav={closeNav} data={data} />
       </div>
@@ -108,36 +107,33 @@ const Communities_Discussion = () => {
             <div className="w-full md:w-1/4 p-4 border-b md:border-r overflow-y-auto h-full">
               <h2 className="text-xl font-bold mb-4">Chat</h2>
               <input
-              type="text"
-              placeholder="Search Here"
-              className="w-full p-2 mb-4 border rounded-lg"
-            />
+                type="text"
+                placeholder="Search Here"
+                className="w-full p-2 mb-4 border rounded-lg"
+              />
               {chats.map((chat, index) => (
                 <div
                   key={index}
-                  className={`flex items-center p-3 mb-2 rounded-lg hover:bg-gray-200 cursor-pointer ${
-                    chat.status === 'typing' ? 'bg-white' : ''
-                  }`}
+                  className={`flex items-center p-3 mb-2 rounded-lg hover:bg-gray-200 cursor-pointer ${chat.status === 'typing' ? 'bg-white' : ''
+                    }`}
                 >
                   <img
-                  src="../../../../../../public/images/Profile.png"
-                  alt="Profile"
-                  className="w-10 h-10 my-3 rounded-full"
-                />
+                    src="../../../../../../public/images/Profile.png"
+                    alt="Profile"
+                    className="w-10 h-10 my-3 rounded-full"
+                  />
                   <div className="ml-3">
                     <p className="text-lg font-semibold  flex items-center">
                       {chat.name}
                       <span
-                        className={`ml-2 w-3 h-3 rounded-full ${
-                          chat.online ? 'bg-green-500' : 'bg-gray-400'
-                        }`}
+                        className={`ml-2 w-3 h-3 rounded-full ${chat.online ? 'bg-green-500' : 'bg-gray-400'
+                          }`}
                         title={chat.online ? 'Online' : 'Offline'}
                       />
                     </p>
                     <p
-                      className={`text-sm  ${
-                        chat.status === 'unread' ? 'text-gray-700 font-bold' : 'text-gray-500'
-                      }`}
+                      className={`text-sm  ${chat.status === 'unread' ? 'text-gray-700 font-bold' : 'text-gray-500'
+                        }`}
                     >
                       {chat.message}
                     </p>
@@ -151,26 +147,26 @@ const Communities_Discussion = () => {
               ))}
             </div>
 
-       
+
             <div className="w-full md:w-3/4 p-4 overflow-y-auto h-full">
-            <div className="bg-white p-4  border-b-2 flex items-center  mb-2 justify-between">
+              <div className="bg-white p-4  border-b-2 flex items-center  mb-2 justify-between">
 
-      <div className="flex items-center">
-        <FaRegUserCircle size={40} className="text-gray-400" />
-        <div className="ml-2">
-          <p className="text-sm font-medium">Community</p>
-          <p className="text-xs text-gray-500">9:00 PM</p>
-        </div>
-      </div>
+                <div className="flex items-center">
+                  <FaRegUserCircle size={40} className="text-gray-400" />
+                  <div className="ml-2">
+                    <p className="text-sm font-medium">Community</p>
+                    <p className="text-xs text-gray-500">9:00 PM</p>
+                  </div>
+                </div>
 
 
-      <div className="flex items-center space-x-4">
-        <button className="bg-gradient-to-r from-orange-400 to-red-500 text-white px-4 py-2 rounded-lg font-semibold">
-          Ask Question
-        </button>
-        <FiMoreVertical className="text-gray-500 cursor-pointer" size={24} />
-      </div>
-    </div>
+                <div className="flex items-center space-x-4">
+                  <button className="bg-gradient-to-r from-orange-400 to-red-500 text-white px-4 py-2 rounded-lg font-semibold">
+                    Ask Question
+                  </button>
+                  <FiMoreVertical className="text-gray-500 cursor-pointer" size={24} />
+                </div>
+              </div>
               <div className="bg-slate-100 shadow-lg rounded-lg p-5">
                 {questions.map((q) => (
                   <div key={q.id} className="border-b border-gray-300 p-4 flex items-start gap-4">

@@ -37,7 +37,7 @@ const Access_Forums = () => {
       {/* Sidebar */}
       <Sidebar toggleNav={toggleNav} data={data} />
       
-      <div id="main" className="flex-1 flex flex-col" style={{ marginLeft: getdata }}>
+      <div id="main" className={`ml-[${getdata}px] max-[426px]:ml-0`}>
         <div className="open_he">
           <Header toggleNav={toggleNav} />
         </div>

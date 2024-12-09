@@ -43,6 +43,11 @@ const paymentShema = new mongoose.Schema({
     },
     paymentdate: {
         type: date
+    },
+    paymentMethod: {
+        type: String,
+        enum: ['cash', 'online'],
+        required: true
     }
 },
     {

@@ -11,6 +11,7 @@ import { DeleteComplaint, GetComplainy } from '../../../../services/Api/api';
 import LodingDelete from '../../../../layout/DeleteLoding'
 import Button from '../../../../layout/Button_gradient'
 import useSidbarTogal from '../../../../layout/useSidbarTogal';
+import UserImg from "../../../../../../public/images/user.png"
 
 const Create_Complaint = () => {
 
@@ -79,7 +80,7 @@ const Create_Complaint = () => {
   return (
     <div>
       <Sidebar toggleNav={toggleNav} data={data} />
-      <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
+      <div id='main' className={`ml-[${getdata}px] max-[425px]:ml-0`}>
         <div className="open_he">
           <Header toggleNav={toggleNav} />
         </div>
@@ -87,7 +88,7 @@ const Create_Complaint = () => {
           <div className="p-6">
             <div className="bg-white shadow-md rounded-lg p-6 h-svh">
               <div className="flex justify-between items-center mb-6">
-                <h1 className='font-semibold md:text-2xl text-md'>Create Complaint</h1>
+                <h1 className='font-semibold md:text-2xl text-lg'>Create Complaint</h1>
                 <Button type="button" onClick={() => setcreateComplint(true)} Btn_Name="Create Complaint" />
                 {createComplint && (<Create_Complint_model setClosecreateComplint={closecreateComplint} getComplaintdata={getComplaintdata} />)}
               </div>
@@ -100,25 +101,25 @@ const Create_Complaint = () => {
                   <table className="min-w-full bg-[#eef1fd] rounded-lg">
                     <thead>
                       <tr>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md text-left">
                           Complainer Name
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md text-left">
                           Complaint Name
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Description
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Unit Number
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Priority
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Status
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Action
                         </th>
                       </tr>
@@ -128,7 +129,7 @@ const Create_Complaint = () => {
                         return (
                           <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium md:font-semibold overflow-x-scroll">
                             <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex items-center">
-                              <img className="w-8 h-8 rounded-full mr-1" src={e.createdBy.Image} alt="profile" />
+                              <img className="w-8 h-8 rounded-full mr-1" src={UserImg} alt="profile" />
                               <span>{e.Complainer_Name}</span>
                             </td>
                             <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Complaint_Name}</td>

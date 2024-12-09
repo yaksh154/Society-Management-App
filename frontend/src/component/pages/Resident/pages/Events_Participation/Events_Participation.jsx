@@ -37,18 +37,14 @@ const Events_Participation = () => {
   return (
     <div className="bg-[#f0f5fb] min-h-screen">
       <Sidebar toggleNav={toggleNav} data={data} />
-      <div
-        id="main"
-        className="max-[425px]:ml-0 transition-all"
-        style={{ marginLeft: getData }}
-      >
+      <div id="main" className={`ml-[${getData}px] max-[426px]:ml-0`}>
         <div className="open_he">
           <Header toggleNav={toggleNav} />
         </div>
         <div className="p-6 bg-gray-100">
           <div className="flex flex-wrap">
             <button
-              className={`py-2 px-8 font-semibold text-center rounded-t-lg border-b-2 border-b-orange-500 ${activeTab === "Events" ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white"
+              className={`py-2 px-8 max-[426px]:px-4 font-semibold text-center rounded-t-lg border-b-2 border-b-orange-500 ${activeTab === "Events" ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white"
                   : "bg-white text-gray-700"
                 }`}
               onClick={() => setActiveTab("Events")}
@@ -56,7 +52,7 @@ const Events_Participation = () => {
               Events Participate
             </button>
             <button
-              className={`py-2 px-8 font-semibold text-center rounded-t-lg border-b-2 border-b-orange-500 ${activeTab === "Activity"
+              className={`py-2 px-8 max-[426px]:px-4 font-semibold text-center rounded-t-lg border-b-2 border-b-orange-500 ${activeTab === "Activity"
                 ? "bg-gradient-to-r from-orange-600 to-yellow-500 text-white"
                 : "bg-white text-gray-700"
                 }`}
@@ -68,10 +64,10 @@ const Events_Participation = () => {
 
           {activeTab === "Events" && (
             <div className="overflow-x-auto bg-white p-4 rounded-xl shadow-lg">
-              <h2 className="text-2xl font-bold mb-4">Events Participation</h2>
-              <table className="w-full table-auto border-collapse">
-                <thead className="bg-blue-100 text-gray-700">
-                  <tr>
+              <h2 className="text-lg lg:text-2xl font-bold mb-4">Events Participation</h2>
+              <table className="w-full table-auto border-collapse rounded-t-lg overflow-hidden">
+                <thead>
+                  <tr className="bg-[#eef1fd] text-gray-700">
                     <th className="px-4 py-2 text-left">Participator Name</th>
                     <th className="px-4 py-2 text-left">Description</th>
                     <th className="px-4 py-2 text-left">Event Time</th>

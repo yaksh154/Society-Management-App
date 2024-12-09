@@ -1,9 +1,9 @@
-import React, { useState, useCallback } from 'react';
-import { useForm } from 'react-hook-form'; // Import react-hook-form
+import React, { useState} from 'react';
+import { useForm } from 'react-hook-form';
 import Sidenav from '../layout/Sidenav';
 import Header from '../layout/Header';
 import { IoSend } from 'react-icons/io5';
-import { PostAlert } from '../Api/Api'; // Import PostAlert function
+import { PostAlert } from '../Api/Api';
 import useSidbarTogal from '../../../layout/useSidbarTogal';
 
 const Emergency = ({ Fdata }) => {
@@ -42,7 +42,7 @@ const Emergency = ({ Fdata }) => {
   return (
     <div className="bg-[#f0f5fb] h-screen">
       <Sidenav toggleNav={toggleNav} data={data} />
-      <div id="main" className="max-[425px]:ml-0" style={{ marginLeft: getData }}>
+      <div id="main" className={`ml-[${getData}px] max-[426px]:ml-0`}>
         <div className="open_he">
           <Header toggleNav={toggleNav} />
         </div>

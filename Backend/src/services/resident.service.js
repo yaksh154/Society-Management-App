@@ -17,7 +17,7 @@ const getById = async (id) => {
 };
 
 const update = async (id, data) => {
-    return await Resident.findByIdAndUpdate(id, data, { new: true });
+    return await Resident.findByIdAndUpdate(id, data, { new: true, runValidators: true});
 };
 
 const deleteResident = async (id) => {

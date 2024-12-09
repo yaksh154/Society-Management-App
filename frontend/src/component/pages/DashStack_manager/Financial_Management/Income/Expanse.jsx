@@ -22,7 +22,7 @@ const Expense = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  useSidbarTogal({setdata, setget, isOpen})
+  useSidbarTogal({ setdata, setget, isOpen })
 
   const [expenses, setExpenses] = useState([]);
   const [error, setError] = useState(null);
@@ -96,19 +96,19 @@ const Expense = () => {
   const CloseForm = () => setEditData(false);
 
   return (
-    <div className="flex">
+    <div>
       <Sidebar toggleNav={toggleNav} data={data} />
-      <div id="main" className="flex-1 transition-all duration-300" style={{ marginLeft: getdata }}>
+      <div id="main" className={`ml-[${getdata}px] max-[425px]:ml-0`}>
         <Header toggleNav={toggleNav} />
         <div className="p-4 md:p-8 bg-slate-100">
           <div className="bg-white rounded-lg shadow-md">
             <div className="flex justify-between items-center mb-4 md:mb-6 p-4">
-              <h1 className="text-lg md:text-2xl font-semibold">Add Expenses Details</h1>
+              <h1 className="text-xl lg:text-2xl font-semibold">Add Expenses Details</h1>
               <button
-                className="bg-orange-500 text-white px-2 md:px-4 py-1 md:py-2 rounded-lg hover:bg-orange-600 text-sm md:text-base flex items-center"
+                className="bg-orange-500 text-white px-2 md:px-4 py-1 md:py-2 rounded-lg hover:bg-orange-600 text-md md:text-base flex items-center"
                 onClick={Open}
               >
-                <FaSquarePlus className="mr-2" /> Add New Expenses Details
+                <FaSquarePlus className="mr-2 text-sm" /> Add
               </button>
               {AddExpense && <AddExpenseForm Fdata={Fdata} setAddExpense={Close} />}
             </div>
@@ -119,20 +119,33 @@ const Expense = () => {
                   <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
                 </div>
               ) : (
-                <table className="min-w-full bg-white rounded-lg">
-                  <thead className="bg-slate-100 font-extrabold rounded-t-lg">
-                    <tr>
-                      <th className="px-2 md:px-4 py-2 md:py-3 text-left text-xs md:text-sm text-gray-600">Title</th>
-                      <th className="px-2 md:px-4 py-2 md:py-3 text-left text-xs md:text-sm text-gray-600">Description</th>
-                      <th className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-600 text-center">Date</th>
-                      <th className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-600 text-center">Amount</th>
-                      <th className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-600 text-center">Bill Format</th>
-                      <th className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-600 text-center">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {expenses.map((expense, index) => (
-                      <tr key={index} className="border-b hover:bg-gray-50 font-medium md:font-semibold">
+                
+                <table className="min-w-full bg-[#eef1fd] rounded-lg">
+                <thead>
+                  <tr>
+                    <th className="px-6 py-3 border-b font-medium text-left">
+                    Title
+                    </th>
+                    <th className="px-6 py-3 border-b font-medium ">
+                    Description
+                    </th>
+                    <th className="px-6 py-3 border-b font-medium ">
+                    Date
+                    </th>
+                    <th className="px-6 py-3 border-b font-medium ">
+                    Amount
+                    </th>
+                    <th className="px-6 py-3 border-b font-medium ">
+                    Bill Format
+                    </th>
+                    <th className="px-6 py-3 border-b font-medium ">
+                    Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                {expenses.map((expense, index) => (
+                      <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium text-center md:font-semibold overflow-x-scroll">
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{expense.Title}</td>
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{expense.Description}</td>
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 text-center">{new Date(expense.Date).toLocaleDateString("en-US", {
@@ -170,8 +183,8 @@ const Expense = () => {
                       </tr>
                     ))
                     }
-                  </tbody>
-                </table>
+                </tbody>
+              </table>
               )}
 
               {EditData && <EditExpensesModal _id={EditId} lodData={Fdata} Close={CloseForm} />}

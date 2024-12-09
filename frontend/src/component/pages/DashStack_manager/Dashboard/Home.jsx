@@ -19,6 +19,7 @@ import DeleteImportantNumbersModal from '../../../Modals/DeleteImportantNumbersM
 import LodingDelete from '../../../layout/DeleteLoding'
 import { DeleteComplaint } from '../../../services/Api/api';
 import useSidbarTogal from '../../../layout/useSidbarTogal';
+import UserImg from "../../../../../public/images/user.png"
 
 
 const Home = () => {
@@ -136,7 +137,7 @@ const Home = () => {
   return (
     <div>
       <Sidebar toggleNav={toggleNav} data={data} />
-      <div id='main' className='max-[425px]:ml-0 ' style={{ marginLeft: getdata }} >
+      <div id='main' className={`ml-[${getdata}px] max-[425px]:ml-0`} >
         <div className="open_he">
           <Header toggleNav={toggleNav} />
         </div>
@@ -209,7 +210,7 @@ const Home = () => {
                         {contacts.map(contact => (
                           <div
                             key={contact._id}
-                            className="flex justify-between items-center p-4 bg-gray-100 rounded-lg"
+                            className="flex justify-between items-center p-4 border-2 border-gray-100 rounded-lg"
                           >
                             <div>
                               <p className="text-sm font-medium">
@@ -370,7 +371,7 @@ const Home = () => {
                     ) : (
                       <table className="min-w-full text-left">
                         <thead>
-                          <tr className="bg-gray-100 text-gray-700">
+                          <tr className="bg-[#eef1fd] text-gray-700">
                             <th className="px-4 py-2">Complainer Name</th>
                             <th className="px-4 py-2">Complaint Name</th>
                             <th className="px-4 py-2">Date</th>
@@ -384,7 +385,7 @@ const Home = () => {
                             return (
                               <tr key={index} className="border-b hover:bg-gray-50">
                                 <td className="px-4 py-2 flex items-center space-x-2">
-                                  <img className="w-8 h-8 rounded-full" src={e.createdBy.Image} alt="profile" />
+                                  <img className="w-8 h-8 rounded-full" src={UserImg} alt="profile" />
                                   <span>{e.Complainer_Name}</span>
                                 </td>
                                 <td className="px-4 py-2">{e.Complaint_Name}</td>
@@ -425,7 +426,7 @@ const Home = () => {
                       </table>
                     )}
 
-                    {EditComplint && <OpenEditComplintModel _id={a_id} closeEditComplint={closeEditComplint} />}
+                    {EditComplint && <OpenEditComplintModel _id={a_id} closeEditComplint={closeEditComplint} LodData={getComplaintdata}/>}
                     {ViewComplint && <ViewComplintModel _id={b_id} closeViewComplint={closeViewComplint} />}
                     {DeleteComplint && <LodingDelete loading={loadingcomplint} DeleteClick={ComlintDelete} close={CloseDeleteComplint} getComplaint={getComplaint} />}
                   </div>

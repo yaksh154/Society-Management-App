@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, { Suspense, lazy } from 'react';
 import PrivateRoute from './component/services/PrivateRoute/PrivateRoute.jsx';
 
+
 // Public Pages
 const Login = lazy(() => import('./component/pages/Login'));
 const Registration = lazy(() => import('./component/pages/Registration'));
