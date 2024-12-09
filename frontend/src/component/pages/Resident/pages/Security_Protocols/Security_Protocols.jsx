@@ -29,13 +29,13 @@ const Security_Protocols = () => {
   return (
     <div className='bg-[#f0f5fb] h-screen'>
       <Sidebar toggleNav={toggleNav} data={data} />
-      <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
+      <div id='main' className={`ml-[${getdata}px] max-[426px]:ml-0`} >
         <div className="open_he">
           <Header toggleNav={toggleNav} />
         </div>
         <div className="p-6 rounded-lg ">
           <div className="overflow-x-auto bg-white p-4 rounded-xl">
-            <h2 className="text-2xl font-bold mb-4">Security Protocols</h2>
+            <h2 className="text-2xl font-bold mb-4 max-[426px]:text-xl">Security Protocols</h2>
             {loding ? (
               <div className='flex justify-center'>
                 <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />

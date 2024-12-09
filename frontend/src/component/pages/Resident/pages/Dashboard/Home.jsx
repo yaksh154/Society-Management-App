@@ -8,6 +8,8 @@ import TotalBalanceChart from '../../../../layout/TotalBalanceChart';
 import { GetComplainy, ImportantNumbersGet } from '../../../../services/Api/api';
 import { Get_Pending_Maintenances } from '../../Api/api';
 import useSidbarTogal from '../../../../layout/useSidbarTogal';
+import UserImg from "../../../../../../public/images/user.png"
+
 
 const Home = () => {
 
@@ -18,7 +20,7 @@ const Home = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  useSidbarTogal({setdata, setget, isOpen})
+  useSidbarTogal({ setdata, setget, isOpen })
 
   const [loading, setLoading] = useState(true);
   const [contacts, setContacts] = useState('');
@@ -49,16 +51,40 @@ const Home = () => {
     getComplaintdata()
   }, [])
 
+  const [filter, setFilter] = useState('Month');
+
   let [getComplaint, setgetComplaint] = useState([]);
   const [loadingcomplaint, setloadingcomplaint] = useState(true)
   const getComplaintdata = () => {
     GetComplainy(setgetComplaint, setloadingcomplaint)
   }
 
+  const filterComplaints = () => {
+    const now = new Date();
+    return getComplaint.filter((e) => {
+      const complaintDate = new Date(e.createdAt);
+      switch (filter) {
+        case 'Day':
+          return now.toDateString() === complaintDate.toDateString();
+        case 'Week':
+          const weekAgo = new Date();
+          weekAgo.setDate(now.getDate() - 7);
+          return complaintDate >= weekAgo && complaintDate <= now;
+        case 'Month':
+          return (
+            complaintDate.getMonth() === now.getMonth() &&
+            complaintDate.getFullYear() === now.getFullYear()
+          );
+        default:
+          return true;
+      }
+    });
+  };
+
   return (
     <div className='bg-[#f0f5fb] h-full'>
       <Sidebar toggleNav={toggleNav} data={data} />
-      <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
+      <div id='main' className={`ml-[${getdata}px] max-[426px]:ml-0`} >
         <div className="open_he">
           <Header toggleNav={toggleNav} />
         </div>
@@ -120,17 +146,17 @@ const Home = () => {
                       {contacts.map(contact => (
                         <div
                           key={contact._id}
-                          className="flex justify-between items-center p-4 bg-gray-100 rounded-lg"
+                          className="flex justify-between items-center p-4 border-2 border-gray-100 rounded-lg"
                         >
                           <div>
-                            <p className="text-sm font-medium">
-                              Name: <span className='text-[#a7a7a7]'>{contact.Fullname}</span>
+                            <p className="text-sm">
+                              Name : <span className='text-[#a7a7a7]'>{contact.Fullname}</span>
                             </p>
                             <p className="text-sm">
-                              Phone Number: <span className='text-[#a7a7a7]'>{contact.Phonenumber}</span>
+                              Phone Number : <span className='text-[#a7a7a7]'>{contact.Phonenumber}</span>
                             </p>
                             <p className="text-sm">
-                              Work: <span className='text-[#a7a7a7]'>{contact.Work}</span>
+                              Work : <span className='text-[#a7a7a7]'>{contact.Work}</span>
                             </p>
                           </div>
                         </div>
@@ -175,10 +201,14 @@ const Home = () => {
             <div className="bg-white rounded-lg p-4">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg font-semibold">Complaint List</h2>
-                <select className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  <option>Month</option>
-                  <option>Week</option>
-                  <option>Day</option>
+                <select
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                  className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="Month">Month</option>
+                  <option value="Week">Week</option>
+                  <option value="Day">Day</option>
                 </select>
               </div>
               <div className="overflow-x-auto h-32 px-2">
@@ -187,9 +217,9 @@ const Home = () => {
                     <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
                   </div>
                 ) : (
-                  <table className="min-w-full text-left">
+                  <table className="min-w-full text-left rounded-lg overflow-hidden">
                     <thead>
-                      <tr className="bg-gray-100 text-gray-700">
+                      <tr className="bg-[#eef1fd] text-gray-700">
                         <th className="px-4 py-2">Complainer Name</th>
                         <th className="px-4 py-2">Complaint Name</th>
                         <th className="px-4 py-2 text-center">Date</th>
@@ -198,40 +228,37 @@ const Home = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {getComplaint.map((e, index) => {
-                        return (
-                          <tr key={index} className="border-b hover:bg-gray-50">
-                            <td className="px-4 py-2 flex items-center space-x-2">
-                              <img className="w-8 h-8 rounded-full" src="https://via.placeholder.com/40" alt="profile" />
-                              <span>{e.Complainer_Name}</span>
-                            </td>
-                            <td className="px-4 py-2">{e.Complaint_Name}</td>
-                            <td className="px-4 py-2 text-center">
-                              {new Date(e.createdAt).toLocaleDateString("en-US", {
-                                month: "2-digit",
-                                day: "2-digit",
-                                year: "numeric",
-                              })}
-                            </td>
-                            <td className="px-4 py-2 text-center">
-                              <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
-                                e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
-                                  e.Priority === "Low" ? "bg-[#39973d] text-white" : null
-                                }`}>{e.Priority}</span>
-                            </td>
-                            <td className="px-4 py-2 text-center">
-                              <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
-                                e.Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
-                                  e.Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
-                                }`}>{e.Status}</span>
-                            </td>
-                          </tr>
-                        )
-                      })}
+                      {filterComplaints().map((e, index) => (
+                        <tr key={index} className="border-b hover:bg-gray-50">
+                          <td className="px-4 py-2 flex items-center space-x-2">
+                            <img className="w-8 h-8 rounded-full" src={UserImg} alt="profile" />
+                            <span>{e.Complainer_Name}</span>
+                          </td>
+                          <td className="px-4 py-2">{e.Complaint_Name}</td>
+                          <td className="px-4 py-2 text-center">
+                            {new Date(e.createdAt).toLocaleDateString("en-US", {
+                              month: "2-digit",
+                              day: "2-digit",
+                              year: "numeric",
+                            })}
+                          </td>
+                          <td className="px-4 py-2 text-center">
+                            <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Priority === "High" ? "bg-[#e74c3c] text-white" :
+                              e.Priority === "Medium" ? "bg-[#5678e9] text-white" :
+                                e.Priority === "Low" ? "bg-[#39973d] text-white" : null
+                              }`}>{e.Priority}</span>
+                          </td>
+                          <td className="px-4 py-2 text-center">
+                            <span className={`px-3 py-1 rounded-full text-md font-medium flex justify-center ${e.Status === "Open" ? "bg-[#eef1fd] text-[#5678e9]" :
+                              e.Status === "Pending" ? "bg-[#fff9e7] text-[#ffc313]" :
+                                e.Status === "Solve" ? "bg-[#ebf5ec] text-[#39973d]" : null
+                              }`}>{e.Status}</span>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 )}
-
               </div>
             </div>
           </div>
@@ -292,7 +319,6 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>

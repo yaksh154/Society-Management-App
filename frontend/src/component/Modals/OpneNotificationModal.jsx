@@ -81,7 +81,7 @@ const OpneNotificationModal = () => {
 
             {isNotificationOpen && (
                 <div
-                    className="absolute right-0 z-10 mt-2 w-80 origin-top-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5  max-[498px]:right-[-50px] max-[415px]:right-[-100px]"
+                    className="absolute right-0 z-10 mt-2 w-80 origin-top-right rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5  max-[498px]:right-[-105px] max-[415px]:right-[-130px] max-[325px]:right-[-160px]"
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="dropdown-button"

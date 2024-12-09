@@ -37,14 +37,14 @@ const Other_Income_Invoice = () => {
     return (
         <div className='bg-[#f0f5fb] h-screen'>
             <Sidebar toggleNav={toggleNav} data={data} />
-            <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
+            <div id='main' className={`ml-[${getdata}px] max-[426px]:ml-0`}>
                 <div className="open_he">
                     <Header toggleNav={toggleNav} />
                 </div>
                 <div className="p-6">
                     <div className="bg-white shadow-md rounded-lg p-6">
                         <div className="flex justify-between items-center mb-4">
-                            <h1 className="font-semibold md:text-2xl text-md">Due Event Payment</h1>
+                            <h1 className="font-semibold md:text-2xl text-lg">Due Event Payment</h1>
                             <Button Btn_Name="View Invoice" />
                         </div>
                         <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

@@ -55,7 +55,7 @@ const Request_Submission = () => {
         <div>
             <div className="p-6 bg-white rounded-lg">
                 <div className="flex justify-between items-center mb-6  ">
-                    <h1 className="text-2xl font-semibold">Request</h1>
+                    <h1 className="text-xl lg:text-2xl font-semibold">Request</h1>
                     <Button onClick={() => setComplaint(true)} Btn_Name="Create Complaint" />
                     {Complaint && (<RequestModal Fdata={Fdata} close={closeComplaint} />)}
                 </div>

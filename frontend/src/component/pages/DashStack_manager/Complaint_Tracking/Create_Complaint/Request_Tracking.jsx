@@ -10,6 +10,7 @@ import ViewReq from '../../../../Modals/ViewReq';
 import Button from '../../../../layout/Button_gradient';
 import DeleteLoding from '../../../../layout/DeleteLoding'
 import useSidbarTogal from '../../../../layout/useSidbarTogal';
+import UserImg from "../../../../../../public/images/user.png"
 
 const Request_Tracking = () => {
 
@@ -76,7 +77,7 @@ const Request_Tracking = () => {
   return (
     <div>
       <Sidebar toggleNav={toggleNav} data={data} />
-      <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
+      <div id='main' className={`ml-[${getdata}px] max-[425px]:ml-0`}>
         <div className="open_he">
           <Header toggleNav={toggleNav} />
         </div>
@@ -84,7 +85,7 @@ const Request_Tracking = () => {
           <div className="p-6">
             <div className="bg-white shadow-md rounded-lg p-6 h-svh">
               <div className="flex justify-between items-center mb-6">
-                <h1 className='font-semibold md:text-2xl text-md'>Create Request</h1>
+                <h1 className='font-semibold md:text-2xl text-lg'>Create Request</h1>
                 <Button type="button" onClick={() => setcreateComplint(true)} Btn_Name="Create Request" />
                 {createComplint && (<Create_Request setClosecreateComplint={closecreateComplint} getComplaintdata={getComplaintdata} />)}
               </div>
@@ -97,25 +98,25 @@ const Request_Tracking = () => {
                   <table className="min-w-full bg-[#eef1fd] rounded-lg">
                     <thead>
                       <tr>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Requester Name
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Request Name
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Request Date
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Unit Number
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Priority
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Status
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-3 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Action
                         </th>
                       </tr>
@@ -125,7 +126,7 @@ const Request_Tracking = () => {
                         return (
                           <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium text-center md:font-semibold overflow-x-scroll">
                             <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex items-center">
-                              <img className="w-8 h-8 rounded-full mr-1" src={e.createdBy.Image} alt="profile" />
+                              <img className="w-8 h-8 rounded-full mr-1" src={UserImg} alt="profile" />
                               <span>{e.Requester_Name}</span>
                             </td>
                             <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Request_Name}</td>

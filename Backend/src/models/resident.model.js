@@ -84,44 +84,46 @@ const residentSchema = new mongoose.Schema(
         return this.ResidentStatus === "Tenant";
       },
     },
-    Member_Counting: [{
-      Fullname: {
+    members: [
+      {
+        fullName: {
+          type: String,
+          // require: true
+        },
+        phone: {
+          type: String,
+          // require: true
+        },
+        email: {
+          type: String,
+          // require: true,
+          match: [/^\S+@\S+\.\S+$/]
+        },
+        age: {
+          type: String,
+          // require: true
+        },
+        gender: {
+          type: String,
+          enum: ["Male", "Female", "Other"],
+          // require: true
+        },
+        Relation: {
+          type: String,
+          // require: true
+        },
+      }
+    ],
+    vehicles: [{
+      type: {
         type: String,
         // require: true
       },
-      Phone: {
+      name: {
         type: String,
         // require: true
       },
-      Email: {
-        type: String,
-        // require: true,
-        match: [/^\S+@\S+\.\S+$/]
-      },
-      Age: {
-        type: String,
-        // require: true
-      },
-      Gender: {
-        type: String,
-        enum: ["Male", "Female", "Other"],
-        // require: true
-      },
-      Relation: {
-        type: String,
-        // require: true
-      },
-    }],
-    Vehicle_Counting: [{
-      Vehicle_Type: {
-        type: String,
-        // require: true
-      },
-      Vehicle_Name: {
-        type: String,
-        // require: true
-      },
-      Vehicle_Number: {
+      number: {
         type: String,
         // require: true
       }

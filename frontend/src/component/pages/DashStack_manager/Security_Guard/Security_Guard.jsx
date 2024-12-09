@@ -81,7 +81,7 @@ const Security_Guard = () => {
   return (
     <div>
       <Sidebar toggleNav={toggleNav} data={data} />
-      <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getdata }} >
+      <div id='main' className={`ml-[${getdata}px] max-[425px]:ml-0`}>
         <div className="open_he">
           <Header toggleNav={toggleNav} />
         </div>
@@ -104,25 +104,25 @@ const Security_Guard = () => {
                   <table className="min-w-full bg-[#eef1fd] rounded-lg">
                     <thead>
                       <tr>
-                        <th className="px-6 py-3 border-b font-medium text-left">
+                        <th className="px-5 py-3 border-b font-medium text-sm lg:text-md md:text-md text-left">
                           Security Guard Name
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-5 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Phone Number
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-5 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Select Shift
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-5 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Shift Date
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-5 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Shift Time
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-5 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Gender
                         </th>
-                        <th className="px-6 py-3 border-b font-medium ">
+                        <th className="px-5 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                           Action
                         </th>
                       </tr>

@@ -31,7 +31,7 @@ const ParticipantTable = () => {
   return (
     <div>
       <Sidebar toggleNav={toggleNav} data={data} />
-      <div id='main' className='max-w-full' style={{ marginLeft: getdata }}>
+      <div id='main' className={`ml-[${getdata}px] max-[425px]:ml-0`}>
         <div className="open_he">
           <Header toggleNav={toggleNav} />
         </div>

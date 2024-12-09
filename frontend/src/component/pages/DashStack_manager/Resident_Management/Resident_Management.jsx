@@ -57,14 +57,8 @@ const Resident_Management = () => {
   return (
     <div>
       <Sidebar toggleNav={toggleNav} data={data} />
-      <div
-        id="main"
-        className="max-[425px]:ml-0"
-        style={{ marginLeft: getdata }}
-      >
-        <div className="open_he">
-          <Header toggleNav={toggleNav} />
-        </div>
+      <div id="main" className={`ml-[${getdata}px] max-[425px]:ml-0`}>
+        <div className="open_he"><Header toggleNav={toggleNav} /></div>
         {/* Main Content */}
         <div className="flex-1 bg-[#f0f5fb]">
           <div className="p-6">

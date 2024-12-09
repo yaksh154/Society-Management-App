@@ -55,21 +55,19 @@ const Otherincome = () => {
   };
 
   const handleDelete = (_id) => {
-    console.log(_id);
-    
-    setDeleteId(_id); // Set the ID of the item to delete
-    setDeleteBox(true); // Open the delete confirmation modal
-    setDropdownOpenIndex(null); // Close the dropdown
+    setDeleteId(_id);
+    setDeleteBox(true); 
+    setDropdownOpenIndex(null);
   };
 
   const confirmDelete = () => {
     if (DeleteId) {
-      setLoading(true); // Start loading
+      setLoading(true);
       DeleteOtherIncome(DeleteId, (success) => {
-        setLoading(false); // Stop loading
+        setLoading(false);
         if (success) {
-          fetchData(); // Refresh the data list
-          closeDeleteBox(); // Close the modal
+          fetchData();
+          closeDeleteBox();
         } else {
           console.error("Failed to delete the data.");
         }

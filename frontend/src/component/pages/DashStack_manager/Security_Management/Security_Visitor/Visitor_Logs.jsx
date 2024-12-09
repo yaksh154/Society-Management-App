@@ -32,13 +32,13 @@ const Visitor_Logs = () => {
     return (
         <div>
             <Sidebar toggleNav={toggleNav} data={data} />
-            <div id='main' className='max-[425px]:ml-0' style={{ marginLeft: getData }}>
+            <div id='main' className={`ml-[${getData}px] max-[425px]:ml-0`}>
                 <div className="open_he">
                     <Header toggleNav={toggleNav} />
                 </div>
                 <div className="p-6 bg-gray-100 rounded-lg shadow-lg">
                     <div className="overflow-x-auto bg-white p-4 rounded-xl">
-                        <h2 className="text-2xl font-bold mb-4">Visitor Logs</h2>
+                        <h2 className="text-xl lg:text-2xl font-bold mb-4">Visitor Logs</h2>
                         {loding ? (
                             <div className='flex justify-center'>
                                 <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
@@ -47,19 +47,19 @@ const Visitor_Logs = () => {
                             <table className="min-w-full bg-[#eef1fd] rounded-lg">
                                 <thead>
                                     <tr>
-                                        <th className="px-6 py-3 border-b font-medium text-left">
+                                        <th className="px-6 py-3 border-b font-medium text-sm lg:text-md md:text-md text-left">
                                             Visitor Name
                                         </th>
-                                        <th className="px-6 py-3 border-b font-medium ">
+                                        <th className="px-6 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                                             Phone Number
                                         </th>
-                                        <th className="px-6 py-3 border-b font-medium ">
+                                        <th className="px-6 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                                             Date
                                         </th>
-                                        <th className="px-6 py-3 border-b font-medium ">
+                                        <th className="px-6 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                                             Unit Number
                                         </th>
-                                        <th className="px-6 py-3 border-b font-medium ">
+                                        <th className="px-6 py-3 border-b font-medium text-sm lg:text-md md:text-md">
                                             Time
                                         </th>
                                     </tr>

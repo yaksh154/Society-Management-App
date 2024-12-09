@@ -22,7 +22,7 @@ const Header = ({toggleNav}) => {
           <span className='flex items-center mr-5' style={{ fontSize: 30, cursor: "pointer" }} onClick={toggleNav}>
             <GiHamburgerMenu />
           </span>
-          <input type="text" placeholder="Search Here" className="w-full max-w-md px-4 py-2 border rounded-lg" />
+          <input type="text" placeholder="Search Here" className="w-full max-w-md px-4 py-2 border rounded-lg max-[426px]:hidden" />
         </div>
         <div className="flex items-center space-x-4">
 
