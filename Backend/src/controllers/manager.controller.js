@@ -127,7 +127,7 @@ const login = async (req, res) => {
     }
 
     if (security) {
-      const bcryptpass = await bcrypt.compare(Password, security.password); // Fixed variable name
+      const bcryptpass = await bcrypt.compare(Password, security.Password); // Fixed variable name
       console.log("🚀 ~ login ~ bcryptpass:", bcryptpass);
       if (!bcryptpass) {
         return res.status(401).json({ message: "Invalid Credentials" });

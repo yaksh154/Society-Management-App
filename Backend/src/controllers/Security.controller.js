@@ -11,6 +11,7 @@ const register = async (req, res) => {
         console.log("🚀 ~ register ~ registersecurity:", registersecurity)
 
         const pass = Math.floor(1000 + Math.random() * 9000);
+        console.log("🚀 ~ register ~ pass:", pass)
         const bcrpass = await bcrypt.hash(pass.toString(), 10);
         console.log("🚀 ~ register ~ req.files:", req.files)
         const photopath = req.files.photo[0].path;
@@ -30,7 +31,7 @@ const register = async (req, res) => {
             Shift_Data: registersecurity.Shift_Data,
             Shift_Time: registersecurity.Shift_Time,
             Aadhar_Card: Aadhar_Card.secure_url,
-            password: bcrpass,
+            Password: bcrpass,
             createdBy: req.user._id,
             Society: req.user.societyid
         }
@@ -39,6 +40,7 @@ const register = async (req, res) => {
         console.log("🚀 ~ register ~ body:", body)
         const security = await securityService.register(body);
         await send_maile(security.Email, pass, security.Full_Name)
+        console.log("🚀 ~ register ~ security.Email, pass, security.Full_Name:", security.Email, pass, security.Full_Name)
         console.log("🚀 ~ register ~ security:", security)
         res.status(201).json({ message: "Security personnel registered", data: security });
     } catch (error) {
