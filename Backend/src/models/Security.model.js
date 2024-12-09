@@ -10,6 +10,10 @@ const securitySchema = new mongoose.Schema(
             type: String,
             require: true
         },
+        Email: {
+            type: String,
+            require: true
+        },
         phone_Number: {
             type: Number,
             require: true
