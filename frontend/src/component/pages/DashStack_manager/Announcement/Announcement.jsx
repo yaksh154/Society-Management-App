@@ -63,6 +63,7 @@ const Announcement = () => {
     setDeleteAnnouncement(true)
     setDeleteAnnouncementId(_id)
   }
+
   const ClaseDeleteAnnouncement = () => {
     setDeleteAnnouncement(false)
   }
@@ -127,8 +128,8 @@ const Announcement = () => {
                           Upcoming Schedule Service Date
                           <span className="ml-1 text-base font-semibold text-gray-700">
                             {new Date(e.date).toLocaleDateString("en-US", {
-                              month: "2-digit",
                               day: "2-digit",
+                              month: "2-digit",
                               year: "numeric",
                             })}
                           </span>
