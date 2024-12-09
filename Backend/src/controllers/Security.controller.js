@@ -55,7 +55,7 @@ const update = async (req, res) => {
         const body = {}
         if (req.body) {
             body.Full_Name = updatesecurity.Full_Name,
-            body.Email = updatesecurity.email,
+            body.Email = updatesecurity.Email,
             body.phone_Number = updatesecurity.phone_Number,
             body.Gender = updatesecurity.Gender,
             body.Shift = updatesecurity.Shift,
