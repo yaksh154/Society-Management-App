@@ -31,7 +31,7 @@ const Events_Participation = () => {
 
 
   const fetchActivities = async () => {
-    GetAnnouncements(setEventData,setLoding)
+    GetAnnouncement(setEventData,setLoding)
   };
  
 
