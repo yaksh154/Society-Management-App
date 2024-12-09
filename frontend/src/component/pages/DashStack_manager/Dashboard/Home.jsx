@@ -454,39 +454,6 @@ const Home = () => {
                       </div>
                       <p className="text-gray-500 text-sm">24-09-2024</p>
                     </div>
-                    {/* Activity Item */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-green-100 text-green-600 font-bold">H</div>
-                        <div>
-                          <p className="text-gray-900 font-medium">Holi Festival</p>
-                          <p className="text-gray-500 text-sm">8:00 PM To 10:00 PM</p>
-                        </div>
-                      </div>
-                      <p className="text-gray-500 text-sm">24-09-2024</p>
-                    </div>
-                    {/* Activity Item */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 font-bold">G</div>
-                        <div>
-                          <p className="text-gray-900 font-medium">Ganesh Chaturthi</p>
-                          <p className="text-gray-500 text-sm">8:00 PM To 10:00 PM</p>
-                        </div>
-                      </div>
-                      <p className="text-gray-500 text-sm">24-09-2024</p>
-                    </div>
-                    {/* Activity Item */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-red-100 text-red-600 font-bold">N</div>
-                        <div>
-                          <p className="text-gray-900 font-medium">Navratri Festival</p>
-                          <p className="text-gray-500 text-sm">8:00 PM To 10:00 PM</p>
-                        </div>
-                      </div>
-                      <p className="text-gray-500 text-sm">24-09-2024</p>
-                    </div>
                   </div>
                 </div>
 

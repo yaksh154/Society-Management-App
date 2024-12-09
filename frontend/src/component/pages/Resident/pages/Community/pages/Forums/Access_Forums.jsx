@@ -37,14 +37,14 @@ const Access_Forums = () => {
       {/* Sidebar */}
       <Sidebar toggleNav={toggleNav} data={data} />
       
-      <div id="main" className={`ml-[${getdata}px] max-[426px]:ml-0`}>
+      <div id="main" className={`ml-[${getdata}px] max-[426px]:ml-0 w-full`}>
         <div className="open_he">
           <Header toggleNav={toggleNav} />
         </div>
 
-        <div className="flex flex-col md:flex-row flex-1 h-screen bg-gray-100 p-2 md:p-4 rounded-lg border-spacing-2">
+        <div className="flex flex-col md:flex-row flex-1 h-screen w-full bg-gray-100 p-2 md:p-4 rounded-lg border-spacing-2">
   {/* Left Sidebar */}
-  <div className="w-full md:w-1/4 bg-white border-r p-4 rounded-lg overflow-y-auto">
+  <div className="w-full md:w-1/4 bg-white border-r p-4 rounded-lg max-[726p]:ml-0   overflow-hidden ">
     <h2 className="text-xl md:text-2xl font-bold mb-4">Chat</h2>
     <input
       type="text"
@@ -73,7 +73,7 @@ const Access_Forums = () => {
   </div>
 
   {/* Right Chat Window */}
-  <div className="flex-1 flex flex-col bg-white p-4 rounded-lg">
+  <div className="flex-1 flex flex-col bg-white p-4 rounded-lg max-[726px]:hide">
     {/* Chat Header */}
     <div className="flex items-center justify-between border-b pb-3 mb-4">
       <div className="flex items-center space-x-3">
@@ -140,6 +140,7 @@ const Access_Forums = () => {
     </div>
   </div>
 </div>
+
 
       </div>
     </div>
