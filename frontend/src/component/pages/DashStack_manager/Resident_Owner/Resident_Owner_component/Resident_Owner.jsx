@@ -118,7 +118,7 @@ const Resident_Owner = () => {
             image,
         };
         console.log("Form Submission Data:", data);
-        PostSumdata(data)
+        // PostSumdata(data)
     };
 
     const uploadCard = (label, fileType) => (
