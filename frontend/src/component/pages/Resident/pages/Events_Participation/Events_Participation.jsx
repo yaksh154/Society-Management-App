@@ -5,6 +5,7 @@ import FaUser from "../../../../../../public/images/Profile.png"; // Corrected i
 import Activity from "./Activity";
 import { GetEventData } from "../../Api/api"; // Ensure API is properly defined
 import useSidbarTogal from "../../../../layout/useSidbarTogal";
+import { GetAnnouncement } from "../../../../services/Api/api";
 
 const Events_Participation = () => {
 
@@ -21,18 +22,18 @@ const Events_Participation = () => {
   const [EventData, setEventData] = useState([]); // Initialize as an empty array
 
   // Fetch Event Data on component mount
+  const [Loding, setLoding] = useState(true)
+
   useEffect(() => {
-    Fdata();
+    
+    fetchActivities();
   }, []);
 
-  const Fdata = async () => {
-    try {
-      await GetEventData(setEventData);
-      // console.log("Fetched event data:", EventData); // Debug log
-    } catch (error) {
-      console.error("Error fetching event data:", error);
-    }
+
+  const fetchActivities = async () => {
+    GetAnnouncements(setEventData,setLoding)
   };
+ 
 
   return (
     <div className="bg-[#f0f5fb] min-h-screen">
@@ -65,6 +66,11 @@ const Events_Participation = () => {
           {activeTab === "Events" && (
             <div className="overflow-x-auto bg-white p-4 rounded-xl shadow-lg">
               <h2 className="text-lg lg:text-2xl font-bold mb-4">Events Participation</h2>
+              {Loding ? (
+                  <div className='flex justify-center'>
+                  <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+                </div>
+                ) : (
               <table className="w-full table-auto border-collapse rounded-t-lg overflow-hidden">
                 <thead>
                   <tr className="bg-[#eef1fd] text-gray-700">
@@ -75,6 +81,7 @@ const Events_Participation = () => {
                     <th className="px-4 py-2 text-left">Event Name</th>
                   </tr>
                 </thead>
+               
                 <tbody>
                   {EventData.map((item, index) => (
                     <tr key={index} className="border-b">
@@ -84,16 +91,20 @@ const Events_Participation = () => {
                           alt="Profile"
                           className="w-8 h-8 rounded-full border border-gray-400"
                         />
-                        <span>{item.ParticipatorName}</span>
+                        <span>{item.title}</span>
                       </td>
-                      <td className="px-4 py-3">{item.Description}</td>
-                      <td className="px-4 py-3">{item.EventTime}</td>
-                      <td className="px-4 py-3">{item.EventDate}</td>
-                      <td className="px-4 py-3">{item.EventName}</td>
+                      <td className="px-4 py-3">{item.description}</td>
+                      <td className="px-4 py-3">{item.time}</td>
+                      <td className="px-4 py-3"> {new Date(item.date).toLocaleDateString("en-US", {
+                              day: "2-digit",
+                              month: "2-digit",
+                              year: "numeric",
+                            })}</td>
+                      <td className="px-4 py-3">{item.title}</td>
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </table>  )}
             </div>
           )}
           {activeTab === "Activity" && (
