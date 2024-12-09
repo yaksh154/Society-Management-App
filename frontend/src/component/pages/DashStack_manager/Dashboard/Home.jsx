@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from '../../../layout/Sidebar';
 import Header from '../../../layout/Header';
-import '../../../../style/home.css'
 import Home_totle_card from '../../../layout/Home_totle_card';
 import { MdOutlineAttachMoney } from "react-icons/md";
 import TotalBalanceChart from '../../../layout/TotalBalanceChart';
