@@ -215,17 +215,17 @@ const Profile = () => {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 disabled">
                         Select Society*
                       </label>
                       <select
                         name="society"
                         value={formData.society}
                         onChange={handleChange}
-                        disabled={!isEditable}
-                        className="w-full p-2 text-sm border border-gray-300 rounded"
+                        disabled
+                        className="w-full p-2 text-sm border border-gray-300 rounded "
                       >
-                        <option value="">Select Society</option>
+                        <option value="" >Select Society</option>
                         {societies.map((e, index) => (
                           <option key={index} value={e._id}>
                             {e.societyname}
