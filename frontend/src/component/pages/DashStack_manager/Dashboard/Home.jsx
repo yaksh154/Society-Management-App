@@ -163,6 +163,7 @@ const Home = () => {
                 totle_color="text-white"
                 totle_icon_bg_back="bg-[#fff0e5]"
                 totle_icon_bg="bg-[#ff6a00]"
+                totle_bg_border="border-[#ff6a00]"
                 totle_Noch="bg-[#ffb480]"
                 totle_simbol={<TiThMenu />}
               />
@@ -173,6 +174,7 @@ const Home = () => {
                 totle_icon_bg_back="bg-[#ebf5ec]"
                 totle_icon_bg="bg-[#39973d]"
                 totle_Noch="bg-[#9ccb9e]"
+                totle_bg_border="border-[#39973d]"
                 totle_simbol={<MdOutlineAttachMoney />}
               />
               <Home_totle_card
@@ -182,6 +184,7 @@ const Home = () => {
                 totle_icon_bg_back="bg-[#f3f5fe]"
                 totle_icon_bg="bg-[#869ff3]"
                 totle_Noch="bg-[#c3cff9]"
+                totle_bg_border="border-[#869ff3]"
                 totle_simbol={<MdOutlineAttachMoney />}
               />
               <Home_totle_card
@@ -191,6 +194,7 @@ const Home = () => {
                 totle_icon_bg_back="bg-[#fdebf9]"
                 totle_icon_bg="bg-[#eb37c3]"
                 totle_Noch="bg-[#f59be1]"
+                totle_bg_border="border-[#eb37c3]"
                 totle_simbol={<MdOutlineAttachMoney />}
               />
             </div>
