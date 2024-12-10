@@ -9,7 +9,7 @@ const Unauthorized = () => {
                     <h1
                         className="text-[13rem] font-[900] bg-clip-text text-transparent max-[768px]:text-[10rem] max-[540px]:text-[8rem] max-[403px]:text-[6rem]"
                         style={{
-                            backgroundImage:"https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770800/e7xelg4lkioyvgxc3pxe.webp",
+                            backgroundImage: "url('https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770800/e7xelg4lkioyvgxc3pxe.webp')",
                             backgroundSize: "cover",
                             backgroundPosition: "center",
                         }}

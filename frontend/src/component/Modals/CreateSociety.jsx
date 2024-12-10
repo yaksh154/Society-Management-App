@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { UserCreateSociety } from '../services/Api/api';
 
-const CreateSociety = ({ CloseCreatenewSociety }) => {
+const CreateSociety = ({ CloseCreatenewSociety,LodData }) => {
     const [newSociety, setNewSociety] = useState({
         societyname: '',
         societyaddress: '',
@@ -16,7 +16,7 @@ const CreateSociety = ({ CloseCreatenewSociety }) => {
     };
 
     const handleAddSociety = () => {
-        UserCreateSociety(newSociety,CloseCreatenewSociety)
+        UserCreateSociety(newSociety,CloseCreatenewSociety,LodData)
     };
 
     return (
