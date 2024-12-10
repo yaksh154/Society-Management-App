@@ -29,7 +29,7 @@ const createResident = async (req, res) => {
 
         const body = {
             Fullname: residentData.fullName,
-            Phone: residentData.phoneNumber,
+            Phone: residentData.phone,
             Email: residentData.email,
             residentphoto: residentphoto.secure_url,
             Age: residentData.age,
