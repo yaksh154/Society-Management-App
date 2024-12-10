@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import FaUser from "../../../../../../public/images/Profile.png";
-import { GetActivityData } from '../../Api/api';
 import { GetAnnouncement } from '../../../../services/Api/api';
 
 const Activity = () => {
@@ -45,7 +43,7 @@ const Activity = () => {
              <tr key={index} className="border-b">
              <td className="px-4 py-3 flex items-center space-x-2">
                <img
-                 src={FaUser}
+                 src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770800/shfpe3pccvr5qrpuldzh.png"
                  alt="Profile"
                  className="w-8 h-8 rounded-full border border-gray-400"
                />

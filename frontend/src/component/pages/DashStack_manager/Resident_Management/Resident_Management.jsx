@@ -8,8 +8,6 @@ import View_Owner_Details_Modal from "../../../Modals/View_Owner_Details_Modal";
 import useSidbarTogal from "../../../layout/useSidbarTogal";
 import { GetResident } from "../../../services/Api/api";
 import { RiShieldUserFill } from "react-icons/ri";
-import Occupied from '../../../../../public/images/Occupied.png'
-import Vacate from '../../../../../public/images/Vacate.png'
 
 const Resident_Management = () => {
 
@@ -114,7 +112,8 @@ const Resident_Management = () => {
                       <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium text-center md:font-semibold overflow-x-scroll">
                         {/* <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{e.name}</td> */}
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex items-center">
-                          <img className="w-8 h-8 rounded-full mr-1" src="https://via.placeholder.com/40" alt="profile" />
+                          <img className="w-8 h-8 rounded-full mr-1" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770800/bc7fyacmra9fa6zjudqg.jpg
+" alt="profile" />
                           <span>{e.Fullname}</span>
                         </td>
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">
@@ -127,8 +126,8 @@ const Resident_Management = () => {
                             : e.UnitStatus === "Vacate" ? " bg-[#fff6ff] text-[#9333ea" : ""
                             }`}
                         >
-                          {e.UnitStatus === "Occupied" && <img src={Occupied} className="mr-1" />}
-                          {e.UnitStatus === "Vacate" && <img src={Vacate} className="mr-1" />}
+                          {e.UnitStatus === "Occupied" && <img src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/puoewxxhgj0kia2qne5q.png" className="mr-1" />}
+                          {e.UnitStatus === "Vacate" && <img src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770798/k2zvlds1skcfrevuvvrs.png" className="mr-1" />}
                           {e.UnitStatus}
                         </span></td>
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700"><span

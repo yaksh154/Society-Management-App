@@ -44,7 +44,7 @@ const Forgot_password = () => {
         const Emails = localStorage.getItem('Email');
         const Email = Emails.replace(/^"(.*)"$/, '$1');
         const datas = { otp, Email }
-        console.log(datas);
+        // console.log(datas);
         setLoading(true); 
         
         Managerverifyotp(datas, setLoginError, setLoading, navigate, reset);

@@ -121,7 +121,7 @@ const Profile = () => {
                 <div className="relative">
                   {Image
                     && <img src={URL.createObjectURL(Image)} alt="Uploaded" className="w-24 h-24 rounded-full object-cover border" />
-                    || <img src={Image || formData.Image || "../../../public/images/user.png"} alt="Profile" className="w-24 h-24 rounded-full object-cover border" />
+                    || <img src={Image || formData.Image || "https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/bl9awma4kwu1d9tdrakp.png"} alt="Profile" className="w-24 h-24 rounded-full object-cover border" />
                   }
 
                   {isEditable && (

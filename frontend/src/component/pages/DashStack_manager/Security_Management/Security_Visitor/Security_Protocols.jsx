@@ -3,7 +3,6 @@ import Sidebar from '../../../../layout/Sidebar';
 import Header from '../../../../layout/Header';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { GrFormView } from 'react-icons/gr';
-import axios from 'axios';
 import ViewProtocolsModal from '../../../../Modals/ViewProtocolsModal';
 import { Delete_Security_Protocols, Get_Security_Protocols } from '../../../../services/Api/api';
 import AddProtocolsModal from '../../../../Modals/AddProtocolsModal';

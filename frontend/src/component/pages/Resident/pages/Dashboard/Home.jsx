@@ -8,7 +8,6 @@ import TotalBalanceChart from '../../../../layout/TotalBalanceChart';
 import { GetAnnouncement, GetComplainy, ImportantNumbersGet } from '../../../../services/Api/api';
 import { Get_Pending_Maintenances } from '../../Api/api';
 import useSidbarTogal from '../../../../layout/useSidbarTogal';
-import UserImg from "../../../../../../public/images/user.png"
 
 
 const Home = () => {
@@ -195,7 +194,7 @@ const Home = () => {
                       <div className="flex items-center space-x-3">
                         <img
                           className="w-10 h-10 rounded-full"
-                          src={e.avatar || "https://via.placeholder.com/40"}
+                          src={e.avatar || "https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/bl9awma4kwu1d9tdrakp.png"}
                           alt={`${e.name}'s avatar`}
                         />
                         <div>
@@ -248,7 +247,8 @@ const Home = () => {
                       {filterComplaints().map((e, index) => (
                         <tr key={index} className="border-b hover:bg-gray-50">
                           <td className="px-4 py-2 flex items-center space-x-2">
-                            <img className="w-8 h-8 rounded-full" src={UserImg} alt="profile" />
+                            <img className="w-8 h-8 rounded-full" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/bl9awma4kwu1d9tdrakp.png
+" alt="profile" />
                             <span>{e.Complainer_Name}</span>
                           </td>
                           <td className="px-4 py-2">{e.Complaint_Name}</td>

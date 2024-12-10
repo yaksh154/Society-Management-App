@@ -7,7 +7,7 @@ import TotalBalanceChart from '../../../layout/TotalBalanceChart';
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, CategoryScale, Tooltip, } from 'chart.js';
 ChartJS.register(LineElement, PointElement, LinearScale, CategoryScale, Tooltip);
 import { FaTrashAlt, FaEdit, FaPlus } from 'react-icons/fa';
-import { GetAnnouncement, GetComplainy, ImportantNumbersGet, Profile_img } from '../../../services/Api/api';
+import { GetAnnouncement, GetComplainy, ImportantNumbersGet } from '../../../services/Api/api';
 import { TiThMenu } from "react-icons/ti";
 import CreateImportantNumbers from '../../../Modals/CreateImportantNumbers';
 import EditImportantNumbers from '../../../Modals/EditImportantNumbers';
@@ -18,7 +18,6 @@ import DeleteImportantNumbersModal from '../../../Modals/DeleteImportantNumbersM
 import LodingDelete from '../../../layout/DeleteLoding'
 import { DeleteComplaint } from '../../../services/Api/api';
 import useSidbarTogal from '../../../layout/useSidbarTogal';
-import UserImg from "../../../../../public/images/user.png"
 
 
 const Home = () => {
@@ -268,7 +267,7 @@ const Home = () => {
                     {/* Maintenance Item */}
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-3">
-                        <img className="w-10 h-10 rounded-full" src="https://via.placeholder.com/40" alt="User Avatar" />
+                        <img className="w-10 h-10 rounded-full" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/bl9awma4kwu1d9tdrakp.png" alt="User Avatar" />
                         <div>
                           <p className="font-medium">Roger Lubin</p>
                           <p className="text-sm text-gray-500">2 Month Pending</p>
@@ -279,7 +278,7 @@ const Home = () => {
                     {/* Repeat this block for each maintenance item */}
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-3">
-                        <img className="w-10 h-10 rounded-full" src="https://via.placeholder.com/40" alt="User Avatar" />
+                        <img className="w-10 h-10 rounded-full" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/bl9awma4kwu1d9tdrakp.png" alt="User Avatar" />
                         <div>
                           <p className="font-medium">Roger Lubin</p>
                           <p className="text-sm text-gray-500">2 Month Pending</p>
@@ -289,7 +288,7 @@ const Home = () => {
                     </div>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-3">
-                        <img className="w-10 h-10 rounded-full" src="https://via.placeholder.com/40" alt="User Avatar" />
+                        <img className="w-10 h-10 rounded-full" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/bl9awma4kwu1d9tdrakp.png" alt="User Avatar" />
                         <div>
                           <p className="font-medium">Roger Lubin</p>
                           <p className="text-sm text-gray-500">2 Month Pending</p>
@@ -299,7 +298,7 @@ const Home = () => {
                     </div>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-3">
-                        <img className="w-10 h-10 rounded-full" src="https://via.placeholder.com/40" alt="User Avatar" />
+                        <img className="w-10 h-10 rounded-full" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/bl9awma4kwu1d9tdrakp.png" alt="User Avatar" />
                         <div>
                           <p className="font-medium">Roger Lubin</p>
                           <p className="text-sm text-gray-500">2 Month Pending</p>
@@ -309,7 +308,7 @@ const Home = () => {
                     </div>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-3">
-                        <img className="w-10 h-10 rounded-full" src="https://via.placeholder.com/40" alt="User Avatar" />
+                        <img className="w-10 h-10 rounded-full" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/bl9awma4kwu1d9tdrakp.png" alt="User Avatar" />
                         <div>
                           <p className="font-medium">Roger Lubin</p>
                           <p className="text-sm text-gray-500">2 Month Pending</p>
@@ -319,7 +318,7 @@ const Home = () => {
                     </div>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-3">
-                        <img className="w-10 h-10 rounded-full" src="https://via.placeholder.com/40" alt="User Avatar" />
+                        <img className="w-10 h-10 rounded-full" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/bl9awma4kwu1d9tdrakp.png" alt="User Avatar" />
                         <div>
                           <p className="font-medium">Roger Lubin</p>
                           <p className="text-sm text-gray-500">2 Month Pending</p>
@@ -329,7 +328,7 @@ const Home = () => {
                     </div>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-3">
-                        <img className="w-10 h-10 rounded-full" src="https://via.placeholder.com/40" alt="User Avatar" />
+                        <img className="w-10 h-10 rounded-full" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/bl9awma4kwu1d9tdrakp.png" alt="User Avatar" />
                         <div>
                           <p className="font-medium">Roger Lubin</p>
                           <p className="text-sm text-gray-500">2 Month Pending</p>
@@ -339,7 +338,7 @@ const Home = () => {
                     </div>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-3">
-                        <img className="w-10 h-10 rounded-full" src="https://via.placeholder.com/40" alt="User Avatar" />
+                        <img className="w-10 h-10 rounded-full" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/bl9awma4kwu1d9tdrakp.png" alt="User Avatar" />
                         <div>
                           <p className="font-medium">Roger Lubin</p>
                           <p className="text-sm text-gray-500">2 Month Pending</p>
@@ -349,7 +348,7 @@ const Home = () => {
                     </div>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-3">
-                        <img className="w-10 h-10 rounded-full" src="https://via.placeholder.com/40" alt="User Avatar" />
+                        <img className="w-10 h-10 rounded-full" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/bl9awma4kwu1d9tdrakp.png" alt="User Avatar" />
                         <div>
                           <p className="font-medium">Roger Lubin</p>
                           <p className="text-sm text-gray-500">2 Month Pending</p>
@@ -397,7 +396,7 @@ const Home = () => {
                             return (
                               <tr key={index} className="border-b hover:bg-gray-50">
                                 <td className="px-4 py-2 flex items-center space-x-2">
-                                  <img className="w-8 h-8 rounded-full" src={UserImg} alt="profile" />
+                                  <img className="w-8 h-8 rounded-full" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/bl9awma4kwu1d9tdrakp.png" alt="profile" />
                                   <span>{e.Complainer_Name}</span>
                                 </td>
                                 <td className="px-4 py-2">{e.Complaint_Name}</td>

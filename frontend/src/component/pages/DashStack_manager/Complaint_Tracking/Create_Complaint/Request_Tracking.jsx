@@ -10,7 +10,6 @@ import ViewReq from '../../../../Modals/ViewReq';
 import Button from '../../../../layout/Button_gradient';
 import DeleteLoding from '../../../../layout/DeleteLoding'
 import useSidbarTogal from '../../../../layout/useSidbarTogal';
-import UserImg from "../../../../../../public/images/user.png"
 
 const Request_Tracking = () => {
 
@@ -126,7 +125,8 @@ const Request_Tracking = () => {
                         return (
                           <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium text-center md:font-semibold overflow-x-scroll">
                             <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex items-center">
-                              <img className="w-8 h-8 rounded-full mr-1" src={UserImg} alt="profile" />
+                              <img className="w-8 h-8 rounded-full mr-1" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/bl9awma4kwu1d9tdrakp.png
+" alt="profile" />
                               <span>{e.Requester_Name}</span>
                             </td>
                             <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">{e.Request_Name}</td>

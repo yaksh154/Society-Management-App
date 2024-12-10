@@ -114,7 +114,7 @@ const Personal_Detail = () => {
                   {/* Left Section: Profile Picture and Info */}
                   <div className="flex flex-wrap items-center gap-6 max-[425px]:flex-col">
                     <img
-                      src="../../../../../../public/images/Profile.png"
+                      src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770800/shfpe3pccvr5qrpuldzh.png"
                       alt="Profile"
                       className="rounded-full w-24 h-24 md:w-36 md:h-36 border border-gray-300"
                     />

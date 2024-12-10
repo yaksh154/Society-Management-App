@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { FaUser } from "react-icons/fa";
 import Sidebar from "../layout/Sidenav";
 import Header from "../layout/Header";
 import { AiOutlinePlus } from "react-icons/ai";

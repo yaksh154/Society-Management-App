@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../../layout/Sidebar";
 import Header from "../../layout/Header";
-import FaUser from "../../../../../../public/images/Profile.png"; // Corrected image import
 import Activity from "./Activity";
-import { GetEventData } from "../../Api/api"; // Ensure API is properly defined
 import useSidbarTogal from "../../../../layout/useSidbarTogal";
 import { GetAnnouncement } from "../../../../services/Api/api";
 
@@ -87,7 +85,7 @@ const Events_Participation = () => {
                     <tr key={index} className="border-b">
                       <td className="px-4 py-3 flex items-center space-x-2">
                         <img
-                          src={FaUser}
+                          src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/bl9awma4kwu1d9tdrakp.png"
                           alt="Profile"
                           className="w-8 h-8 rounded-full border border-gray-400"
                         />

@@ -118,7 +118,7 @@ const Communities_Discussion = () => {
                     }`}
                 >
                   <img
-                    src="../../../../../../public/images/Profile.png"
+                    src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770800/bc7fyacmra9fa6zjudqg.jpg"
                     alt="Profile"
                     className="w-10 h-10 my-3 rounded-full"
                   />

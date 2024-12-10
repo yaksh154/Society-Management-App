@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { LuImagePlus } from "react-icons/lu";
 import { Link } from 'react-router-dom';
 import { PostSumdata } from '../../../../services/Api/api';
-import axios from 'axios';
 
 const Resident_Owner = () => {
     const UnitStatus = localStorage.getItem('UnitStatus');

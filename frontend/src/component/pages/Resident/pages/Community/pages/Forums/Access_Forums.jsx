@@ -78,7 +78,7 @@ const Access_Forums = () => {
     <div className="flex items-center justify-between border-b pb-3 mb-4">
       <div className="flex items-center space-x-3">
         <img
-          src="../../../../../../public/images/Profile.png"
+          src=" https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770800/shfpe3pccvr5qrpuldzh.pn"
           alt="Profile"
           className="w-10 h-10 rounded-full"
         />
@@ -109,7 +109,7 @@ const Access_Forums = () => {
           >
             {msg.type === "image" ? (
               <img
-                src={msg.content}
+                src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770800/bc7fyacmra9fa6zjudqg.jpg"
                 alt="chat-content"
                 className="rounded-lg w-full"
               />

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { LuImagePlus } from "react-icons/lu";
 import { Link } from 'react-router-dom';
 
 const Resident_Tenant = () => {
