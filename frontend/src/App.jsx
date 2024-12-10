@@ -9,6 +9,7 @@ const Registration = lazy(() => import('./component/pages/Registration'));
 const ForgotPassword = lazy(() => import('./component/pages/Forgot_password'));
 const ForgotPasswordOpt = lazy(() => import('./component/pages/Forgot_password_opt'));
 const ResetPassword = lazy(() => import('./component/pages/Reset_password.jsx'));
+const Unauthorized = lazy(() => import('./component/layout/Unauthorized.jsx'));
 
 // Manager Pages
 const ManagerHome = lazy(() => import('./component/pages/DashStack_manager/Dashboard/Home.jsx'));
@@ -61,6 +62,7 @@ function App() {
           <Route path="/forgot_password" element={<ForgotPassword />} />
           <Route path="/forgot_password/opt" element={<ForgotPasswordOpt />} />
           <Route path="/reset_password" element={<ResetPassword />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
 
           {/* Manager Routes */}
           <Route
@@ -126,7 +128,7 @@ function App() {
           />
 
           {/* Fallback */}
-          <Route path="*" element={<div>404 Page Not Found</div>} />
+          <Route path="*" element={<Unauthorized />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
