@@ -289,8 +289,18 @@ export const updateImportantNumber = (_id, editNumber, Fdata, closeEditModal, se
 
 export const GetResident = (setSumdata) => {
     axios.get(`${url}/resident/getall`).then((res) => {
+        console.log(res.data)
         setSumdata(res.data)
     })
+}
+
+// Resident Management page Get /id
+
+export const GetResidentId = (_id,setData) =>{
+    axios.get(`${url}/resident/profile/${_id}`).then((res) => {
+        console.log("hiii",res.data);
+        setData(res.data);
+      });
 }
 
 // Resident Management page Post

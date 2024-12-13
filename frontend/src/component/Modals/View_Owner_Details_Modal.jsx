@@ -1,36 +1,28 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { FaEye, FaFilePdf } from 'react-icons/fa';
-import { IoImageSharp } from 'react-icons/io5';
+import { GetResidentId } from '../services/Api/api';
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import { FaFileAlt } from 'react-icons/fa';
 
 const View_Owner_Details_Modal = ({ _id, View_Owner_Details, closeModal }) => {
-  const [image, setImage] = useState(null);
   const [fetchedImageSize, setFetchedImageSize] = useState(null);
   const [fetchedPdfSize, setFetchedPdfSize] = useState(null);
-  const [data, setData] = useState([]);
-
-  const handleImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setImage(URL.createObjectURL(file));
-    }
-  };
+  const [data, setData] = useState(null); // Set data as an object, not an array
 
   useEffect(() => {
-    Fdata();
-  }, []);
+    if (_id) {
+      fetchData();
+    }
+  }, [_id]);
 
-  const Fdata = () => {
-    axios.get(`https://society-management-app-server.onrender.com/resident/getall`).then((res) => {
-      setData(res.data);
-    });
+  const fetchData = () => {
+    GetResidentId(_id, setData);
   };
 
-  // Function to fetch image size from URL
   const fetchImageSize = async (url) => {
     try {
-      const response = await axios.head(url); // HTTP HEAD request to get headers
-      const contentLength = response.headers['content-length']; // Get content-length header
+      const response = await axios.head(url);
+      const contentLength = response.headers['content-length'];
       if (contentLength) {
         setFetchedImageSize((contentLength / (1024 * 1024)).toFixed(2) + " MB");
       }
@@ -39,11 +31,10 @@ const View_Owner_Details_Modal = ({ _id, View_Owner_Details, closeModal }) => {
     }
   };
 
-  // Function to fetch PDF size from URL
   const fetchPdfSize = async (url) => {
     try {
-      const response = await axios.head(url); // HTTP HEAD request to get headers
-      const contentLength = response.headers['content-length']; // Get content-length header
+      const response = await axios.head(url);
+      const contentLength = response.headers['content-length'];
       if (contentLength) {
         setFetchedPdfSize((contentLength / (1024 * 1024)).toFixed(2) + " MB");
       }
@@ -52,18 +43,16 @@ const View_Owner_Details_Modal = ({ _id, View_Owner_Details, closeModal }) => {
     }
   };
 
-  const ViewFdata = data.filter((e) => e._id === _id);
-
   useEffect(() => {
-    if (ViewFdata.length > 0) {
-      if (ViewFdata[0].img) {
-        fetchImageSize(ViewFdata[0].img); // Fetch the image size of {e.img}
+    if (data) {
+      if (data.residentphoto) {
+        fetchImageSize(data.residentphoto);
       }
-      if (ViewFdata[0].pdf) {
-        fetchPdfSize(ViewFdata[0].pdf); // Fetch the PDF size of {e.pdf}
+      if (data.AadharCard_FrontSide) {
+        fetchPdfSize(data.AadharCard_FrontSide);
       }
     }
-  }, [ViewFdata]);
+  }, [data]);
 
   return (
     <div>
@@ -76,7 +65,7 @@ const View_Owner_Details_Modal = ({ _id, View_Owner_Details, closeModal }) => {
 
       {/* Offcanvas component */}
       <div
-        className={`fixed top-0 right-0 w-80 h-full bg-white shadow-lg z-50 transform transition-transform duration-300 ${View_Owner_Details ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed top-0 right-0 w-80 h-full overflow-y-auto bg-white shadow-lg z-50 transform transition-transform duration-300 ${View_Owner_Details ? 'translate-x-0' : 'translate-x-full'
           }`}
       >
         <div className="flex items-center justify-between p-4 border-b">
@@ -102,78 +91,121 @@ const View_Owner_Details_Modal = ({ _id, View_Owner_Details, closeModal }) => {
           </button>
         </div>
         <div className="p-4">
-          {ViewFdata.map((e, index) => (
-            <div key={index}>
+          {data ? (
+            <div>
               <div className="text-center flex items-center justify-center mb-3">
                 <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center relative">
-                  {image ? (
-                    <img
-                      src={image}
-                      alt="Profile"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <span className="text-gray-400 text-xl">+</span>
-                  )}
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    className="absolute inset-0 opacity-0 cursor-pointer"
+                  <img
+                    src={data.residentphoto}
+                    alt="Profile"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               </div>
               <div className="mb-3">
-                <p className="text-xl text-center font-medium">{e.name}</p>
-                <p className="text-md text-center text-[#4f4f4f]">{e.email}</p>
+                <p className="text-xl text-center font-medium">{data.Fullname}</p>
+                <p className="text-md text-center text-[#4f4f4f]">{data.Email}</p>
               </div>
               <div className="m-2 mb-5 rounded-lg shadow-md">
                 <div className="flex justify-between px-3 py-2 border-b">
                   <p className="text-sm font-medium">Wing</p>
-                  <p className="text-sm">{e.wing}</p>
+                  <p className="text-sm">{data.Wing}</p>
                 </div>
                 <div className="flex justify-between px-3 py-2 border-b">
                   <p className="text-sm font-medium">Unit</p>
-                  <p className="text-sm">{e.unit}</p>
+                  <p className="text-sm">{data.Unit}</p>
                 </div>
                 <div className="flex justify-between px-3 py-2">
                   <p className="text-sm font-medium">Gender</p>
-                  <p className="text-sm">{e.gender}</p>
+                  <p className="text-sm">{data.Gender}</p>
                 </div>
               </div>
               <div className="m-2 rounded-lg shadow-md">
                 <div className="px-3 py-2">
                   <p>Document</p>
                   <div className="mb-3">
-                    {e.img && (
-                      <div className='m-2 flex justify-between items-center'>
-                        <div className="flex justify-between items-center">
-                          <samp className='mr-4 p-2 bg-[#f0f5fb] rounded-lg'><IoImageSharp className='text-[#5678e9] text-lg' /></samp>
-                          <div className="">
-                            <p>Img name</p>
-                            <p className="text-sm text-gray-500">{fetchedImageSize}</p>
-                          </div>
+                    <div className="space-y-3 flex-1 max-w-sm ">
+                      <div className="flex items-center gap-3 p-3 py-2 bg-gray-50 border rounded-md max-[425px]:w-[14px]">
+                        <FaFileAlt className="text-blue-500" />
+                        <div>
+                          <p className='text-sm'>Adharcard Front Side.JPG</p>
+                          <p className="text-xs text-gray-500">{fetchedPdfSize}</p>
                         </div>
-                        <samp><FaEye className='text-[#a7a7a7]' /></samp>
                       </div>
-                    )}
-                    {e.pdf && (
-                      <div className='m-2 flex justify-between items-center'>
-                        <div className="flex justify-between items-center">
-                          <samp className='mr-4 p-2 bg-[#f0f5fb] rounded-lg'><FaFilePdf className='text-[#5678e9] text-lg' /></samp>
-                          <div className="">
-                            <p>Img name</p>
-                            <p className="text-sm text-gray-500">{fetchedPdfSize}</p>
-                          </div>
+                      <div className="flex items-center gap-3 p-3 py-2 bg-gray-50 border rounded-md max-[425px]:w-[14px]">
+                        <FaFileAlt className="text-blue-500" />
+                        <div>
+                          <p className='text-sm'>Address Proof Front Side.PDF</p>
+                          <p className="text-xs text-gray-500">{fetchedImageSize}</p>
                         </div>
-                        <samp><FaEye className='text-[#a7a7a7]' /></samp>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               </div>
+              <div className="bg-white shadow-md rounded-md relative mx-2">
+                <div className="flex justify-between items-center mb-3 rounded-t-lg p-2 bg-[#5678e9]">
+                  <h2 className="text-lg font-semibold text-white">
+                    Member Counting
+                  </h2>
+                  <div className="relative">
+                    <button className="text-blue-500 bg-white px-2 rounded-md focus:outline-none">
+                      {data.members?.length || "0"}
+                    </button>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-2 mb-4 p-3 bg-[#f6f6f6]">
+
+                  {data.members.map((member, index) => (
+                    <div key={index} className='bg-[#fff] rounded-lg p-2'>
+                      <span className="ml-1 text-base font-semibold text-black flex justify-between border-b py-1">
+                        <p className="text-sm font-semibold flex justify-between">
+                          First Name
+                        </p>
+                        <p className='text-sm text-[#4f4f4f]'>
+                          {member.fullName}
+                        </p>
+                      </span>
+                      <span className="ml-1 text-base font-semibold text-black flex justify-between border-b py-1">
+                        <p className="text-sm font-semibold flex justify-between">
+                          Phone No
+                        </p>
+                        <p className='text-sm text-[#4f4f4f]'>
+                          {member.phone}
+                        </p>
+                      </span>
+                      <span className="ml-1 text-base font-semibold text-black flex justify-between border-b py-1">
+                        <p className="text-sm font-semibold flex justify-between">
+                          Age
+                        </p>
+                        <p className='text-sm text-[#4f4f4f]'>
+                          {member.age}
+                        </p>
+                      </span>
+                      <span className="ml-1 text-base font-semibold text-black flex justify-between border-b py-1">
+                        <p className="text-sm font-semibold flex justify-between">
+                          Gender
+                        </p>
+                        <p className='text-sm text-[#4f4f4f]'>
+                          {member.gender}
+                        </p>
+                      </span>
+                      <span className="ml-1 text-base font-semibold text-black flex justify-between py-1">
+                        <p className="text-sm font-semibold flex justify-between">
+                          Relation
+                        </p>
+                        <p className='text-sm text-[#4f4f4f]'>
+                          {member.Relation}
+                        </p>
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          ))}
+          ) : (
+            <p>Loading...</p>
+          )}
         </div>
       </div>
     </div>

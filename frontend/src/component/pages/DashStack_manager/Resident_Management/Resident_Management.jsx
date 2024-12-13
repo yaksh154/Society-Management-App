@@ -41,12 +41,11 @@ const Resident_Management = () => {
   };
 
   const [View_Owner_Details, setView_Owner_Details] = useState(false)
-  const [Owner_DetailsId, setOwner_DetailsId] = useState(false)
-
+  const [Owner_DetailsId, setOwner_DetailsId] = useState([])
+  
   const OpneView_Owner_Details = (_id) => {
     setView_Owner_Details(true);
     setOwner_DetailsId(_id);
-
   }
   const closeModal = () => {
     setView_Owner_Details(false);
@@ -110,10 +109,8 @@ const Resident_Management = () => {
                   <tbody>
                     {Sumdata.map((e, index) => (
                       <tr key={index} className="border-b bg-white hover:bg-gray-50 font-medium text-center md:font-semibold overflow-x-scroll">
-                        {/* <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{e.name}</td> */}
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex items-center">
-                          <img className="w-8 h-8 rounded-full mr-1" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770800/bc7fyacmra9fa6zjudqg.jpg
-" alt="profile" />
+                          <img className="w-8 h-8 rounded-full mr-1" src={e.residentphoto} alt="profile" />
                           <span>{e.Fullname}</span>
                         </td>
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 truncate">
@@ -144,10 +141,10 @@ const Resident_Management = () => {
                         </span></td>
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">{e.Phone}</td>
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
-                          {e?.Member_Counting?.length > 0 ? e.Member_Counting : "0"}
+                        {e?.members?.length || "0"}
                         </td>
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700">
-                          {e?.Vehicle_Counting?.length > 0 ? e.Vehicle_Counting : "0"}
+                        {e?.vehicles?.length || "0"}
                         </td>
                         <td className="px-2 md:px-4 py-2 md:py-3 text-xs md:text-sm text-gray-700 flex space-x-1 md:space-x-2 justify-evenly">
                           <button onClick={() => OpneEdit_Owner_Details(e._id)} className="bg-[#f6f8fb] text-[#39973d] px-3 py-1 rounded-lg mr-2">
