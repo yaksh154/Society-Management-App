@@ -115,6 +115,10 @@ const View_Owner_Details_Modal = ({ _id, View_Owner_Details, closeModal }) => {
                   <p className="text-sm font-medium">Unit</p>
                   <p className="text-sm">{data.Unit}</p>
                 </div>
+                <div className="flex justify-between px-3 py-2 border-b">
+                  <p className="text-sm font-medium">Age</p>
+                  <p className="text-sm">{data.Age}</p>
+                </div>
                 <div className="flex justify-between px-3 py-2">
                   <p className="text-sm font-medium">Gender</p>
                   <p className="text-sm">{data.Gender}</p>
