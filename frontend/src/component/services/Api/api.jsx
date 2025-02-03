@@ -690,6 +690,7 @@ export const UpdateOtherIncome = async (id, data) => {
         throw error;
     }
 };
+
 export const DeleteOtherIncome = (DeleteId, incomeData, setIncomeData, closeDeleteBox) => {
     const _id = DeleteId
     axios

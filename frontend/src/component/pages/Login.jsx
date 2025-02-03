@@ -20,7 +20,7 @@ const Login = () => {
 
 
     // User Login 
-    const onSubmit = async (data) => {
+    const onSubmit = (data) => {
         setLoading(true);
         ManagerLogin(data, setLoginError, navigate, storetokenInLs, setLoading, reset)
     };
@@ -37,8 +37,7 @@ const Login = () => {
                 <div className="flex flex-col w-full lg:w-1/2 items-center justify-center px-8 py-12 lg:py-0 ">
                     <h1 className="text-5xl max-[425px]:text-4xl font-bold text-orange-600 lg:hidden">Dash<span className="text-black">Stack</span></h1>
                     <form className="bg-white w-full max-w-md shadow-lg rounded-lg p-8 mt-8" onSubmit={handleSubmit(onSubmit)} autoComplete="on">
-                        <div className="hidden max-[1023px]:flex items-center justify-center"><img className="h-44 max-[375px]:h-36 max-[320px]:h-28" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/ko545jcfrul0dijrakri.png
-" alt="Login" /></div>
+                        <div className="hidden max-[1023px]:flex items-center justify-center"><img className="h-44 max-[375px]:h-36 max-[320px]:h-28" src="https://res.cloudinary.com/ddf3pgcld/image/upload/v1733770799/ko545jcfrul0dijrakri.png" alt="Login" /></div>
                         <h2 className="text-2xl font-semibold mb-6 text-center">Login</h2>
 
                         <div className="mb-4">

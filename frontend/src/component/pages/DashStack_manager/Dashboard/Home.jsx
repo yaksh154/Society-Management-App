@@ -30,7 +30,7 @@ const Home = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  useSidbarTogal({setdata, setget, isOpen})
+  useSidbarTogal({ setdata, setget, isOpen })
 
   const [contacts, setContacts] = useState('');
   const [loading, setLoading] = useState(true);
@@ -133,15 +133,15 @@ const Home = () => {
   const [Loding, setLoding] = useState(true)
 
   useEffect(() => {
-    
+
     fetchActivities();
   }, []);
 
 
   const fetchActivities = async () => {
-    GetAnnouncement(setActivities,setLoding)
+    GetAnnouncement(setActivities, setLoding)
   };
- 
+
   const getFirstLetter = (title) => {
     return title ? title.charAt(0).toUpperCase() : ''; // Get the first letter and capitalize it
   };
@@ -441,56 +441,55 @@ const Home = () => {
                       </table>
                     )}
 
-                    {EditComplint && <OpenEditComplintModel _id={a_id} closeEditComplint={closeEditComplint} LodData={getComplaintdata}/>}
+                    {EditComplint && <OpenEditComplintModel _id={a_id} closeEditComplint={closeEditComplint} LodData={getComplaintdata} />}
                     {ViewComplint && <ViewComplintModel _id={b_id} closeViewComplint={closeViewComplint} />}
                     {DeleteComplint && <LodingDelete loading={loadingcomplint} DeleteClick={ComlintDelete} close={CloseDeleteComplint} getComplaint={getComplaint} />}
                   </div>
                 </div>
               </div>
               <div className="bg-white p-4 rounded-lg shadow">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-semibold">Upcoming Activity</h2>
-        <select className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option>Month</option>
-          <option>Week</option>
-          <option>Day</option>
-        </select>
-      </div>
-      {Loding ? (
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-xl font-semibold">Upcoming Activity</h2>
+                  <select className="border border-gray-300 rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option>Month</option>
+                    <option>Week</option>
+                    <option>Day</option>
+                  </select>
+                </div>
+                {Loding ? (
                   <div className='flex justify-center'>
-                  <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
-                </div>
-                ): (
-      <div className="bg-white rounded-lg w-full h-32 overflow-auto px-2">
-        <div className="space-y-4">
-          {/* Dynamically render each activity item */}
-          {activities.map((activity, index) => (
-            <div className="flex items-center justify-between" key={index}>
-              <div className="flex items-center space-x-3">
-                {/* Use different colors for different activities based on type */}
-                <div
-                  className={`w-8 h-8 flex items-center justify-center rounded-full ${
-                    activity.color ? `bg-${activity.color}-100` : 'bg-slate-200'
-                  }  'gray-600' font-bold`}
-                >
-                  {getFirstLetter(activity.title)}
-                </div>
-                <div>
-                  <p className="text-gray-900 font-medium">{activity.title}</p>
-                  <p className="text-gray-500 text-sm">{activity.time}</p>
-                </div>
+                    <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#F09619]" />
+                  </div>
+                ) : (
+                  <div className="bg-white rounded-lg w-full h-32 overflow-auto px-2">
+                    <div className="space-y-4">
+                      {/* Dynamically render each activity item */}
+                      {activities.map((activity, index) => (
+                        <div className="flex items-center justify-between" key={index}>
+                          <div className="flex items-center space-x-3">
+                            {/* Use different colors for different activities based on type */}
+                            <div
+                              className={`w-8 h-8 flex items-center justify-center rounded-full ${activity.color ? `bg-${activity.color}-100` : 'bg-slate-200'
+                                }  'gray-600' font-bold`}
+                            >
+                              {getFirstLetter(activity.title)}
+                            </div>
+                            <div>
+                              <p className="text-gray-900 font-medium">{activity.title}</p>
+                              <p className="text-gray-500 text-sm">{activity.time}</p>
+                            </div>
+                          </div>
+                          <p className="text-gray-500 text-sm"> {new Date(activity.date).toLocaleDateString("en-US", {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                          })}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-              <p className="text-gray-500 text-sm"> {new Date(activity.date).toLocaleDateString("en-US", {
-                              day: "2-digit",
-                              month: "2-digit",
-                              year: "numeric",
-                            })}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-            ) }
-    </div>
             </div>
           </div>
         </main>
